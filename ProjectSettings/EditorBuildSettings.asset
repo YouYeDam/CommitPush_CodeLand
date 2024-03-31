@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Create Player Scene.unity
     guid: 488de4dde39476249bc52f85626cf5d0
+  - enabled: 1
+    path: Assets/Scenes/Select Player Scene.unity
+    guid: 606111e140a6d0d45bc7ab6723056e81
   m_configObjects: {}
