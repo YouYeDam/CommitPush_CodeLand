@@ -37,7 +37,6 @@ void OnMove(InputValue Value) {
 
 void Walk() { //플레이어 좌우이동
     bool PlayerHasHorizontalSpeed = Mathf.Abs(MyRigidbody.velocity.x) > Mathf.Epsilon;
-
     Vector2 PlayerVelocity = new Vector2 (MoveInput.x * RunSpeed, MyRigidbody.velocity.y); // 현재의 속도인 y가 무엇이든 동일한 속도를 유지하라는 의미
     MyRigidbody.velocity = PlayerVelocity;
     
