@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ladder
+  - Enemy
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -14,9 +16,9 @@ TagManager:
   - UI
   - Ground
   - Ladder
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Skill
   - 
   - 
   - 
