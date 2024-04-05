@@ -8,8 +8,11 @@ Vector2 MoveInput;
 Rigidbody2D MyRigidbody;
 Animator MyAnimator;
 CapsuleCollider2D MyCapsuleCollider;
-BoxCollider2D MyFeetCollider;
+BoxCollider2D MyBoxCollider;
+public bool IsWalkingAllowed = true;
+
 float StartGravity;
+[SerializeField] float WalkDelay = 0.2f; // Walk 함수 호출을 지연할 시간
 [SerializeField] float RunSpeed = 10f;
 [SerializeField] float JumpSpeed = 5f;
 [SerializeField] float ClimbSpeed = 5f;
@@ -19,14 +22,22 @@ void Start()
     MyRigidbody = GetComponent<Rigidbody2D>();
     MyAnimator = GetComponent<Animator>();
     MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
-    MyFeetCollider = GetComponent<BoxCollider2D>();
+    MyBoxCollider = GetComponent<BoxCollider2D>();
 
     StartGravity = MyRigidbody.gravityScale;
 }
 
 void Update()
 {
-    Walk();
+    if (IsWalkingAllowed)
+    {
+        Walk();
+    }
+    else
+    {
+        MyRigidbody.velocity = new Vector2(0, MyRigidbody.velocity.y);
+        StartCoroutine(WalkWithDelay());
+    }
     CheckWalk();
     ClimbLadder();
     FlipSprite();
@@ -44,8 +55,8 @@ void Walk() { //플레이어 좌우이동
 } 
 
 void CheckWalk() { //걷기 애니메이션 체크
-    bool IsOnGround = MyFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
-    bool IsOnLadder = MyFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
+    bool IsOnGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+    bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
     if (!IsOnGround && !IsOnLadder) {
         MyAnimator.SetBool("IsWalking", false);
         MyAnimator.SetBool("IsJumping", true);
@@ -63,7 +74,7 @@ void FlipSprite() { //플레이어 좌우반전
 }
 
 void OnJump(InputValue Value) { //플레이어 점프
-    bool IsOnGround = MyFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+    bool IsOnGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
     if (!IsOnGround) {
         return;
     }
@@ -73,15 +84,17 @@ void OnJump(InputValue Value) { //플레이어 점프
 }
 
 void ClimbLadder() { //플레이어 사다리 타기
-    bool IsOnLadder = MyFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
-
+    bool IsOnGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+    bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
+    if (IsOnGround && MoveInput.y == 0) {
+        return;
+    }
     if (!IsOnLadder) {
         MyAnimator.SetBool("IsClimbing", false);
         MyAnimator.SetBool("IsClimbingIdle", false);
         MyRigidbody.gravityScale = StartGravity;
         return;
     }
-
     float LadderSpeed = MoveInput.y * ClimbSpeed;
     MyRigidbody.gravityScale = 0f;
     MyRigidbody.velocity = new Vector2(MyRigidbody.velocity.x, LadderSpeed);
@@ -90,6 +103,13 @@ void ClimbLadder() { //플레이어 사다리 타기
     MyAnimator.SetBool("IsClimbing", playerHasVerticalSpeed);
     MyAnimator.SetBool("IsClimbingIdle", !playerHasVerticalSpeed);
     MyAnimator.SetFloat("LadderSpeed", Mathf.Abs(LadderSpeed)); // 사다리 속도를 Animator에 전달
+}
+
+IEnumerator WalkWithDelay()
+{
+    yield return new WaitForSeconds(WalkDelay);
+    // 일정 시간이 지난 후에 다시 Walk 함수 호출을 허용
+    IsWalkingAllowed = true;
 }
 
 }

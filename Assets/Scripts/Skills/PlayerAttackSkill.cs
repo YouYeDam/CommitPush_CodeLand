@@ -4,8 +4,10 @@ public class PlayerAttackSkill : MonoBehaviour
 {
 [SerializeField] float SkillSpeed = 1f;
 [SerializeField] float DestroyDelay = 0.5f;
+[SerializeField] int Damage = 10;
 Rigidbody2D MyRigidbody;
 PlayerMovement Player;
+
 float xSpeed;
 void Start()
 {
@@ -22,7 +24,9 @@ void Update()
 }
 
 void OnTriggerEnter2D(Collider2D other) {
-    if(other.tag == "Enemy") {
+    MonsterStatus MonsterStatus = other.gameObject.GetComponent<MonsterStatus>();
+    if (MonsterStatus != null) {
+        MonsterStatus.MonsterCurrentHealth -= Damage;
     }
 }
 void OnCollisionEnter2D(Collision2D other) {
@@ -42,5 +46,4 @@ void DestroySelf()
     {
         Destroy(gameObject);
     }
-
 }
