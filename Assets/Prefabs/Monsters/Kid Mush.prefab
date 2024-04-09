@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 8690364043849138141}
   - component: {fileID: 7269523134764754929}
   - component: {fileID: 3283868707714084296}
+  - component: {fileID: 5267109138259723723}
   - component: {fileID: 1478778526055664882}
   - component: {fileID: 3712535677390505938}
   - component: {fileID: 3157593347497917494}
   m_Layer: 9
-  m_Name: Fungite
-  m_TagString: Enemy
+  m_Name: Kid Mush
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,6 +152,51 @@ CapsuleCollider2D:
   m_Offset: {x: -0.00722003, y: 0.015}
   m_Size: {x: 0.6224494, y: 0.6225442}
   m_Direction: 0
+--- !u!61 &5267109138259723723
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3523946213023745087}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.005580306, y: 0.0066974163}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8125, y: 0.625}
+    newSize: {x: 0.8125, y: 0.625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.618304, y: 0.61160517}
+  m_EdgeRadius: 0
 --- !u!95 &1478778526055664882
 Animator:
   serializedVersion: 5
@@ -188,6 +234,8 @@ MonoBehaviour:
   FlipTimeHead: 7
   FlipTimeRear: 10
   WaitCanWalk: 2.5
+  DieDelay: 0.6
+  IsAlive: 1
 --- !u!114 &3157593347497917494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8f6e2da49528449a1c776f7367a421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterName: "\uD391\uAC00\uC774\uD2B8"
+  MonsterName: "\uAF2C\uB9C8\uBC84\uC12F"
   MonsterMaxHealth: 20
   MonsterCurrentHealth: 0
+  MonsterDamage: 10
+  MonsterEXP: 1

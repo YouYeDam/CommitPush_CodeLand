@@ -86,6 +86,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerName: "\uD14C\uC2A4\uD2B8"
+  PlayerCurrentHealth: 0
+  PlayerMaxHealth: 100
 --- !u!114 &8642232966939586866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +139,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 794951137
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -1860293165, guid: 02d47c295c8ed2443bc8f3ca6d7d1ccc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -321,7 +323,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsWalkingAllowed: 1
-  WalkDelay: 0.2
+  IsAlive: 1
+  WalkDelayTime: 0.2
+  InvincibleTime: 1
   RunSpeed: 5
   JumpSpeed: 5
   ClimbSpeed: 5

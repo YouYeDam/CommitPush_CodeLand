@@ -118,7 +118,7 @@ TextureImporter:
         width: 22
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -135,11 +135,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 2
+        y: 0
         width: 25
-        height: 29
+        height: 31
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -156,11 +156,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 66
-        y: 1
+        y: 0
         width: 26
-        height: 19
+        height: 20
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,7 +181,7 @@ TextureImporter:
         width: 36
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,7 +202,7 @@ TextureImporter:
         width: 28
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -223,7 +223,7 @@ TextureImporter:
         width: 27
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -241,7 +241,28 @@ TextureImporter:
         serializedVersion: 2
         x: 201
         y: 0
-        width: 54
+        width: 26
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: beb20147ad0ab564d9eb311097fe150a
+      internalID: 2028385861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Owlet_Monster_Death_8_11
+      rect:
+        serializedVersion: 2
+        x: 239
+        y: 0
+        width: 12
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -250,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: beb20147ad0ab564d9eb311097fe150a
-      internalID: 2028385861
+      spriteID: 37225f64640a7a74ba3249cd9a819225
+      internalID: 1058494167
       vertices: []
       indices: 
       edges: []
@@ -270,9 +291,9 @@ TextureImporter:
       Owlet_Monster_Death_8_0: -360553465
       Owlet_Monster_Death_8_1: -529539881
       Owlet_Monster_Death_8_10: 2028385861
+      Owlet_Monster_Death_8_11: 1724952486
       Owlet_Monster_Death_8_2: -2095285555
       Owlet_Monster_Death_8_3: 794589405
-      Owlet_Monster_Death_8_4: 1724952486
       Owlet_Monster_Death_8_5: -858677719
       Owlet_Monster_Death_8_6: 92278845
       Owlet_Monster_Death_8_7: -1077456334

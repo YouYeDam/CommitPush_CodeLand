@@ -24,13 +24,13 @@ void Update()
 }
 
 void OnTriggerEnter2D(Collider2D other) {
-    MonsterStatus MonsterStatus = other.gameObject.GetComponent<MonsterStatus>();
-    if (MonsterStatus != null) {
-        MonsterStatus.MonsterCurrentHealth -= Damage;
+    if (other is BoxCollider2D && other.gameObject.tag == "Monster") {
+        MonsterStatus monsterStatus = other.gameObject.GetComponent<MonsterStatus>();
+        if (monsterStatus != null) {
+            monsterStatus.MonsterCurrentHealth -= Damage;
+        }
     }
-}
-void OnCollisionEnter2D(Collision2D other) {
-    if(other.gameObject.tag == "Ground") {
+    if(other.gameObject.tag == "Monster") {
         Destroy(gameObject);    
     }
 }

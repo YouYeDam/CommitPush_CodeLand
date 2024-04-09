@@ -118,7 +118,7 @@ TextureImporter:
         width: 21
         height: 28
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -135,11 +135,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 34
-        y: 2
+        y: 0
         width: 23
-        height: 28
+        height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -156,11 +156,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 66
-        y: 1
+        y: 0
         width: 26
-        height: 21
+        height: 22
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -181,7 +181,7 @@ TextureImporter:
         width: 37
         height: 11
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -202,7 +202,7 @@ TextureImporter:
         width: 27
         height: 12
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -223,7 +223,7 @@ TextureImporter:
         width: 26
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -241,7 +241,28 @@ TextureImporter:
         serializedVersion: 2
         x: 200
         y: 0
-        width: 55
+        width: 28
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d22321ff06405d43ba2f852b0e35fdd
+      internalID: 78400071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Death_8_11
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 11
         height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -250,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d22321ff06405d43ba2f852b0e35fdd
-      internalID: 78400071
+      spriteID: c000fbdbca95aa645845353e40aa3159
+      internalID: -1909272843
       vertices: []
       indices: 
       edges: []
@@ -270,9 +291,9 @@ TextureImporter:
       Dude_Monster_Death_8_0: -738019565
       Dude_Monster_Death_8_1: -762897010
       Dude_Monster_Death_8_10: 78400071
+      Dude_Monster_Death_8_11: 475255404
       Dude_Monster_Death_8_2: 420005301
       Dude_Monster_Death_8_3: 1189114474
-      Dude_Monster_Death_8_4: 475255404
       Dude_Monster_Death_8_5: -785748492
       Dude_Monster_Death_8_6: 1235351763
       Dude_Monster_Death_8_7: 551580137

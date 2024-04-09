@@ -2143,7 +2143,7 @@ MonoBehaviour:
   RenderersToDeactivate:
   - {fileID: 334044239}
   - {fileID: 1085004304}
-  NewAnimatorController: {fileID: 9100000, guid: 87b66223c807ef544a40b61e205a083c, type: 2}
+  NewAnimatorController: {fileID: 9100000, guid: 90c63af98d26b844cb3200ffe4a02bb1, type: 2}
 --- !u!4 &1752566329
 Transform:
   m_ObjectHideFlags: 0

@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ladder
-  - Enemy
   - Ground
+  - Monster
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -17,9 +18,9 @@ TagManager:
   - Ground
   - Ladder
   - Player
-  - Enemy
+  - Monster
   - Skill
-  - 
+  - Item
   - 
   - 
   - 
@@ -58,4 +59,10 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 794951137
+    locked: 0
+  - name: Item
+    uniqueID: 518454301
+    locked: 0
+  - name: UI
+    uniqueID: 434351797
     locked: 0
