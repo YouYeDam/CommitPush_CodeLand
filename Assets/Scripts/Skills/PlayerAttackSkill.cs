@@ -39,7 +39,6 @@ void FlipSprite() { //스킬 이펙트 좌우반전
 if (xSpeed < 0) {
     transform.localScale = new Vector2(-1, 1);
 }
-
 }
 
 void DestroySelf()

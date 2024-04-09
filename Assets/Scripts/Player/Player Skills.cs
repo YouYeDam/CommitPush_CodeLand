@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerSkills : MonoBehaviour
 {
     Animator MyAnimator;
-    BoxCollider2D MyFeetCollider;
+    CapsuleCollider2D MyCapsuleCollider;
     PlayerMovement PlayerMovement;
     [SerializeField] GameObject NormalAttack;
     [SerializeField] Transform SkillSpot;
@@ -17,7 +17,7 @@ public class PlayerSkills : MonoBehaviour
 
     void Start() {
         MyAnimator = GetComponent<Animator>();
-        MyFeetCollider = GetComponent<BoxCollider2D>();
+        MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
         PlayerMovement = FindObjectOfType<PlayerMovement>();
     }
 
@@ -25,7 +25,7 @@ public class PlayerSkills : MonoBehaviour
         if (PlayerMovement.IsAlive == false) {
             return;
         }
-        bool IsOnLadder = MyFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
+        bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanUseNormalAttack && !IsOnLadder)
         {
             Instantiate(NormalAttack, SkillSpot.position, transform.rotation);
