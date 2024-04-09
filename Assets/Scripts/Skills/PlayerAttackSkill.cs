@@ -25,9 +25,9 @@ void Update()
 
 void OnTriggerEnter2D(Collider2D other) {
     if (other is BoxCollider2D && other.gameObject.tag == "Monster") {
-        MonsterStatus monsterStatus = other.gameObject.GetComponent<MonsterStatus>();
-        if (monsterStatus != null) {
-            monsterStatus.MonsterCurrentHealth -= Damage;
+        MonsterStatus MonsterStatus = other.gameObject.GetComponent<MonsterStatus>();
+        if (MonsterStatus != null) {
+            MonsterStatus.MonsterCurrentHealth -= Damage;
         }
     }
     if(other.gameObject.tag == "Monster") {

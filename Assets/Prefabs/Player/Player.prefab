@@ -50,6 +50,8 @@ GameObject:
   - component: {fileID: 1383479732386273828}
   - component: {fileID: 530069468701044511}
   - component: {fileID: 5276594472103054196}
+  - component: {fileID: 2205046119036907785}
+  - component: {fileID: 5045011585957937535}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -86,8 +88,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerName: "\uD14C\uC2A4\uD2B8"
-  PlayerCurrentHealth: 0
+  PlayerLevel: 1
   PlayerMaxHealth: 100
+  PlayerCurrentHealth: 0
+  PlayerNextEXP: 10
+  PlayerCurrentEXP: 0
 --- !u!114 &8642232966939586866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,3 +350,29 @@ MonoBehaviour:
   SkillSpot: {fileID: 1635159961687940443}
   NormalAttackCoolTime: 0.3
   BackToIdleAnimTime: 0.2
+--- !u!114 &2205046119036907785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902140102076735292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6496b2a512560c941bfa3af9e6f7c934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: {fileID: 0}
+--- !u!114 &5045011585957937535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902140102076735292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e670561afe0a44990f5969469b65c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: {fileID: 0}
