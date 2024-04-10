@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class QuizManager : MonoBehaviour
 {
@@ -113,19 +114,19 @@ public class QuizManager : MonoBehaviour
         // 정답 확인
         if (buttonIndex == CorrectAnswers[currentQuestionIndex]) // 정답을 맞췄을 시 
         {
-            resultText.text = "200 OK \n\n" + currentScore + "원을 획득하셨습니다!";
-
-            Debug.Log("정답입니다!");
-            totalScore += currentScore;
-            currentQuestionIndex++;
-
-            if (currentQuestionIndex < QuizTextArray.Count)
+            if (currentQuestionIndex >= QuizTextArray.Count - 1) // 마지막 문제인지 확인
             {
-                DisplayQuestion(currentQuestionIndex);
+                // 마지막 문제의 정답을 맞췄을 경우
+                resultText.text = "200 OK \n\n" + currentScore + "원을 획득하셨습니다!";
+                StartCoroutine(LoadNewSceneAfterDelay()); // 새 씬으로 전환하는 코루틴 호출
             }
             else
             {
-                Debug.Log($"퀴즈 끝! 최종 점수: {totalScore}");
+                // 마지막 문제가 아닐 경우 다음 문제로 진행
+                resultText.text = "200 OK \n\n" + currentScore + "원을 획득하셨습니다!";
+                totalScore += currentScore;
+                currentQuestionIndex++;
+                DisplayQuestion(currentQuestionIndex);
             }
         }
         else // 오답 선택 시
@@ -138,6 +139,12 @@ public class QuizManager : MonoBehaviour
 
         // 결과를 표시하고 패널을 자동으로 숨김
         StartCoroutine(HideResultPanel());
+    }
+
+    IEnumerator LoadNewSceneAfterDelay()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("New Scene");
     }
 
     // 결과 패널을 숨기는 코루틴
