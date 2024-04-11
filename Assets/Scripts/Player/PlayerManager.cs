@@ -15,12 +15,12 @@ public class PlayerManager : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded; // 객체가 파괴될 때 이벤트에서 제거하여 누수 방지
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene Scene, LoadSceneMode mode)
     {
-        int playerNum = FindObjectsOfType<PlayerManager>().Length; // 현재 씬에 있는 PlayerManager의 수를 찾습니다.
-        string currentSceneName = scene.name; // 현재 씬의 이름을 가져옵니다.
+        int PlayerNum = FindObjectsOfType<PlayerManager>().Length; // 현재 씬에 있는 PlayerManager의 수를 찾습니다.
+        string CurrentSceneName = Scene.name; // 현재 씬의 이름을 가져옵니다.
 
-        if (playerNum > 1 || currentSceneName == "Main Menu Scene") {
+        if (PlayerNum > 1 || CurrentSceneName == "Main Menu Scene") {
             Destroy(gameObject); // 조건에 해당하면 객체를 파괴합니다.
         }
     }

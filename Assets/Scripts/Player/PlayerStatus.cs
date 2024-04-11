@@ -5,14 +5,23 @@ using UnityEngine;
 public class PlayerStatus : MonoBehaviour
 {
     public string PlayerName; // 플레이어 이름
+    public string PlayerClass = "개발자";
     [SerializeField] public int PlayerLevel = 1;
-    [SerializeField] public float PlayerMaxHealth = 100f;
-    [SerializeField] public float PlayerCurrentHealth;
+    [SerializeField] public int PlayerMaxHP = 100;
+    [SerializeField] public int PlayerCurrentHP;
+    [SerializeField] public int PlayerMaxMP = 100;
+    [SerializeField] public int PlayerCurrentMP = 100;
+    [SerializeField] public int PlayerMaxStamina = 100;
+    [SerializeField] public int PlayerCurrentStamina = 100;
     [SerializeField] public int PlayerNextEXP = 10;
     [SerializeField] public int PlayerCurrentEXP = 0;
 
+    [SerializeField] public int PlayerATK = 1;
+    [SerializeField] public int PlayerDEF = 0;
+    [SerializeField] public float PlayerCrit = 0f;
+
     void Start() {
-        PlayerCurrentHealth = PlayerMaxHealth;
+        PlayerCurrentHP = PlayerMaxHP;
     }
     public void SetPlayerName(string NewName){
             PlayerName = NewName;

@@ -125,20 +125,20 @@ public class PlayerMovement : MonoBehaviour
         MyAnimator.SetFloat("LadderSpeed", Mathf.Abs(LadderSpeed)); // 사다리 속도를 Animator에 전달
     }
 
-    public void Hurt(float Damage) { // 플레이어 피격
+    public void Hurt(int Damage) { // 플레이어 피격
         if (IsAlive == false) {
             return;
         }
         if (IsInvincible) { // 무적상태면 실행안함
             return;
         }
-        PlayerStatus.PlayerCurrentHealth -= Damage;
+        PlayerStatus.PlayerCurrentHP -= Damage;
         Color.a = 0.5f;
         MySpriteRenderer.color = Color;
         IsInvincible = true;
         StartCoroutine(InvincibleDelay()); // 무적 활성화 초기화
         StartCoroutine(MoveHurtPosition(0.2f)); // 플레이어 넉백
-        if (PlayerStatus.PlayerCurrentHealth <= 0) {
+        if (PlayerStatus.PlayerCurrentHP <= 0) {
             Die();
         }
     }
