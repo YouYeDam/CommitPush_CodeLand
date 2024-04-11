@@ -8,6 +8,7 @@ public class PlayerSkills : MonoBehaviour
     Animator MyAnimator;
     CapsuleCollider2D MyCapsuleCollider;
     PlayerMovement PlayerMovement;
+    PlayerManager PlayerManager;
     [SerializeField] GameObject NormalAttack;
     [SerializeField] Transform SkillSpot;
     [SerializeField] float NormalAttackCoolTime = 0.3f;
@@ -19,10 +20,11 @@ public class PlayerSkills : MonoBehaviour
         MyAnimator = GetComponent<Animator>();
         MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
         PlayerMovement = FindObjectOfType<PlayerMovement>();
+        PlayerManager = GetComponent<PlayerManager>();
     }
 
     void OnNormalAttack(InputValue value) {
-        if (PlayerMovement.IsAlive == false) {
+        if (PlayerMovement.IsAlive == false || !PlayerManager.CanInput) {
             return;
         }
         bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));

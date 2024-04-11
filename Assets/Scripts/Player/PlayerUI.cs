@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class PlayerUI : MonoBehaviour
 {
+    [SerializeField] GameObject UICanvas;
     [SerializeField] GameObject Inventory;
     [SerializeField] GameObject Character;
+    PlayerManager PlayerManager;
+    void Start() {
+        PlayerManager = GetComponent<PlayerManager>();
+        UICanvas = GameObject.Find("UIManager");
+        Inventory = UICanvas.transform.GetChild(0).gameObject;
+        Character = UICanvas.transform.GetChild(1).gameObject;
+    }
+
     void OnInventory() {
+        if (Inventory == null || !PlayerManager.CanInput) {
+            return;
+        }
         if (Inventory.activeSelf) {
             Inventory.SetActive(false);
         }
@@ -15,6 +27,9 @@ public class PlayerUI : MonoBehaviour
         }
     }
     void OnCharacter() {
+        if (Character == null || !PlayerManager.CanInput) {
+            return;
+        }
         if (Character.activeSelf) {
             Character.SetActive(false);
         }

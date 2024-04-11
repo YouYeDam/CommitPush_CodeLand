@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Monster
   - Item
+  - StopPlayerInput
   layers:
   - Default
   - TransparentFX

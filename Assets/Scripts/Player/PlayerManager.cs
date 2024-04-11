@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+    public bool CanInput;
     // Awake 메소드 안에 있던 코드는 제거하고 OnSceneLoaded 메소드로 이동합니다.
     public void Awake() {
         DontDestroyOnLoad(gameObject);
@@ -19,9 +20,16 @@ public class PlayerManager : MonoBehaviour
     {
         int PlayerNum = FindObjectsOfType<PlayerManager>().Length; // 현재 씬에 있는 PlayerManager의 수를 찾습니다.
         string CurrentSceneName = Scene.name; // 현재 씬의 이름을 가져옵니다.
-
         if (PlayerNum > 1 || CurrentSceneName == "Main Menu Scene") {
             Destroy(gameObject); // 조건에 해당하면 객체를 파괴합니다.
+        }
+
+        GameObject StopPlayerInput = GameObject.FindWithTag("StopPlayerInput");
+        if (StopPlayerInput != null) {
+            CanInput = false;
+        }
+        else {
+            CanInput = true;
         }
     }
 }

@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     BoxCollider2D MyBoxCollider;
     SpriteRenderer MySpriteRenderer;
     PlayerStatus PlayerStatus;
+    PlayerManager PlayerManager;
     public bool IsWalkingAllowed = true;
     public bool IsAlive = true;
     bool IsInvincible = false;
@@ -29,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
         MyBoxCollider = GetComponent<BoxCollider2D>();
         MySpriteRenderer = GetComponent<SpriteRenderer>();
         PlayerStatus = GetComponent<PlayerStatus>();
+        PlayerManager = GetComponent<PlayerManager>();
         StartGravity = MyRigidbody.gravityScale;
 
         Color = MySpriteRenderer.color;
@@ -53,6 +55,9 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
     }
     void OnMove(InputValue Value) { //키보드로 좌우상하 입력받기
+        if (!PlayerManager.CanInput) {
+            return;
+        }
         MoveInput = Value.Get<Vector2>();
     }
 
@@ -88,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnJump(InputValue Value) { //플레이어 점프
-        if (IsAlive == false) {
+        if (IsAlive == false || !PlayerManager.CanInput) {
             return;
         }
         bool IsOnGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
@@ -160,19 +165,29 @@ public class PlayerMovement : MonoBehaviour
         Color.a = 1f;
         MySpriteRenderer.color = Color;
     }
-
     IEnumerator MoveHurtPosition(float Duration) {
-    float StartTime = Time.time;
-    Vector3 StartPosition = transform.position;
-    Vector3 EndPosition = StartPosition + ((transform.localScale.x > 0 ? Vector3.left : Vector3.right) * 0.7f);
+        float StartTime = Time.time;
+        Vector3 StartPosition = transform.position;
+        Vector3 EndPosition = StartPosition + ((transform.localScale.x > 0 ? Vector3.left : Vector3.right) * 0.7f);
 
-    while (Time.time < StartTime + Duration) {
-        float t = (Time.time - StartTime) / Duration;
-        transform.position = Vector3.Lerp(StartPosition, EndPosition, t);
-        yield return null;
+        // Ground레이어에 해당하는 레이어 마스크 가져오기
+        LayerMask layerMask = LayerMask.GetMask("Ground");
+
+        while (Time.time < StartTime + Duration) {
+            float t = (Time.time - StartTime) / Duration;
+            Vector3 NewPosition = Vector3.Lerp(StartPosition, EndPosition, t);
+            
+            // 레이캐스트를 실행하고 "Ground" 레이어와의 충돌만 검사
+            RaycastHit2D Hit = Physics2D.Raycast(transform.position, EndPosition - transform.position, Vector3.Distance(transform.position, EndPosition), layerMask);
+            
+            if (Hit.collider != null) {
+                yield break; // 충돌시 Coroutine 중단
+            }
+            
+            transform.position = NewPosition;
+            yield return null;
+        }
     }
-}
-
 }
 
 
