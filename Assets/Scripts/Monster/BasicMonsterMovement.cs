@@ -16,6 +16,7 @@ public class BasicMonsterMovement : MonoBehaviour
     CapsuleCollider2D MonsterCapsuleCollider;
     BoxCollider2D PlayerBoxCollider;
     CapsuleCollider2D PlayerCapsuleCollider;
+    MonsterDropItem MonsterDropItem;
     PlayerMovement PlayerMovement;
     PlayerStatus PlayerStatus;
     public bool IsAlive = true;
@@ -28,6 +29,7 @@ public class BasicMonsterMovement : MonoBehaviour
         MonsterStatus = GetComponent<MonsterStatus>();
         MonsterBoxCollider = GetComponent<BoxCollider2D>();
         MonsterCapsuleCollider = GetComponent<CapsuleCollider2D>();
+        MonsterDropItem = GetComponent<MonsterDropItem>();
         PlayerBoxCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
         PlayerCapsuleCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<CapsuleCollider2D>();
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
@@ -107,6 +109,7 @@ public class BasicMonsterMovement : MonoBehaviour
         MonsterAnimator.SetBool("IsDying", true);
         IsAlive = false;
         PlayerStatus.GainEXP(MonsterStatus.MonsterEXP);
+        MonsterDropItem.DropItem();
         StartCoroutine(DestroyAfterAnimation(DieDelay)); // 애니메이션 재생 후 몬스터 파괴
     }
 
