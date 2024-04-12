@@ -109,11 +109,7 @@ public class PlayerMovement : MonoBehaviour
         if (IsAlive == false) {
             return;
         }
-        bool IsOnGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
         bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
-        if (IsOnGround && MoveInput.y == 0) {
-            return;
-        }
         if (!IsOnLadder) {
             MyAnimator.SetBool("IsClimbing", false);
             MyAnimator.SetBool("IsClimbingIdle", false);

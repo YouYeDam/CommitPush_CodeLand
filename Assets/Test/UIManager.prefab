@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 2949951243744753569}
   - component: {fileID: 1955548962689674634}
   m_Layer: 5
-  m_Name: UI Canvas
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -631,7 +631,7 @@ MonoBehaviour:
   MPInfo: {fileID: 2541783327638906573}
   ATKInfo: {fileID: 6324019369801478177}
   DEFInfo: {fileID: 8091107747178628939}
-  StaminaInfo: {fileID: 5415938408026025469}
+  SPInfo: {fileID: 0}
   CritInfo: {fileID: 711176488553447662}
   CharacterImage: {fileID: 5662264480453799503}
 --- !u!1 &2873854877393744238
@@ -1539,7 +1539,7 @@ GameObject:
   - component: {fileID: 693476093920232182}
   - component: {fileID: 5415938408026025469}
   m_Layer: 5
-  m_Name: Stamina Info
+  m_Name: SP Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

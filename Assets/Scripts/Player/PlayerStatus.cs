@@ -11,8 +11,8 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] public int PlayerCurrentHP;
     [SerializeField] public int PlayerMaxMP = 100;
     [SerializeField] public int PlayerCurrentMP = 100;
-    [SerializeField] public int PlayerMaxStamina = 100;
-    [SerializeField] public int PlayerCurrentStamina = 100;
+    [SerializeField] public int PlayerMaxSP = 100;
+    [SerializeField] public int PlayerCurrentSP = 100;
     [SerializeField] public int PlayerNextEXP = 10;
     [SerializeField] public int PlayerCurrentEXP = 0;
 

@@ -13,7 +13,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
   - Ground
@@ -22,7 +22,7 @@ TagManager:
   - Monster
   - Skill
   - Item
-  - 
+  - LadderGround
   - 
   - 
   - 
@@ -51,6 +51,9 @@ TagManager:
     locked: 0
   - name: Platforms
     uniqueID: 202840525
+    locked: 0
+  - name: LadderGround
+    uniqueID: 3711487927
     locked: 0
   - name: Ladder
     uniqueID: 1674598465

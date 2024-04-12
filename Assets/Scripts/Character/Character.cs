@@ -15,7 +15,7 @@ public class Character : MonoBehaviour
     public TMP_Text MPInfo;
     public TMP_Text ATKInfo;
     public TMP_Text DEFInfo;
-    public TMP_Text StaminaInfo;
+    public TMP_Text SPInfo;
     public TMP_Text CritInfo;
     public Image CharacterImage;
     
@@ -31,12 +31,12 @@ public class Character : MonoBehaviour
     void Update() {
         NameInfo.text = "이름:" + PlayerStatus.PlayerName;
         ClassInfo.text = "클래스:" + PlayerStatus.PlayerClass;
-        LevelInfo.text = "코딩력:" + PlayerStatus.PlayerLevel;
-        HPInfo.text = "체력:" + PlayerStatus.PlayerMaxHP;
-        MPInfo.text = "정신력:" + PlayerStatus.PlayerMaxMP;
-        ATKInfo.text = "공격력:" + PlayerStatus.PlayerATK;
-        DEFInfo.text = "방어력:" + PlayerStatus.PlayerDEF;
-        StaminaInfo.text = "지구력:" + PlayerStatus.PlayerMaxStamina;
+        LevelInfo.text = "코딩력:" + PlayerStatus.PlayerLevel + "LV";
+        HPInfo.text = "체력:" + PlayerStatus.PlayerMaxHP + "HP";
+        MPInfo.text = "정신력:" + PlayerStatus.PlayerMaxMP + "MP";
+        ATKInfo.text = "공격력:" + PlayerStatus.PlayerATK + "ATK";
+        DEFInfo.text = "방어력:" + PlayerStatus.PlayerDEF + "DEF";
+        SPInfo.text = "지구력:" + PlayerStatus.PlayerMaxSP + "SP";
         CritInfo.text = "치명타:" + PlayerStatus.PlayerCrit + "%";
     }
 
