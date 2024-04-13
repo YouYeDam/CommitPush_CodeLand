@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerUI : MonoBehaviour
 {
-    [SerializeField] GameObject UICanvas;
+    [SerializeField] GameObject UIManager;
     [SerializeField] GameObject Inventory;
     [SerializeField] GameObject Character;
     PlayerManager PlayerManager;
     void Start() {
         PlayerManager = GetComponent<PlayerManager>();
-        UICanvas = GameObject.Find("UIManager");
-        Inventory = UICanvas.transform.GetChild(0).gameObject;
-        Character = UICanvas.transform.GetChild(1).gameObject;
+        UIManager = GameObject.Find("UIManager");
+        Inventory = UIManager.transform.GetChild(0).gameObject;
+        Character = UIManager.transform.GetChild(1).gameObject;
     }
 
     void OnInventory() {

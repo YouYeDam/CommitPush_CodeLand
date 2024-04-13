@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using TMPro;
 public class Character : MonoBehaviour
 {
-    GameObject Player;
     [SerializeField] Sprite BluePlayerPortrait;
     [SerializeField] Sprite PinkPlayerPortrait;
     [SerializeField] Sprite WhitePlayerPortrait;
@@ -15,7 +14,7 @@ public class Character : MonoBehaviour
     public TMP_Text MPInfo;
     public TMP_Text ATKInfo;
     public TMP_Text DEFInfo;
-    public TMP_Text SPInfo;
+    public TMP_Text APInfo;
     public TMP_Text CritInfo;
     public Image CharacterImage;
     
@@ -23,9 +22,8 @@ public class Character : MonoBehaviour
     Animator PlayerAnimator;
 
     void Start() {
-        Player = GameObject.FindGameObjectWithTag("Player");
-        PlayerStatus = Player.GetComponent<PlayerStatus>();
-        PlayerAnimator = Player.GetComponent<Animator>();
+        PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+        PlayerAnimator = GameObject.FindGameObjectWithTag("Player").GetComponent<Animator>();
     }
     
     void Update() {
@@ -36,7 +34,7 @@ public class Character : MonoBehaviour
         MPInfo.text = "정신력:" + PlayerStatus.PlayerMaxMP + "MP";
         ATKInfo.text = "공격력:" + PlayerStatus.PlayerATK + "ATK";
         DEFInfo.text = "방어력:" + PlayerStatus.PlayerDEF + "DEF";
-        SPInfo.text = "지구력:" + PlayerStatus.PlayerMaxSP + "SP";
+        APInfo.text = "가속력:" + PlayerStatus.PlayerAP + "%";
         CritInfo.text = "치명타:" + PlayerStatus.PlayerCrit + "%";
     }
 

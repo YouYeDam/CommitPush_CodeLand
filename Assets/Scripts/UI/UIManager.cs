@@ -5,12 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    [SerializeField] GameObject StatusBar;
+    
     public void Awake()
     {
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    public void Start() {
+        StatusBar = gameObject.transform.GetChild(2).gameObject;
+    }
     private void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -27,7 +32,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            // 씬이 로드될 때마다 Main Camera를 찾아서 Canvas의 Render Camera로 설정합니다.
+            // 씬이 로드될 때마다 Main Camera를 찾아서 Canvas의 Render Camera로 설정.
             Camera MainCamera = Camera.main;
             if (MainCamera != null)
             {
@@ -38,6 +43,15 @@ public class UIManager : MonoBehaviour
                     Canvas.worldCamera = MainCamera;
                 }
             }
+        }
+
+        // 씬이 로드될 때 플레이어 인풋이 막힌 상황이면 Player Status Bar도 비활성화
+        GameObject StopPlayerInput = GameObject.FindWithTag("StopPlayerInput");
+        if (StopPlayerInput != null) {
+            StatusBar.SetActive(false);
+        }
+        else {
+            StatusBar.SetActive(true);
         }
     }
 }

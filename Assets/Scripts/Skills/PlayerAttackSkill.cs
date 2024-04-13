@@ -31,7 +31,7 @@ void OnTriggerEnter2D(Collider2D other) {
         }
     }
     if(other.gameObject.tag == "Monster") {
-        Destroy(gameObject);    
+        Invoke("DestroySelf", 0.1f);
     }
 }
 

@@ -94,8 +94,8 @@ MonoBehaviour:
   PlayerCurrentHP: 0
   PlayerMaxMP: 100
   PlayerCurrentMP: 100
-  PlayerMaxStamina: 100
-  PlayerCurrentStamina: 100
+  PlayerMaxSP: 100
+  PlayerCurrentSP: 100
   PlayerNextEXP: 10
   PlayerCurrentEXP: 0
   PlayerATK: 1
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a0898fcd90d2e409eb8e699196a64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanInput: 0
 --- !u!212 &8364632946237569230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -152,7 +153,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 794951137
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -1860293165, guid: 02d47c295c8ed2443bc8f3ca6d7d1ccc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -281,7 +282,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -340,7 +341,7 @@ MonoBehaviour:
   WalkDelayTime: 0.2
   InvincibleTime: 1
   RunSpeed: 5
-  JumpSpeed: 5
+  JumpSpeed: 12
   ClimbSpeed: 5
 --- !u!114 &5276594472103054196
 MonoBehaviour:
@@ -370,6 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6496b2a512560c941bfa3af9e6f7c934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UICanvas: {fileID: 0}
   Inventory: {fileID: 0}
   Character: {fileID: 0}
 --- !u!114 &5045011585957937535

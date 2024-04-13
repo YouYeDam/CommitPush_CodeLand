@@ -70,7 +70,13 @@ public class PlayerMovement : MonoBehaviour
         Vector2 PlayerVelocity = new Vector2 (MoveInput.x * RunSpeed, MyRigidbody.velocity.y); // 현재의 속도인 y가 무엇이든 동일한 속도를 유지하라는 의미
         MyRigidbody.velocity = PlayerVelocity;
         
-        MyAnimator.SetBool("IsWalking", PlayerHasHorizontalSpeed);
+        bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
+        if (IsOnLadder) {
+            MyAnimator.SetBool("IsWalking", false); // 사다리에 있다면 무조건 걷기 애니메이션 X
+        }
+        else {
+            MyAnimator.SetBool("IsWalking", PlayerHasHorizontalSpeed);
+        }
     } 
 
     void CheckWalk() { //걷기 애니메이션 체크
