@@ -133,7 +133,7 @@ public class PlayerMovement : MonoBehaviour
         MyAnimator.SetBool("IsClimbingIdle", !playerHasVerticalSpeed);
         MyAnimator.SetFloat("LadderSpeed", Mathf.Abs(LadderSpeed)); // 사다리 속도를 Animator에 전달
 
-        // 플레이어가 사다리를 터치하고 있되, 밟고 있다면 사다리 애니메이션 끔
+        // 플레이어가 사다리를 터치하고 있되, 밟고 있다면 사다리 애니메이션 끔. 허벅지 부위에 BoxCollider 추가.
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if(IsSteppingLadder){
             MyAnimator.SetBool("IsClimbing", false);
