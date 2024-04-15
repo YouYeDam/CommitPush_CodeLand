@@ -2609,14 +2609,14 @@ CompositeCollider2D:
       - {x: 3.9838417, y: -0.983871}
       - {x: -10.016129, y: -0.9839003}
       - {x: -10.016099, y: -5.0161295}
-    - - {x: 1.0160997, y: 1.983871}
-      - {x: 1.0160997, y: 3.016129}
-      - {x: -1.016129, y: 3.0160997}
-      - {x: -1.0160997, y: 1.983871}
     - - {x: -1.9839004, y: 1.983871}
       - {x: -1.9839004, y: 3.016129}
       - {x: -4.016129, y: 3.0160997}
       - {x: -4.0161, y: 1.983871}
+    - - {x: 1.0160997, y: 1.983871}
+      - {x: 1.0160997, y: 3.016129}
+      - {x: -1.016129, y: 3.0160997}
+      - {x: -1.0160997, y: 1.983871}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -5374,7 +5374,7 @@ TilemapCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.09}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0

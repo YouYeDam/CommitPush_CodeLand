@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D MyRigidbody;
     Animator MyAnimator;
     CapsuleCollider2D MyCapsuleCollider;
-    BoxCollider2D MyBoxCollider;
+    BoxCollider2D[] MyBoxColliders;
     SpriteRenderer MySpriteRenderer;
     PlayerStatus PlayerStatus;
     PlayerManager PlayerManager;
@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         MyRigidbody = GetComponent<Rigidbody2D>();
         MyAnimator = GetComponent<Animator>();
         MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
-        MyBoxCollider = GetComponent<BoxCollider2D>();
+        MyBoxColliders = GetComponents<BoxCollider2D>();
         MySpriteRenderer = GetComponent<SpriteRenderer>();
         PlayerStatus = GetComponent<PlayerStatus>();
         PlayerManager = GetComponent<PlayerManager>();
@@ -108,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Value.isPressed) {
             MyRigidbody.velocity += new Vector2 (0f, JumpSpeed);
+            Debug.Log(MyRigidbody.velocity);
         }
     }
 
@@ -122,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
             MyRigidbody.gravityScale = StartGravity;
             return;
         }
+        
         float LadderSpeed = MoveInput.y * ClimbSpeed;
         MyRigidbody.gravityScale = 0f;
         MyRigidbody.velocity = new Vector2(MyRigidbody.velocity.x, LadderSpeed);
@@ -130,6 +132,13 @@ public class PlayerMovement : MonoBehaviour
         MyAnimator.SetBool("IsClimbing", playerHasVerticalSpeed);
         MyAnimator.SetBool("IsClimbingIdle", !playerHasVerticalSpeed);
         MyAnimator.SetFloat("LadderSpeed", Mathf.Abs(LadderSpeed)); // 사다리 속도를 Animator에 전달
+
+        // 플레이어가 사다리를 터치하고 있되, 밟고 있다면 사다리 애니메이션 끔
+        bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
+        if(IsSteppingLadder){
+            MyAnimator.SetBool("IsClimbing", false);
+            MyAnimator.SetBool("IsClimbingIdle", false);
+        }
     }
 
     public void Hurt(int Damage) { // 플레이어 피격

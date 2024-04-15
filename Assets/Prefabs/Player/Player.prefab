@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 5276594472103054196}
   - component: {fileID: 2205046119036907785}
   - component: {fileID: 5045011585957937535}
+  - component: {fileID: 4299612691804881965}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -94,12 +95,11 @@ MonoBehaviour:
   PlayerCurrentHP: 0
   PlayerMaxMP: 100
   PlayerCurrentMP: 100
-  PlayerMaxSP: 100
-  PlayerCurrentSP: 100
-  PlayerNextEXP: 10
+  PlayerMaxEXP: 10
   PlayerCurrentEXP: 0
   PlayerATK: 1
   PlayerDEF: 0
+  PlayerAP: 0
   PlayerCrit: 0
 --- !u!114 &8642232966939586866
 MonoBehaviour:
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6496b2a512560c941bfa3af9e6f7c934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UICanvas: {fileID: 0}
+  UIManager: {fileID: 0}
   Inventory: {fileID: 0}
   Character: {fileID: 0}
 --- !u!114 &5045011585957937535
@@ -387,3 +387,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UICanvas: {fileID: 0}
+--- !u!61 &4299612691804881965
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902140102076735292}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.35}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.77272725, y: 1.2727273}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.77272725, y: 0.25}
+  m_EdgeRadius: 0
