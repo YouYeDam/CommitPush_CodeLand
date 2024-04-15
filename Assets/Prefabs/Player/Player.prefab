@@ -94,12 +94,11 @@ MonoBehaviour:
   PlayerCurrentHP: 0
   PlayerMaxMP: 100
   PlayerCurrentMP: 100
-  PlayerMaxSP: 100
-  PlayerCurrentSP: 100
-  PlayerNextEXP: 10
+  PlayerMaxEXP: 10
   PlayerCurrentEXP: 0
-  PlayerATK: 1
+  PlayerATK: 0
   PlayerDEF: 0
+  PlayerAP: 0
   PlayerCrit: 0
 --- !u!114 &8642232966939586866
 MonoBehaviour:
@@ -357,7 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalAttack: {fileID: 8885825609034438207, guid: 7796c015e9a8dbb438ab721afee996c1, type: 3}
   SkillSpot: {fileID: 1635159961687940443}
-  NormalAttackCoolTime: 0.3
+  NormalAttackCoolTime: 0.4
   BackToIdleAnimTime: 0.2
 --- !u!114 &2205046119036907785
 MonoBehaviour:
@@ -371,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6496b2a512560c941bfa3af9e6f7c934, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UICanvas: {fileID: 0}
+  UIManager: {fileID: 0}
   Inventory: {fileID: 0}
   Character: {fileID: 0}
 --- !u!114 &5045011585957937535

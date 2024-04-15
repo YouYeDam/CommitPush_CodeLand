@@ -232,8 +232,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: -2.2
-  FlipTimeHead: 7
+  FlipTimeHead: 1
   FlipTimeRear: 10
+  StopTimeHead: 5
+  StopTimeRear: 10
   WaitCanWalk: 2.5
   DieDelay: 0.6
   IsAlive: 1
@@ -250,10 +252,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterName: "\uAF2C\uB9C8\uBC84\uC12F"
+  MonsterLV: 1
   MonsterMaxHealth: 20
   MonsterCurrentHealth: 0
   MonsterDamage: 10
   MonsterEXP: 1
+  HPBarPos: 0.5
+  MonsterInfoPos: 0.5
+  UIManager: {fileID: 0}
+  HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
+  HPMeterImage: {fileID: 0}
+  HPMeterInstance: {fileID: 0}
+  MonsterInfo: {fileID: 7337256740539332341, guid: 1549b685081dae94bab992933a341a66, type: 3}
+  MonsterInfoText: {fileID: 0}
+  MonsterInfoInstance: {fileID: 0}
 --- !u!114 &2853819430215722925
 MonoBehaviour:
   m_ObjectHideFlags: 0

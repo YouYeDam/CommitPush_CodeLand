@@ -132,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         MyAnimator.SetFloat("LadderSpeed", Mathf.Abs(LadderSpeed)); // 사다리 속도를 Animator에 전달
     }
 
-    public void Hurt(int Damage) { // 플레이어 피격
+    public void TakeDamage(int Damage) { // 플레이어 피격
         if (IsAlive == false) {
             return;
         }
