@@ -54,11 +54,6 @@ public class MonsterStatus : MonoBehaviour
         {
             HPMeterImage.fillAmount = MonsterCurrentHealth / MonsterMaxHealth;
         }
-
-        if (HPMeterInstance != null && MonsterCurrentHealth <= 0) {
-                Destroy(HPMeterInstance);
-        }
-
     }
 
     
@@ -66,7 +61,7 @@ public class MonsterStatus : MonoBehaviour
         if (UIManager != null && MonsterInfo != null && MonsterInfoInstance == null) {
             MonsterInfoInstance = Instantiate(MonsterInfo, UIManager.transform); // 캔버스의 자식으로 할당
             MonsterInfoText = MonsterInfoInstance.GetComponent<TMP_Text>();
-            MonsterInfoText.text = "Lv." + MonsterLV + " " + MonsterName;
+            MonsterInfoText.text = "LV." + MonsterLV + " " + MonsterName;
         }
     }
 
@@ -74,10 +69,6 @@ public class MonsterStatus : MonoBehaviour
         if (MonsterInfoInstance != null) {
             Vector3 newPosition = transform.position + Vector3.down * MonsterInfoPos;
             MonsterInfoInstance.transform.position = newPosition;
-        }
-
-        if (MonsterInfoInstance != null && MonsterCurrentHealth <= 0) {
-                Destroy(MonsterInfoInstance);
         }
     }
 }

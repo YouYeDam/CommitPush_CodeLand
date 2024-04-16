@@ -22,7 +22,7 @@ public class BasicMonsterMovement : MonoBehaviour
     PlayerMovement PlayerMovement;
     PlayerStatus PlayerStatus;
     public bool IsAlive = true;
-
+    public bool IsLeft = true; // 초기 몬스터가 바라보는 방향
     bool CanWalk = true;
     void Start()
     {
@@ -60,7 +60,12 @@ public class BasicMonsterMovement : MonoBehaviour
             return;
         }
         MonsterRigidbody.velocity = new Vector2 (MoveSpeed, 0f);
-        transform.localScale = new Vector2(-Mathf.Sign(MonsterRigidbody.velocity.x), 1f);
+        if (IsLeft) {
+            transform.localScale = new Vector2(-Mathf.Sign(MonsterRigidbody.velocity.x), 1f);
+        }
+        else {
+            transform.localScale = new Vector2(Mathf.Sign(MonsterRigidbody.velocity.x), 1f);
+        }
     }
 
     IEnumerator RandomFlip() { // 랜덤한 시간마다 스프라이트 반전 호출
@@ -127,6 +132,8 @@ public class BasicMonsterMovement : MonoBehaviour
     }
     IEnumerator DestroyAfterAnimation(float DieDelay) {
     yield return new WaitForSeconds(DieDelay);
+    Destroy(MonsterStatus.HPMeterInstance);
+    Destroy(MonsterStatus.MonsterInfoInstance);
     Destroy(gameObject);
     }
 }
