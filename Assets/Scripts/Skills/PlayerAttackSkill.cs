@@ -7,7 +7,7 @@ public class PlayerAttackSkill : MonoBehaviour
 [SerializeField] int Damage = 10;
 Rigidbody2D MyRigidbody;
 PlayerMovement Player;
-
+bool IsAttack = false;
 float xSpeed;
 void Start()
 {
@@ -24,11 +24,13 @@ void Update()
 }
 
 void OnTriggerEnter2D(Collider2D other) {
+    if (IsAttack) {
+        return;
+    }
     if (other is BoxCollider2D && other.gameObject.tag == "Monster") {
-        MonsterStatus MonsterStatus = other.gameObject.GetComponent<MonsterStatus>();
-        if (MonsterStatus != null) {
-            MonsterStatus.MonsterCurrentHealth -= Damage;
-        }
+        IsAttack = true;
+        BasicMonsterMovement BaiscMonsterMovement = other.gameObject.GetComponent<BasicMonsterMovement>();
+        BaiscMonsterMovement.TakeDamage(Damage);
     }
     if(other.gameObject.tag == "Monster") {
         Invoke("DestroySelf", 0.1f);

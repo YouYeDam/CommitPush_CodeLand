@@ -781,6 +781,7 @@ GameObject:
   - component: {fileID: 3595563109849232814}
   - component: {fileID: 2859603453595361751}
   - component: {fileID: 6275077212198346848}
+  - component: {fileID: 9138600995551837373}
   - component: {fileID: 2949951243744753569}
   - component: {fileID: 1955548962689674634}
   - component: {fileID: 2911972981389088484}
@@ -889,6 +890,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StatusBar: {fileID: 5909250996008770510}
+--- !u!114 &9138600995551837373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2327944111166365452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e44eb533fcb894a9c28ee220b7c188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CursorTexture: {fileID: 2800000, guid: 2e71a8202d3b4a3448ec85ced5a40265, type: 3}
+  HotSpot: {x: 0, y: 0}
 --- !u!114 &2949951243744753569
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,9 @@ public class BasicMonsterMovement : MonoBehaviour
 {
     [SerializeField] float MoveSpeed = 1f;
     [SerializeField] float FlipTimeHead = 1f;
-    [SerializeField] float FlipTimeRear = 1f;
+    [SerializeField] float FlipTimeRear = 10f;
+    [SerializeField] float StopTimeHead = 5f;
+    [SerializeField] float StopTimeRear = 10f;
     [SerializeField] float WaitCanWalk = 1f;
     [SerializeField] float DieDelay = 0.6f;
     Rigidbody2D MonsterRigidbody;
@@ -58,6 +60,7 @@ public class BasicMonsterMovement : MonoBehaviour
             return;
         }
         MonsterRigidbody.velocity = new Vector2 (MoveSpeed, 0f);
+        transform.localScale = new Vector2(-Mathf.Sign(MonsterRigidbody.velocity.x), 1f);
     }
 
     IEnumerator RandomFlip() { // 랜덤한 시간마다 스프라이트 반전 호출
@@ -71,18 +74,19 @@ public class BasicMonsterMovement : MonoBehaviour
 
     IEnumerator RandomStop() { // 랜덤한 시간마다 이동 멈춤 호출
         while (IsAlive) {
-            float WaitTime = Random.Range(FlipTimeHead, FlipTimeRear);
+            float WaitTime = Random.Range(StopTimeHead, StopTimeRear);
             yield return new WaitForSeconds(WaitTime);
 
             StopWalking();
         }
     }
     void FlipEnemyFacing() { // 스프라이트 반전
-        if (MonsterRigidbody.velocity.x == 0) {
+        bool IsOnGround = MonsterCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        if (!IsOnGround) {
             return;
         }
         MoveSpeed = -MoveSpeed;
-        transform.localScale = new Vector2 (Mathf.Sign(MonsterRigidbody.velocity.x), 1f); 
+        transform.localScale = new Vector2 (Mathf.Sign(MonsterRigidbody.velocity.x), 1f);
     }
 
     void StopWalking() { // 이동 멈춤
@@ -99,7 +103,15 @@ public class BasicMonsterMovement : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other) { // 몬스터와 플레이어 겹쳤을 때 데미지
         if (other.tag == "Player" && IsAlive) {
-            PlayerMovement.Hurt(MonsterStatus.MonsterDamage);
+            PlayerMovement.TakeDamage(MonsterStatus.MonsterDamage);
+        }
+    }
+
+    public void TakeDamage(int Damage) {
+        if (MonsterStatus != null) {
+            MonsterStatus.MonsterCurrentHealth -= Damage;
+            MonsterStatus.DisplayHPMeter();
+            MonsterStatus.DisplayMonsterInfo();
         }
     }
     void Die() {
@@ -110,11 +122,11 @@ public class BasicMonsterMovement : MonoBehaviour
         IsAlive = false;
         PlayerStatus.GainEXP(MonsterStatus.MonsterEXP);
         MonsterDropItem.DropItem();
+        MonsterBoxCollider.enabled = false; // 플레이어 스킬 먹힘 방지
         StartCoroutine(DestroyAfterAnimation(DieDelay)); // 애니메이션 재생 후 몬스터 파괴
     }
-
     IEnumerator DestroyAfterAnimation(float DieDelay) {
     yield return new WaitForSeconds(DieDelay);
     Destroy(gameObject);
-}
+    }
 }
