@@ -239,6 +239,7 @@ MonoBehaviour:
   WaitCanWalk: 2.5
   DieDelay: 0.6
   IsAlive: 1
+  IsLeft: 1
 --- !u!114 &3157593347497917494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,13 +253,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterName: "\uAF2C\uB9C8\uBC84\uC12F"
-  MonsterLV: 1
+  MonsterLV: 2
   MonsterMaxHealth: 20
   MonsterCurrentHealth: 0
-  MonsterDamage: 10
-  MonsterEXP: 1
-  HPBarPos: 0.5
-  MonsterInfoPos: 0.5
+  MonsterDamage: 15
+  MonsterEXP: 3
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}

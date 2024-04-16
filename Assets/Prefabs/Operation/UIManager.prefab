@@ -2433,6 +2433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca6fae521966684b8754970fc0d77fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIManager: {fileID: 5963290262796570602}
 --- !u!1 &7139519791033003511
 GameObject:
   m_ObjectHideFlags: 0
@@ -3245,7 +3246,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -600, y: 105}
+  m_AnchoredPosition: {x: -500, y: 105}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2702115686952850099
@@ -3298,6 +3299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca6fae521966684b8754970fc0d77fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UIManager: {fileID: 5963290262796570602}
 --- !u!1 &8983123957130550075
 GameObject:
   m_ObjectHideFlags: 0
