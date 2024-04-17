@@ -8,17 +8,17 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject Inventory;
     [SerializeField] GameObject Character;
     PlayerManager PlayerManager;
-    private Vector3 InventoryStartPosition;
-    private Vector3 CharacterStartPosition;
-
+    private Vector2 InventoryOriginalPosition;
+    private Vector2 CharacterOriginalPosition;
     void Start() {
         PlayerManager = GetComponent<PlayerManager>();
         UIManager = GameObject.Find("UIManager");
         Inventory = UIManager.transform.GetChild(0).gameObject;
         Character = UIManager.transform.GetChild(1).gameObject;
 
-        InventoryStartPosition = Inventory.transform.position;
-        CharacterStartPosition = Character.transform.position;
+        // 원래 위치 저장
+        InventoryOriginalPosition = Inventory.GetComponent<RectTransform>().anchoredPosition;
+        CharacterOriginalPosition = Character.GetComponent<RectTransform>().anchoredPosition;
     }
 
     void OnInventory() {
@@ -27,10 +27,11 @@ public class PlayerUI : MonoBehaviour
         }
         if (Inventory.activeSelf) {
             Inventory.SetActive(false);
-            Inventory.transform.position = InventoryStartPosition;
         }
         else {
             Inventory.SetActive(true);
+            // 원래 위치로 복원
+            Inventory.GetComponent<RectTransform>().anchoredPosition = InventoryOriginalPosition;
         }
     }
     void OnCharacter() {
@@ -39,10 +40,11 @@ public class PlayerUI : MonoBehaviour
         }
         if (Character.activeSelf) {
             Character.SetActive(false);
-            Character.transform.position = CharacterStartPosition;
         }
         else {
             Character.SetActive(true);
+            // 원래 위치로 복원
+            Character.GetComponent<RectTransform>().anchoredPosition = CharacterOriginalPosition;
         }
     }
 }
