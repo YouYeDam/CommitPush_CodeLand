@@ -108,7 +108,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Value.isPressed) {
             MyRigidbody.velocity += new Vector2 (0f, JumpSpeed);
-            Debug.Log(MyRigidbody.velocity);
         }
     }
 
@@ -155,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
         StartCoroutine(InvincibleDelay()); // 무적 활성화 초기화
         StartCoroutine(MoveHurtPosition(0.2f)); // 플레이어 넉백
         if (PlayerStatus.PlayerCurrentHP <= 0) {
+            PlayerStatus.PlayerCurrentHP = 0;
             Die();
         }
     }
