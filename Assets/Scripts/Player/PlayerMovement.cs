@@ -75,7 +75,15 @@ public class PlayerMovement : MonoBehaviour
             MyAnimator.SetBool("IsWalking", false); // 사다리에 있다면 무조건 걷기 애니메이션 X
         }
         else {
-            MyAnimator.SetBool("IsWalking", PlayerHasHorizontalSpeed);
+            // 레이캐스트를 통해 플레이어가 바라보고 있는 방향으로 조금 앞에 있는 지형 확인
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground"));
+            
+            // 만약 충돌한 지형이 Ground 레이어라면 Walk 애니메이션 실행 X
+            if (hit.collider != null && hit.collider.CompareTag("Ground")) {
+                MyAnimator.SetBool("IsWalking", false);
+            } else {
+                MyAnimator.SetBool("IsWalking", PlayerHasHorizontalSpeed);
+            }
         }
     } 
 

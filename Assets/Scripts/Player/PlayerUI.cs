@@ -21,7 +21,7 @@ public class PlayerUI : MonoBehaviour
         CharacterOriginalPosition = Character.GetComponent<RectTransform>().anchoredPosition;
     }
 
-    void OnInventory() {
+    public void OnInventory() {
         if (Inventory == null || !PlayerManager.CanInput) {
             return;
         }
@@ -34,7 +34,7 @@ public class PlayerUI : MonoBehaviour
             Inventory.GetComponent<RectTransform>().anchoredPosition = InventoryOriginalPosition;
         }
     }
-    void OnCharacter() {
+    public void OnCharacter() {
         if (Character == null || !PlayerManager.CanInput) {
             return;
         }
