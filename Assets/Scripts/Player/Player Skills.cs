@@ -28,16 +28,17 @@ public class PlayerSkills : MonoBehaviour
             return;
         }
         bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
-        if (CanUseNormalAttack && !IsOnLadder)
-        {
-            Instantiate(NormalAttack, SkillSpot.position, transform.rotation);
-            MyAnimator.SetBool("IsAttacking", true);
-            CanUseNormalAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
-            PlayerMovement.IsWalkingAllowed = false; // 스킬을 사용한 후 이동 멈춤 설정
-            
-            Invoke("ResetNormalAttack", NormalAttackCoolTime); // 2초 후에 ResetSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
-            Invoke("BackToIdleAnim", BackToIdleAnimTime); // 1초 후에 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
-
+        bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
+        if (CanUseNormalAttack) {
+            if (!IsOnLadder || IsOnLadderGround) {
+                Instantiate(NormalAttack, SkillSpot.position, transform.rotation);
+                MyAnimator.SetBool("IsAttacking", true);
+                CanUseNormalAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
+                PlayerMovement.IsWalkingAllowed = false; // 스킬을 사용한 후 이동 멈춤 설정
+                
+                Invoke("ResetNormalAttack", NormalAttackCoolTime); // 2초 후에 ResetSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
+                Invoke("BackToIdleAnim", BackToIdleAnimTime); // 1초 후에 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
+            }
         }
     }
     void ResetNormalAttack()
