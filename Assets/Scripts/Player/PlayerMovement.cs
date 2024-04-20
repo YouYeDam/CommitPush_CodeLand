@@ -75,14 +75,15 @@ public class PlayerMovement : MonoBehaviour
             MyAnimator.SetBool("IsWalking", false); // 사다리에 있다면 무조건 걷기 애니메이션 X
         }
         else {
-            // 레이캐스트를 통해 플레이어가 바라보고 있는 방향으로 조금 앞에 있는 지형 확인
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground"));
+            // 레이캐스트를 통해 플레이어가 바라보고 있는 방향으로 조금 앞에 Ground 레이어 확인
+            RaycastHit2D hitRight = Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground"));
+            RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, -transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground"));
             
-            // 만약 충돌한 지형이 Ground 레이어라면 Walk 애니메이션 실행 X
-            if (hit.collider != null && hit.collider.CompareTag("Ground")) {
-                MyAnimator.SetBool("IsWalking", false);
-            } else {
+            // 만약 양쪽 모두가 Ground 레이어와 충돌하지 않고 있다면 Walk 애니메이션 실행
+            if (hitRight.collider == null && hitLeft.collider == null) {
                 MyAnimator.SetBool("IsWalking", PlayerHasHorizontalSpeed);
+            } else {
+                MyAnimator.SetBool("IsWalking", false);
             }
         }
     } 
@@ -196,7 +197,7 @@ public class PlayerMovement : MonoBehaviour
             float t = (Time.time - StartTime) / Duration;
             Vector3 NewPosition = Vector3.Lerp(StartPosition, EndPosition, t);
             
-            // 레이캐스트를 실행하고 "Ground" 레이어와의 충돌만 검사
+            // 레이캐스트를 사용해 Ground 레이어와의 충돌 검사
             RaycastHit2D Hit = Physics2D.Raycast(transform.position, EndPosition - transform.position, Vector3.Distance(transform.position, EndPosition), layerMask);
             
             if (Hit.collider != null) {

@@ -10,8 +10,8 @@ public class MonsterStatus : MonoBehaviour
     [SerializeField] public float MonsterCurrentHealth;
     [SerializeField] public int MonsterDamage = 10;
     [SerializeField] public int MonsterEXP = 1;
-    float HPBarPos = 0.5f;
-    float MonsterInfoPos = 0.5f;
+    public float HPBarPos = 0.5f;
+    public float MonsterInfoPos = 0.5f;
     public GameObject UIManager;
 
     public GameObject HPBar; // 체력바 프리팹

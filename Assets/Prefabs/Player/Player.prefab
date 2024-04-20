@@ -90,6 +90,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: "\uD14C\uC2A4\uD2B8"
   PlayerClass: "\uAC1C\uBC1C\uC790"
+  UIManager: {fileID: 0}
+  PlayerNameInfo: {fileID: 7337256740539332341, guid: 7a61fbe61d3a0a1458d89fdd8373759c, type: 3}
+  PlayerNameInfoText: {fileID: 0}
+  PlayerNameInfoInstance: {fileID: 0}
+  PlayerNameInfoPos: 0.8
   PlayerLevel: 1
   PlayerMaxHP: 100
   PlayerCurrentHP: 0
