@@ -10,7 +10,8 @@ public class StatusBar : MonoBehaviour
     public TMP_Text HPDisplay;
     public TMP_Text MPDisplay;
     public TMP_Text EXPDisplay;
-
+    public TMP_Text PlayerLV;
+    public TMP_Text PlayerName;
     PlayerStatus PlayerStatus;
     void Start(){
         PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
@@ -35,6 +36,8 @@ void Update() {
     HPDisplay.text = PlayerStatus.PlayerCurrentHP + " / " + PlayerStatus.PlayerMaxHP;
     MPDisplay.text = PlayerStatus.PlayerCurrentMP + " / " + PlayerStatus.PlayerMaxMP;
     EXPDisplay.text = PlayerStatus.PlayerCurrentEXP + " / " + PlayerStatus.PlayerMaxEXP;
+    PlayerLV.text = "LV." + PlayerStatus.PlayerLevel + " " + PlayerStatus.PlayerClass;
+    PlayerName.text = PlayerStatus.PlayerName;
 }
 
 }

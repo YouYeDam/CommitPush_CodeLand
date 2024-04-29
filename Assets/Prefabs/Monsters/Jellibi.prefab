@@ -189,7 +189,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5833333}
+    oldSize: {x: 0.5, y: 0.6041667}
     newSize: {x: 0.8125, y: 0.625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -237,9 +237,11 @@ MonoBehaviour:
   StopTimeHead: 3
   StopTimeRear: 7
   WaitCanWalk: 2
-  DieDelay: 0.6
+  DieDelay: 0.7
+  PlayerOverlapRange: 0.1
   IsAlive: 1
   IsLeft: 0
+  IsTakeDamge: 0
 --- !u!114 &3157593347497917494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +260,8 @@ MonoBehaviour:
   MonsterCurrentHealth: 0
   MonsterDamage: 10
   MonsterEXP: 1
+  HPBarPos: 0.5
+  MonsterInfoPos: 0.5
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}

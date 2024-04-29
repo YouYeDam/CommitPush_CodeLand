@@ -11,6 +11,7 @@ public class BasicMonsterMovement : MonoBehaviour
     [SerializeField] float StopTimeRear = 10f;
     [SerializeField] float WaitCanWalk = 1f;
     [SerializeField] float DieDelay = 0.6f;
+    [SerializeField] float PlayerOverlapRange = 0.1f;
     Rigidbody2D MonsterRigidbody;
     Animator MonsterAnimator;
     MonsterStatus MonsterStatus;
@@ -21,8 +22,11 @@ public class BasicMonsterMovement : MonoBehaviour
     MonsterDropItem MonsterDropItem;
     PlayerMovement PlayerMovement;
     PlayerStatus PlayerStatus;
+    GameObject Player;
+
     public bool IsAlive = true;
     public bool IsLeft = true; // 초기 몬스터가 바라보는 방향
+    public bool IsTakeDamge = false;
     bool CanWalk = true;
     void Start()
     {
@@ -42,6 +46,8 @@ public class BasicMonsterMovement : MonoBehaviour
 
         Physics2D.IgnoreCollision(PlayerCapsuleCollider, MonsterCapsuleCollider, true);
         Physics2D.IgnoreCollision(PlayerBoxCollider, MonsterCapsuleCollider, true);
+
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Update()
@@ -50,8 +56,11 @@ public class BasicMonsterMovement : MonoBehaviour
             return;
         }
         Die();
-        if (CanWalk) {
+        if (CanWalk && !IsTakeDamge) {
             Move();
+        }
+        else if (IsTakeDamge){
+            MoveToPlayer();
         }
     }
     
@@ -68,8 +77,42 @@ public class BasicMonsterMovement : MonoBehaviour
         }
     }
 
+    void MoveToPlayer() {
+        if (!IsAlive) {
+            return;
+        }
+        if (Player != null) {
+            RestartWalking();
+            Vector2 PlayerPosition = Player.transform.position;
+            Vector2 DirectionToPlayer = (PlayerPosition - (Vector2)transform.position).normalized;
+            if (DirectionToPlayer.x <= PlayerOverlapRange && DirectionToPlayer.x >= -PlayerOverlapRange) {
+                MonsterRigidbody.velocity = new Vector2 (0f, 0f);
+                MonsterAnimator.SetBool("IsIdling", true);
+            }
+
+            else {
+                MoveSpeed = Mathf.Sign(DirectionToPlayer.x) * Mathf.Abs(MoveSpeed);
+                MonsterRigidbody.velocity = new Vector2 (MoveSpeed, 0f);
+                MonsterAnimator.SetBool("IsIdling", false);
+                if (IsLeft) {
+                transform.localScale = new Vector2(-Mathf.Sign(MonsterRigidbody.velocity.x), 1f);
+                }
+                else {
+                transform.localScale = new Vector2(Mathf.Sign(MonsterRigidbody.velocity.x), 1f);
+                }
+            }
+
+        }
+
+        if (!PlayerMovement.IsAlive) {
+            IsTakeDamge = false;
+            StartCoroutine(RandomFlip());
+            StartCoroutine(RandomStop());
+        }
+    }
+
     IEnumerator RandomFlip() { // 랜덤한 시간마다 스프라이트 반전 호출
-        while (IsAlive) {
+        while (IsAlive && !IsTakeDamge) {
             float WaitTime = Random.Range(FlipTimeHead, FlipTimeRear);
             yield return new WaitForSeconds(WaitTime);
 
@@ -78,7 +121,7 @@ public class BasicMonsterMovement : MonoBehaviour
     }
 
     IEnumerator RandomStop() { // 랜덤한 시간마다 이동 멈춤 호출
-        while (IsAlive) {
+        while (IsAlive && !IsTakeDamge) {
             float WaitTime = Random.Range(StopTimeHead, StopTimeRear);
             yield return new WaitForSeconds(WaitTime);
 
@@ -117,6 +160,7 @@ public class BasicMonsterMovement : MonoBehaviour
             MonsterStatus.MonsterCurrentHealth -= Damage;
             MonsterStatus.DisplayHPMeter();
             MonsterStatus.DisplayMonsterInfo();
+            IsTakeDamge = true;
         }
     }
     void Die() {

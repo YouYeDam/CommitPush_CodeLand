@@ -238,8 +238,10 @@ MonoBehaviour:
   StopTimeRear: 12
   WaitCanWalk: 3.5
   DieDelay: 0.8
+  PlayerOverlapRange: 0.3
   IsAlive: 1
   IsLeft: 0
+  IsTakeDamge: 0
 --- !u!114 &3157593347497917494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,9 +259,9 @@ MonoBehaviour:
   MonsterMaxHealth: 100
   MonsterCurrentHealth: 0
   MonsterDamage: 20
-  MonsterEXP: 15
-  HPBarPos: 0.7
-  MonsterInfoPos: 0.7
+  MonsterEXP: 30
+  HPBarPos: 0.8
+  MonsterInfoPos: 0.8
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}

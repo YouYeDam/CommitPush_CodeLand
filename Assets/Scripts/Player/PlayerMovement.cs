@@ -135,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
         float LadderSpeed = MoveInput.y * ClimbSpeed;
         MyRigidbody.gravityScale = 0f;
         MyRigidbody.velocity = new Vector2(MyRigidbody.velocity.x, LadderSpeed);
-
+        
         bool playerHasVerticalSpeed = Mathf.Abs(MyRigidbody.velocity.y) > Mathf.Epsilon;
         MyAnimator.SetBool("IsClimbing", playerHasVerticalSpeed);
         MyAnimator.SetBool("IsClimbingIdle", !playerHasVerticalSpeed);

@@ -16,10 +16,10 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] public int PlayerCurrentMP;
     [SerializeField] public int PlayerMaxEXP = 10;
     [SerializeField] public int PlayerCurrentEXP = 0;
-    [SerializeField] public int PlayerATK = 1;
-    [SerializeField] public int PlayerDEF = 0;
-    [SerializeField] public float PlayerAP = 0f;
-    [SerializeField] public float PlayerCrit = 0f;
+    [SerializeField] public int PlayerATK = 1;  //공격력
+    [SerializeField] public int PlayerDEF = 0; //방어력
+    [SerializeField] public float PlayerAP = 0f; //가속력
+    [SerializeField] public float PlayerCrit = 0f; //치명타율
 
     void Start() {
         PlayerCurrentHP = PlayerMaxHP;
@@ -44,6 +44,8 @@ public class PlayerStatus : MonoBehaviour
     void LevelUp() {
         PlayerLevel += 1;
         PlayerCurrentEXP -= PlayerMaxEXP;
+        PlayerCurrentHP = PlayerMaxHP;
+        PlayerCurrentMP = PlayerMaxMP;
     }
 
     public void DisplayPlayerNameInfo() { // 캐릭터 이름 보이기

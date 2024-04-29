@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7ccdb8cd45e11fa448977f11bb6b7e60
+guid: fea459f9d0c845643a06d5bfcc41c5b8
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,173 +93,186 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uBE68\uAC15\uC2A4\uD0DD_0"
+      name: GrayFullStacktone_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 14
+        x: 777
+        y: 561
         width: 29
-        height: 29
+        height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f20cfca72d900f342a469ff2c660d0d1
-      internalID: -2113529537
+      spriteID: 2a073d098f6e83e41abe7d016ae9f4b3
+      internalID: -96617959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uBE68\uAC15\uC2A4\uD0DD_1"
+      name: FullStacktone_1
       rect:
         serializedVersion: 2
-        x: 57
-        y: 15
+        x: 825
+        y: 561
         width: 29
-        height: 30
+        height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4bd81d4b172620448139d850a4f934c
-      internalID: -1454008653
+      spriteID: d96883aeeb5f5cd4bac0d810a683bf49
+      internalID: -28363238
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uBE68\uAC15\uC2A4\uD0DD_2"
+      name: FullStacktone_2
       rect:
         serializedVersion: 2
-        x: 105
-        y: 17
+        x: 873
+        y: 561
         width: 29
-        height: 29
+        height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c0a98ee3c9e16b4e91fd075f683d053
-      internalID: 1157367783
+      spriteID: 5a97ba8afffc260429d259636f22796e
+      internalID: 907521522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uBE68\uAC15\uC2A4\uD0DD_3"
+      name: FullStacktone_3
       rect:
         serializedVersion: 2
-        x: 153
-        y: 9
+        x: 921
+        y: 561
         width: 29
-        height: 36
+        height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1328f3e81bee61b4c9dc957e4f0834b4
-      internalID: 114301108
+      spriteID: a9293b338ca292942911f8a8e3626c2a
+      internalID: -554756354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uBE68\uAC15\uC2A4\uD0DD_4"
+      name: FullStacktone_4
       rect:
         serializedVersion: 2
-        x: 200
-        y: 0
+        x: 968
+        y: 561
         width: 31
-        height: 25
+        height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e83a1a145aabfb49837d35af2712cd0
-      internalID: 1503626579
+      spriteID: 9fc97054b11251b4b87a68d558e3d7fb
+      internalID: 1065402060
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uBE68\uAC15\uC2A4\uD0DD_5"
+      name: FullStacktone_5
       rect:
         serializedVersion: 2
-        x: 247
-        y: 0
+        x: 1015
+        y: 561
         width: 33
-        height: 22
+        height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bee7471d754d20644a9c7196e1229905
-      internalID: 330099538
+      spriteID: ce2fe1fd823ee63418a6725684cc2e83
+      internalID: 137090377
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uBE68\uAC15\uC2A4\uD0DD_6"
+      name: FullStacktone_6
       rect:
         serializedVersion: 2
-        x: 297
-        y: 4
+        x: 1065
+        y: 561
         width: 29
-        height: 29
+        height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4454bca79fdb5cb4abb7ec617743426a
-      internalID: 898070272
+      spriteID: b2ae7350976c2144a98fea558f1fc5d0
+      internalID: 956625804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uBE68\uAC15\uC2A4\uD0DD_7"
+      name: FullStacktone_7
       rect:
         serializedVersion: 2
-        x: 345
-        y: 11
+        x: 1113
+        y: 561
         width: 29
-        height: 29
+        height: 83
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6acfffd03cbfc84cbf78bdc90e3ba4d
-      internalID: 628179095
+      spriteID: d04ed5056c12ab344b55d78ec034b9d5
+      internalID: -588812633
       vertices: []
       indices: 
       edges: []
@@ -275,14 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "\uBE68\uAC15\uC2A4\uD0DD_0": -2113529537
-      "\uBE68\uAC15\uC2A4\uD0DD_1": -1454008653
-      "\uBE68\uAC15\uC2A4\uD0DD_2": 1157367783
-      "\uBE68\uAC15\uC2A4\uD0DD_3": 114301108
-      "\uBE68\uAC15\uC2A4\uD0DD_4": 1503626579
-      "\uBE68\uAC15\uC2A4\uD0DD_5": 330099538
-      "\uBE68\uAC15\uC2A4\uD0DD_6": 898070272
-      "\uBE68\uAC15\uC2A4\uD0DD_7": 628179095
+      FullStacktone_1: -28363238
+      FullStacktone_2: 907521522
+      FullStacktone_3: -554756354
+      FullStacktone_4: 1065402060
+      FullStacktone_5: 137090377
+      FullStacktone_6: 956625804
+      FullStacktone_7: -588812633
+      GrayFullStacktone_0: -96617959
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
