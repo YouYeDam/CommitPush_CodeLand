@@ -112,7 +112,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         bool IsOnGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
-        if (!IsOnGround) {
+        bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
+        if (!IsOnGround & !IsSteppingLadder) {
             return;
         }
         if (Value.isPressed) {
@@ -132,20 +133,32 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         
-        float LadderSpeed = MoveInput.y * ClimbSpeed;
-        MyRigidbody.gravityScale = 0f;
-        MyRigidbody.velocity = new Vector2(MyRigidbody.velocity.x, LadderSpeed);
-        
-        bool playerHasVerticalSpeed = Mathf.Abs(MyRigidbody.velocity.y) > Mathf.Epsilon;
-        MyAnimator.SetBool("IsClimbing", playerHasVerticalSpeed);
-        MyAnimator.SetBool("IsClimbingIdle", !playerHasVerticalSpeed);
-        MyAnimator.SetFloat("LadderSpeed", Mathf.Abs(LadderSpeed)); // 사다리 속도를 Animator에 전달
-
         // 플레이어가 사다리를 터치하고 있되, 밟고 있다면 사다리 애니메이션 끔. 허벅지 부위에 BoxCollider 추가.
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if(IsSteppingLadder){
+            float modified_y;
+            if (MoveInput.y > 0){
+                modified_y = 0;
+            } else {
+                modified_y = MoveInput.y;
+            }
+            float LadderSpeed = modified_y * ClimbSpeed;
+            MyRigidbody.velocity = new Vector2(MyRigidbody.velocity.x, LadderSpeed);
+            MyRigidbody.gravityScale = 0f;
+
             MyAnimator.SetBool("IsClimbing", false);
             MyAnimator.SetBool("IsClimbingIdle", false);
+        }
+        else {
+            float LadderSpeed = MoveInput.y * ClimbSpeed;
+            MyRigidbody.velocity = new Vector2(MyRigidbody.velocity.x, LadderSpeed);
+            MyRigidbody.gravityScale = 0f;
+
+            MyRigidbody.gravityScale = 0f;
+            bool playerHasVerticalSpeed = Mathf.Abs(MyRigidbody.velocity.y) > Mathf.Epsilon;
+            MyAnimator.SetBool("IsClimbing", playerHasVerticalSpeed);
+            MyAnimator.SetBool("IsClimbingIdle", !playerHasVerticalSpeed);
+            MyAnimator.SetFloat("LadderSpeed", Mathf.Abs(LadderSpeed)); // 사다리 속도를 Animator에 전달
         }
     }
 
