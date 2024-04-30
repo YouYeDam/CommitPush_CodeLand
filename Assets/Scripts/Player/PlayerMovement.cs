@@ -136,13 +136,13 @@ public class PlayerMovement : MonoBehaviour
         // 플레이어가 사다리를 터치하고 있되, 밟고 있다면 사다리 애니메이션 끔. 허벅지 부위에 BoxCollider 추가.
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if(IsSteppingLadder){
-            float modified_y;
+            float Modified_y;
             if (MoveInput.y > 0){
-                modified_y = 0;
+                Modified_y = 0;
             } else {
-                modified_y = MoveInput.y;
+                Modified_y = MoveInput.y;
             }
-            float LadderSpeed = modified_y * ClimbSpeed;
+            float LadderSpeed = Modified_y * ClimbSpeed;
             MyRigidbody.velocity = new Vector2(MyRigidbody.velocity.x, LadderSpeed);
             MyRigidbody.gravityScale = 0f;
 
@@ -154,7 +154,6 @@ public class PlayerMovement : MonoBehaviour
             MyRigidbody.velocity = new Vector2(MyRigidbody.velocity.x, LadderSpeed);
             MyRigidbody.gravityScale = 0f;
 
-            MyRigidbody.gravityScale = 0f;
             bool playerHasVerticalSpeed = Mathf.Abs(MyRigidbody.velocity.y) > Mathf.Epsilon;
             MyAnimator.SetBool("IsClimbing", playerHasVerticalSpeed);
             MyAnimator.SetBool("IsClimbingIdle", !playerHasVerticalSpeed);
@@ -168,6 +167,10 @@ public class PlayerMovement : MonoBehaviour
         }
         if (IsInvincible) { // 무적상태면 실행안함
             return;
+        }
+        Damage -= Mathf.CeilToInt(PlayerStatus.PlayerDEF * 1.5f); // 방어력 공식: DEF * 1.5
+        if (Damage < 1) {
+            Damage = 1;
         }
         PlayerStatus.PlayerCurrentHP -= Damage;
         Color.a = 0.5f;

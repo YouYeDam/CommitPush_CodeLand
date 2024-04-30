@@ -20,4 +20,6 @@ public class Item : ScriptableObject
     public string EquipmentType;  // 장비 유형
     public string UsedType;  // 소비 유형
 
+    public bool IsAlreadyGet = false; // 아이템 중복 습득 방지
+
 }

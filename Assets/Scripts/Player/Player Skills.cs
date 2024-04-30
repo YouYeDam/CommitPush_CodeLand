@@ -9,6 +9,7 @@ public class PlayerSkills : MonoBehaviour
     CapsuleCollider2D MyCapsuleCollider;
     PlayerMovement PlayerMovement;
     PlayerManager PlayerManager;
+    PlayerStatus PlayerStatus;
     [SerializeField] GameObject NormalAttack;
     [SerializeField] Transform SkillSpot;
     [SerializeField] float GlobalCoolDown = 0.3f;
@@ -20,7 +21,10 @@ public class PlayerSkills : MonoBehaviour
         MyAnimator = GetComponent<Animator>();
         MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
         PlayerMovement = FindObjectOfType<PlayerMovement>();
+        PlayerStatus = FindObjectOfType<PlayerStatus>();
         PlayerManager = GetComponent<PlayerManager>();
+
+        GlobalCoolDown -= PlayerStatus.PlayerAP; // 글쿨 가속력 공식: 글쿨 - 가속력
     }
 
     void OnNormalAttack(InputValue value) {

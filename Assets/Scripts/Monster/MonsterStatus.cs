@@ -40,6 +40,7 @@ public class MonsterStatus : MonoBehaviour
             HPMeterInstance = Instantiate(HPBar, UIManager.transform); // 캔버스의 자식으로 할당
             HPMeterImage = HPMeterInstance.transform.GetChild(0).gameObject.GetComponentInChildren<Image>();
             UpdateHealthBar();
+            HPMeterInstance.transform.SetAsFirstSibling();
         }
     }
     void UpdateHealthBar() // 체력바 갱신
@@ -62,6 +63,7 @@ public class MonsterStatus : MonoBehaviour
             MonsterInfoInstance = Instantiate(MonsterInfo, UIManager.transform); // 캔버스의 자식으로 할당
             MonsterInfoText = MonsterInfoInstance.GetComponent<TMP_Text>();
             MonsterInfoText.text = "LV." + MonsterLV + " " + MonsterName;
+            MonsterInfoInstance.transform.SetAsFirstSibling();
         }
     }
 

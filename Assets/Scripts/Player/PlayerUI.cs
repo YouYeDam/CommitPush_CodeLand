@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class PlayerUI : MonoBehaviour
     PlayerManager PlayerManager;
     private Vector2 InventoryOriginalPosition;
     private Vector2 CharacterOriginalPosition;
+
+    GameObject InventoryButtonObject;
+    GameObject CharacterButtonObject;
+    Button InventoryButton;
+    Button CharacterButton;
     void Start() {
         PlayerManager = GetComponent<PlayerManager>();
         UIManager = GameObject.Find("UIManager");
@@ -32,6 +38,13 @@ public class PlayerUI : MonoBehaviour
             Inventory.SetActive(true);
             // 원래 위치로 복원
             Inventory.GetComponent<RectTransform>().anchoredPosition = InventoryOriginalPosition;
+
+            // 버튼으로 닫게하기
+            if (InventoryButtonObject == null) {
+                InventoryButtonObject = GameObject.Find("Inventory Close Button");
+                InventoryButton = InventoryButtonObject.GetComponent<Button>();
+                InventoryButton.onClick.AddListener(OnInventory);
+            }
         }
     }
     public void OnCharacter() {
@@ -45,6 +58,13 @@ public class PlayerUI : MonoBehaviour
             Character.SetActive(true);
             // 원래 위치로 복원
             Character.GetComponent<RectTransform>().anchoredPosition = CharacterOriginalPosition;
+
+            // 버튼으로 닫게하기
+            if (CharacterButtonObject == null) {
+                CharacterButtonObject = GameObject.Find("Character Close Button");
+                CharacterButton = CharacterButtonObject.GetComponent<Button>();
+                CharacterButton.onClick.AddListener(OnCharacter);
+            }
         }
     }
 }

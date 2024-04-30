@@ -5,17 +5,25 @@ public class PlayerAttackSkill : MonoBehaviour
 [SerializeField] float SkillSpeed = 1f;
 [SerializeField] float DestroyDelay = 0.5f;
 [SerializeField] int Damage = 10;
+[SerializeField] float SkillCoefficient = 0.1f; // 스킬계수
 Rigidbody2D MyRigidbody;
-PlayerMovement Player;
+PlayerMovement PlayerMovement;
+PlayerStatus PlayerStatus;
 bool IsAttack = false;
 float xSpeed;
 void Start()
 {
     MyRigidbody = GetComponent<Rigidbody2D>();
-    Player = FindObjectOfType<PlayerMovement>();
-    xSpeed = Player.transform.localScale.x * SkillSpeed;
+    PlayerMovement = FindObjectOfType<PlayerMovement>();
+    xSpeed = PlayerMovement.transform.localScale.x * SkillSpeed;
     Invoke("DestroySelf", DestroyDelay);
     FlipSprite();
+    
+    PlayerStatus = FindObjectOfType<PlayerStatus>();    
+    Damage = Mathf.CeilToInt(Damage * (1 + SkillCoefficient * PlayerStatus.PlayerATK)); // 데미지 공식: 스킬계수 * 플레이어ATK
+    if (Random.value < PlayerStatus.PlayerCrit) {
+        Damage *= 2; // 크리티컬 공식: 최종 데미지 * 2
+    }
 }
 void Update()
 {

@@ -9,6 +9,7 @@ TagManager:
   - Monster
   - Item
   - StopPlayerInput
+  - UpButton
   layers:
   - Default
   - TransparentFX

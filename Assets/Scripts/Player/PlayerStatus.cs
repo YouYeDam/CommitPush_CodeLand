@@ -14,12 +14,13 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] public int PlayerCurrentHP;
     [SerializeField] public int PlayerMaxMP = 100;
     [SerializeField] public int PlayerCurrentMP;
-    [SerializeField] public int PlayerMaxEXP = 10;
+    [SerializeField] public int PlayerMaxEXP = 10; 
     [SerializeField] public int PlayerCurrentEXP = 0;
-    [SerializeField] public int PlayerATK = 1;  //공격력
-    [SerializeField] public int PlayerDEF = 0; //방어력
-    [SerializeField] public float PlayerAP = 0f; //가속력
-    [SerializeField] public float PlayerCrit = 0f; //치명타율
+    [SerializeField] public int PlayerATK = 0;
+    [SerializeField] public int PlayerDEF = 0;
+    [SerializeField] public float PlayerAP = 0f;
+    [SerializeField] public float PlayerCrit = 0.05f;
+    public int LevelUpPoint = 0;
 
     void Start() {
         PlayerCurrentHP = PlayerMaxHP;
@@ -44,8 +45,11 @@ public class PlayerStatus : MonoBehaviour
     void LevelUp() {
         PlayerLevel += 1;
         PlayerCurrentEXP -= PlayerMaxEXP;
+        PlayerMaxHP += 10;
+        PlayerMaxMP += 10;
         PlayerCurrentHP = PlayerMaxHP;
         PlayerCurrentMP = PlayerMaxMP;
+        LevelUpPoint += 3;
     }
 
     public void DisplayPlayerNameInfo() { // 캐릭터 이름 보이기
@@ -61,5 +65,37 @@ public class PlayerStatus : MonoBehaviour
             Vector3 newPosition = transform.position + Vector3.down * PlayerNameInfoPos;
             PlayerNameInfoInstance.transform.position = newPosition;
         }
+    }
+
+    void HPUp() {
+        PlayerMaxHP += 10;
+        PlayerCurrentHP += 10;
+        LevelUpPoint -= 1;
+    }
+
+    void MPUP() {
+        PlayerMaxMP += 10;
+        PlayerCurrentMP += 10;
+        LevelUpPoint -= 1;
+    }
+
+    void ATKUP() {
+        PlayerATK += 1;
+        LevelUpPoint -= 1;
+    }
+
+    void DEFUP() {
+        PlayerDEF += 1;
+        LevelUpPoint -= 1;
+    }
+
+    void APUP() {
+        PlayerAP += 0.02f;
+        LevelUpPoint -= 1;
+    }
+
+    void CritUP() {
+        PlayerCrit += 0.008f;
+        LevelUpPoint -= 1;
     }
 }
