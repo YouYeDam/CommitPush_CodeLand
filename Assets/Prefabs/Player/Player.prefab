@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 5276594472103054196}
   - component: {fileID: 2205046119036907785}
   - component: {fileID: 5045011585957937535}
+  - component: {fileID: 4620007604820390355}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -106,6 +107,7 @@ MonoBehaviour:
   PlayerDEF: 0
   PlayerAP: 0
   PlayerCrit: 0
+  LevelUpPoint: 0
 --- !u!114 &8642232966939586866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,7 +409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalAttack: {fileID: 8885825609034438207, guid: 7796c015e9a8dbb438ab721afee996c1, type: 3}
   SkillSpot: {fileID: 1635159961687940443}
-  NormalAttackCoolTime: 0.4
+  GlobalCoolDown: 0.3
   BackToIdleAnimTime: 0.2
 --- !u!114 &2205046119036907785
 MonoBehaviour:
@@ -437,3 +439,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UICanvas: {fileID: 0}
+--- !u!114 &4620007604820390355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902140102076735292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd2c718b447f154b9b84dd90a29f1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

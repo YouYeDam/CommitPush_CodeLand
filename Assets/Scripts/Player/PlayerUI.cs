@@ -16,7 +16,10 @@ public class PlayerUI : MonoBehaviour
     GameObject CharacterButtonObject;
     Button InventoryButton;
     Button CharacterButton;
+
+    PlayerLevelUpController PlayerLevelUpController;
     void Start() {
+        PlayerLevelUpController = GetComponent<PlayerLevelUpController>();
         PlayerManager = GetComponent<PlayerManager>();
         UIManager = GameObject.Find("UIManager");
         Inventory = UIManager.transform.GetChild(0).gameObject;
@@ -39,7 +42,7 @@ public class PlayerUI : MonoBehaviour
             // 원래 위치로 복원
             Inventory.GetComponent<RectTransform>().anchoredPosition = InventoryOriginalPosition;
 
-            // 버튼으로 닫게하기
+            // 닫기 버튼 연결
             if (InventoryButtonObject == null) {
                 InventoryButtonObject = GameObject.Find("Inventory Close Button");
                 InventoryButton = InventoryButtonObject.GetComponent<Button>();
@@ -59,11 +62,12 @@ public class PlayerUI : MonoBehaviour
             // 원래 위치로 복원
             Character.GetComponent<RectTransform>().anchoredPosition = CharacterOriginalPosition;
 
-            // 버튼으로 닫게하기
+            // 닫기 버튼 연결
             if (CharacterButtonObject == null) {
                 CharacterButtonObject = GameObject.Find("Character Close Button");
                 CharacterButton = CharacterButtonObject.GetComponent<Button>();
                 CharacterButton.onClick.AddListener(OnCharacter);
+                PlayerLevelUpController.ConnectButton();
             }
         }
     }

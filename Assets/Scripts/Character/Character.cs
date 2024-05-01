@@ -16,8 +16,9 @@ public class Character : MonoBehaviour
     public TMP_Text DEFInfo;
     public TMP_Text APInfo;
     public TMP_Text CritInfo;
+    public TMP_Text LevelUpPointInfo;
     public Image CharacterImage;
-    
+
     PlayerStatus PlayerStatus;
     Animator PlayerAnimator;
 
@@ -36,6 +37,7 @@ public class Character : MonoBehaviour
         DEFInfo.text = "방어력:" + PlayerStatus.PlayerDEF + "DEF";
         APInfo.text = "가속력:" + PlayerStatus.PlayerAP * 100 + "%";
         CritInfo.text = "치명타:" + PlayerStatus.PlayerCrit * 100+ "%";
+        LevelUpPointInfo.text = "스탯포인트: " + PlayerStatus.LevelUpPoint;
     }
 
     public void SetPortrait() {

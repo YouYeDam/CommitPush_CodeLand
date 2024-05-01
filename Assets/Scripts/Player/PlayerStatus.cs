@@ -67,34 +67,34 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    void HPUp() {
+    public void HPUp() {
         PlayerMaxHP += 10;
         PlayerCurrentHP += 10;
         LevelUpPoint -= 1;
     }
 
-    void MPUP() {
+    public void MPUp() {
         PlayerMaxMP += 10;
         PlayerCurrentMP += 10;
         LevelUpPoint -= 1;
     }
 
-    void ATKUP() {
+    public void ATKUp() {
         PlayerATK += 1;
         LevelUpPoint -= 1;
     }
 
-    void DEFUP() {
+    public void DEFUp() {
         PlayerDEF += 1;
         LevelUpPoint -= 1;
     }
 
-    void APUP() {
+    public void APUp() {
         PlayerAP += 0.02f;
         LevelUpPoint -= 1;
     }
 
-    void CritUP() {
+    public void CritUp() {
         PlayerCrit += 0.008f;
         LevelUpPoint -= 1;
     }
