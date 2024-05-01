@@ -57,6 +57,7 @@ public class PlayerStatus : MonoBehaviour
             PlayerNameInfoInstance = Instantiate(PlayerNameInfo, UIManager.transform); // 캔버스의 자식으로 할당
             PlayerNameInfoText = PlayerNameInfoInstance.GetComponent<TMP_Text>();
             PlayerNameInfoText.text = PlayerName;
+            PlayerNameInfoInstance.transform.SetAsFirstSibling();
         }
     }
 
