@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     PlayerStatus PlayerStatus;
     PlayerManager PlayerManager;
     public bool IsWalkingAllowed = true;
+    public LayerMask targetLayerMask;
+
     public bool IsAlive = true;
     bool IsInvincible = false;
     float StartGravity;
@@ -107,6 +109,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // 사다리에서 점프를 가능하게 하기 위한 코루틴. 1. 현재 플레이어의 y 위치를 눈에 띄지 않을 만큼 올리고(사다리 rigidbody에 걸리는 현상 해결) 2. 원래대로 velocity에 벡터값 추가. 
+    IEnumerator MagicJump(float modified_jump_speed)
+    {
+        transform.position = new Vector2(transform.position.x, transform.position.y+0.15f);
+        yield return new WaitForSeconds(0.001f); 
+        MyRigidbody.velocity += new Vector2 (0f, modified_jump_speed);
+    }
+
     void OnJump(InputValue Value) { //플레이어 점프
         if (IsAlive == false || !PlayerManager.CanInput) {
             return;
@@ -117,8 +127,9 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         if (Value.isPressed) {
-            MyRigidbody.velocity += new Vector2 (0f, JumpSpeed);
+            StartCoroutine(MagicJump(JumpSpeed));
         }
+
     }
 
     void ClimbLadder() { //플레이어 사다리 타기
@@ -148,6 +159,8 @@ public class PlayerMovement : MonoBehaviour
 
             MyAnimator.SetBool("IsClimbing", false);
             MyAnimator.SetBool("IsClimbingIdle", false);
+
+            
         }
         else {
             float LadderSpeed = MoveInput.y * ClimbSpeed;
@@ -160,6 +173,8 @@ public class PlayerMovement : MonoBehaviour
             MyAnimator.SetFloat("LadderSpeed", Mathf.Abs(LadderSpeed)); // 사다리 속도를 Animator에 전달
         }
     }
+
+
 
     public void TakeDamage(int Damage) { // 플레이어 피격
         if (IsAlive == false) {

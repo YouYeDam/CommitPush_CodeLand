@@ -7,6 +7,7 @@ public class PlayerSkills : MonoBehaviour
 {
     Animator MyAnimator;
     CapsuleCollider2D MyCapsuleCollider;
+    BoxCollider2D[] MyBoxColliders;
     PlayerMovement PlayerMovement;
     PlayerManager PlayerManager;
     PlayerStatus PlayerStatus;
@@ -20,6 +21,7 @@ public class PlayerSkills : MonoBehaviour
     void Start() {
         MyAnimator = GetComponent<Animator>();
         MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
+        MyBoxColliders = GetComponents<BoxCollider2D>();
         PlayerMovement = FindObjectOfType<PlayerMovement>();
         PlayerStatus = FindObjectOfType<PlayerStatus>();
         PlayerManager = GetComponent<PlayerManager>();
@@ -33,8 +35,9 @@ public class PlayerSkills : MonoBehaviour
         }
         bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
         bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
+        bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanUseNormalAttack) {
-            if (!IsOnLadder || IsOnLadderGround) {
+            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
                 Instantiate(NormalAttack, SkillSpot.position, transform.rotation);
                 MyAnimator.SetBool("IsAttacking", true);
                 CanUseNormalAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
