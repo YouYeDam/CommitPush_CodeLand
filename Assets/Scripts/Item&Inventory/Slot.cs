@@ -13,7 +13,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
     [SerializeField] TMP_Text TextCount;
     [SerializeField] GameObject CountImage;
-
     void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
         Color Color = ItemImage.color;
         Color.a = Alpha;
@@ -66,8 +65,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         {
             ItemDrag.Instance.DragSlot = this;
             ItemDrag.Instance.DragSetImage(ItemImage);
-            ItemDrag.Instance.MyRectTransform.anchoredPosition += eventData.delta/ ItemDrag.Instance.UIManager.scaleFactor;
-            SetColor(0);
+            // 현재 슬롯의 월드 좌표를 드래그 객체의 위치로 설정
+            ItemDrag.Instance.transform.position = this.transform.position;
+            SetColor(0.5f);
         }
     }
 
@@ -75,7 +75,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     {
         if (Item != null) 
         {
-            ItemDrag.Instance.MyRectTransform.anchoredPosition += eventData.delta/ ItemDrag.Instance.UIManager.scaleFactor;
+            Vector3 globalMousePos;
+            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(ItemDrag.Instance.MyRectTransform, eventData.position, eventData.pressEventCamera, out globalMousePos))
+            {
+                ItemDrag.Instance.MyRectTransform.position = globalMousePos;
+            }
         }
     }
 
