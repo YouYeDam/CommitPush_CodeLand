@@ -35,7 +35,7 @@ public class Character : MonoBehaviour
         MPInfo.text = "정신력:" + PlayerStatus.PlayerMaxMP + "MP";
         ATKInfo.text = "공격력:" + PlayerStatus.PlayerATK + "ATK";
         DEFInfo.text = "방어력:" + PlayerStatus.PlayerDEF + "DEF";
-        APInfo.text = "가속력:" + PlayerStatus.PlayerAP * 100 + "%";
+        APInfo.text = "가속력:" + PlayerStatus.PlayerAP * 100 + "AP";
         CritInfo.text = "치명타:" + PlayerStatus.PlayerCrit * 100+ "%";
         LevelUpPointInfo.text = "스탯포인트: " + PlayerStatus.LevelUpPoint;
     }

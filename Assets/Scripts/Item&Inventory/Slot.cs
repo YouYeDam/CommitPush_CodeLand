@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class Slot : MonoBehaviour
+using UnityEngine.EventSystems;
+
+public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public Item Item; // 획득한 아이템
     public int ItemCount; // 획득한 아이템의 개수
@@ -52,5 +54,59 @@ public class Slot : MonoBehaviour
 
         TextCount.text = "0";
         CountImage.SetActive(false);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if(Item != null)
+        {
+            ItemDrag.Instance.DragSlot = this;
+            ItemDrag.Instance.DragSetImage(ItemImage);
+            ItemDrag.Instance.MyRectTransform.anchoredPosition += eventData.delta/ ItemDrag.Instance.UIManager.scaleFactor;
+            SetColor(0);
+        }
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (Item != null) 
+        {
+            ItemDrag.Instance.MyRectTransform.anchoredPosition += eventData.delta/ ItemDrag.Instance.UIManager.scaleFactor;
+        }
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        ItemDrag.Instance.SetColor(0);
+        ItemDrag.Instance.DragSlot = null;
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        if (ItemDrag.Instance.DragSlot != null) 
+        {
+            ChangeSlot();
+        }
+    }
+
+    private void ChangeSlot()
+    {
+        Item TempItem = Item;
+        int TempItemCount = ItemCount;
+
+        AddItem(ItemDrag.Instance.DragSlot.Item, ItemDrag.Instance.DragSlot.ItemCount);
+
+        if (TempItem != null) 
+        {
+            ItemDrag.Instance.DragSlot.AddItem(TempItem, TempItemCount);
+        }
+        else 
+        {
+            ItemDrag.Instance.DragSlot.ClearSlot();
+        }
     }
 }
