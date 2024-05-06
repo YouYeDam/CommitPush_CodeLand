@@ -5,16 +5,16 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     public Item Item; // 획득한 아이템
     public int ItemCount; // 획득한 아이템의 개수
     public Image ItemImage;  // 아이템의 이미지
     Rect InventoryRect;
     DropItemInputNumber DropItemInputNumber;
+    ItemToolTip ItemToolTip;
     [SerializeField] TMP_Text TextCount;
     [SerializeField] GameObject CountImage;
-
 
     // 더블클릭 기능 구현 변수
     private int ClickCount = 0;
@@ -25,6 +25,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     void Start() {
         InventoryRect = transform.parent.parent.parent.GetComponent<RectTransform>().rect;
         DropItemInputNumber = FindObjectOfType<DropItemInputNumber>();
+        ItemToolTip = FindObjectOfType<ItemToolTip>();
     }
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
         Color Color = ItemImage.color;
@@ -69,8 +70,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         CountImage.SetActive(false);
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
+    public void OnPointerClick(PointerEventData eventData) {
         ClickCount++;
         if (ClickCount == 1)
         {
@@ -86,6 +86,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             ClickCount = 1; // 시간 초과로 다시 1부터 카운트
             LastClickTime = Time.time;
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData) {
+        if (Item != null) {
+            ItemToolTip.ShowToolTip(Item);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData) {
+        ItemToolTip.HideToolTip();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
