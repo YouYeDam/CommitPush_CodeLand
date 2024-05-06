@@ -170,7 +170,7 @@ public class BasicMonsterMovement : MonoBehaviour
         MonsterAnimator.SetBool("IsDying", true);
         IsAlive = false;
         PlayerStatus.GainEXP(MonsterStatus.MonsterEXP);
-        MonsterDropItem.DropItem();
+        MonsterDropItem.DropItems();
         MonsterBoxCollider.enabled = false; // 플레이어 스킬 먹힘 방지
         StartCoroutine(DestroyAfterAnimation(DieDelay)); // 애니메이션 재생 후 몬스터 파괴
     }

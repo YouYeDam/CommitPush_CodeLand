@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  ItemName: 
+  ItemName: Test
+  ItemCount: 1
   Type: 0
   ItemImage: {fileID: 8596640243658272642, guid: 5d4daff38e3d9174b873918abcf2c1d4, type: 3}
   ItemPrefab: {fileID: 4338472210403635751, guid: 2d963e917af93384c9cd3f8ddb130795, type: 3}
-  EquipmentType: 
-  UsedType: 
+  IsAlreadyGet: 0
