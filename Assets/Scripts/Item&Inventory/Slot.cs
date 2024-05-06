@@ -10,14 +10,28 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public Item Item; // 획득한 아이템
     public int ItemCount; // 획득한 아이템의 개수
     public Image ItemImage;  // 아이템의 이미지
-
+    Rect InventoryRect;
+    DropItemInputNumber DropItemInputNumber;
     [SerializeField] TMP_Text TextCount;
     [SerializeField] GameObject CountImage;
-    void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
+
+
+    // 더블클릭 기능 구현 변수
+    private int ClickCount = 0;
+    private float LastClickTime = 0f;
+    private const float DoubleClickTime = 0.2f; // 더블 클릭 간격
+
+
+    void Start() {
+        InventoryRect = transform.parent.parent.parent.GetComponent<RectTransform>().rect;
+        DropItemInputNumber = FindObjectOfType<DropItemInputNumber>();
+    }
+    public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
         Color Color = ItemImage.color;
         Color.a = Alpha;
         ItemImage.color = Color;
     }
+
     public void AddItem(Item Item, int Count = 1) { //인벤토리에 새로운 아이템 슬롯 추가
         this.Item = Item;
         ItemCount = Count;
@@ -57,6 +71,21 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        ClickCount++;
+        if (ClickCount == 1)
+        {
+            LastClickTime = Time.time;
+        }
+        else if (ClickCount == 2 && Time.time - LastClickTime < DoubleClickTime)
+        {
+            OnDoubleClick(); // 더블 클릭 발생
+            ClickCount = 0; // 클릭 카운트 초기화
+        }
+        else if (Time.time - LastClickTime > DoubleClickTime)
+        {
+            ClickCount = 1; // 시간 초과로 다시 1부터 카운트
+            LastClickTime = Time.time;
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -85,8 +114,21 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        ItemDrag.Instance.SetColor(0);
-        ItemDrag.Instance.DragSlot = null;
+        if (ItemDrag.Instance.transform.localPosition.x < InventoryRect.xMin 
+        || ItemDrag.Instance.transform.localPosition.x > InventoryRect.xMax
+        || ItemDrag.Instance.transform.localPosition.y < InventoryRect.yMin
+        || ItemDrag.Instance.transform.localPosition.y > InventoryRect.yMax)
+        {
+            if (ItemDrag.Instance.DragSlot != null) {
+                DropItemInputNumber.OpenInputField();
+                ItemDrag.Instance.SetColor(0);
+            }
+        }
+        else
+        {
+            ItemDrag.Instance.SetColor(0);
+            ItemDrag.Instance.DragSlot = null;
+        }
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -111,6 +153,24 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         else 
         {
             ItemDrag.Instance.DragSlot.ClearSlot();
+
+        }
+    }
+
+    void OnDoubleClick() // 슬롯 더블클릭
+    {
+        if (Item == null) {
+            return;
+        }
+        if (Item.Type == Item.ItemType.Used) // 소비 아이템시 실행
+        {
+            UsedItem UsedItem = Item.ItemPrefab.GetComponent<UsedItem>();
+            UsedItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+            if (UsedItem != null)
+            {
+                UsedItem.EffectItem();
+                SetSlotCount(-1);
+            }
         }
     }
 }

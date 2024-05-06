@@ -78,11 +78,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else {
             // 레이캐스트를 통해 플레이어가 바라보고 있는 방향으로 조금 앞에 Ground 레이어 확인
-            RaycastHit2D hitRight = Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground"));
-            RaycastHit2D hitLeft = Physics2D.Raycast(transform.position, -transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground"));
+            RaycastHit2D HitRight = Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground"));
+            RaycastHit2D HitLeft = Physics2D.Raycast(transform.position, -transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground"));
             
             // 만약 양쪽 모두가 Ground 레이어와 충돌하지 않고 있다면 Walk 애니메이션 실행
-            if (hitRight.collider == null && hitLeft.collider == null) {
+            if (HitRight.collider == null && HitLeft.collider == null) {
                 MyAnimator.SetBool("IsWalking", PlayerHasHorizontalSpeed);
             } else {
                 MyAnimator.SetBool("IsWalking", false);
