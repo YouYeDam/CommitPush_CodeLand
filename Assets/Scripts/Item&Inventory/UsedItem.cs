@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class UsedItem : MonoBehaviour
 {
-    [SerializeField] string UsedType; // 소비 유형(음식, 음료, 강장제 등)
-    [SerializeField] string TonicType; // 강장제 유형(공격력 증가, 방어력 증가 등)
+    [SerializeField] string UsedType; // 소비 유형(Food, Drink, Tonic 등)
+    [SerializeField] string TonicType; // 강장제 유형(ATK, DEF 등)
     [SerializeField] int EffectValue; // 영향값
     [SerializeField] int EffectDuration; // 기간
 
@@ -58,10 +58,10 @@ public class UsedItem : MonoBehaviour
     public void EndIncreaseStatus() {
         switch (TonicType) {
             case "ATK":
-                PlayerStatus.PlayerATK += EffectValue;
+                PlayerStatus.PlayerATK -= EffectValue;
                 break;
             case "DEF":
-                PlayerStatus.PlayerDEF += EffectValue;
+                PlayerStatus.PlayerDEF -= EffectValue;
                 break;
             default:
                 break;

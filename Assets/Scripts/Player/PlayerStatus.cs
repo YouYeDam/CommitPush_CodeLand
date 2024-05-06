@@ -21,6 +21,7 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] public float PlayerAP = 0f;
     [SerializeField] public float PlayerCrit = 0.05f;
     public int LevelUpPoint = 0;
+    public bool IsTonic = false;
 
     void Start() {
         PlayerCurrentHP = PlayerMaxHP;

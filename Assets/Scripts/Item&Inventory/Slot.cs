@@ -13,6 +13,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     Rect InventoryRect;
     DropItemInputNumber DropItemInputNumber;
     ItemToolTip ItemToolTip;
+    PlayerMovement PlayerMovement;
     [SerializeField] TMP_Text TextCount;
     [SerializeField] GameObject CountImage;
 
@@ -25,7 +26,13 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     void Start() {
         InventoryRect = transform.parent.parent.parent.GetComponent<RectTransform>().rect;
         DropItemInputNumber = FindObjectOfType<DropItemInputNumber>();
-        ItemToolTip = FindObjectOfType<ItemToolTip>();
+
+        GameObject ToolTipObject = GameObject.Find("ItemToolTip");
+        if (ToolTipObject != null) {
+        ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
+        }
+
+        PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
         Color Color = ItemImage.color;
@@ -169,7 +176,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     void OnDoubleClick() // 슬롯 더블클릭
     {
-        if (Item == null) {
+        if (Item == null || !PlayerMovement.IsAlive) {
             return;
         }
         if (Item.Type == Item.ItemType.Used) // 소비 아이템시 실행

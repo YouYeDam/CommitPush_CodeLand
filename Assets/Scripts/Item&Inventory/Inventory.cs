@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private GameObject Bag;  // Slot들의 부모인 Bag
+    [SerializeField] private GameObject Content;  // Slot들의 부모인 Content
 
     private Slot[] Slots;  // 슬롯들 배열
 
     void Start()
     {
-        Slots = Bag.GetComponentsInChildren<Slot>();
+        Slots = Content.GetComponentsInChildren<Slot>();
     }
     
     public void AcquireItem(Item Item, int Count = 1) // 아이템 획득
