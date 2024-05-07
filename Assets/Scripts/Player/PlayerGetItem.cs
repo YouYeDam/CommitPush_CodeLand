@@ -21,9 +21,9 @@ public class PlayerGetItem : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision) { // 아이템과 충돌 시 아이템 획득
-    if (collision.gameObject.tag == "Item" && InventoryScript != null) {
-        InventoryScript.AcquireItem(collision.gameObject.GetComponent<ItemPickup>().item); // 아이템과 개수를 전달하여 호출
-        Destroy(collision.gameObject);
-    }
+        if (collision.gameObject.tag == "Item" && InventoryScript != null) {
+            InventoryScript.AcquireItem(collision.gameObject.GetComponent<ItemPickup>().item); // 아이템과 개수를 전달하여 호출
+            Destroy(collision.gameObject);
+        }
     }
 }

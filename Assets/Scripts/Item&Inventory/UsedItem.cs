@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UsedItem : MonoBehaviour
 {
-    [SerializeField] string UsedType; // 소비 유형(Food, Drink, Tonic 등)
+    [SerializeField] string UsedType; // 소비 유형(음식, 음료, 강장제 등)
     [SerializeField] string TonicType; // 강장제 유형(ATK, DEF 등)
     [SerializeField] int EffectValue; // 영향값
     [SerializeField] int EffectDuration; // 기간
@@ -13,13 +13,13 @@ public class UsedItem : MonoBehaviour
 
     public void EffectItem() {
         switch (UsedType) {
-            case "Food":
+            case "음식":
                 IncreaseHP();
                 break;
-            case "Drink":
+            case "음료":
                 IncreaseMP();
                 break;
-            case "Tonic":
+            case "강장제":
                 IncreaseStatus();
                 break;
             default:
