@@ -112,8 +112,8 @@ public class PlayerMovement : MonoBehaviour
     // 사다리에서 점프를 가능하게 하기 위한 코루틴. 1. 현재 플레이어의 y 위치를 눈에 띄지 않을 만큼 올리고(사다리 rigidbody에 걸리는 현상 해결) 2. 원래대로 velocity에 벡터값 추가. 
     IEnumerator MagicJump(float modified_jump_speed)
     {
-        transform.position = new Vector2(transform.position.x, transform.position.y+0.15f);
-        yield return new WaitForSeconds(0.001f); 
+        transform.position = new Vector2(transform.position.x, transform.position.y+0.3f);
+        yield return new WaitForSeconds(0.01f); 
         MyRigidbody.velocity += new Vector2 (0f, modified_jump_speed);
     }
 

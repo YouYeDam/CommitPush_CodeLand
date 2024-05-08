@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class QuizManager : MonoBehaviour
 {
@@ -24,7 +25,6 @@ public class QuizManager : MonoBehaviour
     List<string> QuizTextArray = new List<string>();
     List<string> AnswerTextArray = new List<string>();
     List<int> CorrectAnswers = new List<int>();
-    string[] answer;
     int currentQuestionIndex = 0;
     int totalScore = 0;
     int currentScore = 100; // 현재 문제의 시작 점수
@@ -34,12 +34,14 @@ public class QuizManager : MonoBehaviour
 
     void Start()
     {
+        currentScore = 100; // 새 문제에 대한 점수를 100으로 설정
         skipButton.onClick.AddListener(SkipText); // 스킵 버튼 이벤트 리스너 추가
         // 게임 시작할 때 결과 패널 비활성화
         resultPanel.SetActive(false);
         InitializeQuiz(); // 퀴즈 데이터 초기화
         // 첫번째 문제 표시
         DisplayQuestion(currentQuestionIndex);
+        SetAnswerButtonsActive(false);
     }
     // 퀴즈 데이터 초기화 함수
     void InitializeQuiz()
@@ -57,14 +59,23 @@ public class QuizManager : MonoBehaviour
     // 문제 표시 함수
     void DisplayQuestion(int questionIndex)
     {
-        currentScore = 100; // 새 문제에 대한 점수를 100으로 설정
         UpdateScoreText();  // 점수 텍스트 업데이트
+        ClearAnswerButtons();
         
         SetAnswerButtonsActive(false);  // 시작 시 보기 버튼들 비활성화
 
         // 문제 텍스트를 한글자씩 표시
         string questionText = QuizTextArray[questionIndex];
         StartCoroutine(ShowTextOneByOne(questionText, QuizText, delay));
+    }
+
+    // 다음 문제가 나오지 전에 보기 선택지 백지화
+    void ClearAnswerButtons() 
+    {
+        ButtonText1.text = "";
+        ButtonText2.text = "";
+        ButtonText3.text = "";
+        ButtonText4.text = "";
     }
 
     // 문제 텍스트를 한글자씩 화면에 표시하는 코루틴
@@ -91,18 +102,72 @@ public class QuizManager : MonoBehaviour
     void AssignAnswerTexts(int questionIndex)
     {
         string[] answers = AnswerTextArray[questionIndex].Split(',');
-        ButtonText1.text = answers[0].Trim();
-        ButtonText2.text = answers[1].Trim();
-        ButtonText3.text = answers[2].Trim();
-        ButtonText4.text = answers[3].Trim();
+        ShuffleAnswers(answers, questionIndex);
+
+
     }
 
+    // 선택지와 정답 인덱스를 랜덤하게 섞는 함수
+    void ShuffleAnswers(string[] answers, int currentQuestionIndex)
+    {
+        // 현재 문제의 정답 인덱스를 찾음
+        int correctIndex = CorrectAnswers[currentQuestionIndex];
+
+        // 선택지와 인덱스를 튜플로 묶음
+        List<(string, int)> answerIndexPairs = new List<(string, int)>();
+        for (int i = 0; i < answers.Length; i++)
+        {
+            answerIndexPairs.Add((answers[i], i));
+        }
+
+        // 선택지를 무작위로 섞음
+        System.Random rng = new System.Random();
+        int n = answerIndexPairs.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            var temp = answerIndexPairs[k];
+            answerIndexPairs[k] = answerIndexPairs[n];
+            answerIndexPairs[n] = temp;
+        }
+
+        // 섞인 선택지를 UI에 할당하고 정답 인덱스 업데이트
+        for (int i = 0; i < answerIndexPairs.Count; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    ButtonText1.text = answerIndexPairs[i].Item1;
+                    break;
+                case 1:
+                    ButtonText2.text = answerIndexPairs[i].Item1;
+                    break;
+                case 2:
+                    ButtonText3.text = answerIndexPairs[i].Item1;
+                    break;
+                case 3:
+                    ButtonText4.text = answerIndexPairs[i].Item1;
+                    break;
+            }
+
+            if (answerIndexPairs[i].Item2 == correctIndex)
+            {
+                CorrectAnswers[currentQuestionIndex] = i;
+            }
+        }
+
+        Debug.Log("새 정답 인덱스: " + CorrectAnswers[currentQuestionIndex]);
+    }
+
+
+    
     // 선택지 버튼의 활성/비활성 상태를 설정하는 함수
     void SetAnswerButtonsActive(bool isActive)
     {
         foreach (var button in answerButtons)
         {
-            button.gameObject.SetActive(isActive);
+            button.interactable = isActive;
         }
     }
 
@@ -135,11 +200,15 @@ public class QuizManager : MonoBehaviour
             Debug.Log("오답입니다!");
             currentScore = Mathf.Max(0, currentScore - penalty);
             UpdateScoreText(); // 오답을 선택할 때마다 화면에 표시되는 점수 갱신
+
+            AssignAnswerTexts(currentQuestionIndex);
         }
 
         // 결과를 표시하고 패널을 자동으로 숨김
         StartCoroutine(HideResultPanel());
     }
+
+
 
     IEnumerator LoadNewSceneAfterDelay()
     {

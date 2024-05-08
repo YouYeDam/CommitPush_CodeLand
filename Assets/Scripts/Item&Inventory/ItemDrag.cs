@@ -12,7 +12,7 @@ public class ItemDrag : MonoBehaviour
 
     [SerializeField] private Image ItemImage;
 
-    void Start()
+    void Awake()
     {
         MyRectTransform = GetComponent<RectTransform>();
         Instance = this;

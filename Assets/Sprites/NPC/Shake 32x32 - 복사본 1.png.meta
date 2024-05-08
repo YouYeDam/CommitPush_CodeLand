@@ -1,34 +1,7 @@
 fileFormatVersion: 2
-guid: 10f3cacccb0c4c547be76836eba20664
+guid: ce2b8f95bd7c18e4ebeeb03ca64a6018
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -6447722072507503168
-    second: Idle 0
-  - first:
-      213: 2962027833772318483
-    second: Idle 1
-  - first:
-      213: -2453208753318357113
-    second: Run 0
-  - first:
-      213: 6348790710242686107
-    second: Run 1
-  - first:
-      213: 5513914976837039818
-    second: Run 2
-  - first:
-      213: -434675778434299504
-    second: Run 3
-  - first:
-      213: -5761754228987130096
-    second: Jump 0
-  - first:
-      213: 5907920678353447086
-    second: Jump 1
-  - first:
-      213: -6086044393419928071
-    second: Jump 2
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -61,12 +34,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: 0
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -75,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 18
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -92,14 +65,14 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,36 +82,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 128
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 128
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 128
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -150,12 +97,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle 0
+      name: "Shake 32x32 - \uBCF5\uC0AC\uBCF8_0"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 34
-        width: 16
+        x: 3
+        y: 1
+        width: 14
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -164,19 +111,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cdaeb1cfe61586a0800000000000000
-      internalID: -6447722072507503168
+      spriteID: 2c75ca18b27b3a8498bb8bda895b1bdd
+      internalID: 919737148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Idle 1
+      name: "Shake 32x32 - \uBCF5\uC0AC\uBCF8_1"
       rect:
         serializedVersion: 2
-        x: 17
-        y: 34
-        width: 16
+        x: 35
+        y: 1
+        width: 14
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -185,19 +132,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 31f91de0f9c3b1920800000000000000
-      internalID: 2962027833772318483
+      spriteID: 34874edd4ab6f2c48bead907f7f60018
+      internalID: 1502575404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run 0
+      name: "Shake 32x32 - \uBCF5\uC0AC\uBCF8_2"
       rect:
         serializedVersion: 2
-        x: 34
-        y: 34
-        width: 16
+        x: 67
+        y: 1
+        width: 14
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -206,19 +153,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7879492f2a374fdd0800000000000000
-      internalID: -2453208753318357113
+      spriteID: 5afcaf7874d8d7c4288f83f7bd9afb7e
+      internalID: -621621209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run 1
+      name: "Shake 32x32 - \uBCF5\uC0AC\uBCF8_3"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 17
-        width: 16
+        x: 99
+        y: 1
+        width: 14
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -227,19 +174,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b94b05d738f6b1850800000000000000
-      internalID: 6348790710242686107
+      spriteID: def6cc25ff499594cbd4b7d92fefb3c5
+      internalID: 1172661672
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run 2
+      name: "Shake 32x32 - \uBCF5\uC0AC\uBCF8_4"
       rect:
         serializedVersion: 2
-        x: 17
-        y: 17
-        width: 16
+        x: 131
+        y: 1
+        width: 14
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -248,18 +195,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac6f31c157c558c40800000000000000
-      internalID: 5513914976837039818
+      spriteID: 18bb8f247f35c504a93f4dfa16bc20f3
+      internalID: 1782933865
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run 3
+      name: "Shake 32x32 - \uBCF5\uC0AC\uBCF8_5"
       rect:
         serializedVersion: 2
-        x: 34
-        y: 17
+        x: 162
+        y: 1
         width: 16
         height: 16
       alignment: 0
@@ -269,19 +216,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 09905f9bea8b7f9f0800000000000000
-      internalID: -434675778434299504
+      spriteID: 6a21260d24bed1043bd9f79ac6bcae83
+      internalID: -403986001
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jump 0
+      name: "Shake 32x32 - \uBCF5\uC0AC\uBCF8_6"
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 16
+        x: 195
+        y: 1
+        width: 14
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -290,19 +237,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01f0e1a4e032a00b0800000000000000
-      internalID: -5761754228987130096
+      spriteID: 488047c59b99f3649be28779eabdd0dc
+      internalID: 594079230
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jump 1
+      name: "Shake 32x32 - \uBCF5\uC0AC\uBCF8_7"
       rect:
         serializedVersion: 2
-        x: 17
-        y: 0
-        width: 16
+        x: 226
+        y: 1
+        width: 14
         height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -311,29 +258,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea821723e862df150800000000000000
-      internalID: 5907920678353447086
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Jump 2
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9fd82f29ed60a8ba0800000000000000
-      internalID: -6086044393419928071
+      spriteID: 4c1caf4003f8a5a4ca98073cf562889b
+      internalID: -2010354393
       vertices: []
       indices: 
       edges: []
@@ -349,15 +275,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idle 0: -6447722072507503168
-      Idle 1: 2962027833772318483
-      Jump 0: -5761754228987130096
-      Jump 1: 5907920678353447086
-      Jump 2: -6086044393419928071
-      Run 0: -2453208753318357113
-      Run 1: 6348790710242686107
-      Run 2: 5513914976837039818
-      Run 3: -434675778434299504
+      "Shake 32x32 - \uBCF5\uC0AC\uBCF8_0": 919737148
+      "Shake 32x32 - \uBCF5\uC0AC\uBCF8_1": 1502575404
+      "Shake 32x32 - \uBCF5\uC0AC\uBCF8_2": -621621209
+      "Shake 32x32 - \uBCF5\uC0AC\uBCF8_3": 1172661672
+      "Shake 32x32 - \uBCF5\uC0AC\uBCF8_4": 1782933865
+      "Shake 32x32 - \uBCF5\uC0AC\uBCF8_5": -403986001
+      "Shake 32x32 - \uBCF5\uC0AC\uBCF8_6": 594079230
+      "Shake 32x32 - \uBCF5\uC0AC\uBCF8_7": -2010354393
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
