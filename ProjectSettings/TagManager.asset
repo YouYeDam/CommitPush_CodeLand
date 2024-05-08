@@ -60,11 +60,11 @@ TagManager:
   - name: Ladder
     uniqueID: 1674598465
     locked: 0
-  - name: Monster
-    uniqueID: 859613945
-    locked: 0
   - name: NPC
     uniqueID: 847609113
+    locked: 0
+  - name: Monster
+    uniqueID: 859613945
     locked: 0
   - name: Player
     uniqueID: 794951137
