@@ -71,7 +71,6 @@ public class PlayerMovement : MonoBehaviour
         bool PlayerHasHorizontalSpeed = Mathf.Abs(MyRigidbody.velocity.x) > Mathf.Epsilon;
         Vector2 PlayerVelocity = new Vector2 (MoveInput.x * RunSpeed, MyRigidbody.velocity.y); // 현재의 속도인 y가 무엇이든 동일한 속도를 유지하라는 의미
         MyRigidbody.velocity = PlayerVelocity;
-        
         bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (IsOnLadder) {
             MyAnimator.SetBool("IsWalking", false); // 사다리에 있다면 무조건 걷기 애니메이션 X
@@ -173,8 +172,6 @@ public class PlayerMovement : MonoBehaviour
             MyAnimator.SetFloat("LadderSpeed", Mathf.Abs(LadderSpeed)); // 사다리 속도를 Animator에 전달
         }
     }
-
-
 
     public void TakeDamage(int Damage) { // 플레이어 피격
         if (IsAlive == false) {

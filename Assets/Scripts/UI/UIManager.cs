@@ -14,7 +14,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void Start() {
-        StatusBar = gameObject.transform.GetChild(2).gameObject;
+        StatusBar = gameObject.transform.GetChild(3).gameObject;
     }
     private void OnDestroy()
     {
