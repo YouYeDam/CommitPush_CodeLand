@@ -8,14 +8,22 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject UIManager;
     [SerializeField] GameObject Inventory;
     [SerializeField] GameObject Character;
+    [SerializeField] GameObject Equipment;
+
     PlayerManager PlayerManager;
     private Vector2 InventoryOriginalPosition;
     private Vector2 CharacterOriginalPosition;
+    private Vector2 EquipmentOriginalPosition;
+
 
     GameObject InventoryButtonObject;
     GameObject CharacterButtonObject;
+    GameObject EquipmentButtonObject;
+
     Button InventoryButton;
     Button CharacterButton;
+    Button EquipmentButton;
+
 
     PlayerLevelUpController PlayerLevelUpController;
     void Start() {
@@ -24,10 +32,13 @@ public class PlayerUI : MonoBehaviour
         UIManager = GameObject.Find("UIManager");
         Inventory = UIManager.transform.GetChild(0).gameObject;
         Character = UIManager.transform.GetChild(1).gameObject;
+        Equipment = UIManager.transform.GetChild(2).gameObject;
 
         // 원래 위치 저장
         InventoryOriginalPosition = Inventory.GetComponent<RectTransform>().anchoredPosition;
         CharacterOriginalPosition = Character.GetComponent<RectTransform>().anchoredPosition;
+        EquipmentOriginalPosition = Character.GetComponent<RectTransform>().anchoredPosition;
+
     }
 
     public void OnInventory() {
@@ -68,6 +79,26 @@ public class PlayerUI : MonoBehaviour
                 CharacterButton = CharacterButtonObject.GetComponent<Button>();
                 CharacterButton.onClick.AddListener(OnCharacter);
                 PlayerLevelUpController.ConnectButton();
+            }
+        }
+    }
+    public void OnEquipment() {
+        if (Equipment == null || !PlayerManager.CanInput) {
+            return;
+        }
+        if (Equipment.activeSelf) {
+            Equipment.SetActive(false);
+        }
+        else {
+            Equipment.SetActive(true);
+            // 원래 위치로 복원
+            Equipment.GetComponent<RectTransform>().anchoredPosition = EquipmentOriginalPosition;
+
+            // 닫기 버튼 연결
+            if (EquipmentButtonObject == null) {
+                EquipmentButtonObject = GameObject.Find("Equipment Close Button");
+                EquipmentButton = EquipmentButtonObject.GetComponent<Button>();
+                EquipmentButton.onClick.AddListener(OnEquipment);
             }
         }
     }

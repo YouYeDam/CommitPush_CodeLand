@@ -189,5 +189,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                 SetSlotCount(-1);
             }
         }
+        if (Item.Type == Item.ItemType.Equipment) // 장비 아이템시 실행
+        {
+            
+        }
     }
 }

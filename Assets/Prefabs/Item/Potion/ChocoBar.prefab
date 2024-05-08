@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd7c7473e23e2364b860f7a9dbc005e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UsedType: Food
+  UsedType: "\uC74C\uC2DD"
   TonicType: 
   EffectValue: 30
   EffectDuration: 0
