@@ -10,6 +10,7 @@ TagManager:
   - Item
   - StopPlayerInput
   - UpButton
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Item
   - LadderGround
   - LadderControl
-  - 
+  - NPC
   - 
   - 
   - 
@@ -64,6 +65,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 794951137
+    locked: 0
+  - name: NPC
+    uniqueID: 847609113
     locked: 0
   - name: Item
     uniqueID: 518454301
