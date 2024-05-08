@@ -36,7 +36,7 @@ public class Character : MonoBehaviour
         ATKInfo.text = "공격력:" + PlayerStatus.PlayerATK + "ATK";
         DEFInfo.text = "방어력:" + PlayerStatus.PlayerDEF + "DEF";
         APInfo.text = "가속력:" + PlayerStatus.PlayerAP * 100 + "AP";
-        CritInfo.text = "치명타:" + PlayerStatus.PlayerCrit * 100+ "%";
+        CritInfo.text = "치명타: " + (PlayerStatus.PlayerCrit * 100).ToString("F2") + "%"; // 소수부 둘째자리까지 표기
         LevelUpPointInfo.text = "스탯포인트: " + PlayerStatus.LevelUpPoint;
     }
 

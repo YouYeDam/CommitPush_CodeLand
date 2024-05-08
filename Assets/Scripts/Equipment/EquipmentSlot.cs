@@ -10,6 +10,11 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public Item Item; // 장비 아이템
     public Image ItemImage;  // 아이템의 이미지
     ItemToolTip ItemToolTip;
+    EquipmentItem EquipmentItem;
+
+    [SerializeField] GameObject UICanvas;
+    Inventory InventoryScript;
+
     private int ClickCount = 0;
     private float LastClickTime = 0f;
     private const float DoubleClickTime = 0.2f; // 더블 클릭 간격
@@ -19,6 +24,19 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (ToolTipObject != null) {
         ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
         }
+
+        UICanvas = GameObject.Find("UIManager");
+        if (UICanvas != null) {
+            InventoryScript = UICanvas.GetComponent<Inventory>();
+        }
+    }
+
+    public void InitialEquip() {
+            if (Item != null) { // 초기 아이템 설정
+            EquipmentItem EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
+            EquipmentItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+            AddItem(Item);
+        }
     }
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
         Color Color = ItemImage.color;
@@ -26,7 +44,8 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         ItemImage.color = Color;
     }
 
-    void ClearSlot() { // 해당 슬롯 하나 삭제
+    void ClearSlot() { // 장비 슬롯에 아이템 탈착
+        EquipmentItem.DecreaseStat();
         Item = null;
         ItemImage.sprite = null;
         SetColor(0);
@@ -52,7 +71,10 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     void OnDoubleClick() // 슬롯 더블클릭
     {
+        if (Item != null) {
+        InventoryScript.AcquireItem(Item);
         ClearSlot();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
@@ -63,5 +85,24 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void OnPointerExit(PointerEventData eventData) {
         ItemToolTip.HideToolTip();
+    }
+
+    public void AddItem(Item Item) { //장비 슬롯에 아이템 장착
+        this.Item = Item;
+        ItemImage.sprite = this.Item.ItemImage;
+        SetColor(1);
+        EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
+        EquipmentItem.IncreaseStat();
+    }
+
+    public void CheckNull(Item NewItem) {
+        if (Item == null) {
+            AddItem(NewItem);
+        }
+        else {
+            InventoryScript.AcquireItem(Item);
+            ClearSlot();
+            AddItem(NewItem);
+        }
     }
 }

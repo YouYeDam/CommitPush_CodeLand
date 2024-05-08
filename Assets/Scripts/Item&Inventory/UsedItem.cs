@@ -10,7 +10,6 @@ public class UsedItem : MonoBehaviour
     [SerializeField] int EffectDuration; // 기간
 
     public PlayerStatus PlayerStatus;
-
     public void EffectItem() {
         switch (UsedType) {
             case "음식":

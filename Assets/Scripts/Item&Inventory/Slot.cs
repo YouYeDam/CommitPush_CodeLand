@@ -189,9 +189,15 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                 SetSlotCount(-1);
             }
         }
-        if (Item.Type == Item.ItemType.Equipment) // 장비 아이템시 실행
+        else if (Item.Type == Item.ItemType.Equipment) // 장비 아이템시 실행
         {
-            
+            EquipmentItem EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
+            EquipmentItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+            if (EquipmentItem != null)
+            {
+                EquipmentItem.EquipItem(Item);
+                ClearSlot();
+            }
         }
     }
 }

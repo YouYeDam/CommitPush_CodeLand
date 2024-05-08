@@ -108,6 +108,7 @@ MonoBehaviour:
   PlayerAP: 0
   PlayerCrit: 0
   LevelUpPoint: 0
+  IsTonic: 0
 --- !u!114 &8642232966939586866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,6 +390,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsWalkingAllowed: 1
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   IsAlive: 1
   WalkDelayTime: 0.2
   InvincibleTime: 1
@@ -426,6 +430,7 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   Inventory: {fileID: 0}
   Character: {fileID: 0}
+  Equipment: {fileID: 0}
 --- !u!114 &5045011585957937535
 MonoBehaviour:
   m_ObjectHideFlags: 0

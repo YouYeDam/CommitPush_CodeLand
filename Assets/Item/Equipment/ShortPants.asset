@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: ShortPants
+  m_EditorClassIdentifier: 
+  ItemName: "\uBC18\uBC14\uC9C0"
+  ItemCount: 1
+  Type: 0
+  ItemImage: {fileID: 21300000, guid: eaaf2740c3646c1409060a165dee2d21, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: 09382d285b303df4298f132f80fb755c, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uD3B8\uD558\uAC8C \uC785\uAE30 \uC88B\uC740 \uBC18\uBC14\uC9C0\uC774\uB2E4.
+    \n\uCC29\uC6A9 \uC2DC \uBC29\uC5B4\uB825\uC774 1\uB9CC\uD07C \uC99D\uAC00\uD55C\uB2E4."
