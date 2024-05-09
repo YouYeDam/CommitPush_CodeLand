@@ -11,8 +11,15 @@ public class ItemDrop {
 public class MonsterDropItem : MonoBehaviour {
     public ItemDrop[] ItemDrops; // 아이템 드롭 데이터 배열
     private Vector3 MyPosition; // 몬스터의 위치
-    public LayerMask GroundLayer; // Ground 레이어 마스크
+    LayerMask GroundLayer; // Ground 레이어 마스크
 
+    DropMoney DropMoney;
+    GameObject MoneyInstance;
+    [SerializeField] public int MonsterBit = 0;
+    [SerializeField] public int MonsterSnippet = 0;
+    void Start() {
+        MonsterBit = Mathf.FloorToInt(MonsterBit * Random.Range(1.0f, 1.51f));
+    }
     void Update() {
         MyPosition = transform.position; // 매 프레임마다 몬스터의 현재 위치를 업데이트
     }
@@ -38,15 +45,29 @@ public class MonsterDropItem : MonoBehaviour {
                 SpawnPosition = MyPosition; // Ground가 감지되면 몬스터의 위치에 아이템을 생성
             }
 
+
             if (ItemDrops[i].ItemPrefab != null && Random.value <= ItemDrops[i].SpawnProbability) {
-                Instantiate(ItemDrops[i].ItemPrefab, SpawnPosition, Quaternion.identity);
+
+                if (ItemDrops[i].ItemPrefab.tag == "Money") {
+                    MoneyInstance = Instantiate(ItemDrops[i].ItemPrefab, SpawnPosition, Quaternion.identity);
+                    DropMoney = MoneyInstance.GetComponent<DropMoney>();
+                    if (DropMoney.IsBit) {
+                        DropMoney.Bit = MonsterBit;
+                    }
+                    else if (DropMoney.IsSnippet) {
+                        DropMoney.Snippet = MonsterSnippet;
+                    }
+                }
+                else {
+                    Instantiate(ItemDrops[i].ItemPrefab, SpawnPosition, Quaternion.identity);
+                }
             }
         }
     }
 
     // 레이캐스트를 이용해 Ground 레이어가 근처에 있는지 검사하는 메서드
     private bool IsGroundNearby(Vector3 position) {
-        float CheckDistance = 1.0f; // 검사할 거리
+        float CheckDistance = 2.0f; // 검사할 거리
         RaycastHit Hit;
         // 좌우로 레이캐스트
         if (Physics.Raycast(position, Vector3.right, out Hit, CheckDistance, GroundLayer) ||

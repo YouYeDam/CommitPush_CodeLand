@@ -55,6 +55,8 @@ GameObject:
   - component: {fileID: 5045011585957937535}
   - component: {fileID: 4620007604820390355}
   - component: {fileID: 7298786854515850199}
+  - component: {fileID: 1652058328434829399}
+  - component: {fileID: 6252826259264600955}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -473,3 +475,29 @@ MonoBehaviour:
   npcLayerMask:
     serializedVersion: 2
     m_Bits: 16384
+--- !u!114 &1652058328434829399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902140102076735292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7a76467ffdc1b479d3cce627123434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bit: 0
+  Snippet: 0
+--- !u!114 &6252826259264600955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902140102076735292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e85fcf2d9b24ce4c8541a7c71df446b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

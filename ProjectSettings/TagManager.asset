@@ -11,6 +11,8 @@ TagManager:
   - StopPlayerInput
   - UpButton
   - NPC
+  - Money
+  - Portal
   layers:
   - Default
   - TransparentFX

@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/New Scene.unity
     guid: b168af0dee79d62479f3586d3d4223dc
   - enabled: 1
+    path: Assets/Scenes/Cave_Tutorial.unity
+    guid: 96a1d39439c581648a19eabb88c50da1
+  - enabled: 1
     path: Assets/Scenes/Quiz Scene.unity
     guid: 9d96a0ffe7dd6b74a8f2a16164039fb8
   m_configObjects:

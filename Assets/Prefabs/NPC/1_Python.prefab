@@ -53,7 +53,7 @@ MonoBehaviour:
   NPCNameInfo: {fileID: 7337256740539332341, guid: b57da644c15344546acebcacfc6f353f, type: 3}
   NPCNameInfoText: {fileID: 0}
   NPCNameInfoInstance: {fileID: 0}
-  NPCNameInfoPos: 0.8
+  NPCNameInfoPos: 0.6
 --- !u!212 &717382888131969278
 SpriteRenderer:
   m_ObjectHideFlags: 0
