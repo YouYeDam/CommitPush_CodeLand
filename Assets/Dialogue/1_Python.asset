@@ -14,18 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - SpeakerName: "\uD30C\uC774\uC36C"
-    DialogueText: "\uC548\uB155!"
+    DialogueText: "\uC548\uB155! \uC88B\uC740 \uB0A0\uC774\uC57C."
     SpeakerImage: {fileID: 919737148, guid: ce2b8f95bd7c18e4ebeeb03ca64a6018, type: 3}
-    Responses:
-    - ResponseText: "\uC548\uB155."
-      NextNode:
-        SpeakerName: "\uD30C\uC774\uC36C"
-        DialogueText: "\uB9CC\uB098\uC11C \uBC18\uAC00\uC6CC."
-        SpeakerImage: {fileID: 919737148, guid: ce2b8f95bd7c18e4ebeeb03ca64a6018, type: 3}
-        Responses:
-        - ResponseText: "\uB098\uB3C4 \uBC18\uAC00\uC6CC."
-          NextNode:
-            SpeakerName: "\uD30C\uC774\uC36C"
-            DialogueText: "\uADF8\uB7FC \uC798\uAC00!"
-            SpeakerImage: {fileID: 919737148, guid: ce2b8f95bd7c18e4ebeeb03ca64a6018, type: 3}
-            Responses: []
+  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
+    DialogueText: "\uC548\uB155. \uB9CC\uB098\uC11C \uBC18\uAC00\uC6CC."
+    SpeakerImage: {fileID: 0}
+  - SpeakerName: "\uD30C\uC774\uC36C"
+    DialogueText: "\uADF8\uB7FC, \uB2E4\uC74C\uC5D0 \uB610 \uBD10!"
+    SpeakerImage: {fileID: 919737148, guid: ce2b8f95bd7c18e4ebeeb03ca64a6018, type: 3}

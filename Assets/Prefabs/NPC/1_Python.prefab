@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 717382888131969278}
   - component: {fileID: 5149360776717742433}
   - component: {fileID: 2373437424921086739}
-  - component: {fileID: 2849567534196730538}
   m_Layer: 14
   m_Name: 1_Python
   m_TagString: NPC
@@ -49,6 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Dialogue: {fileID: 11400000, guid: 1a128422d32564147bc657c56a633991, type: 2}
+  UIManager: {fileID: 0}
+  NPCName: "\uD30C\uC774\uC36C"
+  NPCNameInfo: {fileID: 7337256740539332341, guid: b57da644c15344546acebcacfc6f353f, type: 3}
+  NPCNameInfoText: {fileID: 0}
+  NPCNameInfoInstance: {fileID: 0}
+  NPCNameInfoPos: 0.8
 --- !u!212 &717382888131969278
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -160,7 +165,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0014927536, y: -0.007394552}
+  m_Offset: {x: -0.0014927387, y: 0.008920789}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -171,19 +176,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7920445, y: 0.87267447}
+  m_Size: {x: 0.7920445, y: 0.8400438}
   m_EdgeRadius: 0
---- !u!114 &2849567534196730538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349573210681341999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83f46e1c647aa8f4ea0d3113e7bde1d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 1
-  IsNPC: 1

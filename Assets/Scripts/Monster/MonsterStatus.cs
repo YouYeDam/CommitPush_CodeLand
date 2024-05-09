@@ -22,7 +22,6 @@ public class MonsterStatus : MonoBehaviour
     public TMP_Text MonsterInfoText;
     public GameObject MonsterInfoInstance;
 
-    
     void Start() {
         MonsterCurrentHealth = MonsterMaxHealth;
         UIManager = GameObject.Find("UIManager");
@@ -56,8 +55,6 @@ public class MonsterStatus : MonoBehaviour
             HPMeterImage.fillAmount = MonsterCurrentHealth / MonsterMaxHealth;
         }
     }
-
-    
     public void DisplayMonsterInfo() { // 몬스터 정보(이름, 레벨) 보이기
         if (UIManager != null && MonsterInfo != null && MonsterInfoInstance == null) {
             MonsterInfoInstance = Instantiate(MonsterInfo, UIManager.transform); // 캔버스의 자식으로 할당
