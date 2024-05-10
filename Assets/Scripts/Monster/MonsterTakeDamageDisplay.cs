@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class MonsterTakeDamageDisplay : MonoBehaviour
@@ -9,46 +7,59 @@ public class MonsterTakeDamageDisplay : MonoBehaviour
     public float DamageBarPos;
     public GameObject UIManager;
     public GameObject DamageBar; // 데미지바 프리팹
-    public List<GameObject> DamageBarInstances; // 생성된 모든 데미지바 인스턴스를 저장하는 리스트
+    public GameObject DamageBarInstance; // 데미지바 인스턴스
     MonsterStatus MonsterStatus;
-    float Delay = 0.5f;
+    float Delay = 0.75f;
+
     void Start() {
         UIManager = GameObject.Find("UIManager");
-        DamageBarInstances = new List<GameObject>();
         MonsterStatus = GetComponent<MonsterStatus>();
-        DamageBarPos = MonsterStatus.HPBarPos + 0.2f;
+        DamageBarPos = MonsterStatus.HPBarPos + 0.5f;
     }
 
     void Update() {
-        UpdateDamageBarPositions();
+        UpdateDamageBarPosition();
     }
 
     public void DisplayDamageBar(int Damage, bool IsCrit) {
         if (UIManager != null && DamageBar != null) {
-            GameObject NewDamageBarInstance = Instantiate(DamageBar, UIManager.transform); // 캔버스의 자식으로 할당
-            TMP_Text DamageText = NewDamageBarInstance.GetComponent<TMP_Text>();
+            // 이전 인스턴스가 있으면 삭제
+            if (DamageBarInstance != null) {
+                Destroy(DamageBarInstance);
+            }
+
+            DamageBarInstance = Instantiate(DamageBar, UIManager.transform);
+            TMP_Text DamageText = DamageBarInstance.GetComponent<TMP_Text>();
             DamageText.text = Damage.ToString();
-            NewDamageBarInstance.transform.SetAsFirstSibling();
+            DamageBarInstance.transform.SetAsFirstSibling();
 
             if (IsCrit) {
                 DamageText.color = Color.red;
             }
 
-            DamageBarInstances.Add(NewDamageBarInstance);
-            StartCoroutine(DestroyAfterDelay(NewDamageBarInstance, Delay));
+            StartCoroutine(FadeOutAndDestroy(DamageText, DamageBarInstance, Delay));
         }
     }
 
-    void UpdateDamageBarPositions() {
-        foreach (var instance in DamageBarInstances) {
+    void UpdateDamageBarPosition() {
+        if (DamageBarInstance != null) {
             Vector3 newPosition = transform.position + Vector3.up * DamageBarPos;
-            instance.transform.position = newPosition;
+            DamageBarInstance.transform.position = newPosition;
         }
     }
 
-    IEnumerator DestroyAfterDelay(GameObject damageBarInstance, float Delay) {
-        yield return new WaitForSeconds(Delay);
-        DamageBarInstances.Remove(damageBarInstance);
-        Destroy(damageBarInstance);
+    IEnumerator FadeOutAndDestroy(TMP_Text DamageText, GameObject DamageBarInstance, float Delay) {
+        float ElapsedTime = 0;
+        Color OriginalColor = DamageText.color;
+
+        while (ElapsedTime < Delay) {
+            float Alpha = Mathf.Lerp(1f, 0f, ElapsedTime / Delay);
+            DamageText.color = new Color(OriginalColor.r, OriginalColor.g, OriginalColor.b, Alpha);
+            ElapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        DamageText.color = new Color(OriginalColor.r, OriginalColor.g, OriginalColor.b, 0);
+        Destroy(DamageBarInstance);
     }
 }

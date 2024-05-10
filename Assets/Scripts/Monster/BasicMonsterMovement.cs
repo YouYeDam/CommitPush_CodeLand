@@ -10,7 +10,7 @@ public class BasicMonsterMovement : MonoBehaviour
     [SerializeField] float StopTimeHead = 5f;
     [SerializeField] float StopTimeRear = 10f;
     [SerializeField] float WaitCanWalk = 1f;
-    [SerializeField] float DieDelay = 0.6f;
+    [SerializeField] float DieDelay = 0.8f;
     [SerializeField] float PlayerOverlapRange = 0.1f;
     Rigidbody2D MonsterRigidbody;
     Animator MonsterAnimator;

@@ -45,7 +45,6 @@ public class MonsterDropItem : MonoBehaviour {
                 SpawnPosition = MyPosition; // Ground가 감지되면 몬스터의 위치에 아이템을 생성
             }
 
-
             if (ItemDrops[i].ItemPrefab != null && Random.value <= ItemDrops[i].SpawnProbability) {
 
                 if (ItemDrops[i].ItemPrefab.tag == "Money") {
@@ -67,7 +66,7 @@ public class MonsterDropItem : MonoBehaviour {
 
     // 레이캐스트를 이용해 Ground 레이어가 근처에 있는지 검사하는 메서드
     private bool IsGroundNearby(Vector3 position) {
-        float CheckDistance = 2.0f; // 검사할 거리
+        float CheckDistance = 3.0f; // 검사할 거리
         RaycastHit Hit;
         // 좌우로 레이캐스트
         if (Physics.Raycast(position, Vector3.right, out Hit, CheckDistance, GroundLayer) ||

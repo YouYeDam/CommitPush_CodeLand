@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class StartDialogue : MonoBehaviour
 {
-    public float detectionRadius = 5.0f;  // 감지 반경
+    public float DetectionRadius = 5f;  // 감지 반경
     public LayerMask npcLayerMask;       // NPC가 포함된 레이어 마스크
     PlayerManager PlayerManager;
+    PlayerUI PlayerUI;
     GameObject DialogueNPC;
     DialogueController DialogueController;
 
     void Start() {
         PlayerManager = GetComponent<PlayerManager>();
+        PlayerUI = GetComponent<PlayerUI>();
         DialogueController = FindObjectOfType<DialogueController>();
     }
 
@@ -17,6 +19,16 @@ public class StartDialogue : MonoBehaviour
         // 마우스 클릭을 감지
         if (Input.GetMouseButtonDown(0)) {
             CheckMouseClick();
+        }
+        // 대화중인 NPC 감지
+        if (!DialogueController.DialogueBase.activeSelf) { //대화창이 활성화 상태가 아니라면 대화중인 NPC 초기화
+            ResetDialogueNPC();
+        }
+        else { //대화창이 활성화 상태라면 일정거리에서 떨어질 시 대화창 닫기
+            if (DialogueNPC != null && Vector3.Distance(transform.position, DialogueNPC.transform.position) > DetectionRadius + 5f) {
+            DialogueController.DialogueBase.SetActive(false);
+            ResetDialogueNPC();
+            }
         }
     }
 
@@ -45,7 +57,7 @@ public class StartDialogue : MonoBehaviour
     }
 
     GameObject DetectNearestNPC() {
-        Collider2D[] Hits = Physics2D.OverlapCircleAll(transform.position, detectionRadius, npcLayerMask);
+        Collider2D[] Hits = Physics2D.OverlapCircleAll(transform.position, DetectionRadius, npcLayerMask);
         GameObject NearestNPC = null;
         float MinDistance = float.MaxValue;
         foreach (var Hit in Hits) {
@@ -64,6 +76,13 @@ public class StartDialogue : MonoBehaviour
         Dialogue Dialogue = Npc.GetComponent<NPC>().Dialogue;
         if (Dialogue != null && DialogueController != null) {
             DialogueController.StartDialogue(Dialogue);
+            if (PlayerUI.DialogueButtonObject == null) {
+                PlayerUI.SetDialogueButton();
+            }
         }
+    }
+
+    void ResetDialogueNPC() {
+        DialogueNPC = null;
     }
 }

@@ -1057,11 +1057,20 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 0726427c8b173bf4ebfa45ec48cbeade, type: 3}
+    - target: {fileID: 3731088917168028613, guid: 1e7127f881cb70548b252267bdd55022, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8147946229444393980, guid: 1e7127f881cb70548b252267bdd55022, type: 3}
       propertyPath: m_Name
       value: Background Audio
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8147946229444393980, guid: 1e7127f881cb70548b252267bdd55022, type: 3}
+      propertyPath: m_TagString
+      value: BackgroundMusic
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5247044581050392446, guid: 1e7127f881cb70548b252267bdd55022, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3236,6 +3245,7 @@ SceneRoots:
   - {fileID: 1486293429}
   - {fileID: 1346593313}
   - {fileID: 467541172}
+  - {fileID: 669897489}
   - {fileID: 4982508496657581539}
   - {fileID: 5852773442801622694}
   - {fileID: 470525492}
@@ -3246,4 +3256,3 @@ SceneRoots:
   - {fileID: 998858270}
   - {fileID: 823766911}
   - {fileID: 7979718144508192344}
-  - {fileID: 669897489}

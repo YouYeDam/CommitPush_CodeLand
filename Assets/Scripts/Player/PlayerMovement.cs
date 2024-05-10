@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer MySpriteRenderer;
     PlayerStatus PlayerStatus;
     PlayerManager PlayerManager;
+    PlayerTakeDamageDisplay PlayerTakeDamageDisplay;
     public bool IsWalkingAllowed = true;
     public LayerMask targetLayerMask;
 
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         MySpriteRenderer = GetComponent<SpriteRenderer>();
         PlayerStatus = GetComponent<PlayerStatus>();
         PlayerManager = GetComponent<PlayerManager>();
+        PlayerTakeDamageDisplay = GetComponent<PlayerTakeDamageDisplay>();
         StartGravity = MyRigidbody.gravityScale;
 
         Color = MySpriteRenderer.color;
@@ -181,9 +183,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         Damage -= Mathf.CeilToInt(PlayerStatus.PlayerDEF * 1.5f); // 방어력 공식: DEF * 1.5
+        Damage = Mathf.FloorToInt(Damage * Random.Range(0.8f, 1.21f)); // 데미지 랜덤값: 계산된 데미지의 0.8 ~ 1.2배로 조정
         if (Damage < 1) {
             Damage = 1;
         }
+        PlayerTakeDamageDisplay.DisplayDamageBar(Damage);
         PlayerStatus.PlayerCurrentHP -= Damage;
         Color.a = 0.5f;
         MySpriteRenderer.color = Color;

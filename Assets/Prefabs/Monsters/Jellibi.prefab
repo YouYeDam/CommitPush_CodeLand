@@ -238,7 +238,7 @@ MonoBehaviour:
   StopTimeHead: 3
   StopTimeRear: 7
   WaitCanWalk: 2
-  DieDelay: 0.7
+  DieDelay: 0.8
   PlayerOverlapRange: 0.1
   IsAlive: 1
   IsLeft: 0
@@ -262,7 +262,7 @@ MonoBehaviour:
   MonsterDamage: 10
   MonsterEXP: 1
   HPBarPos: 0.5
-  MonsterInfoPos: 0.5
+  MonsterInfoPos: 0.6
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}
@@ -307,4 +307,3 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   DamageBar: {fileID: 6382830084018992234, guid: 2c3eb6d6a30ab2642b5ec098c16cf5e6, type: 3}
   DamageBarInstance: {fileID: 0}
-  DamageText: {fileID: 0}

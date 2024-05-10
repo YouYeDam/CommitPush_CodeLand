@@ -9,7 +9,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject Inventory;
     [SerializeField] GameObject Character;
     [SerializeField] GameObject Equipment;
-
+    [SerializeField] GameObject Dialogue;
     PlayerManager PlayerManager;
     private Vector2 InventoryOriginalPosition;
     private Vector2 CharacterOriginalPosition;
@@ -19,13 +19,15 @@ public class PlayerUI : MonoBehaviour
     GameObject InventoryButtonObject;
     GameObject CharacterButtonObject;
     GameObject EquipmentButtonObject;
+    public GameObject DialogueButtonObject;
 
     Button InventoryButton;
     Button CharacterButton;
     Button EquipmentButton;
-
+    Button DialogueButton;
 
     PlayerLevelUpController PlayerLevelUpController;
+
     void Start() {
         PlayerLevelUpController = GetComponent<PlayerLevelUpController>();
         PlayerManager = GetComponent<PlayerManager>();
@@ -33,12 +35,11 @@ public class PlayerUI : MonoBehaviour
         Character = UIManager.transform.GetChild(0).gameObject;
         Equipment = UIManager.transform.GetChild(1).gameObject;
         Inventory = UIManager.transform.GetChild(2).gameObject;
-
+        Dialogue = UIManager.transform.GetChild(4).gameObject.transform.GetChild(0).gameObject;
         // 원래 위치 저장
         InventoryOriginalPosition = Inventory.GetComponent<RectTransform>().anchoredPosition;
         CharacterOriginalPosition = Character.GetComponent<RectTransform>().anchoredPosition;
         EquipmentOriginalPosition = Equipment.GetComponent<RectTransform>().anchoredPosition;
-
     }
 
     public void OnInventory() {
@@ -100,6 +101,17 @@ public class PlayerUI : MonoBehaviour
                 EquipmentButton = EquipmentButtonObject.GetComponent<Button>();
                 EquipmentButton.onClick.AddListener(OnEquipment);
             }
+        }
+    }
+
+    public void SetDialogueButton() {
+        DialogueButtonObject = GameObject.Find("Dialogue Close Button");
+        DialogueButton = DialogueButtonObject.GetComponent<Button>();
+        DialogueButton.onClick.AddListener(CloseDialogue);
+    }
+    public void CloseDialogue() {
+        if (Dialogue.activeSelf) {
+            Dialogue.SetActive(false);
         }
     }
 }
