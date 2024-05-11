@@ -25,7 +25,7 @@ public class StartDialogue : MonoBehaviour
             ResetDialogueNPC();
         }
         else { //대화창이 활성화 상태라면 일정거리에서 떨어질 시 대화창 닫기
-            if (DialogueNPC != null && Vector3.Distance(transform.position, DialogueNPC.transform.position) > DetectionRadius + 5f) {
+            if (DialogueNPC != null && Vector3.Distance(transform.position, DialogueNPC.transform.position) > DetectionRadius + 7f) {
             DialogueController.DialogueBase.SetActive(false);
             ResetDialogueNPC();
             }

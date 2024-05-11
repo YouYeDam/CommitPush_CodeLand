@@ -99,7 +99,7 @@ MonoBehaviour:
   PlayerNameInfo: {fileID: 7337256740539332341, guid: 7a61fbe61d3a0a1458d89fdd8373759c, type: 3}
   PlayerNameInfoText: {fileID: 0}
   PlayerNameInfoInstance: {fileID: 0}
-  PlayerNameInfoPos: 0.8
+  PlayerNameInfoPos: 1
   PlayerLevel: 1
   PlayerMaxHP: 100
   PlayerCurrentHP: 0
@@ -435,6 +435,8 @@ MonoBehaviour:
   Inventory: {fileID: 0}
   Character: {fileID: 0}
   Equipment: {fileID: 0}
+  Dialogue: {fileID: 0}
+  DialogueButtonObject: {fileID: 0}
 --- !u!114 &5045011585957937535
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,7 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699278b4157b9064fa5ab31700fa0fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 5
+  DetectionRadius: 4.5
   npcLayerMask:
     serializedVersion: 2
     m_Bits: 16384
