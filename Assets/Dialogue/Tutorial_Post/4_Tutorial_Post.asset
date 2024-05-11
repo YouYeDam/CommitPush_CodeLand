@@ -21,11 +21,3 @@ MonoBehaviour:
     DialogueText: "\uC544\uC774\uD15C\uC744 \uC0AC\uC6A9\uD558\uB824\uBA74 \uC544\uC774\uD15C\uC744
       \uB354\uBE14\uD074\uB9AD \uD558\uC138\uC694,"
     SpeakerImage: {fileID: 21300000, guid: 4bae5f5c79a401641991f49b62c8e3a0, type: 3}
-  - SpeakerName: "\uD45C\uC9C0\uD310"
-    DialogueText: "\uCE90\uB9AD\uD130\uC758 HP\uAC00 0\uC774 \uB418\uBA74 \uCE90\uB9AD\uD130\uAC00
-      \uC0AC\uB9DD\uD569\uB2C8\uB2E4."
-    SpeakerImage: {fileID: 21300000, guid: 4bae5f5c79a401641991f49b62c8e3a0, type: 3}
-  - SpeakerName: "\uD45C\uC9C0\uD310"
-    DialogueText: "\uC0AC\uB9DD \uC2DC \uACBD\uD5D8\uCE58 \uD328\uB110\uD2F0\uB97C
-      \uBC1B\uACE0, \uAC00\uAE4C\uC6B4 \uB9C8\uC744\uC5D0\uC11C \uBD80\uD65C\uD569\uB2C8\uB2E4."
-    SpeakerImage: {fileID: 21300000, guid: 4bae5f5c79a401641991f49b62c8e3a0, type: 3}

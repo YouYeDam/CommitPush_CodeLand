@@ -5,4 +5,5 @@ using UnityEngine;
 public class PortalInfo : MonoBehaviour
 {
     [SerializeField] public string LoadSceneName;
+    [SerializeField] public string ConnectPortalName;
 }

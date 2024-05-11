@@ -2,11 +2,18 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
-{
-PortalInfo PortalInfo;
-string LoadSceneName;
-bool CanUsePortal = false;
+    {
+    PortalInfo PortalInfo;
+    UIManager UIManager;
+    PlayerManager PlayerManager;
+    string LoadSceneName;
+    string ConnectPortalName;
+    bool CanUsePortal = false;
 
+    void Start() {
+        PlayerManager = GetComponent<PlayerManager>();
+        UIManager = FindObjectOfType<UIManager>();
+    }
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Portal") {
             CanUsePortal = true;
@@ -25,7 +32,12 @@ bool CanUsePortal = false;
 
     void OnPortal() {
         if (CanUsePortal) {
-            SceneManager.LoadScene(LoadSceneName);
+            UIManager.DestroyAllTempInfo();
+            if (LoadSceneName != null) {
+                ConnectPortalName = PortalInfo.ConnectPortalName;
+                PlayerManager.SetConnectPortalName(ConnectPortalName);
+                SceneManager.LoadScene(LoadSceneName);
+            }
         }
     }
 }

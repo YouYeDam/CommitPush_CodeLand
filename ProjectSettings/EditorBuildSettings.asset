@@ -6,17 +6,22 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Main Menu Scene.unity
+    path: "Assets/Scenes/\uAC8C\uC784\uC2DC\uC791/Main Menu Scene.unity"
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Create Player Scene.unity
+    path: "Assets/Scenes/\uAC8C\uC784\uC2DC\uC791/Create Player Scene.unity"
     guid: 488de4dde39476249bc52f85626cf5d0
   - enabled: 1
     path: Assets/Scenes/New Scene.unity
     guid: b168af0dee79d62479f3586d3d4223dc
   - enabled: 1
-    path: Assets/Scenes/Cave_Tutorial.unity
+    path: "Assets/Scenes/\uC2DC\uC791\uC758 \uB3D9\uAD74/\uC2DC\uC791\uC758 \uB3D9\uAD74_\uB3D9\uAD74
+      \uC548\uCABD.unity"
     guid: 96a1d39439c581648a19eabb88c50da1
+  - enabled: 1
+    path: "Assets/Scenes/\uC2DC\uC791\uC758 \uB3D9\uAD74/\uC2DC\uC791\uC758 \uB3D9\uAD74_\uB3D9\uAD74
+      \uCD08\uC785.unity"
+    guid: 5132d3c5a9c369e429a0bcc2f4627c27
   - enabled: 1
     path: Assets/Scenes/Quiz Scene.unity
     guid: 9d96a0ffe7dd6b74a8f2a16164039fb8

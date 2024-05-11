@@ -54,4 +54,13 @@ public class UIManager : MonoBehaviour
             StatusBar.SetActive(true);
         }
     }
+
+    public void DestroyAllTempInfo()
+    {
+        GameObject[] tempInfos = GameObject.FindGameObjectsWithTag("TempInfo");
+        foreach (GameObject tempInfo in tempInfos)
+        {
+            Destroy(tempInfo);
+        }
+    }
 }
