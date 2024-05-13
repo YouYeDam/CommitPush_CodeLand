@@ -6,23 +6,27 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: "Assets/Scenes/\uAC8C\uC784\uC2DC\uC791/Main Menu Scene.unity"
+    path: Assets/Scenes/GameStart/Main Menu Scene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: "Assets/Scenes/\uAC8C\uC784\uC2DC\uC791/Create Player Scene.unity"
+    path: Assets/Scenes/GameStart/Create Player Scene.unity
     guid: 488de4dde39476249bc52f85626cf5d0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/New Scene.unity
     guid: b168af0dee79d62479f3586d3d4223dc
   - enabled: 1
-    path: "Assets/Scenes/\uC2DC\uC791\uC758 \uB3D9\uAD74/\uC2DC\uC791\uC758 \uB3D9\uAD74_\uB3D9\uAD74
+    path: "Assets/Scenes/CaveOfBeginning/\uC2DC\uC791\uC758 \uB3D9\uAD74_\uB3D9\uAD74
       \uC548\uCABD.unity"
     guid: 96a1d39439c581648a19eabb88c50da1
   - enabled: 1
-    path: "Assets/Scenes/\uC2DC\uC791\uC758 \uB3D9\uAD74/\uC2DC\uC791\uC758 \uB3D9\uAD74_\uB3D9\uAD74
+    path: "Assets/Scenes/CaveOfBeginning/\uC2DC\uC791\uC758 \uB3D9\uAD74_\uB3D9\uAD74
       \uCD08\uC785.unity"
     guid: 5132d3c5a9c369e429a0bcc2f4627c27
   - enabled: 1
+    path: "Assets/Scenes/DataForest/\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uB3D9\uAD74
+      \uC785\uAD6C.unity"
+    guid: eb2af1ab2b01fc24a8cef206913d8824
+  - enabled: 0
     path: Assets/Scenes/Quiz Scene.unity
     guid: 9d96a0ffe7dd6b74a8f2a16164039fb8
   m_configObjects:

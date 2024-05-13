@@ -8,6 +8,9 @@ public class PlayerStatus : MonoBehaviour
     public GameObject PlayerNameInfo; // 플레이어 이름 텍스트 프리팹
     public TMP_Text PlayerNameInfoText;
     public GameObject PlayerNameInfoInstance;
+    [SerializeField] GameObject LevelUpEffect;
+    [SerializeField] Transform LevelUpSpot;
+
     public float PlayerNameInfoPos = 0.5f;
     [SerializeField] public int PlayerLevel = 1;
     [SerializeField] public int PlayerMaxHP = 100;
@@ -39,7 +42,6 @@ public class PlayerStatus : MonoBehaviour
         PlayerCurrentEXP += EXP;
         if (PlayerCurrentEXP >= PlayerMaxEXP) {
             LevelUp();
-            PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.5f);
         }
     }
 
@@ -51,6 +53,12 @@ public class PlayerStatus : MonoBehaviour
         PlayerCurrentHP = PlayerMaxHP;
         PlayerCurrentMP = PlayerMaxMP;
         LevelUpPoint += 3;
+        
+        PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.5f);
+        if (PlayerCurrentEXP >= PlayerMaxEXP) {
+            PlayerCurrentEXP = PlayerMaxEXP - 1;
+        }
+        Instantiate(LevelUpEffect, LevelUpSpot.position, transform.rotation);
     }
 
     public void DisplayPlayerNameInfo() { // 캐릭터 이름 보이기

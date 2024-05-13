@@ -79,6 +79,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1635159961687940443}
+  - {fileID: 4214793044141808167}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8822639669664260740
@@ -99,6 +100,8 @@ MonoBehaviour:
   PlayerNameInfo: {fileID: 7337256740539332341, guid: 7a61fbe61d3a0a1458d89fdd8373759c, type: 3}
   PlayerNameInfoText: {fileID: 0}
   PlayerNameInfoInstance: {fileID: 0}
+  LevelUpEffect: {fileID: 8885825609034438207, guid: 359fb0e816ec9544791a30f787f18fa1, type: 3}
+  LevelUpSpot: {fileID: 4214793044141808167}
   PlayerNameInfoPos: 1
   PlayerLevel: 1
   PlayerMaxHP: 100
@@ -165,7 +168,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 794951137
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: -1860293165, guid: 02d47c295c8ed2443bc8f3ca6d7d1ccc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -417,6 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalAttack: {fileID: 8885825609034438207, guid: 7796c015e9a8dbb438ab721afee996c1, type: 3}
   SkillSpot: {fileID: 1635159961687940443}
+  BuffSpot: {fileID: 0}
   GlobalCoolDown: 0.3
   BackToIdleAnimTime: 0.2
 --- !u!114 &2205046119036907785
@@ -520,3 +524,34 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   DamageBar: {fileID: 6382830084018992234, guid: e22d1cf4b2a941743a8d9137ce366cf0, type: 3}
   DamageBarInstance: {fileID: 0}
+--- !u!1 &7569024645267090874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4214793044141808167}
+  m_Layer: 8
+  m_Name: Buff Spot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4214793044141808167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7569024645267090874}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4114499145531435079}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

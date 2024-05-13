@@ -14,7 +14,7 @@ TagManager:
   - Money
   - Portal
   - BackgroundMusic
-  - TempInfo
+  - Prop
   layers:
   - Default
   - TransparentFX
@@ -31,7 +31,7 @@ TagManager:
   - LadderGround
   - LadderControl
   - NPC
-  - 
+  - Prop
   - 
   - 
   - 
@@ -63,6 +63,9 @@ TagManager:
     locked: 0
   - name: Ladder
     uniqueID: 1674598465
+    locked: 0
+  - name: Prop
+    uniqueID: 497593275
     locked: 0
   - name: NPC
     uniqueID: 847609113

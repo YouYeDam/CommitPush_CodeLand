@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dce98ef6376c6e4a90bf811322f4e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dialogue: {fileID: 11400000, guid: 1a128422d32564147bc657c56a633991, type: 2}
+  Dialogue: {fileID: 11400000, guid: 3d3c82711d0d36b4d8238308f8e76f43, type: 2}
   UIManager: {fileID: 0}
   NPCName: "\uD30C\uC774\uC36C"
   NPCNameInfo: {fileID: 7337256740539332341, guid: b57da644c15344546acebcacfc6f353f, type: 3}

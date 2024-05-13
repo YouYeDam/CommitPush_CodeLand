@@ -13,6 +13,7 @@ public class PlayerSkills : MonoBehaviour
     PlayerStatus PlayerStatus;
     [SerializeField] GameObject NormalAttack;
     [SerializeField] Transform SkillSpot;
+    [SerializeField] Transform BuffSpot;
     [SerializeField] float GlobalCoolDown = 0.3f;
     [SerializeField] float BackToIdleAnimTime = 0.2f;
 
