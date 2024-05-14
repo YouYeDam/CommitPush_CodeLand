@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBuffSkill : MonoBehaviour
 {
     [SerializeField] float DestroyDelay = 0.5f;
-    [SerializeField] float SkillCoefficient = 0.1f; // 스킬계수
+    [SerializeField] int EffectValue = 1;
     Rigidbody2D MyRigidbody;
     PlayerStatus PlayerStatus;
     GameObject Player;
@@ -16,7 +16,7 @@ public class PlayerBuffSkill : MonoBehaviour
         MyRigidbody = GetComponent<Rigidbody2D>();
         PlayerStatus = FindObjectOfType<PlayerStatus>();
         Player = GameObject.FindGameObjectWithTag("Player");
-        Invoke("DestroySelf", DestroyDelay);
+        Invoke("DestroySelf", DestroyDelay); 
     }
 
     void Update() {
@@ -30,8 +30,10 @@ public class PlayerBuffSkill : MonoBehaviour
         transform.position = new Vector3(playerX, NewY, transform.position.z);
     }
 
-    void DestroySelf()
-        {
+    void SkillEffect() {
+        PlayerStatus.PlayerATK *= EffectValue;
+    }
+    void DestroySelf() {
             Destroy(gameObject);
-        }
+    }
 }

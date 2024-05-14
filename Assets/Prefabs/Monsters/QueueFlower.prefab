@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3157593347497917494}
   - component: {fileID: 2853819430215722925}
   - component: {fileID: -8855345390103764750}
+  - component: {fileID: 5552684333874109378}
   m_Layer: 9
   m_Name: QueueFlower
   m_TagString: Monster
@@ -37,7 +38,8 @@ Transform:
   m_LocalPosition: {x: 3.0302165, y: 1.8800466, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8763508143990234850}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8690364043849138141
@@ -79,7 +81,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 859613945
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 1099392935, guid: 5433753d4d0c035429764ea14e543aa2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -242,6 +244,7 @@ MonoBehaviour:
   PlayerOverlapRange: 0.1
   IsAlive: 1
   IsLeft: 0
+  IsAttackMonster: 1
   IsTakeDamge: 0
 --- !u!114 &3157593347497917494
 MonoBehaviour:
@@ -261,8 +264,8 @@ MonoBehaviour:
   MonsterCurrentHealth: 0
   MonsterDamage: 15
   MonsterEXP: 10
-  HPBarPos: 0.5
-  MonsterInfoPos: 0.6
+  HPBarPos: 0.7
+  MonsterInfoPos: 0.8
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}
@@ -305,3 +308,49 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   DamageBar: {fileID: 6382830084018992234, guid: 2c3eb6d6a30ab2642b5ec098c16cf5e6, type: 3}
   DamageBarInstance: {fileID: 0}
+--- !u!114 &5552684333874109378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3523946213023745087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c13a339100992154f999e72d5ca291f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Projectile: {fileID: 8885825609034438207, guid: 0067db93532db514da2a5ffbae9d7ab8, type: 3}
+  SkillSpot: {fileID: 8763508143990234850}
+  BackToIdleAnimTime: 0.7
+--- !u!1 &9048284205231676761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8763508143990234850}
+  m_Layer: 8
+  m_Name: Skill Spot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8763508143990234850
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9048284205231676761}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.597, y: 0.11, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6939425423564658731}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

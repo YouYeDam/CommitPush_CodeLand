@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: 5_Tutorial_Post
   m_EditorClassIdentifier: 
   nodes:
-  - SpeakerName: "\uD45C\uC9C0\uD310"
+  - SpeakerName: "\uACF5\uC2DD\uBB38\uC11C \uD45C\uC9C0\uD310"
     DialogueText: "\uD3EC\uD0C8\uC744 \uC0AC\uC6A9\uD558\uBA74 \uB2E4\uB978 \uB9F5\uC73C\uB85C
       \uC774\uB3D9\uD569\uB2C8\uB2E4."
     SpeakerImage: {fileID: 21300000, guid: 4bae5f5c79a401641991f49b62c8e3a0, type: 3}
-  - SpeakerName: "\uD45C\uC9C0\uD310"
+  - SpeakerName: "\uACF5\uC2DD\uBB38\uC11C \uD45C\uC9C0\uD310"
     DialogueText: "\uD3EC\uD0C8\uC744 \uC0AC\uC6A9\uD558\uB824\uBA74 \uC0C1\uB2E8
       \uBC29\uD5A5\uD0A4\uB97C \uB204\uB974\uC138\uC694."
     SpeakerImage: {fileID: 21300000, guid: 4bae5f5c79a401641991f49b62c8e3a0, type: 3}

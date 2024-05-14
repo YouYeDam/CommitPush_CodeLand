@@ -22,20 +22,28 @@ public class BasicMonsterMovement : MonoBehaviour
     MonsterDropItem MonsterDropItem;
     PlayerMovement PlayerMovement;
     PlayerStatus PlayerStatus;
+    MonsterSkills MonsterSkills;
     GameObject Player;
 
     public bool IsAlive = true;
     public bool IsLeft = true; // 초기 몬스터가 바라보는 방향
+    public bool IsAttackMonster = false;
     public bool IsTakeDamge = false;
     bool CanWalk = true;
+    bool CanAttack = true;
+    float AttackDelayTime = 3f;
     void Start()
     {
         MonsterRigidbody = GetComponent<Rigidbody2D>();
+        MonsterRigidbody.sleepMode = RigidbodySleepMode2D.NeverSleep;
         MonsterAnimator = GetComponent<Animator>();
         MonsterStatus = GetComponent<MonsterStatus>();
         MonsterBoxCollider = GetComponent<BoxCollider2D>();
         MonsterCapsuleCollider = GetComponent<CapsuleCollider2D>();
         MonsterDropItem = GetComponent<MonsterDropItem>();
+        if (IsAttackMonster) {
+            MonsterSkills = GetComponent<MonsterSkills>();
+        }
         PlayerBoxCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
         PlayerCapsuleCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<CapsuleCollider2D>();
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
@@ -89,7 +97,6 @@ public class BasicMonsterMovement : MonoBehaviour
                 MonsterRigidbody.velocity = new Vector2 (0f, 0f);
                 MonsterAnimator.SetBool("IsIdling", true);
             }
-
             else {
                 MoveSpeed = Mathf.Sign(DirectionToPlayer.x) * Mathf.Abs(MoveSpeed);
                 MonsterRigidbody.velocity = new Vector2 (MoveSpeed, 0f);
@@ -102,6 +109,10 @@ public class BasicMonsterMovement : MonoBehaviour
                 }
             }
 
+            if (IsAttackMonster && CanAttack) {
+                StartCoroutine(AttackSkillRoutine());
+                MonsterRigidbody.velocity = new Vector2 (0f, 0f);
+            }
         }
 
         if (!PlayerMovement.IsAlive) {
@@ -175,9 +186,26 @@ public class BasicMonsterMovement : MonoBehaviour
         StartCoroutine(DestroyAfterAnimation(DieDelay)); // 애니메이션 재생 후 몬스터 파괴
     }
     IEnumerator DestroyAfterAnimation(float DieDelay) {
-    yield return new WaitForSeconds(DieDelay);
-    Destroy(MonsterStatus.HPMeterInstance);
-    Destroy(MonsterStatus.MonsterInfoInstance);
-    Destroy(gameObject);
+        yield return new WaitForSeconds(DieDelay);
+        Destroy(MonsterStatus.HPMeterInstance);
+        Destroy(MonsterStatus.MonsterInfoInstance);
+        Destroy(gameObject);
+    }
+    IEnumerator AttackSkillRoutine() {
+        while (IsAlive && PlayerMovement.IsAlive) {
+            if (CanAttack) {
+                // 플레이어와 몬스터 사이의 거리 계산
+                float DistanceToPlayer = Vector2.Distance(Player.transform.position, transform.position);
+                
+                // 플레이어가 앞뒤 8f 내에 있을 때만 스킬 발사
+                if (DistanceToPlayer <= MonsterSkills.UseSkillDistance) {
+                    MonsterSkills.StartShootSkill();
+                    CanAttack = false; // 공격 후 잠시 공격 불가 상태로 설정
+                    yield return new WaitForSeconds(AttackDelayTime); // 공격 후 지연 시간 대기
+                    CanAttack = true; // 다시 공격 가능 상태로 설정
+                }
+            }
+            yield return null; // 한 프레임 대기
+        }
     }
 }

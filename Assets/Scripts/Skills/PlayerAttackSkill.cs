@@ -9,7 +9,7 @@ public class PlayerAttackSkill : MonoBehaviour
     Rigidbody2D MyRigidbody;
     PlayerMovement PlayerMovement;
     PlayerStatus PlayerStatus;
-    bool IsAttack = false;
+    bool IsAttackDone = false;
     bool IsCrit = false;
     float XSpeed;
     void Start()
@@ -35,11 +35,11 @@ public class PlayerAttackSkill : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other) {
-        if (IsAttack) {
+        if (IsAttackDone) {
             return;
         }
         if (other is BoxCollider2D && other.gameObject.tag == "Monster") {
-            IsAttack = true;
+            IsAttackDone = true;
             BasicMonsterMovement BaiscMonsterMovement = other.gameObject.GetComponent<BasicMonsterMovement>();
             BaiscMonsterMovement.TakeDamage(Damage);
 
@@ -52,13 +52,13 @@ public class PlayerAttackSkill : MonoBehaviour
     }
 
     void FlipSprite() { //스킬 이펙트 좌우반전
-    if (XSpeed < 0) {
-        transform.localScale = new Vector2(-1, 1);
-    }
+        if (XSpeed < 0) {
+            transform.localScale = new Vector2(-1, 1);
+        }
     }
 
     void DestroySelf()
-        {
+    {
             Destroy(gameObject);
-        }
+    }
 }

@@ -17,16 +17,9 @@ MonoBehaviour:
     DialogueText: "\uC815\uC2E0\uC774 \uC880 \uB4E4\uC5B4?"
     SpeakerImage: {fileID: 919737148, guid: ce2b8f95bd7c18e4ebeeb03ca64a6018, type: 3}
   - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
-    DialogueText: "...\uBC40\uC774 \uB9D0\uC744 \uD558\uC796\uC544!?"
+    DialogueText: "\uB10C \uB204\uAD6C\uC57C?"
     SpeakerImage: {fileID: 0}
-  - SpeakerName: "\uD30C\uC774\uC36C"
-    DialogueText: "\uBB58 \uADF8\uB807\uAC8C \uB180\uB77C\uACE0 \uADF8\uB798. \uB108\uD76C
-      \uC138\uACC4\uC5D0\uC11C\uB294 \uB9D0\uD558\uB294 \uBC40\uC774 \uC5C6\uB098\uBCF4\uC9C0?"
-    SpeakerImage: {fileID: 919737148, guid: ce2b8f95bd7c18e4ebeeb03ca64a6018, type: 3}
   - SpeakerName: "\uD30C\uC774\uC36C"
     DialogueText: "\uB09C \uD30C\uC774\uC36C\uC774\uB77C\uACE0 \uD574. \uB9CC\uB098\uC11C
       \uBC18\uAC00\uC6CC!"
     SpeakerImage: {fileID: 919737148, guid: ce2b8f95bd7c18e4ebeeb03ca64a6018, type: 3}
-  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
-    DialogueText: "\uD30C\uC774\uC36C...? \uB418\uAC8C \uD2B9\uC774\uD55C \uC774\uB984\uC774\uB124."
-    SpeakerImage: {fileID: 0}

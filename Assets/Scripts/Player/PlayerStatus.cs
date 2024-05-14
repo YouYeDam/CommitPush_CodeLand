@@ -70,7 +70,7 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    void UpdatePlayerNameInfo() {
+    void UpdatePlayerNameInfo() { // 캐릭터 이름 위치 갱신
         if (PlayerNameInfoInstance != null) {
             Vector3 newPosition = transform.position + Vector3.down * PlayerNameInfoPos;
             PlayerNameInfoInstance.transform.position = newPosition;
@@ -107,5 +107,21 @@ public class PlayerStatus : MonoBehaviour
     public void CritUp() {
         PlayerCrit += 0.008f;
         LevelUpPoint -= 1;
+    }
+
+    public void AutoHeal() {
+        if (PlayerCurrentHP != PlayerMaxHP) {
+            PlayerCurrentHP += Mathf.RoundToInt(PlayerMaxHP * 0.03f);
+            if (PlayerCurrentHP > PlayerMaxHP) {
+                PlayerCurrentHP = PlayerMaxHP;
+            }
+        }
+
+        if (PlayerCurrentMP != PlayerMaxMP) {
+            PlayerCurrentMP += Mathf.RoundToInt(PlayerMaxMP * 0.05f);
+            if (PlayerCurrentMP > PlayerMaxMP) {
+                PlayerCurrentMP = PlayerMaxMP;
+            }
+        }
     }
 }

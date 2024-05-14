@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         MyRigidbody = GetComponent<Rigidbody2D>();
+        MyRigidbody.sleepMode = RigidbodySleepMode2D.NeverSleep;
         MyAnimator = GetComponent<Animator>();
         MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
         MyBoxColliders = GetComponents<BoxCollider2D>();
@@ -36,8 +37,9 @@ public class PlayerMovement : MonoBehaviour
         PlayerManager = GetComponent<PlayerManager>();
         PlayerTakeDamageDisplay = GetComponent<PlayerTakeDamageDisplay>();
         StartGravity = MyRigidbody.gravityScale;
-
         Color = MySpriteRenderer.color;
+
+        StartCoroutine(AutoHealRoutine());
     }
 
     void Update()
@@ -193,7 +195,6 @@ public class PlayerMovement : MonoBehaviour
         MySpriteRenderer.color = Color;
         IsInvincible = true;
         StartCoroutine(InvincibleDelay()); // 무적 활성화 초기화
-        StartCoroutine(MoveHurtPosition(0.2f)); // 플레이어 넉백
         if (PlayerStatus.PlayerCurrentHP <= 0) {
             PlayerStatus.PlayerCurrentHP = 0;
             Die();
@@ -217,29 +218,15 @@ public class PlayerMovement : MonoBehaviour
         Color.a = 1f;
         MySpriteRenderer.color = Color;
     }
-    IEnumerator MoveHurtPosition(float Duration) {
-        float StartTime = Time.time;
-        Vector3 StartPosition = transform.position;
-        Vector3 EndPosition = StartPosition + ((transform.localScale.x > 0 ? Vector3.left : Vector3.right) * 0.7f);
-
-        // Ground레이어에 해당하는 레이어 마스크 가져오기
-        LayerMask layerMask = LayerMask.GetMask("Ground");
-
-        while (Time.time < StartTime + Duration) {
-            float t = (Time.time - StartTime) / Duration;
-            Vector3 NewPosition = Vector3.Lerp(StartPosition, EndPosition, t);
-            
-            // 레이캐스트를 사용해 Ground 레이어와의 충돌 검사
-            RaycastHit2D Hit = Physics2D.Raycast(transform.position, EndPosition - transform.position, Vector3.Distance(transform.position, EndPosition), layerMask);
-            
-            if (Hit.collider != null) {
-                yield break; // 충돌시 Coroutine 중단
+    IEnumerator AutoHealRoutine() {
+        while (true) {
+            if (IsAlive) {
+                PlayerStatus.AutoHeal(); // 5초마다 AutoHeal 함수 호출
             }
-            
-            transform.position = NewPosition;
-            yield return null;
+            yield return new WaitForSeconds(5f);
         }
     }
+
 }
 
 
