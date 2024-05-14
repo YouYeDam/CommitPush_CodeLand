@@ -71,7 +71,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
         bool PlayerHasHorizontalSpeed = Mathf.Abs(MyRigidbody.velocity.x) > Mathf.Epsilon;
-        Vector2 PlayerVelocity = new Vector2 (MoveInput.x * RunSpeed, MyRigidbody.velocity.y); // 현재의 속도인 y가 무엇이든 동일한 속도를 유지하라는 의미
+        // MoveInput이 OnMove에서 1이거나(위아래 키 안 눌렸을 때) 0.75로(위아래 키 눌렸을 떄) 설정됨. 두 값이 바뀌는 이유로 걷는 속도가 느려짐. -> 조건에 따라 무조건 1로 설정해야함.
+        float modifiedX = 0;
+        if (MoveInput.x > 0){
+            modifiedX = 1f;
+        }
+        else if (MoveInput.x < 0){
+            modifiedX = -1f;
+        }
+        Vector2 PlayerVelocity = new Vector2 (modifiedX * RunSpeed, MyRigidbody.velocity.y); // 현재의 속도인 y가 무엇이든 동일한 속도를 유지하라는 의미 + 이 부분이 작동을 안 함. 아마 on move 자체 함수의 문제인 듯 함.
+        
         MyRigidbody.velocity = PlayerVelocity;
         bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (IsOnLadder) {
@@ -89,7 +98,8 @@ public class PlayerMovement : MonoBehaviour
                 MyAnimator.SetBool("IsWalking", false);
             }
         }
-    } 
+    }
+ 
 
     void CheckWalk() { //걷기 애니메이션 체크
         bool IsOnGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
@@ -182,6 +192,8 @@ public class PlayerMovement : MonoBehaviour
         if (IsInvincible) { // 무적상태면 실행안함
             return;
         }
+        bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
+        
         Damage -= Mathf.CeilToInt(PlayerStatus.PlayerDEF * 1.5f); // 방어력 공식: DEF * 1.5
         Damage = Mathf.FloorToInt(Damage * Random.Range(0.8f, 1.21f)); // 데미지 랜덤값: 계산된 데미지의 0.8 ~ 1.2배로 조정
         if (Damage < 1) {
@@ -193,12 +205,17 @@ public class PlayerMovement : MonoBehaviour
         MySpriteRenderer.color = Color;
         IsInvincible = true;
         StartCoroutine(InvincibleDelay()); // 무적 활성화 초기화
-        StartCoroutine(MoveHurtPosition(0.2f)); // 플레이어 넉백
+        
+        if (!IsOnLadder) { // 사다리에 없을 때만 넉백
+            StartCoroutine(MoveHurtPosition(0.2f)); // 플레이어 넉백    
+        }
+
         if (PlayerStatus.PlayerCurrentHP <= 0) {
             PlayerStatus.PlayerCurrentHP = 0;
             Die();
         }
     }
+
 
     void Die() { // 플레이어 죽음
         IsAlive = false;
