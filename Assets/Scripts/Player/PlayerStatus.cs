@@ -71,12 +71,22 @@ public class PlayerStatus : MonoBehaviour
     }
 
     void UpdatePlayerNameInfo() { // 캐릭터 이름 위치 갱신
-        if (PlayerNameInfoInstance != null) {
+        if (PlayerNameInfoInstance != null && Camera.main != null && UIManager != null) {
             Vector3 newPosition = transform.position + Vector3.down * PlayerNameInfoPos;
-            PlayerNameInfoInstance.transform.position = newPosition;
+            Vector2 screenPosition = Camera.main.WorldToScreenPoint(newPosition);
+
+            RectTransform canvasRect = UIManager.GetComponent<RectTransform>();
+            RectTransform nameTagRect = PlayerNameInfoInstance.GetComponent<RectTransform>();
+
+            Vector2 localPoint;
+            // 스크린 좌표를 캔버스의 로컬 좌표로 변환
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRect, screenPosition, Camera.main, out localPoint)) {
+                // 부드러운 이동을 위한 Lerp 사용
+                Vector2 targetPosition = Vector2.Lerp(nameTagRect.anchoredPosition, localPoint, Time.deltaTime * 20);
+                nameTagRect.anchoredPosition = targetPosition;
+            }
         }
     }
-
     public void HPUp() {
         PlayerMaxHP += 10;
         PlayerCurrentHP += 10;
