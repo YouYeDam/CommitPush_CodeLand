@@ -181,6 +181,8 @@ public class BasicMonsterMovement : MonoBehaviour
         yield return new WaitForSeconds(FollowDelay);
 
         IsTakeDamge = false;
+        StartCoroutine(RandomFlip());
+        StartCoroutine(RandomStop());
     }
 
     void Die() {
