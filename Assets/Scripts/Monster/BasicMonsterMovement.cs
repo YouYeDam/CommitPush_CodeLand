@@ -12,6 +12,7 @@ public class BasicMonsterMovement : MonoBehaviour
     [SerializeField] float WaitCanWalk = 1f;
     [SerializeField] float DieDelay = 0.8f;
     [SerializeField] float PlayerOverlapRange = 0.1f;
+    [SerializeField] float FollowDelay = 10f;
     Rigidbody2D MonsterRigidbody;
     Animator MonsterAnimator;
     MonsterStatus MonsterStatus;
@@ -172,8 +173,18 @@ public class BasicMonsterMovement : MonoBehaviour
             MonsterStatus.DisplayHPMeter();
             MonsterStatus.DisplayMonsterInfo();
             IsTakeDamge = true;
+            StartCoroutine(ChangeVariableAfterSeconds(FollowDelay));
         }
     }
+
+    IEnumerator ChangeVariableAfterSeconds(float FollowDelay) {
+        yield return new WaitForSeconds(FollowDelay);
+
+        IsTakeDamge = false;
+        StartCoroutine(RandomFlip());
+        StartCoroutine(RandomStop());
+    }
+
     void Die() {
         if (MonsterStatus.MonsterCurrentHealth > 0) {
             return;
