@@ -79,7 +79,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 859613945
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -1837222457, guid: d03127c51e0067a46a8c28e15b64a303, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -240,8 +240,10 @@ MonoBehaviour:
   WaitCanWalk: 3.5
   DieDelay: 0.8
   PlayerOverlapRange: 0.75
+  FollowDelay: 10
   IsAlive: 1
   IsLeft: 0
+  IsAttackMonster: 0
   IsTakeDamge: 0
 --- !u!114 &3157593347497917494
 MonoBehaviour:
@@ -255,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8f6e2da49528449a1c776f7367a421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterName: "\uC2A4\uD30C\uC774\uB354"
+  MonsterName: "\uADF8\uB798\uD30C\uC774\uB354"
   MonsterLV: 8
   MonsterMaxHealth: 100
   MonsterCurrentHealth: 0

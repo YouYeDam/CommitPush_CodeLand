@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2e198bb496d03459a891c87cf8bb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 0
+  MoveSpeed: 1
   FlipTimeHead: 3
   FlipTimeRear: 8
   StopTimeHead: 4
@@ -242,6 +242,7 @@ MonoBehaviour:
   WaitCanWalk: 3
   DieDelay: 0.8
   PlayerOverlapRange: 0.1
+  FollowDelay: 10
   IsAlive: 1
   IsLeft: 0
   IsAttackMonster: 1
@@ -323,6 +324,7 @@ MonoBehaviour:
   Projectile: {fileID: 8885825609034438207, guid: 0067db93532db514da2a5ffbae9d7ab8, type: 3}
   SkillSpot: {fileID: 8763508143990234850}
   BackToIdleAnimTime: 0.7
+  UseSkillDistance: 8
 --- !u!1 &9048284205231676761
 GameObject:
   m_ObjectHideFlags: 0
