@@ -26,6 +26,10 @@ EditorBuildSettings:
     path: "Assets/Scenes/DataForest/\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uB3D9\uAD74
       \uC785\uAD6C.unity"
     guid: eb2af1ab2b01fc24a8cef206913d8824
+  - enabled: 1
+    path: "Assets/Scenes/DataForest/\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uB370\uC774\uD130
+      \uBE4C\uB9AC\uC9C0.unity"
+    guid: 16f797f2057e9cb48a002591426d835e
   - enabled: 0
     path: Assets/Scenes/Quiz Scene.unity
     guid: 9d96a0ffe7dd6b74a8f2a16164039fb8

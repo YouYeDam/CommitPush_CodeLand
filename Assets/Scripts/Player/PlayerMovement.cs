@@ -6,13 +6,14 @@ public class PlayerMovement : MonoBehaviour
 {
     Vector2 MoveInput;
     Rigidbody2D MyRigidbody;
-    Animator MyAnimator;
     CapsuleCollider2D MyCapsuleCollider;
     BoxCollider2D[] MyBoxColliders;
     SpriteRenderer MySpriteRenderer;
     PlayerStatus PlayerStatus;
     PlayerManager PlayerManager;
     PlayerTakeDamageDisplay PlayerTakeDamageDisplay;
+    DyingCheck DyingCheck;
+    public Animator MyAnimator;
     public bool IsWalkingAllowed = true;
     public LayerMask targetLayerMask;
 
@@ -36,9 +37,9 @@ public class PlayerMovement : MonoBehaviour
         PlayerStatus = GetComponent<PlayerStatus>();
         PlayerManager = GetComponent<PlayerManager>();
         PlayerTakeDamageDisplay = GetComponent<PlayerTakeDamageDisplay>();
+        DyingCheck = FindObjectOfType<DyingCheck>();
         StartGravity = MyRigidbody.gravityScale;
         Color = MySpriteRenderer.color;
-
         StartCoroutine(AutoHealRoutine());
     }
 
@@ -204,6 +205,7 @@ public class PlayerMovement : MonoBehaviour
     void Die() { // 플레이어 죽음
         IsAlive = false;
         MyAnimator.SetBool("IsDying", true);
+        DyingCheck.ActivateDyingCheck();
     }
 
     IEnumerator WalkWithDelay() { // 공격 시 이동 제한

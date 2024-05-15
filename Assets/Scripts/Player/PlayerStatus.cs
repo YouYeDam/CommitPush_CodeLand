@@ -31,7 +31,7 @@ public class PlayerStatus : MonoBehaviour
         PlayerCurrentMP = PlayerMaxMP;
         UIManager = GameObject.Find("UIManager");
     }
-    void Update() {
+    void LateUpdate() {
         UpdatePlayerNameInfo();
     }
     public void SetPlayerName(string NewName){

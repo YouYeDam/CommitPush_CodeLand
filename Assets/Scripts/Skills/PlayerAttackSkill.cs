@@ -11,6 +11,9 @@ public class PlayerAttackSkill : MonoBehaviour
     PlayerStatus PlayerStatus;
     bool IsAttackDone = false;
     bool IsCrit = false;
+    public float CoolDown = 3f;
+    public int MPUse = 0;
+    [SerializeField] float DestroyTime = 0.1f;
     float XSpeed;
     void Start()
     {
@@ -47,7 +50,7 @@ public class PlayerAttackSkill : MonoBehaviour
             MonsterTakeDamageDisplay.DisplayDamageBar(Damage, IsCrit);
         }
         if(other.gameObject.tag == "Monster") {
-            Invoke("DestroySelf", 0.1f);
+            Invoke("DestroySelf", DestroyTime);
         }
     }
 

@@ -9,6 +9,8 @@ public class PlayerBuffSkill : MonoBehaviour
     Rigidbody2D MyRigidbody;
     PlayerStatus PlayerStatus;
     GameObject Player;
+    public float CoolDown = 30f;
+    public int MPUse = 0;
     float PlayerX;
     [SerializeField] float YSpeed;
 

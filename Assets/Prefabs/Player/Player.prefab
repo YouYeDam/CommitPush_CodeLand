@@ -396,6 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d886c3de4666af4c98a641cb963fab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MyAnimator: {fileID: 0}
   IsWalkingAllowed: 1
   targetLayerMask:
     serializedVersion: 2
@@ -419,9 +420,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalAttack: {fileID: 8885825609034438207, guid: 7796c015e9a8dbb438ab721afee996c1, type: 3}
+  QSkill: {fileID: 8885825609034438207, guid: ca446e7c5ca234d45960607dc8b2e268, type: 3}
   SkillSpot: {fileID: 1635159961687940443}
   BuffSpot: {fileID: 0}
   GlobalCoolDown: 0.3
+  QSkillCoolDown: 0
   BackToIdleAnimTime: 0.2
 --- !u!114 &2205046119036907785
 MonoBehaviour:
