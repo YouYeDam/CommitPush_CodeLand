@@ -2643,7 +2643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2882101390858264316, guid: fac4c6ce55938c14c8d58d11b670afdf, type: 3}
       propertyPath: LoadSceneName
-      value: "\uC2DC\uC791\uC758 \uB3D9\uAD74_\uB3D9\uAD74 \uCD08\uC785"
+      value: "\uC785\uBB38\uC758 \uB3D9\uAD74_\uB3D9\uAD74 \uCD08\uC785"
       objectReference: {fileID: 0}
     - target: {fileID: 2882101390858264316, guid: fac4c6ce55938c14c8d58d11b670afdf, type: 3}
       propertyPath: LoadTransformX

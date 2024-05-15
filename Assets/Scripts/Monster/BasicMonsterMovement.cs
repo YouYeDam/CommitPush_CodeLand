@@ -173,11 +173,11 @@ public class BasicMonsterMovement : MonoBehaviour
             MonsterStatus.DisplayHPMeter();
             MonsterStatus.DisplayMonsterInfo();
             IsTakeDamge = true;
-            StartCoroutine(ChangeVariableAfterSeconds(FollowDelay));
+            StartCoroutine(StopAggressiveMode(FollowDelay));
         }
     }
 
-    IEnumerator ChangeVariableAfterSeconds(float FollowDelay) {
+    IEnumerator StopAggressiveMode(float FollowDelay) {
         yield return new WaitForSeconds(FollowDelay);
 
         IsTakeDamge = false;

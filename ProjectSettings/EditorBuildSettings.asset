@@ -15,11 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/New Scene.unity
     guid: b168af0dee79d62479f3586d3d4223dc
   - enabled: 1
-    path: "Assets/Scenes/CaveOfBeginning/\uC2DC\uC791\uC758 \uB3D9\uAD74_\uB3D9\uAD74
+    path: "Assets/Scenes/CaveOfBeginning/\uC785\uBB38\uC758 \uB3D9\uAD74_\uB3D9\uAD74
       \uC548\uCABD.unity"
     guid: 96a1d39439c581648a19eabb88c50da1
   - enabled: 1
-    path: "Assets/Scenes/CaveOfBeginning/\uC2DC\uC791\uC758 \uB3D9\uAD74_\uB3D9\uAD74
+    path: "Assets/Scenes/CaveOfBeginning/\uC785\uBB38\uC758 \uB3D9\uAD74_\uB3D9\uAD74
       \uCD08\uC785.unity"
     guid: 5132d3c5a9c369e429a0bcc2f4627c27
   - enabled: 1
