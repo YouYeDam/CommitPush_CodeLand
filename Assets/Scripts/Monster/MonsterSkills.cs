@@ -6,6 +6,7 @@ public class MonsterSkills : MonoBehaviour
 {
     Animator MyAnimator;
     CapsuleCollider2D MyCapsuleCollider;
+    BasicMonsterMovement BasicMonsterMovement;
     [SerializeField] GameObject Projectile;
     [SerializeField] Transform SkillSpot;
     [SerializeField] float BackToIdleAnimTime = 0.35f;
@@ -14,6 +15,7 @@ public class MonsterSkills : MonoBehaviour
     void Start() {
         MyAnimator = GetComponent<Animator>();
         MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
+        BasicMonsterMovement = GetComponent<BasicMonsterMovement>();
     }
 
     public void StartShootSkill() {
@@ -28,6 +30,7 @@ public class MonsterSkills : MonoBehaviour
             yield return new WaitForSeconds(1f); // 1초 대기
             GameObject ProjectileInstance = Instantiate(Projectile, SkillSpot.position, transform.rotation);
             MyAnimator.SetBool("IsAttacking", true);
+            BasicMonsterMovement.CanWalk = false;
             Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
             
             // MonsterAttackSkill 컴포넌트를 가져와 필요한 값을 할당
@@ -37,11 +40,13 @@ public class MonsterSkills : MonoBehaviour
                 MonsterStatus MonsterStatus = GetComponent<MonsterStatus>();
                 MonsterAttackSkill.BasicMonsterMovement = BasicMonsterMovement;
                 MonsterAttackSkill.MonsterStatus = MonsterStatus;
+                MonsterAttackSkill.IsLeft = BasicMonsterMovement.IsLeft;
             }
         }
     }
 
     void BackToIdleAnim() {
         MyAnimator.SetBool("IsAttacking", false);
+        BasicMonsterMovement.CanWalk = true;
     }
 }

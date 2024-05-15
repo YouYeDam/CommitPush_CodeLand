@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 31
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -114,9 +114,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
-        width: 32
-        height: 31
+        y: 97
+        width: 31
+        height: 33
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -240,7 +240,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 66
-        y: 96
+        y: 97
         width: 30
         height: 31
       alignment: 0
@@ -277,6 +277,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: VineLadder2
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 128
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 633eb03ff47dd1c429ccac916bcb0cb8
+      internalID: -1140765099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -291,6 +312,7 @@ TextureImporter:
       StreetLamp: -1707507949
       SunFlower: -1377772455
       VineLadder1: 1040237675
+      VineLadder2: -1140765099
       "\uB370\uC774\uD130\uD3EC\uB808\uC2A4\uD2B8 \uC18C\uD4881_0": 1066715844
       "\uB370\uC774\uD130\uD3EC\uB808\uC2A4\uD2B8 \uC18C\uD4881_3": -236048343
       "\uB370\uC774\uD130\uD3EC\uB808\uC2A4\uD2B8 \uC18C\uD4881_4": 1048170802

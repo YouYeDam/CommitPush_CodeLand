@@ -11,11 +11,17 @@ public class MonsterAttackSkill : MonoBehaviour
     public BasicMonsterMovement BasicMonsterMovement;
     public MonsterStatus MonsterStatus;
     bool IsAttackDone = false;
+    public bool IsLeft = false;
     float XSpeed;
     void Start()
     {
         MyRigidbody = GetComponent<Rigidbody2D>();
-        XSpeed = BasicMonsterMovement.transform.localScale.x * SkillSpeed;
+        if (IsLeft) {
+            XSpeed = -BasicMonsterMovement.transform.localScale.x * SkillSpeed;
+        }
+        else {
+            XSpeed = BasicMonsterMovement.transform.localScale.x * SkillSpeed;
+        }
         Invoke("DestroySelf", DestroyDelay);
         FlipSprite();
         Damage = MonsterStatus.MonsterDamage * 2;

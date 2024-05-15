@@ -12,7 +12,7 @@ public class BasicMonsterMovement : MonoBehaviour
     [SerializeField] float WaitCanWalk = 1f;
     [SerializeField] float DieDelay = 0.8f;
     [SerializeField] float PlayerOverlapRange = 0.1f;
-    [SerializeField] float FollowDelay = 10f;
+    [SerializeField] float FollowDelay = 15f;
     Rigidbody2D MonsterRigidbody;
     Animator MonsterAnimator;
     MonsterStatus MonsterStatus;
@@ -30,7 +30,7 @@ public class BasicMonsterMovement : MonoBehaviour
     public bool IsLeft = true; // 초기 몬스터가 바라보는 방향
     public bool IsAttackMonster = false;
     public bool IsTakeDamge = false;
-    bool CanWalk = true;
+    public bool CanWalk = true;
     bool CanAttack = true;
     float AttackDelayTime = 3f;
     void Start()
@@ -108,6 +108,10 @@ public class BasicMonsterMovement : MonoBehaviour
                 else {
                 transform.localScale = new Vector2(Mathf.Sign(MonsterRigidbody.velocity.x), 1f);
                 }
+                if (!CanWalk) {
+                    MonsterRigidbody.velocity = new Vector2 (0f, 0f);
+                    MonsterAnimator.SetBool("IsIdling", true);
+                }
             }
 
             if (IsAttackMonster && CanAttack) {
@@ -158,7 +162,9 @@ public class BasicMonsterMovement : MonoBehaviour
 
     void RestartWalking() { // 재이동 시작
         MonsterAnimator.SetBool("IsIdling", false);
+        if (!IsTakeDamge) {
         CanWalk = true;
+        }
     }
 
     void OnTriggerStay2D(Collider2D other) { // 몬스터와 플레이어 겹쳤을 때 데미지
@@ -203,7 +209,7 @@ public class BasicMonsterMovement : MonoBehaviour
         Destroy(gameObject);
     }
     IEnumerator AttackSkillRoutine() {
-        while (IsAlive && PlayerMovement.IsAlive) {
+        while (IsAlive && PlayerMovement.IsAlive && IsTakeDamge) {
             if (CanAttack) {
                 // 플레이어와 몬스터 사이의 거리 계산
                 float DistanceToPlayer = Vector2.Distance(Player.transform.position, transform.position);
