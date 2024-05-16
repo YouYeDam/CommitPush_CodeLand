@@ -92,6 +92,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
         bool PlayerHasHorizontalSpeed = Mathf.Abs(MyRigidbody.velocity.x) > Mathf.Epsilon;
+                // MoveInput이 OnMove에서 1이거나(위아래 키 안 눌렸을 때) 0.75로(위아래 키 눌렸을 떄) 설정됨. 두 값이 바뀌는 이유로 걷는 속도가 느려짐. -> 조건에 따라 무조건 1로 설정해야함.
+        // float modifiedX = 0;
+        // if (MoveInput.x > 0){
+            // modifiedX = 1f;
+        // }
+        // else if (MoveInput.x < 0){
+            // modifiedX = -1f;
+        // }
+        // Vector2 PlayerVelocity = new Vector2 (modifiedX * RunSpeed, MyRigidbody.velocity.y); // 현재의 속도인 y가 무엇이든 동일한 속도를 유지하라는 의미 + 이 부분이 작동을 안 함. 아마 on move 자체 함수의 문제인 듯 함.
+        
         Vector2 PlayerVelocity = new Vector2(MoveInput.x * RunSpeed, MyRigidbody.velocity.y); // 현재의 속도인 y가 무엇이든 동일한 속도를 유지하라는 의미
         MyRigidbody.velocity = PlayerVelocity;
         bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
