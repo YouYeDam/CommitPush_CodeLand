@@ -241,7 +241,7 @@ MonoBehaviour:
   StopTimeRear: 8
   WaitCanWalk: 3
   DieDelay: 0.8
-  PlayerOverlapRange: 0.1
+  PlayerOverlapRange: 0.2
   FollowDelay: 10
   IsAlive: 1
   IsLeft: 1
@@ -351,7 +351,7 @@ Transform:
   m_GameObject: {fileID: 9048284205231676761}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.875, y: 0.08, z: 0}
+  m_LocalPosition: {x: -0.638, y: 0.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

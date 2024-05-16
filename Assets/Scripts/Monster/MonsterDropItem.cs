@@ -41,7 +41,7 @@ public class MonsterDropItem : MonoBehaviour {
             }
             Vector3 SpawnPosition = MyPosition + Offset;
 
-            if (IsGroundNearby(SpawnPosition)) {
+            if (IsGroundNearby(MyPosition)) {
                 SpawnPosition = MyPosition; // Ground가 감지되면 몬스터의 위치에 아이템을 생성
             }
 
