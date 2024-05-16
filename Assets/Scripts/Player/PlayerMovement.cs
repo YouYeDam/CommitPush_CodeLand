@@ -213,8 +213,6 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (MoveInput.y < 0)
             {
-                Debug.Log("Go down!!!");
-
                 LadderSwitch = false;
                 float LadderSpeed = MoveInput.y * ClimbSpeed;
                 MyRigidbody.velocity = new Vector2(MyRigidbody.velocity.x, LadderSpeed);
@@ -228,7 +226,6 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 DisableLadderLayerColliders();
-                Debug.Log("out!!!");
             }
 
 
@@ -252,9 +249,6 @@ public class PlayerMovement : MonoBehaviour
         GameObject[] ladderObjects = GameObject.FindGameObjectsWithTag("Ladder");
         foreach (GameObject ladderObject in ladderObjects)
         {
-            // "DisabledLadder" 레이어로 변경
-
-            // transform.position = new Vector2(transform.position.x, transform.position.y + 1f);
             ladderObject.layer = LayerMask.NameToLayer("LadderToGround");
             TilemapCollider2D tilemapCollider = ladderObject.GetComponent<TilemapCollider2D>();
             if (tilemapCollider != null)
@@ -270,9 +264,6 @@ public class PlayerMovement : MonoBehaviour
         GameObject[] ladderObjects = GameObject.FindGameObjectsWithTag("Ladder");
         foreach (GameObject ladderObject in ladderObjects)
         {
-            // "DisabledLadder" 레이어로 변경
-            Debug.Log("enabled layer again");
-            // transform.position = new Vector2(transform.position.x, transform.position.y + 1f);
             ladderObject.layer = LayerMask.NameToLayer("Ladder");
             TilemapCollider2D tilemapCollider = ladderObject.GetComponent<TilemapCollider2D>();
             if (tilemapCollider != null)

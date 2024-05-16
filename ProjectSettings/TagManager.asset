@@ -16,6 +16,7 @@ TagManager:
   - BackgroundMusic
   - Prop
   - TempInfo
+  - LadderGroundForMonster
   layers:
   - Default
   - TransparentFX
@@ -34,7 +35,7 @@ TagManager:
   - NPC
   - Prop
   - LadderToGround
-  - 
+  - LadderGroundForMonster
   - 
   - 
   - 
