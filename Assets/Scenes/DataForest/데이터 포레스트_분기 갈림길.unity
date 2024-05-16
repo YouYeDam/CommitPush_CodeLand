@@ -4238,7 +4238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2882101390858264316, guid: fac4c6ce55938c14c8d58d11b670afdf, type: 3}
       propertyPath: LoadSceneName
-      value: "\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uB370\uC774\uD130 \uBE4C\uB9AC\uC9C0"
+      value: "\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uC815\uB82C \uACFC\uC218\uC6D01"
       objectReference: {fileID: 0}
     - target: {fileID: 2882101390858264316, guid: fac4c6ce55938c14c8d58d11b670afdf, type: 3}
       propertyPath: ConnectPortalName
@@ -4250,7 +4250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3127581827792844616, guid: fac4c6ce55938c14c8d58d11b670afdf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

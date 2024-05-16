@@ -204,6 +204,7 @@ public class BasicMonsterMovement : MonoBehaviour
         yield return new WaitForSeconds(FollowDelay);
 
         IsTakeDamge = false;
+        MonsterAnimator.SetBool("IsIdling", false);
         SetRandomBehavior();
     }
 

@@ -170,7 +170,7 @@ Animator:
   m_GameObject: {fileID: 8885825609034438207}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 87d80cb52d1f4104d9e5f7cdfcfabfc5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9d6d327d0762a4a4999103edeb428fa6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -198,3 +198,4 @@ MonoBehaviour:
   Damage: 50
   BasicMonsterMovement: {fileID: 0}
   MonsterStatus: {fileID: 0}
+  IsLeft: 0
