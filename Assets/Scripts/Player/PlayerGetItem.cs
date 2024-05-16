@@ -9,47 +9,53 @@ public class PlayerGetItem : MonoBehaviour
     Inventory InventoryScript;
     PlayerMoney PlayerMoney;
     DropMoney DropMoney;
+    
+    // 이미 획득한 아이템을 추적하기 위한 Set
+    HashSet<GameObject> acquiredItems = new HashSet<GameObject>();
+    
     void Start() {
         UICanvas = GameObject.Find("UIManager");
         if (UICanvas != null) {
             InventoryScript = UICanvas.GetComponent<Inventory>();
         }
         PlayerMoney = GetComponent<PlayerMoney>();
-
     }
-    void OnTriggerEnter2D(Collider2D other) { // 아이템과 닿을 시 아이템 획득
-        if (other.gameObject.tag == "Item" && InventoryScript != null) {
-            InventoryScript.AcquireItem(other.gameObject.GetComponent<ItemPickup>().item); // 아이템과 갯수를 전달하여 호출
-            Destroy(other.gameObject);
-        }
 
-        if (other.gameObject.tag == "Money") {
-            DropMoney = other.gameObject.GetComponent<DropMoney>();
-            if (DropMoney.Bit != 0) {
-                PlayerMoney.Bit += DropMoney.Bit;
-            }
-            if (DropMoney.Snippet != 0) {
-                PlayerMoney.Snippet += DropMoney.Snippet;
-            }
-            Destroy(other.gameObject);
-        }
+    void OnTriggerEnter2D(Collider2D other) { // 아이템과 닿을 시 아이템 획득
+        AcquireItem(other.gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D collision) { // 아이템과 충돌 시 아이템 획득
-        if (collision.gameObject.tag == "Item" && InventoryScript != null) {
-            InventoryScript.AcquireItem(collision.gameObject.GetComponent<ItemPickup>().item); // 아이템과 개수를 전달하여 호출
-            Destroy(collision.gameObject);
+        AcquireItem(collision.gameObject);
+    }
+
+    void AcquireItem(GameObject itemObject) {
+        if (acquiredItems.Contains(itemObject)) {
+            return; // 이미 획득한 아이템이면 반환
         }
 
-        if (collision.gameObject.tag == "Money") {
-            DropMoney = collision.gameObject.GetComponent<DropMoney>();
+        if (itemObject.tag == "Item" && InventoryScript != null) {
+            InventoryScript.AcquireItem(itemObject.GetComponent<ItemPickup>().item); // 아이템과 갯수를 전달하여 호출
+            acquiredItems.Add(itemObject);
+            StartCoroutine(DestroyAfterDelay(itemObject));
+        }
+
+        if (itemObject.tag == "Money") {
+            DropMoney = itemObject.GetComponent<DropMoney>();
             if (DropMoney.Bit != 0) {
                 PlayerMoney.Bit += DropMoney.Bit;
             }
             if (DropMoney.Snippet != 0) {
                 PlayerMoney.Snippet += DropMoney.Snippet;
             }
-            Destroy(collision.gameObject);
+            acquiredItems.Add(itemObject);
+            StartCoroutine(DestroyAfterDelay(itemObject));
         }
+    }
+
+    IEnumerator DestroyAfterDelay(GameObject itemObject) {
+        yield return new WaitForEndOfFrame(); // 한 프레임 기다린 후
+        Destroy(itemObject);
+        acquiredItems.Remove(itemObject); // Destroy한 후 Set에서 제거
     }
 }

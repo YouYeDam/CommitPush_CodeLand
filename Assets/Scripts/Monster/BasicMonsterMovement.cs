@@ -33,6 +33,13 @@ public class BasicMonsterMovement : MonoBehaviour
     public bool CanWalk = true;
     bool CanAttack = true;
     float AttackDelayTime = 3f;
+
+    Vector3 StartPosition; // 초기 위치
+    Quaternion StartRotation; // 초기 회전
+    GameObject MonsterObject; // 몬스터 프리팹
+    GameObject MonsterRegenerationControllerObject; // 몬스터 재생성기 오브젝트
+    MonsterRegenerationController MonsterRegenerationController;
+
     void Start()
     {
         MonsterRigidbody = GetComponent<Rigidbody2D>();
@@ -57,6 +64,12 @@ public class BasicMonsterMovement : MonoBehaviour
         Physics2D.IgnoreCollision(PlayerBoxCollider, MonsterCapsuleCollider, true);
 
         Player = GameObject.FindGameObjectWithTag("Player");
+
+        StartPosition = transform.position;
+        StartRotation = transform.rotation;
+        MonsterObject = this.gameObject;
+        MonsterRegenerationControllerObject = GameObject.Find("MonsterRegenerationObject");
+        MonsterRegenerationController = MonsterRegenerationControllerObject.GetComponent<MonsterRegenerationController>();
     }
 
     void Update()
@@ -73,7 +86,7 @@ public class BasicMonsterMovement : MonoBehaviour
         }
     }
     
-    void Move() {
+    public void Move() {
         if (!IsAlive) {
             return;
         }
@@ -108,7 +121,7 @@ public class BasicMonsterMovement : MonoBehaviour
                 else {
                 transform.localScale = new Vector2(Mathf.Sign(MonsterRigidbody.velocity.x), 1f);
                 }
-                if (!CanWalk) {
+                if (!CanWalk && IsAttackMonster) {
                     MonsterRigidbody.velocity = new Vector2 (0f, 0f);
                     MonsterAnimator.SetBool("IsIdling", true);
                 }
@@ -122,8 +135,7 @@ public class BasicMonsterMovement : MonoBehaviour
 
         if (!PlayerMovement.IsAlive) {
             IsTakeDamge = false;
-            StartCoroutine(RandomFlip());
-            StartCoroutine(RandomStop());
+            SetRandomBehavior();
         }
     }
 
@@ -143,6 +155,11 @@ public class BasicMonsterMovement : MonoBehaviour
 
             StopWalking();
         }
+    }
+
+    public void SetRandomBehavior() {
+        StartCoroutine(RandomFlip());
+        StartCoroutine(RandomStop());
     }
     void FlipEnemyFacing() { // 스프라이트 반전
         bool IsOnGround = MonsterCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
@@ -187,8 +204,7 @@ public class BasicMonsterMovement : MonoBehaviour
         yield return new WaitForSeconds(FollowDelay);
 
         IsTakeDamge = false;
-        StartCoroutine(RandomFlip());
-        StartCoroutine(RandomStop());
+        SetRandomBehavior();
     }
 
     void Die() {
@@ -196,6 +212,7 @@ public class BasicMonsterMovement : MonoBehaviour
             return;
         }
         MonsterAnimator.SetBool("IsDying", true);
+        MonsterRegenerationController.RegenerateMonster(MonsterObject, StartPosition, StartRotation);
         IsAlive = false;
         PlayerStatus.GainEXP(MonsterStatus.MonsterEXP);
         MonsterDropItem.DropItems();
