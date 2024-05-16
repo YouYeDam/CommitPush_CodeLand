@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 847609113
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: -362860652, guid: 7b9bd05f1fa5e3f4eb4e3c15ec6c1670, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoadSceneName: Cave_Tutorial
+  ConnectPortalName: 
 --- !u!50 &5395048085078877355
 Rigidbody2D:
   serializedVersion: 4
