@@ -17,10 +17,9 @@ GameObject:
   - component: {fileID: 3712535677390505938}
   - component: {fileID: 3157593347497917494}
   - component: {fileID: 2853819430215722925}
-  - component: {fileID: -8855345390103764750}
-  - component: {fileID: 5552684333874109378}
+  - component: {fileID: -1662317977100510757}
   m_Layer: 9
-  m_Name: DequeFlower
+  m_Name: GreddyBag
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,8 +37,7 @@ Transform:
   m_LocalPosition: {x: 3.0302165, y: 1.8800466, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8763508143990234850}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8690364043849138141
@@ -83,12 +81,12 @@ SpriteRenderer:
   m_SortingLayerID: 859613945
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1874096897, guid: f54daba08dcfbd047a2ba307699d98a1, type: 3}
+  m_Sprite: {fileID: -969675317, guid: c5848441635730e4981b5e1a2c0286f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.40625, y: 0.8125}
+  m_Size: {x: 0.8125, y: 0.625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -153,9 +151,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.17686786, y: -0.029865826}
-  m_Size: {x: 1.4880463, y: 1.3349495}
-  m_Direction: 1
+  m_Offset: {x: -0.00025177002, y: 0.03206122}
+  m_Size: {x: 1.0730634, y: 1.0730634}
+  m_Direction: 0
 --- !u!61 &5267109138259723723
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -188,18 +186,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.18090367, y: -0.028001308}
+  m_Offset: {x: 0.0013879538, y: 0.019778967}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.8125, y: 1.375}
-    newSize: {x: 0.40625, y: 0.8125}
+    oldSize: {x: 1.0714285, y: 1}
+    newSize: {x: 0.8125, y: 0.625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4830384, y: 1.3311481}
+  m_Size: {x: 1.0782092, y: 1.0453472}
   m_EdgeRadius: 0
 --- !u!95 &1478778526055664882
 Animator:
@@ -211,7 +209,7 @@ Animator:
   m_GameObject: {fileID: 3523946213023745087}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f192cc60e5d0abb419c7c9b115cbaf0a, type: 2}
+  m_Controller: {fileID: 9100000, guid: a428d4d1fceb83d419d87eeaa59937a3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -234,21 +232,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2e198bb496d03459a891c87cf8bb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: -2.5
-  FlipTimeHead: 3
-  FlipTimeRear: 8
-  StopTimeHead: 4
-  StopTimeRear: 8
-  WaitCanWalk: 3
+  MoveSpeed: 2
+  FlipTimeHead: 1
+  FlipTimeRear: 10
+  StopTimeHead: 10
+  StopTimeRear: 20
+  WaitCanWalk: 2.5
   DieDelay: 0.8
   PlayerOverlapRange: 0.1
-  FollowDelay: 10
+  FollowDelay: 15
   IsAlive: 1
-  IsLeft: 1
-  IsAttackMonster: 1
+  IsLeft: 0
+  IsAttackMonster: 0
   IsTakeDamge: 0
   CanWalk: 1
-  AttackDelayTime: 3
 --- !u!114 &3157593347497917494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,14 +258,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8f6e2da49528449a1c776f7367a421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterName: "\uB371\uD50C\uB77C\uC6CC"
-  MonsterLV: 4
-  MonsterMaxHealth: 80
+  MonsterName: "\uADF8\uB9AC\uB514 \uAC00\uBC29"
+  MonsterLV: 8
+  MonsterMaxHealth: 100
   MonsterCurrentHealth: 0
-  MonsterDamage: 15
-  MonsterEXP: 10
+  MonsterDamage: 30
+  MonsterEXP: 19
   HPBarPos: 0.7
-  MonsterInfoPos: 0.8
+  MonsterInfoPos: 0.7
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}
@@ -292,10 +289,10 @@ MonoBehaviour:
   - ItemPrefab: {fileID: 4338472210403635751, guid: 00e07d54bea641949a9c054f1e9dbbac, type: 3}
     SpawnProbability: 0.6
   - ItemPrefab: {fileID: 4338472210403635751, guid: 1efa8118dec067347b7ec11c7d7255ee, type: 3}
-    SpawnProbability: 0.1
+    SpawnProbability: 0.3
   MonsterBit: 3
   MonsterSnippet: 0
---- !u!114 &-8855345390103764750
+--- !u!114 &-1662317977100510757
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -311,51 +308,3 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   DamageBar: {fileID: 6382830084018992234, guid: 2c3eb6d6a30ab2642b5ec098c16cf5e6, type: 3}
   DamageBarInstance: {fileID: 0}
---- !u!114 &5552684333874109378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3523946213023745087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c13a339100992154f999e72d5ca291f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Projectile: {fileID: 8885825609034438207, guid: 37bd2736a84de984c8247d6f149dfe1d, type: 3}
-  SkillSpot: {fileID: 8763508143990234850}
-  BackToIdleAnimTime: 0.7
-  Delay: 1
-  UseSkillDistance: 20
---- !u!1 &9048284205231676761
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8763508143990234850}
-  m_Layer: 8
-  m_Name: Skill Spot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8763508143990234850
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9048284205231676761}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.185, y: 0.216, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6939425423564658731}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

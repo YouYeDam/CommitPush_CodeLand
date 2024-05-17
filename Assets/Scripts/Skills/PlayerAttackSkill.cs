@@ -48,8 +48,6 @@ public class PlayerAttackSkill : MonoBehaviour
 
             MonsterTakeDamageDisplay MonsterTakeDamageDisplay = other.gameObject.GetComponent<MonsterTakeDamageDisplay>();
             MonsterTakeDamageDisplay.DisplayDamageBar(Damage, IsCrit);
-        }
-        if(other.gameObject.tag == "Monster") {
             Invoke("DestroySelf", DestroyTime);
         }
     }

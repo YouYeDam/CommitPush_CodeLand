@@ -32,7 +32,7 @@ public class BasicMonsterMovement : MonoBehaviour
     public bool IsTakeDamge = false;
     public bool CanWalk = true;
     bool CanAttack = true;
-    float AttackDelayTime = 3f;
+    [SerializeField] float AttackDelayTime = 3f;
 
     Vector3 StartPosition; // 초기 위치
     Quaternion StartRotation; // 초기 회전
@@ -204,7 +204,12 @@ public class BasicMonsterMovement : MonoBehaviour
         yield return new WaitForSeconds(FollowDelay);
 
         IsTakeDamge = false;
-        MonsterAnimator.SetBool("IsIdling", false);
+        if (MonsterRigidbody.velocity.x != 0) {
+            MonsterAnimator.SetBool("IsIdling", false);
+        }
+        else {
+        MonsterAnimator.SetBool("IsIdling", true);
+        }
         SetRandomBehavior();
     }
 
@@ -232,7 +237,7 @@ public class BasicMonsterMovement : MonoBehaviour
                 // 플레이어와 몬스터 사이의 거리 계산
                 float DistanceToPlayer = Vector2.Distance(Player.transform.position, transform.position);
                 
-                // 플레이어가 앞뒤 8f 내에 있을 때만 스킬 발사
+                // 플레이어가 앞뒤 사정거리 내에 있을 때만 스킬 발사
                 if (DistanceToPlayer <= MonsterSkills.UseSkillDistance) {
                     MonsterSkills.StartShootSkill();
                     CanAttack = false; // 공격 후 잠시 공격 불가 상태로 설정

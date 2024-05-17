@@ -10,6 +10,7 @@ public class MonsterSkills : MonoBehaviour
     [SerializeField] GameObject Projectile;
     [SerializeField] Transform SkillSpot;
     [SerializeField] float BackToIdleAnimTime = 0.35f;
+    [SerializeField] float Delay = 1f;
     public float UseSkillDistance = 8f; // 스킬 사용 거리
 
     void Start() {
@@ -27,7 +28,7 @@ public class MonsterSkills : MonoBehaviour
         bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
 
         if (IsOnLadderGround || IsOnGround) {
-            yield return new WaitForSeconds(1f); // 1초 대기
+            yield return new WaitForSeconds(Delay); // 1초 대기
             GameObject ProjectileInstance = Instantiate(Projectile, SkillSpot.position, transform.rotation);
             MyAnimator.SetBool("IsAttacking", true);
             BasicMonsterMovement.CanWalk = false;
