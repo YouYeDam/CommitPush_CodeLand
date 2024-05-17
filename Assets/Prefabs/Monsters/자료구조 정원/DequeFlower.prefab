@@ -267,8 +267,8 @@ MonoBehaviour:
   MonsterCurrentHealth: 0
   MonsterDamage: 15
   MonsterEXP: 10
-  HPBarPos: 0.7
-  MonsterInfoPos: 0.8
+  HPBarPos: 0.9
+  MonsterInfoPos: 0.9
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}
