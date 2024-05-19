@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2e198bb496d03459a891c87cf8bb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2.5
+  MoveSpeed: 3
   FlipTimeHead: 1
   FlipTimeRear: 5
   StopTimeHead: 3
@@ -245,6 +245,8 @@ MonoBehaviour:
   IsLeft: 1
   IsAttackMonster: 0
   IsTakeDamge: 0
+  CanWalk: 1
+  AttackDelayTime: 3
 --- !u!114 &3157593347497917494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,11 +260,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterName: "\uB9C1\uD06C\uB4DC \uB77C\uBC14"
-  MonsterLV: 3
-  MonsterMaxHealth: 35
+  MonsterLV: 4
+  MonsterMaxHealth: 65
   MonsterCurrentHealth: 0
-  MonsterDamage: 20
-  MonsterEXP: 8
+  MonsterDamage: 30
+  MonsterEXP: 9
   HPBarPos: 0.5
   MonsterInfoPos: 0.6
   UIManager: {fileID: 0}

@@ -263,10 +263,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterName: "\uBE0C\uB808\uC2A4\uD0C0\uC6B0\uB974\uC2A4"
   MonsterLV: 10
-  MonsterMaxHealth: 180
+  MonsterMaxHealth: 210
   MonsterCurrentHealth: 0
-  MonsterDamage: 35
-  MonsterEXP: 30
+  MonsterDamage: 70
+  MonsterEXP: 27
   HPBarPos: 1.7
   MonsterInfoPos: 1.5
   UIManager: {fileID: 0}

@@ -247,6 +247,8 @@ MonoBehaviour:
   IsLeft: 0
   IsAttackMonster: 1
   IsTakeDamge: 0
+  CanWalk: 1
+  AttackDelayTime: 3
 --- !u!114 &3157593347497917494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,11 +262,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterName: "\uD050\uD50C\uB77C\uC6CC"
-  MonsterLV: 2
-  MonsterMaxHealth: 50
+  MonsterLV: 6
+  MonsterMaxHealth: 90
   MonsterCurrentHealth: 0
-  MonsterDamage: 15
-  MonsterEXP: 10
+  MonsterDamage: 35
+  MonsterEXP: 13
   HPBarPos: 0.7
   MonsterInfoPos: 0.8
   UIManager: {fileID: 0}
@@ -324,6 +326,7 @@ MonoBehaviour:
   Projectile: {fileID: 8885825609034438207, guid: 0067db93532db514da2a5ffbae9d7ab8, type: 3}
   SkillSpot: {fileID: 8763508143990234850}
   BackToIdleAnimTime: 0.7
+  Delay: 1
   UseSkillDistance: 8
 --- !u!1 &9048284205231676761
 GameObject:

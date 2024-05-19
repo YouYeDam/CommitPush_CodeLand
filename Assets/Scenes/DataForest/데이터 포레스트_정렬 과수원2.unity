@@ -15241,11 +15241,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5561303
+      value: -0.5589446
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.297992
+      value: -2.2980192
       objectReference: {fileID: 0}
     - target: {fileID: 3546177479845366616, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_ScreenY
@@ -15354,7 +15354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2882101390858264316, guid: fac4c6ce55938c14c8d58d11b670afdf, type: 3}
       propertyPath: LoadSceneName
-      value: "\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uC815\uB82C \uACFC\uC218\uC6D01"
+      value: "\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uD0D0\uC0C9\uC758 \uBBF8\uB85C"
       objectReference: {fileID: 0}
     - target: {fileID: 2882101390858264316, guid: fac4c6ce55938c14c8d58d11b670afdf, type: 3}
       propertyPath: LoadTransformX
@@ -15374,7 +15374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3127581827792844616, guid: fac4c6ce55938c14c8d58d11b670afdf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -175,7 +175,10 @@ MonoBehaviour:
   SkillSpeed: 2
   DestroyDelay: 0.5
   Damage: 10
-  SkillCoefficient: 0.1
+  SkillCoefficient: 0.05
+  CoolDown: 3
+  MPUse: 0
+  DestroyTime: 0.1
 --- !u!95 &4696956795978963348
 Animator:
   serializedVersion: 5

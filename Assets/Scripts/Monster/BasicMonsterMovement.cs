@@ -57,8 +57,7 @@ public class BasicMonsterMovement : MonoBehaviour
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
 
-        StartCoroutine(RandomFlip());
-        StartCoroutine(RandomStop());
+        SetRandomBehavior();
 
         Physics2D.IgnoreCollision(PlayerCapsuleCollider, MonsterCapsuleCollider, true);
         Physics2D.IgnoreCollision(PlayerBoxCollider, MonsterCapsuleCollider, true);
@@ -135,6 +134,12 @@ public class BasicMonsterMovement : MonoBehaviour
 
         if (!PlayerMovement.IsAlive) {
             IsTakeDamge = false;
+            if (MonsterRigidbody.velocity.x != 0) {
+                MonsterAnimator.SetBool("IsIdling", true);
+            }
+            else {
+                MonsterAnimator.SetBool("IsIdling", false);
+            }
             SetRandomBehavior();
         }
     }
@@ -210,7 +215,9 @@ public class BasicMonsterMovement : MonoBehaviour
         else {
         MonsterAnimator.SetBool("IsIdling", true);
         }
-        SetRandomBehavior();
+        if (PlayerMovement.IsAlive) {
+            SetRandomBehavior();
+        }
     }
 
     void Die() {

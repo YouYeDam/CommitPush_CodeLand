@@ -246,6 +246,7 @@ MonoBehaviour:
   IsAttackMonster: 0
   IsTakeDamge: 0
   CanWalk: 1
+  AttackDelayTime: 3
 --- !u!114 &3157593347497917494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,11 +260,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterName: "\uD551\uD06C\uBC84\uBE14\uB8E8"
-  MonsterLV: 5
-  MonsterMaxHealth: 40
+  MonsterLV: 8
+  MonsterMaxHealth: 125
   MonsterCurrentHealth: 0
-  MonsterDamage: 20
-  MonsterEXP: 12
+  MonsterDamage: 60
+  MonsterEXP: 19
   HPBarPos: 0.5
   MonsterInfoPos: 0.6
   UIManager: {fileID: 0}

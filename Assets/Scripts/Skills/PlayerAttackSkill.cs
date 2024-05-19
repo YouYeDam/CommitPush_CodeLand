@@ -5,7 +5,7 @@ public class PlayerAttackSkill : MonoBehaviour
     [SerializeField] float SkillSpeed = 1f;
     [SerializeField] float DestroyDelay = 0.5f;
     [SerializeField] int Damage = 10;
-    [SerializeField] float SkillCoefficient = 0.1f; // 스킬계수
+    [SerializeField] float SkillCoefficient = 0.05f; // 스킬계수
     Rigidbody2D MyRigidbody;
     PlayerMovement PlayerMovement;
     PlayerStatus PlayerStatus;

@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     bool IsInvincible = false;
     float StartGravity;
     bool LadderSwitch = false;
+    float TimeInState = 0f;
+    float RequiredTime = 0.3f;
     Color Color;
     [SerializeField] float WalkDelayTime = 0.2f; // Walk 함수 호출을 지연할 시간
     [SerializeField] public float InvincibleTime = 1f;
@@ -47,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        UpPosition();
         if (IsAlive == false)
         {
             return;
@@ -339,6 +342,29 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void UpPosition()
+    {
+        bool IsCapsuleOnGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+        bool IsBoxOnGround = MyBoxColliders[0].IsTouchingLayers(LayerMask.GetMask("Ground"));
+
+
+        if (IsCapsuleOnGround && IsBoxOnGround)
+        {
+            TimeInState += Time.deltaTime;
+            if (TimeInState >= RequiredTime)
+            {
+                RaycastHit2D HitRight = Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground") | LayerMask.GetMask("LadderToGround"));
+                RaycastHit2D HitLeft = Physics2D.Raycast(transform.position, -transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground") | LayerMask.GetMask("LadderToGround"));
+                if (HitRight.collider == null && HitLeft.collider == null) {
+                    transform.position = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+                    TimeInState = 0f; 
+                }
+
+            }
+        }
+        else
+        {
+            TimeInState = 0f; 
+        }
+    }
 }
-
-
