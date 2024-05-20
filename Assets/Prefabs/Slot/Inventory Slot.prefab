@@ -380,5 +380,6 @@ MonoBehaviour:
   Item: {fileID: 0}
   ItemCount: 0
   ItemImage: {fileID: 6337844948874345264}
+  QuickSlotBase: {fileID: 0}
   TextCount: {fileID: 4255503015249159850}
   CountImage: {fileID: 248264924685457421}

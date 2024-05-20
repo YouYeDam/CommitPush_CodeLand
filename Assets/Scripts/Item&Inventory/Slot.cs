@@ -11,7 +11,8 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public int ItemCount; // 획득한 아이템의 개수
     public Image ItemImage;  // 아이템의 이미지
     Rect InventoryRect;
-    DropItemInputNumber DropItemInputNumber;
+    public DropItemInputNumber DropItemInputNumber;
+    public ItemQuickSlot QuickSlotReference;
     ItemToolTip ItemToolTip;
     PlayerMovement PlayerMovement;
     [SerializeField] TMP_Text TextCount;
@@ -22,6 +23,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     private float LastClickTime = 0f;
     private const float DoubleClickTime = 0.2f; // 더블 클릭 간격
 
+    public bool IsSyncing = false; // 동기화 플래그
 
     void Start() {
         InventoryRect = transform.parent.parent.parent.GetComponent<RectTransform>().rect;
@@ -31,7 +33,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         if (ToolTipObject != null) {
         ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
         }
-
+        
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
@@ -40,12 +42,13 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         ItemImage.color = Color;
     }
 
-    public void AddItem(Item Item, int Count = 1) { //인벤토리에 새로운 아이템 슬롯 추가
+    public void AddItem(Item Item, int Count = 1, ItemQuickSlot QuickSlot = null) { // 인벤토리에 새로운 아이템 슬롯 추가
         this.Item = Item;
         ItemCount = Count;
         ItemImage.sprite = this.Item.ItemImage;
+        QuickSlotReference = QuickSlot;
 
-        if(this.Item.Type != Item.ItemType.Equipment)
+        if (this.Item.Type != Item.ItemType.Equipment)
         {
             CountImage.SetActive(true);
             TextCount.text = ItemCount.ToString();
@@ -59,12 +62,19 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     }
 
     
-    public void SetSlotCount(int Count) {// 해당 슬롯의 아이템 갯수 업데이트
+    public void SetSlotCount(int Count) {
         ItemCount += Count;
         TextCount.text = ItemCount.ToString();
 
-        if (ItemCount <= 0)
+        if (ItemCount <= 0) {
             ClearSlot();
+        }
+
+        if (QuickSlotReference != null && !QuickSlotReference.IsSyncing) {
+            IsSyncing = true;
+            QuickSlotReference.SetSlotCount(Count); // QuickSlot과 동기화
+            IsSyncing = false;
+        }
     }
 
     void ClearSlot() { // 해당 슬롯 하나 삭제
@@ -75,6 +85,12 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
         TextCount.text = "0";
         CountImage.SetActive(false);
+
+        // QuickSlotReference 초기화
+        if (QuickSlotReference != null) {
+            QuickSlotReference.SlotReference = null;
+            QuickSlotReference = null;
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData) {
@@ -131,12 +147,15 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (ItemDrag.Instance.transform.localPosition.x < InventoryRect.xMin 
-        || ItemDrag.Instance.transform.localPosition.x > InventoryRect.xMax
-        || ItemDrag.Instance.transform.localPosition.y < InventoryRect.yMin
-        || ItemDrag.Instance.transform.localPosition.y > InventoryRect.yMax)
+        bool IsOutsideInventory = ItemDrag.Instance.transform.localPosition.x < InventoryRect.xMin  // 인벤토리를 벗어나는지 검사
+            || ItemDrag.Instance.transform.localPosition.x > InventoryRect.xMax
+            || ItemDrag.Instance.transform.localPosition.y < InventoryRect.yMin
+            || ItemDrag.Instance.transform.localPosition.y > InventoryRect.yMax;
+
+        if (IsOutsideInventory)
         {
-            if (ItemDrag.Instance.DragSlot != null) {
+            if (ItemDrag.Instance.DragSlot != null)
+            {
                 DropItemInputNumber.OpenInputField();
                 ItemDrag.Instance.SetColor(0);
             }
@@ -161,7 +180,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         Item TempItem = Item;
         int TempItemCount = ItemCount;
 
-        AddItem(ItemDrag.Instance.DragSlot.Item, ItemDrag.Instance.DragSlot.ItemCount);
+        AddItem(ItemDrag.Instance.DragSlot.Item, ItemDrag.Instance.DragSlot.ItemCount, ItemDrag.Instance.DragSlot.QuickSlotReference);
 
         if (TempItem != null) 
         {

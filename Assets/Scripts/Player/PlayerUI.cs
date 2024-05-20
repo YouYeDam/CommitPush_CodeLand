@@ -32,10 +32,10 @@ public class PlayerUI : MonoBehaviour
         PlayerLevelUpController = GetComponent<PlayerLevelUpController>();
         PlayerManager = GetComponent<PlayerManager>();
         UIManager = GameObject.Find("UIManager");
-        Character = UIManager.transform.GetChild(0).gameObject;
-        Equipment = UIManager.transform.GetChild(1).gameObject;
-        Inventory = UIManager.transform.GetChild(2).gameObject;
-        Dialogue = UIManager.transform.GetChild(4).gameObject.transform.GetChild(0).gameObject;
+        Character = UIManager.transform.GetChild(1).gameObject;
+        Equipment = UIManager.transform.GetChild(2).gameObject;
+        Inventory = UIManager.transform.GetChild(3).gameObject;
+        Dialogue = UIManager.transform.GetChild(5).gameObject.transform.GetChild(0).gameObject;
         // 원래 위치 저장
         InventoryOriginalPosition = Inventory.GetComponent<RectTransform>().anchoredPosition;
         CharacterOriginalPosition = Character.GetComponent<RectTransform>().anchoredPosition;
