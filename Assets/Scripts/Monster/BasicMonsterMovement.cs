@@ -16,7 +16,7 @@ public class BasicMonsterMovement : MonoBehaviour
     Rigidbody2D MonsterRigidbody;
     Animator MonsterAnimator;
     MonsterStatus MonsterStatus;
-    BoxCollider2D MonsterBoxCollider;
+    public BoxCollider2D MonsterBoxCollider;
     CapsuleCollider2D MonsterCapsuleCollider;
     BoxCollider2D PlayerBoxCollider;
     CapsuleCollider2D PlayerCapsuleCollider;
@@ -31,6 +31,7 @@ public class BasicMonsterMovement : MonoBehaviour
     public bool IsAttackMonster = false;
     public bool IsTakeDamge = false;
     public bool CanWalk = true;
+    public bool CanTriggerDamage = true;
     bool CanAttack = true;
     [SerializeField] float AttackDelayTime = 3f;
 
@@ -190,7 +191,7 @@ public class BasicMonsterMovement : MonoBehaviour
     }
 
     void OnTriggerStay2D(Collider2D other) { // 몬스터와 플레이어 겹쳤을 때 데미지
-        if (other.tag == "Player" && IsAlive) {
+        if (other.tag == "Player" && IsAlive && CanTriggerDamage) {
             PlayerMovement.TakeDamage(MonsterStatus.MonsterDamage);
         }
     }

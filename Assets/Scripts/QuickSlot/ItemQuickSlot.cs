@@ -29,11 +29,11 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         ItemImage.color = Color;
     }
 
-    public void AddItem(Item Item, int Count = 1, Slot slot = null) { // 퀵슬롯에 새로운 아이템 슬롯 추가
+    public void AddItem(Item Item, int Count = 1, Slot Slot = null) { // 퀵슬롯에 새로운 아이템 슬롯 추가
         this.Item = Item;
         ItemCount = Count;
         ItemImage.sprite = this.Item.ItemImage;
-        SlotReference = slot; // SlotReference 설정
+        SlotReference = Slot; // SlotReference 설정
 
         CountImage.SetActive(true);
         TextCount.text = ItemCount.ToString();

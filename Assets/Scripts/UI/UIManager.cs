@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject StatusBar;
+    [SerializeField] GameObject QuickSlot;
     
     public void Awake()
     {
@@ -14,7 +15,8 @@ public class UIManager : MonoBehaviour
     }
 
     public void Start() {
-        StatusBar = gameObject.transform.GetChild(3).gameObject;
+        StatusBar = gameObject.transform.GetChild(4).gameObject;
+        QuickSlot = gameObject.transform.GetChild(0).gameObject;
     }
     private void OnDestroy()
     {
@@ -49,9 +51,11 @@ public class UIManager : MonoBehaviour
         GameObject StopPlayerInput = GameObject.FindWithTag("StopPlayerInput");
         if (StopPlayerInput != null) {
             StatusBar.SetActive(false);
+            QuickSlot.SetActive(false);
         }
         else {
             StatusBar.SetActive(true);
+            QuickSlot.SetActive(true);
         }
     }
 
