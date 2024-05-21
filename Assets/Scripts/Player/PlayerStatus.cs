@@ -59,6 +59,14 @@ public class PlayerStatus : MonoBehaviour
             PlayerCurrentEXP = PlayerMaxEXP - 1;
         }
         Instantiate(LevelUpEffect, LevelUpSpot.position, transform.rotation);
+
+        GameObject[] Monsters = GameObject.FindGameObjectsWithTag("Monster");
+        foreach (GameObject Monster in Monsters) {
+            MonsterStatus MonsterStatus = Monster.GetComponent<MonsterStatus>();
+            if (MonsterStatus != null) {
+                MonsterStatus.SetLevelDiff(PlayerLevel);
+            }
+        }
     }
 
     public void DisplayPlayerNameInfo() { // 캐릭터 이름 보이기

@@ -44,10 +44,7 @@ public class PlayerAttackSkill : MonoBehaviour
         if (other is BoxCollider2D && other.gameObject.tag == "Monster") {
             IsAttackDone = true;
             BasicMonsterMovement BaiscMonsterMovement = other.gameObject.GetComponent<BasicMonsterMovement>();
-            BaiscMonsterMovement.TakeDamage(Damage);
-
-            MonsterTakeDamageDisplay MonsterTakeDamageDisplay = other.gameObject.GetComponent<MonsterTakeDamageDisplay>();
-            MonsterTakeDamageDisplay.DisplayDamageBar(Damage, IsCrit);
+            BaiscMonsterMovement.TakeDamage(Damage, IsCrit);
             Invoke("DestroySelf", DestroyTime);
         }
     }

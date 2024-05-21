@@ -49,14 +49,13 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         ItemCount += Count;
         TextCount.text = ItemCount.ToString();
 
-        if (ItemCount <= 0) {
-            ClearSlot();
-        }
-
         if (SlotReference != null && !SlotReference.IsSyncing) {
             IsSyncing = true;
             SlotReference.SetSlotCount(Count); // Slot과 동기화
             IsSyncing = false;
+        }
+        if (ItemCount <= 0) {
+            ClearSlot();
         }
     }
 

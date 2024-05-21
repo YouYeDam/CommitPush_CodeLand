@@ -135,14 +135,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stacktone
       objectReference: {fileID: 0}
-    - target: {fileID: 3712535677390505938, guid: 0a6e336802fcc554ea7a99c8268c33c6, type: 3}
-      propertyPath: MoveSpeed
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939425423564658731, guid: 0a6e336802fcc554ea7a99c8268c33c6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: 0a6e336802fcc554ea7a99c8268c33c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.616047
@@ -3454,7 +3446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: c0566eea2c57a834f9fa7495c1d7dd73, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.61
+      value: 15.54
       objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: c0566eea2c57a834f9fa7495c1d7dd73, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3911,21 +3903,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoubleStacktone (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 3712535677390505938, guid: c0566eea2c57a834f9fa7495c1d7dd73, type: 3}
-      propertyPath: MoveSpeed
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939425423564658731, guid: c0566eea2c57a834f9fa7495c1d7dd73, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: c0566eea2c57a834f9fa7495c1d7dd73, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.293069
+      value: 2.28
       objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: c0566eea2c57a834f9fa7495c1d7dd73, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.684505
+      value: 15.56
       objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: c0566eea2c57a834f9fa7495c1d7dd73, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8350,14 +8334,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stacktone (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 3712535677390505938, guid: 0a6e336802fcc554ea7a99c8268c33c6, type: 3}
-      propertyPath: MoveSpeed
-      value: -2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939425423564658731, guid: 0a6e336802fcc554ea7a99c8268c33c6, type: 3}
-      propertyPath: m_LocalScale.x
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: 0a6e336802fcc554ea7a99c8268c33c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.54
@@ -8510,7 +8486,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: c0566eea2c57a834f9fa7495c1d7dd73, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.61
+      value: 15.57
       objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: c0566eea2c57a834f9fa7495c1d7dd73, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12295,11 +12271,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.61047924
+      value: -0.6146983
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.299455
+      value: -2.2994936
       objectReference: {fileID: 0}
     - target: {fileID: 3546177479845366616, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_ScreenY

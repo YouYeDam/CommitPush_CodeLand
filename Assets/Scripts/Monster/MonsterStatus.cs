@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class MonsterStatus : MonoBehaviour
 {
     [SerializeField] public string MonsterName;
-    [SerializeField] public int MonsterLV = 1;
+    [SerializeField] public int MonsterLevel = 1;
     [SerializeField] public float MonsterMaxHealth;
     [SerializeField] public float MonsterCurrentHealth;
     [SerializeField] public int MonsterDamage = 10;
@@ -22,11 +22,15 @@ public class MonsterStatus : MonoBehaviour
     public GameObject MonsterInfo; // 몬스터 정보 텍스트 프리팹
     public TMP_Text MonsterInfoText;
     public GameObject MonsterInfoInstance;
+    PlayerStatus PlayerStatus;
+    public int LevelDiff = 0;
+    public bool BiggerThanPlayerLevel = false;
 
     void Start() {
         MonsterCurrentHealth = MonsterMaxHealth;
         UIManager = GameObject.Find("UIManager");
-        
+        PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+        SetLevelDiff(PlayerStatus.PlayerLevel);
     }
 
     void Update() {
@@ -60,7 +64,7 @@ public class MonsterStatus : MonoBehaviour
         if (UIManager != null && MonsterInfo != null && MonsterInfoInstance == null) {
             MonsterInfoInstance = Instantiate(MonsterInfo, UIManager.transform); // 캔버스의 자식으로 할당
             MonsterInfoText = MonsterInfoInstance.GetComponent<TMP_Text>();
-            MonsterInfoText.text = "LV." + MonsterLV + " " + MonsterName;
+            MonsterInfoText.text = "LV." + MonsterLevel + " " + MonsterName;
             MonsterInfoInstance.transform.SetAsFirstSibling();
         }
     }
@@ -69,6 +73,25 @@ public class MonsterStatus : MonoBehaviour
         if (MonsterInfoInstance != null) {
             Vector3 newPosition = transform.position + Vector3.down * MonsterInfoPos;
             MonsterInfoInstance.transform.position = newPosition;
+        }
+    }
+
+    public void SetLevelDiff(int PlayerLevel) {
+        if (PlayerLevel >= MonsterLevel) { // 플레이어 LV > 몬스터 LV
+            LevelDiff = PlayerLevel - MonsterLevel;
+            if (LevelDiff >= 5) {
+                LevelDiff = 5;
+            }
+            LevelDiff *= 5;
+            BiggerThanPlayerLevel = false;
+        }
+        else { // 몬스터 LV > 플레이어 LV
+            LevelDiff = MonsterLevel - PlayerLevel;
+            if (LevelDiff >= 5) {
+                LevelDiff = 5;
+            }
+            LevelDiff *= 10;
+            BiggerThanPlayerLevel = true;
         }
     }
 }

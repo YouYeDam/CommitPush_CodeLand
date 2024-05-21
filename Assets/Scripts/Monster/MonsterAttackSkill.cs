@@ -24,7 +24,6 @@ public class MonsterAttackSkill : MonoBehaviour
         }
         Invoke("DestroySelf", DestroyDelay);
         FlipSprite();
-        Damage = MonsterStatus.MonsterDamage * 2;
     }
     void Update()
     {

@@ -243,11 +243,13 @@ MonoBehaviour:
   DieDelay: 0.8
   PlayerOverlapRange: 0.1
   FollowDelay: 10
+  MonsterBoxCollider: {fileID: 0}
   IsAlive: 1
   IsLeft: 0
   IsAttackMonster: 1
   IsTakeDamge: 0
   CanWalk: 1
+  CanTriggerDamage: 1
   AttackDelayTime: 2
 --- !u!114 &3157593347497917494
 MonoBehaviour:
@@ -262,7 +264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterName: "\uBE0C\uB808\uC2A4\uD0C0\uC6B0\uB974\uC2A4"
-  MonsterLV: 10
+  MonsterLevel: 10
   MonsterMaxHealth: 210
   MonsterCurrentHealth: 0
   MonsterDamage: 70
@@ -276,6 +278,8 @@ MonoBehaviour:
   MonsterInfo: {fileID: 7337256740539332341, guid: 1549b685081dae94bab992933a341a66, type: 3}
   MonsterInfoText: {fileID: 0}
   MonsterInfoInstance: {fileID: 0}
+  LevelDiff: 0
+  BiggerThanPlayerLevel: 0
 --- !u!114 &2853819430215722925
 MonoBehaviour:
   m_ObjectHideFlags: 0

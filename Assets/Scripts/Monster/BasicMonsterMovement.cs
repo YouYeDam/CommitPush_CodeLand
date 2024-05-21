@@ -16,6 +16,7 @@ public class BasicMonsterMovement : MonoBehaviour
     Rigidbody2D MonsterRigidbody;
     Animator MonsterAnimator;
     MonsterStatus MonsterStatus;
+    MonsterTakeDamageDisplay MonsterTakeDamageDisplay;
     public BoxCollider2D MonsterBoxCollider;
     CapsuleCollider2D MonsterCapsuleCollider;
     BoxCollider2D PlayerBoxCollider;
@@ -50,6 +51,7 @@ public class BasicMonsterMovement : MonoBehaviour
         MonsterBoxCollider = GetComponent<BoxCollider2D>();
         MonsterCapsuleCollider = GetComponent<CapsuleCollider2D>();
         MonsterDropItem = GetComponent<MonsterDropItem>();
+        MonsterTakeDamageDisplay = GetComponent<MonsterTakeDamageDisplay>();
         if (IsAttackMonster) {
             MonsterSkills = GetComponent<MonsterSkills>();
         }
@@ -196,11 +198,18 @@ public class BasicMonsterMovement : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int Damage) {
+    public void TakeDamage(int Damage, bool IsCrit) {
         if (MonsterStatus != null) {
+            if (MonsterStatus.BiggerThanPlayerLevel) { // 몬스터 LV > 플레이어 LV
+                Damage = Mathf.RoundToInt(Damage * (1 - MonsterStatus.LevelDiff / 100f)); // 받는 데미지 감소
+            }
+            else { // 플레이어 LV > 몬스터 LV
+                Damage = Mathf.RoundToInt(Damage * (1 + MonsterStatus.LevelDiff / 100f)); // 받는 데미지 증가
+            }
             MonsterStatus.MonsterCurrentHealth -= Damage;
             MonsterStatus.DisplayHPMeter();
             MonsterStatus.DisplayMonsterInfo();
+            MonsterTakeDamageDisplay.DisplayDamageBar(Damage, IsCrit);
             IsTakeDamge = true;
             StartCoroutine(StopAggressiveMode(FollowDelay));
         }
