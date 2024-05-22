@@ -62,6 +62,18 @@ EditorBuildSettings:
     path: "Assets/Scenes/DataForest/\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uD0D0\uC0C9\uC758
       \uBBF8\uB85C.unity"
     guid: f51aaeb0ccfd91d4aa37477fe03511ac
+  - enabled: 1
+    path: "Assets/Scenes/DataForest/\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uBE44\uC120\uD615
+      \uADF8\uB298\uC232 \uCD08\uC785.unity"
+    guid: 903259d20e2e1864bab4fb4e353f3206
+  - enabled: 1
+    path: "Assets/Scenes/DataForest/\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uBE44\uC120\uD615
+      \uADF8\uB298\uC2321.unity"
+    guid: a853d6d1e29ee11409094d7b27b2e950
+  - enabled: 1
+    path: "Assets/Scenes/DataForest/\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uBE44\uC120\uD615
+      \uADF8\uB298\uC2322.unity"
+    guid: 7d79c16ae2a1d10458118f3c2f3bcffc
   - enabled: 0
     path: Assets/Scenes/Quiz Scene.unity
     guid: 9d96a0ffe7dd6b74a8f2a16164039fb8

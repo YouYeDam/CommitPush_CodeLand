@@ -10,7 +10,7 @@ public class MonsterSkills : MonoBehaviour
     [SerializeField] GameObject Projectile;
     [SerializeField] Transform SkillSpot;
     [SerializeField] float BackToIdleAnimTime = 0.35f;
-    [SerializeField] float Delay = 1f;
+    [SerializeField] float Delay = 1f; // 피격 후 스킬 시전 대기시간
     public float UseSkillDistance = 8f; // 스킬 사용 거리
 
     void Start() {

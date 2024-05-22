@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         MyRigidbody = GetComponent<Rigidbody2D>();
-        MyRigidbody.sleepMode = RigidbodySleepMode2D.NeverSleep;
         MyAnimator = GetComponent<Animator>();
         MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
         MyBoxColliders = GetComponents<BoxCollider2D>();
@@ -74,8 +73,8 @@ public class PlayerMovement : MonoBehaviour
 
     bool IsGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(MyCapsuleCollider.bounds.center, Vector2.down, MyCapsuleCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground") | LayerMask.GetMask("LadderToGround"));
-        return hit.collider != null;
+        RaycastHit2D Hit = Physics2D.Raycast(MyCapsuleCollider.bounds.center, Vector2.down, MyCapsuleCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground") | LayerMask.GetMask("LadderToGround"));
+        return Hit.collider != null;
     }
 
     void OnMove(InputValue Value)
@@ -252,14 +251,14 @@ public class PlayerMovement : MonoBehaviour
     void DisableLadderLayerColliders()
     {
         // "Ladder" 태그가 지정된 모든 GameObjects 찾기
-        GameObject[] ladderObjects = GameObject.FindGameObjectsWithTag("Ladder");
-        foreach (GameObject ladderObject in ladderObjects)
+        GameObject[] LadderObjects = GameObject.FindGameObjectsWithTag("Ladder");
+        foreach (GameObject LadderObject in LadderObjects)
         {
-            ladderObject.layer = LayerMask.NameToLayer("LadderToGround");
-            TilemapCollider2D tilemapCollider = ladderObject.GetComponent<TilemapCollider2D>();
-            if (tilemapCollider != null)
+            LadderObject.layer = LayerMask.NameToLayer("LadderToGround");
+            TilemapCollider2D TilemapCollider = LadderObject.GetComponent<TilemapCollider2D>();
+            if (TilemapCollider != null)
             {
-                tilemapCollider.isTrigger = false; // isTrigger 옵션 끄기
+                TilemapCollider.isTrigger = false; // isTrigger 옵션 끄기
             }
         }
 
@@ -267,14 +266,14 @@ public class PlayerMovement : MonoBehaviour
     void EnableLadderLayerColliders()
     {
         // "Ladder" 태그가 지정된 모든 GameObjects 찾기
-        GameObject[] ladderObjects = GameObject.FindGameObjectsWithTag("Ladder");
-        foreach (GameObject ladderObject in ladderObjects)
+        GameObject[] LadderObjects = GameObject.FindGameObjectsWithTag("Ladder");
+        foreach (GameObject LadderObject in LadderObjects)
         {
-            ladderObject.layer = LayerMask.NameToLayer("Ladder");
-            TilemapCollider2D tilemapCollider = ladderObject.GetComponent<TilemapCollider2D>();
-            if (tilemapCollider != null)
+            LadderObject.layer = LayerMask.NameToLayer("Ladder");
+            TilemapCollider2D TilemapCollider = LadderObject.GetComponent<TilemapCollider2D>();
+            if (TilemapCollider != null)
             {
-                tilemapCollider.isTrigger = true; // isTrigger 옵션 끄기
+                TilemapCollider.isTrigger = true; // isTrigger 옵션 끄기
             }
         }
 

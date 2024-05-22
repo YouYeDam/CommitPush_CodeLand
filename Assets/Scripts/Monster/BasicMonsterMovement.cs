@@ -137,12 +137,7 @@ public class BasicMonsterMovement : MonoBehaviour
 
         if (!PlayerMovement.IsAlive) {
             IsTakeDamge = false;
-            if (MonsterRigidbody.velocity.x != 0) {
-                MonsterAnimator.SetBool("IsIdling", true);
-            }
-            else {
-                MonsterAnimator.SetBool("IsIdling", false);
-            }
+            MonsterAnimator.SetBool("IsIdling", false);
             SetRandomBehavior();
         }
     }
@@ -217,7 +212,6 @@ public class BasicMonsterMovement : MonoBehaviour
 
     IEnumerator StopAggressiveMode(float FollowDelay) {
         yield return new WaitForSeconds(FollowDelay);
-
         IsTakeDamge = false;
         if (MonsterRigidbody.velocity.x != 0) {
             MonsterAnimator.SetBool("IsIdling", false);
