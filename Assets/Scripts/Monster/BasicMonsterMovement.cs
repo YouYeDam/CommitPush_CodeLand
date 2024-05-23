@@ -34,6 +34,7 @@ public class BasicMonsterMovement : MonoBehaviour
     public bool CanWalk = true;
     public bool CanTriggerDamage = true;
     bool CanAttack = true;
+    private Coroutine StopAggressiveModeCoroutine;
     [SerializeField] float AttackDelayTime = 3f;
 
     Vector3 StartPosition; // 초기 위치
@@ -70,8 +71,10 @@ public class BasicMonsterMovement : MonoBehaviour
         StartPosition = transform.position;
         StartRotation = transform.rotation;
         MonsterObject = this.gameObject;
-        MonsterRegenerationControllerObject = GameObject.Find("MonsterRegenerationObject");
-        MonsterRegenerationController = MonsterRegenerationControllerObject.GetComponent<MonsterRegenerationController>();
+        if (!MonsterStatus.IsBossMonster) {
+            MonsterRegenerationControllerObject = GameObject.Find("MonsterRegenerationObject");
+            MonsterRegenerationController = MonsterRegenerationControllerObject.GetComponent<MonsterRegenerationController>();
+        }
     }
 
     void Update()
@@ -206,13 +209,21 @@ public class BasicMonsterMovement : MonoBehaviour
             MonsterStatus.DisplayMonsterInfo();
             MonsterTakeDamageDisplay.DisplayDamageBar(Damage, IsCrit);
             IsTakeDamge = true;
-            StartCoroutine(StopAggressiveMode(FollowDelay));
+
+            // 기존의 코루틴이 실행 중이면 중지
+            if (StopAggressiveModeCoroutine != null) {
+                StopCoroutine(StopAggressiveModeCoroutine);
+            }
+
+            // 새로운 코루틴 시작
+            StopAggressiveModeCoroutine = StartCoroutine(StopAggressiveMode(FollowDelay));
         }
     }
 
     IEnumerator StopAggressiveMode(float FollowDelay) {
         yield return new WaitForSeconds(FollowDelay);
         IsTakeDamge = false;
+        yield return new WaitForSeconds(0.1f);
         if (MonsterRigidbody.velocity.x != 0) {
             MonsterAnimator.SetBool("IsIdling", false);
         }
@@ -229,7 +240,9 @@ public class BasicMonsterMovement : MonoBehaviour
             return;
         }
         MonsterAnimator.SetBool("IsDying", true);
-        MonsterRegenerationController.RegenerateMonster(MonsterObject, StartPosition, StartRotation);
+        if (MonsterRegenerationController) {
+            MonsterRegenerationController.RegenerateMonster(MonsterObject, StartPosition, StartRotation);
+        }
         IsAlive = false;
         PlayerStatus.GainEXP(MonsterStatus.MonsterEXP);
         MonsterDropItem.DropItems();
