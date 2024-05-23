@@ -26,7 +26,6 @@ public class BasicMonsterMovement : MonoBehaviour
     PlayerStatus PlayerStatus;
     MonsterSkills MonsterSkills;
     GameObject Player;
-
     public bool IsAlive = true;
     public bool IsLeft = true; // 초기 몬스터가 바라보는 방향
     public bool IsAttackMonster = false;
@@ -71,7 +70,7 @@ public class BasicMonsterMovement : MonoBehaviour
         StartPosition = transform.position;
         StartRotation = transform.rotation;
         MonsterObject = this.gameObject;
-        if (!MonsterStatus.IsBossMonster) {
+        if (!MonsterStatus.IsBossMonster && !MonsterStatus.IsSummonedMonster) {
             MonsterRegenerationControllerObject = GameObject.Find("MonsterRegenerationObject");
             MonsterRegenerationController = MonsterRegenerationControllerObject.GetComponent<MonsterRegenerationController>();
         }
@@ -261,7 +260,7 @@ public class BasicMonsterMovement : MonoBehaviour
         PlayerStatus.GainEXP(MonsterStatus.MonsterEXP);
         MonsterDropItem.DropItems();
         MonsterBoxCollider.enabled = false; // 플레이어 스킬 먹힘 방지
-        if (MonsterStatus.IsGenerateMonster && !MonsterStatus.IsBossMonster) {
+        if (MonsterStatus.IsSummoningMonster && !MonsterStatus.IsBossMonster) {
             GenerateMonster GenerateMonster = GetComponent<GenerateMonster>();
             GenerateMonster.GenerateMonsters();
         }

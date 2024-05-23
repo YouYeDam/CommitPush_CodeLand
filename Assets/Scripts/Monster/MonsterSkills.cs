@@ -12,6 +12,7 @@ public class MonsterSkills : MonoBehaviour
     [SerializeField] float BackToIdleAnimTime = 0.35f;
     [SerializeField] float Delay = 1f; // 피격 후 스킬 시전 대기시간
     public float UseSkillDistance = 8f; // 스킬 사용 거리
+    public bool IsSkilling = false;
 
     void Start() {
         MyAnimator = GetComponent<Animator>();
@@ -31,6 +32,7 @@ public class MonsterSkills : MonoBehaviour
             yield return new WaitForSeconds(Delay); // 1초 대기
             GameObject ProjectileInstance = Instantiate(Projectile, SkillSpot.position, transform.rotation);
             MyAnimator.SetBool("IsAttacking", true);
+            IsSkilling = true;
             BasicMonsterMovement.CanWalk = false;
             Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
             
@@ -51,6 +53,7 @@ public class MonsterSkills : MonoBehaviour
 
     void BackToIdleAnim() {
         MyAnimator.SetBool("IsAttacking", false);
+        IsSkilling = false;
         BasicMonsterMovement.CanWalk = true;
     }
 }

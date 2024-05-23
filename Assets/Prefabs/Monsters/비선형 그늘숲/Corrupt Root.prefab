@@ -282,7 +282,8 @@ MonoBehaviour:
   LevelDiff: 0
   BiggerThanPlayerLevel: 0
   IsBossMonster: 0
-  IsGenerateMonster: 1
+  IsSummoningMonster: 1
+  IsSummonedMonster: 0
 --- !u!114 &2853819430215722925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,6 +336,7 @@ MonoBehaviour:
   BackToIdleAnimTime: 0.4
   Delay: 0.35
   UseSkillDistance: 20
+  IsSkilling: 0
 --- !u!114 &4474165348767794096
 MonoBehaviour:
   m_ObjectHideFlags: 0

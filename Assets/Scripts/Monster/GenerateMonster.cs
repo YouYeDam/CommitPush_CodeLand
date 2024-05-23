@@ -9,19 +9,20 @@ public class GenerateMonster : MonoBehaviour
     [SerializeField] float DelayTime = 0.5f;
     BasicMonsterMovement BasicMonsterMovement;
     MonsterStatus MonsterStatus;
+
     void Update() {
         MyPosition = transform.position; // 매 프레임마다 몬스터의 현재 위치를 업데이트
     }
 
-    public void GenerateMonsters() {
+    public void GenerateMonsters(Vector3? Position = null) {
+        Vector3 SpawnPosition = Position ?? MyPosition; // Position이 null이면 MyPosition 사용
         foreach (GameObject MonsterPrefab in GeneratedMonsters) {
             if (MonsterPrefab != null) {
-                GameObject MonsterInstance = Instantiate(MonsterPrefab, MyPosition, Quaternion.identity);
-                MonsterStatus = MonsterInstance.GetComponent<MonsterStatus>();
+                GameObject MonsterInstance = Instantiate(MonsterPrefab, SpawnPosition, Quaternion.identity);
                 BasicMonsterMovement = MonsterInstance.GetComponent<BasicMonsterMovement>();
-                MonsterStatus.IsBossMonster = true;
+                MonsterStatus = MonsterInstance.GetComponent<MonsterStatus>();
+                MonsterStatus.IsSummonedMonster = true;
                 StartCoroutine(RegenerateMonsterWithDelay(BasicMonsterMovement));
-                
             }
         }
     }

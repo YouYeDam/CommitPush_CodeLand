@@ -8144,33 +8144,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1307406999}
     m_Modifications:
-    - target: {fileID: 3157593347497917494, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
-      propertyPath: MonsterInfoPos
-      value: 4.3
-      objectReference: {fileID: 0}
     - target: {fileID: 3523946213023745087, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
       propertyPath: m_Name
       value: Corrupt Tree
       objectReference: {fileID: 0}
-    - target: {fileID: 3712535677390505938, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
-      propertyPath: DieDelay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3712535677390505938, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
-      propertyPath: IsTakeDamge
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3712535677390505938, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
-      propertyPath: WaitCanWalk
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3712535677390505938, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
-      propertyPath: AttackDelayTime
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.816639
+      value: 12.34
       objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8209,7 +8189,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1018408640787276256, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
