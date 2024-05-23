@@ -16,7 +16,7 @@ public class MonsterRegenerationController : MonoBehaviour
         MonsterInstance.SetActive(false);
         StartCoroutine(RegenerateMonsterWithDelay(MonsterInstance));
     }
-
+    
     IEnumerator RegenerateMonsterWithDelay(GameObject MonsterInstance) {
         yield return new WaitForSeconds(DelayTime); // DelayTime만큼 대기
         MonsterInstance.SetActive(true);

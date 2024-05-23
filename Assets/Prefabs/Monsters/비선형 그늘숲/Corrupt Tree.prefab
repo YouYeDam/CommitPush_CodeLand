@@ -234,7 +234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2e198bb496d03459a891c87cf8bb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3
+  MoveSpeed: 4.5
   FlipTimeHead: 3
   FlipTimeRear: 8
   StopTimeHead: 4
@@ -281,6 +281,7 @@ MonoBehaviour:
   LevelDiff: 0
   BiggerThanPlayerLevel: 0
   IsBossMonster: 1
+  IsGenerateMonster: 0
 --- !u!114 &2853819430215722925
 MonoBehaviour:
   m_ObjectHideFlags: 0

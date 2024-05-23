@@ -26,6 +26,7 @@ public class MonsterStatus : MonoBehaviour
     public int LevelDiff = 0;
     public bool BiggerThanPlayerLevel = false;
     public bool IsBossMonster = false;
+    public bool IsGenerateMonster = false;
     void Start() {
         MonsterCurrentHealth = MonsterMaxHealth;
         UIManager = GameObject.Find("UIManager");

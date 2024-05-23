@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2853819430215722925}
   - component: {fileID: -8855345390103764750}
   - component: {fileID: 5552684333874109378}
+  - component: {fileID: 4474165348767794096}
   m_Layer: 9
   m_Name: Corrupt Root
   m_TagString: Monster
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2e198bb496d03459a891c87cf8bb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2.7
+  MoveSpeed: 3
   FlipTimeHead: 3
   FlipTimeRear: 8
   StopTimeHead: 4
@@ -270,7 +271,7 @@ MonoBehaviour:
   MonsterDamage: 85
   MonsterEXP: 31
   HPBarPos: 1.7
-  MonsterInfoPos: 1.5
+  MonsterInfoPos: 1.3
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}
@@ -280,6 +281,8 @@ MonoBehaviour:
   MonsterInfoInstance: {fileID: 0}
   LevelDiff: 0
   BiggerThanPlayerLevel: 0
+  IsBossMonster: 0
+  IsGenerateMonster: 1
 --- !u!114 &2853819430215722925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +335,21 @@ MonoBehaviour:
   BackToIdleAnimTime: 0.4
   Delay: 0.35
   UseSkillDistance: 20
+--- !u!114 &4474165348767794096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3523946213023745087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6816ece1e318e4e4f96a9a4001bb0989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GeneratedMonsters:
+  - {fileID: 3523946213023745087, guid: 81498eea6e34f364ab05ebff383b79e3, type: 3}
+  DelayTime: 0.5
 --- !u!1 &9048284205231676761
 GameObject:
   m_ObjectHideFlags: 0

@@ -8157,6 +8157,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3712535677390505938, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
+      propertyPath: IsTakeDamge
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712535677390505938, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
       propertyPath: WaitCanWalk
       value: 10
       objectReference: {fileID: 0}
