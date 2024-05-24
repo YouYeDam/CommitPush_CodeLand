@@ -236,10 +236,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 3
-  FlipTimeHead: 3
-  FlipTimeRear: 8
-  StopTimeHead: 4
-  StopTimeRear: 8
+  FlipTimeHead: 4
+  FlipTimeRear: 10
+  StopTimeHead: 5
+  StopTimeRear: 12
   WaitCanWalk: 3
   DieDelay: 0.8
   PlayerOverlapRange: 0.1

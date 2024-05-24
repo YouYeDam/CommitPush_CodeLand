@@ -8,6 +8,7 @@ public class MonsterAttackSkill : MonoBehaviour
     [SerializeField] float DestroyDelay = 0.5f;
     [SerializeField] int Damage = 10;
     [SerializeField] bool IsHoming = false; // 유도탄 여부를 결정하는 변수
+    [SerializeField] bool IsRotationing = false; // 회전하는 물체인지를 경정하는 변수
     Rigidbody2D MyRigidbody;
     public BasicMonsterMovement BasicMonsterMovement;
     public MonsterStatus MonsterStatus;
@@ -15,6 +16,8 @@ public class MonsterAttackSkill : MonoBehaviour
     [SerializeField] bool IsSlowingSkill;
     [SerializeField] float SlowTime = 3f;
     [SerializeField] float SlowFactor = 0.5f;
+    [SerializeField]float RotationSpeed = 360f;
+
     public bool IsLeft = false;
     float XSpeed;
     GameObject Player;
@@ -45,6 +48,9 @@ public class MonsterAttackSkill : MonoBehaviour
         if (!IsHoming)
         {
             MyRigidbody.velocity = new Vector2(XSpeed, 0f);
+        }
+        if (IsRotationing) {
+            transform.Rotate(0, 0, RotationSpeed * Time.deltaTime);
         }
     }
 

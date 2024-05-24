@@ -17,6 +17,7 @@ public class MonsterStatus : MonoBehaviour
 
     public GameObject HPBar; // 체력바 프리팹
     public Image HPMeterImage;
+    public TMP_Text HPPercentText;
     public GameObject HPMeterInstance;
 
     public GameObject MonsterInfo; // 몬스터 정보 텍스트 프리팹
@@ -46,6 +47,9 @@ public class MonsterStatus : MonoBehaviour
         {
             HPMeterInstance = Instantiate(HPBar, UIManager.transform); // 캔버스의 자식으로 할당
             HPMeterImage = HPMeterInstance.transform.GetChild(0).gameObject.GetComponentInChildren<Image>();
+            if (IsBossMonster) {
+                HPPercentText = HPMeterInstance.transform.GetChild(1).gameObject.GetComponentInChildren<TMP_Text>();
+            }
             UpdateHealthBar();
             HPMeterInstance.transform.SetAsFirstSibling();
         }
@@ -61,6 +65,12 @@ public class MonsterStatus : MonoBehaviour
         if (HPMeterImage != null) // 몬스터 체력바 수치 갱신
         {
             HPMeterImage.fillAmount = MonsterCurrentHealth / MonsterMaxHealth;
+        }
+
+        if (HPPercentText != null) // 몬스터 체력바 퍼센트 표시 갱신
+        {
+            float HealthPercent = (MonsterCurrentHealth / MonsterMaxHealth) * 100f;
+            HPPercentText.text = HealthPercent.ToString("F1") + "%";
         }
     }
     public void DisplayMonsterInfo() { // 몬스터 정보(이름, 레벨) 보이기

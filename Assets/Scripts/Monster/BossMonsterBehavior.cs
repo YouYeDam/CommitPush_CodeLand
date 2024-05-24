@@ -10,18 +10,22 @@ public class BossMonsterBehavior : MonoBehaviour
     [SerializeField] float ThrowingWaitTime = 10f;
     [SerializeField] float SummonBackToIdleAnimTime = 0.35f;
     [SerializeField] float SummonDelayTime = 1f;
+    [SerializeField] int SummonCount = 0;
     public Transform SummonSpot;
     BasicMonsterMovement BasicMonsterMovement;
     GenerateMonster GenerateMonster;
     MonsterThrowingSkill MonsterThrowingSkill;
     MonsterSkills MonsterSkills;
     Animator MyAnimator;
+    PlayerMovement PlayerMovement;
 
     void Start()
     {
         BasicMonsterMovement = GetComponent<BasicMonsterMovement>();
         MonsterSkills = GetComponent<MonsterSkills>();
         MyAnimator = GetComponent<Animator>();
+        PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+
 
         if (IsSummonBoss) {
             GenerateMonster = GetComponent<GenerateMonster>();
@@ -35,7 +39,7 @@ public class BossMonsterBehavior : MonoBehaviour
     }
 
     IEnumerator SummonMonster() {
-        while (BasicMonsterMovement.IsAlive) {
+        while (BasicMonsterMovement.IsAlive && PlayerMovement.IsAlive && SummonCount <= 30) {
             yield return new WaitForSeconds(SummonWaitTime);
 
             if (MonsterSkills.IsSkilling) {
@@ -52,11 +56,12 @@ public class BossMonsterBehavior : MonoBehaviour
 
             yield return new WaitForSeconds(SummonDelayTime);
             GenerateMonster.GenerateMonsters(SummonSpot.position);
+            SummonCount++;
         }
     }
 
     IEnumerator ThrowingSkill() {
-        while (BasicMonsterMovement.IsAlive) {
+        while (BasicMonsterMovement.IsAlive && PlayerMovement.IsAlive) {
             yield return new WaitForSeconds(ThrowingWaitTime);
 
             if (MonsterSkills.IsSkilling) {

@@ -110,7 +110,7 @@ MonoBehaviour:
   PlayerCurrentMP: 100
   PlayerMaxEXP: 10
   PlayerCurrentEXP: 0
-  PlayerATK: 0
+  PlayerATK: 1
   PlayerDEF: 0
   PlayerAP: 0
   PlayerCrit: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
   WalkDelayTime: 0.2
   InvincibleTime: 1
   RunSpeed: 5
-  JumpSpeed: 12
+  JumpSpeed: 11.7
   ClimbSpeed: 5
 --- !u!114 &5276594472103054196
 MonoBehaviour:

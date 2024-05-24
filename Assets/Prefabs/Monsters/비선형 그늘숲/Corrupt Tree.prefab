@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2e198bb496d03459a891c87cf8bb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 4.5
+  MoveSpeed: 5
   FlipTimeHead: 3
   FlipTimeRear: 8
   StopTimeHead: 4
@@ -301,10 +301,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterName: "\uBD80\uD328\uD55C \uD2B8\uB9AC"
   MonsterLevel: 15
-  MonsterMaxHealth: 260
+  MonsterMaxHealth: 5000
   MonsterCurrentHealth: 0
   MonsterDamage: 85
-  MonsterEXP: 31
+  MonsterEXP: 400
   HPBarPos: 3.3
   MonsterInfoPos: 4.3
   UIManager: {fileID: 0}
@@ -386,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GeneratedMonsters:
   - {fileID: 3523946213023745087, guid: 1eefaaa475a96e941b00499e9445c76a, type: 3}
+  - {fileID: 3523946213023745087, guid: 9a7eb17367f68384680590f915386c7d, type: 3}
   DelayTime: 0.5
 --- !u!114 &5369814400074721809
 MonoBehaviour:
@@ -401,7 +402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsSummonBoss: 1
   IsThrowingBoss: 1
-  SummonWaitTime: 15
+  SummonWaitTime: 25
+  ThrowingWaitTime: 12
   SummonBackToIdleAnimTime: 0.83
   SummonDelayTime: 1
   SummonSpot: {fileID: 1987699232559368084}
@@ -419,7 +421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 8885825609034438207, guid: 551b476ba81103d468938b0af7c033a6, type: 3}
   ThrowingSpot: {fileID: 4801698573816297099}
-  BackToIdleAnimTime: 0.35
+  BackToIdleAnimTime: 0.3
   UseSkillDistance: 30
   IsSkilling: 0
 --- !u!1 &7068998259601782848

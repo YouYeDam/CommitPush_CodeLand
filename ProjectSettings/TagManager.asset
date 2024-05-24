@@ -17,6 +17,7 @@ TagManager:
   - Prop
   - TempInfo
   - LadderGroundForMonster
+  - Tunnel
   layers:
   - Default
   - TransparentFX
