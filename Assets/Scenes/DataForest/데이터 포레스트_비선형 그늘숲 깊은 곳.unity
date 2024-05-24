@@ -8229,7 +8229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.62026584
+      value: -0.61180484
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8305,7 +8305,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 261631
+      value: 258559
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0.85
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
