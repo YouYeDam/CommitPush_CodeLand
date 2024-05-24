@@ -5,12 +5,15 @@ using UnityEngine;
 public class BossMonsterBehavior : MonoBehaviour
 {
     [SerializeField] bool IsSummonBoss = false; // 소환스킬을 가진 보스인지
+    [SerializeField] bool IsThrowingBoss = false; // 던지기 스킬을 가진 보스인지
     [SerializeField] float SummonWaitTime = 20f;
+    [SerializeField] float ThrowingWaitTime = 10f;
     [SerializeField] float SummonBackToIdleAnimTime = 0.35f;
     [SerializeField] float SummonDelayTime = 1f;
     public Transform SummonSpot;
     BasicMonsterMovement BasicMonsterMovement;
     GenerateMonster GenerateMonster;
+    MonsterThrowingSkill MonsterThrowingSkill;
     MonsterSkills MonsterSkills;
     Animator MyAnimator;
 
@@ -23,6 +26,11 @@ public class BossMonsterBehavior : MonoBehaviour
         if (IsSummonBoss) {
             GenerateMonster = GetComponent<GenerateMonster>();
             StartCoroutine(SummonMonster());
+        }
+
+        if (IsThrowingBoss) {
+            MonsterThrowingSkill = GetComponent<MonsterThrowingSkill>();
+            StartCoroutine(ThrowingSkill());
         }
     }
 
@@ -44,6 +52,17 @@ public class BossMonsterBehavior : MonoBehaviour
 
             yield return new WaitForSeconds(SummonDelayTime);
             GenerateMonster.GenerateMonsters(SummonSpot.position);
+        }
+    }
+
+    IEnumerator ThrowingSkill() {
+        while (BasicMonsterMovement.IsAlive) {
+            yield return new WaitForSeconds(ThrowingWaitTime);
+
+            if (MonsterSkills.IsSkilling) {
+                yield return new WaitForSeconds(5f); // 스킬을 사용하는 중이면 추가 대기 시간
+            }
+            MonsterThrowingSkill.ShootSkill();
         }
     }
 }

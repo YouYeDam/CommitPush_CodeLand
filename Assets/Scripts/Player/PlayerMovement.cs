@@ -30,6 +30,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float RunSpeed = 10f;
     [SerializeField] float JumpSpeed = 5f;
     [SerializeField] float ClimbSpeed = 5f;
+    float OriginalRunSpeed;
+    float OriginalJumpSpeed;
+    float OriginalClimbSpeed;
     void Start()
     {
         MyRigidbody = GetComponent<Rigidbody2D>();
@@ -44,6 +47,10 @@ public class PlayerMovement : MonoBehaviour
         StartGravity = MyRigidbody.gravityScale;
         Color = MySpriteRenderer.color;
         StartCoroutine(AutoHealRoutine());
+
+        OriginalRunSpeed = RunSpeed;
+        OriginalJumpSpeed = JumpSpeed;
+        OriginalClimbSpeed = ClimbSpeed;
     }
 
     void Update()
@@ -365,5 +372,21 @@ public class PlayerMovement : MonoBehaviour
         {
             TimeInState = 0f; 
         }
+    }
+
+    public void ApplySlow(float SlowTime, float SlowFactor) // 이속감소 디버프에 걸렸을 때 호출
+    {
+        StartCoroutine(SlowCoroutine(SlowTime, SlowFactor));
+    }
+
+    private IEnumerator SlowCoroutine(float SlowTime, float SlowFactor)
+    {
+        RunSpeed *= SlowFactor;
+        JumpSpeed *= SlowFactor;
+        ClimbSpeed *= SlowFactor;
+        yield return new WaitForSeconds(SlowTime);
+        RunSpeed = OriginalRunSpeed;
+        JumpSpeed = OriginalJumpSpeed;
+        ClimbSpeed = OriginalClimbSpeed;
     }
 }

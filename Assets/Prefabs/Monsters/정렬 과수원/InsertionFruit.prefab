@@ -239,7 +239,7 @@ MonoBehaviour:
   FlipTimeRear: 8
   StopTimeHead: 4
   StopTimeRear: 8
-  WaitCanWalk: 3
+  WaitCanWalk: 4.5
   DieDelay: 0.8
   PlayerOverlapRange: 0.2
   FollowDelay: 10
@@ -250,7 +250,7 @@ MonoBehaviour:
   IsTakeDamge: 0
   CanWalk: 1
   CanTriggerDamage: 1
-  AttackDelayTime: 3
+  AttackDelayTime: 4.5
 --- !u!114 &3157593347497917494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,6 +280,9 @@ MonoBehaviour:
   MonsterInfoInstance: {fileID: 0}
   LevelDiff: 0
   BiggerThanPlayerLevel: 0
+  IsBossMonster: 0
+  IsSummoningMonster: 0
+  IsSummonedMonster: 0
 --- !u!114 &2853819430215722925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +335,7 @@ MonoBehaviour:
   BackToIdleAnimTime: 0.7
   Delay: 1
   UseSkillDistance: 10
+  IsSkilling: 0
 --- !u!1 &9048284205231676761
 GameObject:
   m_ObjectHideFlags: 0

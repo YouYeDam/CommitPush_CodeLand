@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4696956795978963348}
   - component: {fileID: 6854366649211171025}
   m_Layer: 9
-  m_Name: InsertionFruit Skill
+  m_Name: CorruptTreeSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 794951137
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d115dbba564d2f34ead7ecba224b6c68, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 805e4348a84701b44823041b52d97f43, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -147,18 +147,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0012512207, y: 0.013763465}
+  m_Offset: {x: -0.0005838275, y: -0.00826022}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.46875, y: 0.375}
+    oldSize: {x: 0.53333336, y: 0.53333336}
     newSize: {x: 0.7, y: 0.7}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5911026, y: 0.2672342}
+  m_Size: {x: 0.5443858, y: 0.52217466}
   m_EdgeRadius: 0
 --- !u!95 &4696956795978963348
 Animator:
@@ -170,7 +170,7 @@ Animator:
   m_GameObject: {fileID: 8885825609034438207}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8cfe6162eeb59a74dbd9cb0789be33c4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7ba428b5ad98cdb4784b49891711bc5d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -193,13 +193,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32476e9073461e4fb08ba896d17197c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillSpeed: 2.8
-  DestroyDelay: 1.5
-  Damage: 70
+  SkillSpeed: 5
+  DestroyDelay: 3.5
+  Damage: 150
   IsHoming: 1
   BasicMonsterMovement: {fileID: 0}
   MonsterStatus: {fileID: 0}
-  IsSlowingSkill: 0
+  IsSlowingSkill: 1
   SlowTime: 3
   SlowFactor: 0.5
   IsLeft: 0

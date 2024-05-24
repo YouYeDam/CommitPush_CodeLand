@@ -8148,6 +8148,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Corrupt Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 5369814400074721809, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
+      propertyPath: ThrowingWaitTime
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 6939425423564658731, guid: 87150d3c7ef454244a23660d260c5aab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.34
