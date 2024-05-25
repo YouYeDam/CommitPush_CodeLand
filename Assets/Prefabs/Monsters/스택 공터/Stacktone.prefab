@@ -272,12 +272,16 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}
+  HPPercentText: {fileID: 0}
   HPMeterInstance: {fileID: 0}
   MonsterInfo: {fileID: 7337256740539332341, guid: 1549b685081dae94bab992933a341a66, type: 3}
   MonsterInfoText: {fileID: 0}
   MonsterInfoInstance: {fileID: 0}
   LevelDiff: 0
   BiggerThanPlayerLevel: 0
+  IsBossMonster: 0
+  IsSummoningMonster: 0
+  IsSummonedMonster: 0
 --- !u!114 &2853819430215722925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +298,9 @@ MonoBehaviour:
   - ItemPrefab: {fileID: 4338472210403635751, guid: 00e07d54bea641949a9c054f1e9dbbac, type: 3}
     SpawnProbability: 0.6
   - ItemPrefab: {fileID: 4338472210403635751, guid: 1efa8118dec067347b7ec11c7d7255ee, type: 3}
-    SpawnProbability: 0.5
+    SpawnProbability: 0.1
+  - ItemPrefab: {fileID: 4338472210403635751, guid: e3bd7ef95c002f8478b90bfbe69e738c, type: 3}
+    SpawnProbability: 0.1
   MonsterBit: 6
   MonsterSnippet: 0
 --- !u!114 &7038210497370349640

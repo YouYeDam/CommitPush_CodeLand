@@ -310,6 +310,7 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: a401422bc1a650141a887151459ba260, type: 3}
   HPMeterImage: {fileID: 0}
+  HPPercentText: {fileID: 0}
   HPMeterInstance: {fileID: 0}
   MonsterInfo: {fileID: 7337256740539332341, guid: 85dbf807b4edd3e43838c0df2abdfb55, type: 3}
   MonsterInfoText: {fileID: 0}
@@ -336,7 +337,7 @@ MonoBehaviour:
     SpawnProbability: 1
   - ItemPrefab: {fileID: 4338472210403635751, guid: ced1e47a196c61b4e84827ca8fe59c67, type: 3}
     SpawnProbability: 1
-  MonsterBit: 200
+  MonsterBit: 400
   MonsterSnippet: 1
 --- !u!114 &-8855345390103764750
 MonoBehaviour:
@@ -406,6 +407,7 @@ MonoBehaviour:
   ThrowingWaitTime: 12
   SummonBackToIdleAnimTime: 0.83
   SummonDelayTime: 1
+  SummonCount: 0
   SummonSpot: {fileID: 1987699232559368084}
 --- !u!114 &6704895050344695363
 MonoBehaviour:

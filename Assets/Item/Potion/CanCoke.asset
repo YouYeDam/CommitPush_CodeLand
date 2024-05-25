@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: CanCoke
+  m_EditorClassIdentifier: 
+  ItemName: "\uCE94\uCF5C\uB77C"
+  ItemCount: 1
+  ItemCost: 140
+  Type: 1
+  ItemImage: {fileID: 21300000, guid: e5258900d70b8654497247ea9f8d5b5c, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: a20cea60472899840ade3f6a44eed7f1, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uCC28\uAC00\uC6B4 \uCE94\uCF5C\uB77C\uC774\uB2E4. \uCE74\uD398\uC778\uC774
+    \uC788\uC5B4 \uC9D1\uC911\uB825\uC744 \uB192\uC774\uACE0 \uD53C\uB85C\uB97C \uC904\uC774\uB294
+    \uB370 \uB3C4\uC6C0\uC774 \uB41C\uB2E4. \uC9C0\uB8E8\uD55C \uC5C5\uBB34\uC5D0\uC11C
+    \uC7A0\uC2DC\uB098\uB9C8 \uC0C1\uCF8C\uD55C \uAE30\uBD84\uC744 \uB290\uAEF4\uBCF4\uC790.\n\n\uC0AC\uC6A9
+    \uC2DC MP\uB97C 100\uB9CC\uD07C \uD68C\uBCF5\uD55C\uB2E4."
