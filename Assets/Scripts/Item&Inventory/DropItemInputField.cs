@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+
 public class DropItemInputNumber : MonoBehaviour
 {
 
@@ -42,7 +43,8 @@ public class DropItemInputNumber : MonoBehaviour
 
         if (DropCount > ItemDrag.Instance.DragSlot.ItemCount) {
             DropCount = ItemDrag.Instance.DragSlot.ItemCount;
-        } else if (DropCount <= 0) {
+        } 
+        else if (DropCount <= 0) {
             Cancel();
             return;
         }

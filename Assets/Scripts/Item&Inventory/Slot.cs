@@ -12,9 +12,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public Image ItemImage;  // 아이템의 이미지
     Rect InventoryRect;
     public DropItemInputNumber DropItemInputNumber;
+    public SellItemInputField SellItemInputField;
     public ItemQuickSlot QuickSlotReference;
     ItemToolTip ItemToolTip;
     PlayerMovement PlayerMovement;
+    PlayerMoney PlayerMoney;
     [SerializeField] TMP_Text TextCount;
     [SerializeField] GameObject CountImage;
 
@@ -28,6 +30,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     void Start() {
         InventoryRect = transform.parent.parent.parent.GetComponent<RectTransform>().rect;
         DropItemInputNumber = FindObjectOfType<DropItemInputNumber>();
+        SellItemInputField = FindObjectOfType<SellItemInputField>();
 
         GameObject ToolTipObject = GameObject.Find("ItemToolTip");
         if (ToolTipObject != null) {
@@ -35,6 +38,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
         
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        PlayerMoney  = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
     }
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
         Color Color = ItemImage.color;
@@ -101,8 +105,14 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
         else if (ClickCount == 2 && Time.time - LastClickTime < DoubleClickTime)
         {
-            OnDoubleClick(); // 더블 클릭 발생
-            ClickCount = 0; // 클릭 카운트 초기화
+            PlayerUI PlayerUI = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerUI>();
+            if (PlayerUI.Shop.activeSelf) {
+                OnDoubleClickForSell();
+            }
+            else {
+                OnDoubleClickForUse(); // 더블 클릭 발생
+                ClickCount = 0; // 클릭 카운트 초기화
+            }
         }
         else if (Time.time - LastClickTime > DoubleClickTime)
         {
@@ -193,7 +203,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
     }
 
-    void OnDoubleClick() // 슬롯 더블클릭
+    void OnDoubleClickForUse() // 슬롯 더블클릭
     {
         if (Item == null || !PlayerMovement.IsAlive) {
             return;
@@ -218,5 +228,27 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                 ClearSlot();
             }
         }
+    }
+
+    void OnDoubleClickForSell()
+    {
+        if (Item == null || !PlayerMovement.IsAlive) {
+            return;
+        }
+        if (Item.Type == Item.ItemType.Used) // 소비 아이템시 실행
+        {
+            SellItemInputField.OpenInputField(this);
+        }
+        else if (Item.Type == Item.ItemType.Equipment) // 장비 아이템시 실행
+        {
+            PlayerMoney.Bit += Item.ItemCost;
+            ClearSlot();
+        }
+    }
+
+    public void SellManyItem(int SellItemCount) {
+        int TotalItemCost = Item.ItemCost * SellItemCount;
+        PlayerMoney.Bit += TotalItemCost;
+        SetSlotCount(-SellItemCount);
     }
 }

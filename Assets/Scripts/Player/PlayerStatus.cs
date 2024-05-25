@@ -54,7 +54,7 @@ public class PlayerStatus : MonoBehaviour
         PlayerCurrentMP = PlayerMaxMP;
         LevelUpPoint += 3;
         
-        PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.7f);
+        PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.6f);
         if (PlayerCurrentEXP >= PlayerMaxEXP) {
             PlayerCurrentEXP = PlayerMaxEXP - 1;
         }

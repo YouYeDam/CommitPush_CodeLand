@@ -110,7 +110,7 @@ MonoBehaviour:
   PlayerCurrentMP: 100
   PlayerMaxEXP: 10
   PlayerCurrentEXP: 0
-  PlayerATK: 1
+  PlayerATK: 0
   PlayerDEF: 0
   PlayerAP: 0
   PlayerCrit: 0

@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerGetItem : MonoBehaviour
 {
     [SerializeField] GameObject UICanvas;
-    Inventory InventoryScript;
+    public Inventory InventoryScript;
     PlayerMoney PlayerMoney;
     DropMoney DropMoney;
     

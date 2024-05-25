@@ -10,21 +10,24 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject Character;
     [SerializeField] GameObject Equipment;
     [SerializeField] GameObject Dialogue;
+    [SerializeField] public GameObject Shop;
     PlayerManager PlayerManager;
     private Vector2 InventoryOriginalPosition;
     private Vector2 CharacterOriginalPosition;
     private Vector2 EquipmentOriginalPosition;
-
+    private Vector2 ShopOriginalPosition;
 
     GameObject InventoryButtonObject;
     GameObject CharacterButtonObject;
     GameObject EquipmentButtonObject;
+    public GameObject ShopButtonObject;
     public GameObject DialogueButtonObject;
 
     Button InventoryButton;
     Button CharacterButton;
     Button EquipmentButton;
     Button DialogueButton;
+    Button ShopButton;
 
     PlayerLevelUpController PlayerLevelUpController;
 
@@ -36,10 +39,12 @@ public class PlayerUI : MonoBehaviour
         Equipment = UIManager.transform.GetChild(2).gameObject;
         Inventory = UIManager.transform.GetChild(3).gameObject;
         Dialogue = UIManager.transform.GetChild(5).gameObject.transform.GetChild(0).gameObject;
+        Shop = UIManager.transform.GetChild(7).gameObject;
         // 원래 위치 저장
         InventoryOriginalPosition = Inventory.GetComponent<RectTransform>().anchoredPosition;
         CharacterOriginalPosition = Character.GetComponent<RectTransform>().anchoredPosition;
         EquipmentOriginalPosition = Equipment.GetComponent<RectTransform>().anchoredPosition;
+        ShopOriginalPosition = Shop.GetComponent<RectTransform>().anchoredPosition;
     }
 
     public void OnInventory() {
@@ -112,6 +117,37 @@ public class PlayerUI : MonoBehaviour
     public void CloseDialogue() {
         if (Dialogue.activeSelf) {
             Dialogue.SetActive(false);
+        }
+    }
+
+    public void OpenShop() {
+        if (Shop == null || !PlayerManager.CanInput) {
+            return;
+        }
+        if (!Shop.activeSelf) {
+            Shop.SetActive(true);
+        }
+        if (!Inventory.activeSelf) { // 인벤토리 창도 같이 열기
+            OnInventory();
+        }
+        if (Dialogue.activeSelf) { // 대화창이 열려있으면 대화창 닫기
+            CloseDialogue();
+        }
+        // 원래 위치로 복원
+        Shop.GetComponent<RectTransform>().anchoredPosition = ShopOriginalPosition;
+        if (ShopButtonObject == null) {
+            ShopButtonObject = GameObject.Find("Shop Close Button");
+            ShopButton = ShopButtonObject.GetComponent<Button>();
+            ShopButton.onClick.AddListener(CloseShop);
+        }
+    }
+
+    public void CloseShop() {
+        if (Shop.activeSelf) {
+            Shop.SetActive(false);
+        }
+        if (Inventory.activeSelf) {
+            Inventory.SetActive(false);
         }
     }
 }

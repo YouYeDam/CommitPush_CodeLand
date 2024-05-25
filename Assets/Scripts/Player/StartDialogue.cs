@@ -73,9 +73,18 @@ public class StartDialogue : MonoBehaviour
     }
 
     void StartDialogueIfPossible(GameObject Npc) {
+        if (Npc.GetComponent<NPC>().IsShop) {
+            PlayerUI.OpenShop();
+            AddShopItem AddShopItem = Npc.GetComponent<AddShopItem>();
+            AddShopItem.SetContent();
+            AddShopItem.AddEachItem();
+        }
         Dialogue Dialogue = Npc.GetComponent<NPC>().Dialogue;
         if (Dialogue != null && DialogueController != null) {
             DialogueController.StartDialogue(Dialogue);
+            if (PlayerUI.Shop.activeSelf) { // 상점창이 열려있으면 상점창 닫기
+                PlayerUI.CloseShop();
+            }
             if (PlayerUI.DialogueButtonObject == null) {
                 PlayerUI.SetDialogueButton();
             }
