@@ -3238,7 +3238,7 @@ MonoBehaviour:
   miniMapCamera: {fileID: 3513347914862912944}
   canvas: {fileID: 1359014469}
   horizontalPadding: 2
-  bottomPadding: 40
+  bottomPadding: 60
 --- !u!114 &1015421283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7567,7 +7567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 185788154108197273, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 823755748117343754, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_Lens.OrthographicSize
@@ -7583,7 +7583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4950322
+      value: -0.48861873
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7660,6 +7660,22 @@ PrefabInstance:
     - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_CullingMask.m_Bits
       value: 258559
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -4231,7 +4231,7 @@ MonoBehaviour:
   miniMapCamera: {fileID: 1988254457}
   canvas: {fileID: 1978074750}
   horizontalPadding: 2
-  bottomPadding: 40
+  bottomPadding: 60
 --- !u!114 &372278124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10914,7 +10914,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 185788154108197273, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 823755748117343754, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_Lens.OrthographicSize
@@ -10930,7 +10930,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.49503314
+      value: -0.4886197
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10990,7 +10990,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: orthographic size
-      value: 11.72
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_BackGroundColor.b
@@ -11010,7 +11010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
-      value: 0.85
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8989922727866607182, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_NormalizedViewPortRect.y

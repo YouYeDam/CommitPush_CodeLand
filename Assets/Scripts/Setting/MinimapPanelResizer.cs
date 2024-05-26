@@ -10,7 +10,7 @@ public class MinimapPanelResizer : MonoBehaviour
     public Camera miniMapCamera;
     public Canvas canvas;
     public float horizontalPadding = 0f;
-    public float bottomPadding = 40f;
+    public float bottomPadding = 70f;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +50,8 @@ public class MinimapPanelResizer : MonoBehaviour
         mapNameRect.pivot = new Vector2(0.5f, 0);
         mapNameRect.sizeDelta = new Vector2(0, bottomPadding);
         mapNameRect.anchoredPosition = new Vector2(5f, -bottomPadding / 2 - 5f);
+
+        mapNameTMP.fontSize = 16;
 
     }
 }

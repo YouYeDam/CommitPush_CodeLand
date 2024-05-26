@@ -8893,7 +8893,7 @@ MonoBehaviour:
   miniMapCamera: {fileID: 3513347914862912944}
   canvas: {fileID: 1696339915}
   horizontalPadding: 2
-  bottomPadding: 60
+  bottomPadding: 90
 --- !u!114 &517442392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19069,11 +19069,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6118239
+      value: -0.60541046
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.338804
+      value: -2.338767
       objectReference: {fileID: 0}
     - target: {fileID: 3546177479845366616, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_ScreenY
