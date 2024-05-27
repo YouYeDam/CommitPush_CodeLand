@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Gaming Keyboard
+  m_EditorClassIdentifier: 
+  ItemName: "\uAC8C\uC774\uBC0D \uD0A4\uBCF4\uB4DC"
+  ItemCount: 1
+  ItemCost: 10
+  Type: 0
+  ItemImage: {fileID: 21300000, guid: 28d7817314f018d43945519567043c90, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: 2d963e917af93384c9cd3f8ddb130795, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uD0A4\uCEA1\uC774 \uBA87 \uAD70\uB370 \uBE60\uC9C4 \uB0A1\uC740 \uAC8C\uC774\uBC0D
+    \uD0A4\uBCF4\uB4DC\uC774\uB2E4.\n\n\uCC29\uC6A9 \uC2DC \uACF5\uACA9\uB825\uC774
+    1\uB9CC\uD07C \uC99D\uAC00\uD55C\uB2E4."
