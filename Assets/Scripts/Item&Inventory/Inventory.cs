@@ -23,8 +23,18 @@ public class Inventory : MonoBehaviour
                 {
                     if (Slots[i].Item.ItemName == Item.ItemName && Slots[i].ItemCount <= 99) // 아이템 이름이 같으면 갯수 더해주기
                     {
-                        Slots[i].SetSlotCount(Count);
-                        return;
+                        int TotalItemCount = Slots[i].ItemCount + Count;
+                        if (TotalItemCount <= 99)
+                        {
+                            Slots[i].SetSlotCount(Count);
+                            return;
+                        }
+                        else
+                        {
+                            int RemainingCount = TotalItemCount - 99;
+                            Slots[i].SetSlotCount(99 - Slots[i].ItemCount);
+                            Count = RemainingCount;
+                        }
                     }
                 }
             }
