@@ -20,6 +20,18 @@ public class PlayerData
     public TMP_Text PlayerNameInfoText;
     public GameObject PlayerNameInfoInstance;
     public int PlayerCurrentHP;
+    public int PlayerMaxHP;
+    public int PlayerCurrentMP;
+    public int PlayerMaxMP;
+    public int PlayerCurrentEXP;
+    public int PlayerMaxEXP;
+    public int PlayerATK;
+    public int PlayerDEF;
+    public float PlayerAP;
+    public float PlayerCrit;
+    public int LevelUpPoint;
+    public int Bit;
+    public int Snippet;
     public string sceneName; // 현재 씬 이름
     public GameObject playerPrefab;
     public Animator playerAnimator; // 이거 필요 없었던 거 같은데
@@ -34,6 +46,7 @@ public class SaveManager : MonoBehaviour
     private GameObject PauseMenuInstance = null;
     // public GameObject GameDataSlot;
     PlayerStatus playerStatus;
+    PlayerMoney playerMoney;
     public GameObject playerObject;
     GameObject uiManager;
     GameObject Character;
@@ -56,14 +69,16 @@ public class SaveManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             playerObject = GameObject.FindWithTag("Player");
+            Debug.Log("log10: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP ); 
             uiManager = GameObject.FindWithTag("UIManager");
             currentAniController = playerObject.GetComponent<Animator>().runtimeAnimatorController;
             if (playerObject != null)
             {
                 Vector3 playerPosition = playerObject.transform.position;
                 playerStatus = playerObject.GetComponent<PlayerStatus>();
+                playerMoney = playerObject.GetComponent<PlayerMoney>();
                 Debug.Log(playerStatus);
-                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController);
+                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController, playerMoney);
                 Debug.Log("플레이어 진행 상황이 저장되었습니다.");
             }
         }
@@ -90,7 +105,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void SavePlayerProgress(Vector3 playerPosition, string currentSceneName, PlayerStatus playerStatus, RuntimeAnimatorController currentAniController)
+    public void SavePlayerProgress(Vector3 playerPosition, string currentSceneName, PlayerStatus playerStatus, RuntimeAnimatorController currentAniController, PlayerMoney playerMoney)
     {
         PlayerData data = new PlayerData
         {
@@ -98,16 +113,28 @@ public class SaveManager : MonoBehaviour
             y = playerPosition.y,
             z = playerPosition.z,
             sceneName = currentSceneName, // 현재 씬 이름 저장
-
             PlayerLevel = playerStatus.PlayerLevel,
+            PlayerMaxHP = playerStatus.PlayerMaxHP,
             PlayerCurrentHP = playerStatus.PlayerCurrentHP, // 플레이어 체력 저장
+            PlayerMaxMP = playerStatus.PlayerMaxMP,
+            PlayerCurrentMP = playerStatus.PlayerCurrentMP,
+            PlayerMaxEXP = playerStatus.PlayerMaxEXP,
+            PlayerCurrentEXP = playerStatus.PlayerCurrentEXP,
             PlayerName = playerStatus.PlayerName,
             PlayerClass = playerStatus.PlayerClass,
             PlayerNameInfo = playerStatus.PlayerNameInfo,
             PlayerNameInfoText = playerStatus.PlayerNameInfoText,
             PlayerNameInfoInstance = playerStatus.PlayerNameInfoInstance,
+            PlayerATK = playerStatus.PlayerATK,
+            PlayerDEF = playerStatus.PlayerDEF,
+            PlayerAP = playerStatus.PlayerAP,
+            PlayerCrit = playerStatus.PlayerCrit,
+            LevelUpPoint = playerStatus.LevelUpPoint,
+            Bit = playerMoney.Bit,
+            Snippet = playerMoney.Snippet,
             runtimeAnimatorController = currentAniController
         };
+        Debug.Log("log5: Max Hp on saving: " + data.PlayerMaxHP);
         string json = JsonUtility.ToJson(data);
         string path = Path.Combine(Application.persistentDataPath, "playerData.json");
         File.WriteAllText(path, json);
@@ -123,19 +150,37 @@ public class SaveManager : MonoBehaviour
             playerObject = Instantiate(playerPrefab, new Vector3(data.x, data.y, data.z), Quaternion.identity);
             playerObject.name = playerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
+            playerObject.GetComponent<Animator>().runtimeAnimatorController = data.runtimeAnimatorController; // hell yeah
             playerObject.GetComponent<PlayerStatus>().PlayerLevel = data.PlayerLevel;
             playerObject.GetComponent<PlayerStatus>().PlayerCurrentHP = data.PlayerCurrentHP;
+            playerObject.GetComponent<PlayerStatus>().PlayerMaxHP = data.PlayerMaxHP;
+            playerObject.GetComponent<PlayerStatus>().PlayerCurrentMP = data.PlayerCurrentMP;
+            playerObject.GetComponent<PlayerStatus>().PlayerMaxMP = data.PlayerMaxMP;
+            playerObject.GetComponent<PlayerStatus>().PlayerCurrentEXP = data.PlayerCurrentEXP;
+            playerObject.GetComponent<PlayerStatus>().PlayerMaxEXP = data.PlayerMaxEXP;
             playerObject.GetComponent<PlayerStatus>().PlayerClass = data.PlayerClass;
-            playerObject.GetComponent<Animator>().runtimeAnimatorController = data.runtimeAnimatorController; // hell yeah
             playerObject.GetComponent<PlayerStatus>().PlayerName = data.PlayerName;
+            playerObject.GetComponent<PlayerStatus>().PlayerATK = data.PlayerATK;
+            playerObject.GetComponent<PlayerStatus>().PlayerDEF = data.PlayerDEF;
+            playerObject.GetComponent<PlayerStatus>().PlayerAP = data.PlayerAP;
+            playerObject.GetComponent<PlayerStatus>().PlayerCrit = data.PlayerCrit;
+            playerObject.GetComponent<PlayerStatus>().LevelUpPoint = data.LevelUpPoint;
+            playerObject.GetComponent<PlayerMoney>().Bit = data.Bit;
+            playerObject.GetComponent<PlayerMoney>().Snippet = data.Snippet;
+            Debug.Log("log6: Max Hp on instantiating: " + data.PlayerMaxHP);
+            Debug.Log("log7: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP ); 
         }
+            // PlayerAP
         if (uiManager == null)
+            // PlayerCrit
         {
+            // LevelUpPoint
             uiManager = Instantiate(uiManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             uiManager.name = uiManagerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(uiManager); // 씬 전환 시 파괴되지 않도록 설정
 
         }
+        Debug.Log("log8: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP ); 
 
         if (uiManager != null && data.PlayerNameInfo != null && data.PlayerNameInfoInstance == null)
         {
@@ -143,6 +188,7 @@ public class SaveManager : MonoBehaviour
             playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance = Instantiate(data.PlayerNameInfo, uiManager.transform);
             playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance.GetComponent<TMP_Text>().text = data.PlayerName;
         }
+        Debug.Log("log9: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP ); 
 
     }
 

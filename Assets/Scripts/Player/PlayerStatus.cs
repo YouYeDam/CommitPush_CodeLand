@@ -29,6 +29,7 @@ public class PlayerStatus : MonoBehaviour
     void Start() {
         PlayerCurrentHP = PlayerMaxHP;
         PlayerCurrentMP = PlayerMaxMP;
+        Debug.Log("log12: PlayerMaxHP on player status: " + PlayerMaxHP);
         UIManager = GameObject.Find("UIManager");
     }
     void LateUpdate() {
