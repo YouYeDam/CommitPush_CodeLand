@@ -194,5 +194,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyDelay: 1
-  EffectValue: 1
+  CoolDown: 0
+  MPUse: 0
+  BuffDuration: 0
   YSpeed: 0.5
+  IsStatusUpBuff: 0
+  HPBuff: 0
+  MPBuff: 0
+  ATKBuff: 0
+  DEFBuff: 0
+  APBuff: 0
+  CritBuff: 0

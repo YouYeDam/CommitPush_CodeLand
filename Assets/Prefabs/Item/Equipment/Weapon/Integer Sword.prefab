@@ -63,11 +63,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EquipmentType: "\uBB34\uAE30"
   RequireLevel: 5
+  EquipmentItemGrade: "\uC77C\uBC18"
   HPValue: 0
   MPValue: 0
   ATKValue: 6
   DEFValue: 0
-  APValue: 3
+  APValue: 0.06
   CritValue: 0
   PlayerStatus: {fileID: 0}
   Equipment: {fileID: 0}
@@ -182,7 +183,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0012007356, y: -0.0012007952}
+  m_Offset: {x: -0.0054033995, y: 0.0012007952}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -193,5 +194,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32469285, y: 0.32709432}
+  m_Size: {x: 0.6260774, y: 0.6320813}
   m_EdgeRadius: 0

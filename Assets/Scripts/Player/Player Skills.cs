@@ -13,15 +13,19 @@ public class PlayerSkills : MonoBehaviour
     PlayerStatus PlayerStatus;
     [SerializeField] GameObject NormalAttack;
     [SerializeField] GameObject QSkill;
+    [SerializeField] GameObject WSkill;
     [SerializeField] Transform SkillSpot;
     [SerializeField] Transform BuffSpot;
     [SerializeField] float GlobalCoolDown = 0.3f;
     [SerializeField] float QSkillCoolDown;
+    [SerializeField] float WSkillCoolDown;
     [SerializeField] float BackToIdleAnimTime = 0.2f;
 
     bool CanAttack = true;
     bool CanQSkill = true;
+    bool CanWSkill = true;
     int QSKillMPUse;
+    int WSKillMPUse;
     void Start() {
         MyAnimator = GetComponent<Animator>();
         MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
@@ -79,6 +83,33 @@ public class PlayerSkills : MonoBehaviour
             }
         }
     }
+
+    void OnWSkill() {
+        if (PlayerMovement.IsAlive == false || !PlayerManager.CanInput || WSkill == null || PlayerStatus.PlayerCurrentMP < WSKillMPUse) {
+            return;
+        }
+        bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
+        bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
+        bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
+        if (CanAttack && CanWSkill) {
+            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
+                Instantiate(WSkill, BuffSpot.position, transform.rotation);
+                MyAnimator.SetBool("IsBuffing", true);
+                CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
+                CanWSkill = false;
+                PlayerMovement.IsWalkingAllowed = false; // 스킬을 사용한 후 이동 멈춤 설정
+
+                PlayerStatus.PlayerCurrentMP -= WSKillMPUse;
+                if (PlayerStatus.PlayerCurrentMP < 0) {
+                    PlayerStatus.PlayerCurrentMP = 0;
+                }
+
+                Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
+                Invoke("RestWSkill", WSkillCoolDown); // 쿨다운 이후 RestQSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
+                Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
+            }
+        }
+    }
     void ResetCanAttack() {
         CanAttack = true;
     }
@@ -86,8 +117,12 @@ public class PlayerSkills : MonoBehaviour
     void RestQSkill() {
         CanQSkill = true;
     }
+    void RestWSkill() {
+        CanWSkill = true;
+    }
     void BackToIdleAnim() {
         MyAnimator.SetBool("IsAttacking", false);
+        MyAnimator.SetBool("IsBuffing", false);
     }
 
 
@@ -95,6 +130,9 @@ public class PlayerSkills : MonoBehaviour
     void SetSkillsCoolTime() {
         PlayerAttackSkill PlayerQAttackSkill = QSkill.GetComponent<PlayerAttackSkill>();
         PlayerBuffSkill PlayerQBuffSkill = QSkill.GetComponent<PlayerBuffSkill>();
+        PlayerAttackSkill PlayerWAttackSkill = WSkill.GetComponent<PlayerAttackSkill>();
+        PlayerBuffSkill PlayerWBuffSkill = WSkill.GetComponent<PlayerBuffSkill>();
+
         if (PlayerQAttackSkill != null) {
             QSkillCoolDown = PlayerQAttackSkill.CoolDown;
             QSKillMPUse = PlayerQAttackSkill.MPUse;
@@ -102,6 +140,15 @@ public class PlayerSkills : MonoBehaviour
         else if (PlayerQBuffSkill != null) {
             QSkillCoolDown = PlayerQBuffSkill.CoolDown;
             QSKillMPUse = PlayerQBuffSkill.MPUse;
+        }
+
+        if (PlayerWAttackSkill != null) {
+            WSkillCoolDown = PlayerWAttackSkill.CoolDown;
+            WSKillMPUse = PlayerWAttackSkill.MPUse;
+        }
+        else if (PlayerWBuffSkill != null) {
+            WSkillCoolDown = PlayerWBuffSkill.CoolDown;
+            WSKillMPUse = PlayerWBuffSkill.MPUse;
         }
     }
 }

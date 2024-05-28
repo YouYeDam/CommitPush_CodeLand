@@ -5,19 +5,30 @@ using UnityEngine;
 public class PlayerBuffSkill : MonoBehaviour
 {
     [SerializeField] float DestroyDelay = 0.5f;
-    [SerializeField] int EffectValue = 1;
-    Rigidbody2D MyRigidbody;
-    PlayerStatus PlayerStatus;
     GameObject Player;
-    public float CoolDown = 30f;
+    PlayerStatus PlayerStatus;
+    PlayerBuffController PlayerBuffController;
+    public float CoolDown = 60f;
     public int MPUse = 0;
+    public float BuffDuration = 0f;
     float PlayerX;
     [SerializeField] float YSpeed;
+    
+    [SerializeField] bool IsStatusUpBuff = false; //스탯업 버프인지
+    [SerializeField] int HPBuff = 0;
+    [SerializeField] int MPBuff = 0;
+    [SerializeField] int ATKBuff = 0;
+    [SerializeField] int DEFBuff = 0;
+    [SerializeField] int APBuff = 0;
+    [SerializeField] int CritBuff = 0;
 
     void Start() {
-        MyRigidbody = GetComponent<Rigidbody2D>();
-        PlayerStatus = FindObjectOfType<PlayerStatus>();
         Player = GameObject.FindGameObjectWithTag("Player");
+        PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+        PlayerBuffController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBuffController>();
+
+        CheckBuffType(); // 버프 타입 체크
+
         Invoke("DestroySelf", DestroyDelay); 
     }
 
@@ -32,8 +43,10 @@ public class PlayerBuffSkill : MonoBehaviour
         transform.position = new Vector3(playerX, NewY, transform.position.z);
     }
 
-    void SkillEffect() {
-        PlayerStatus.PlayerATK *= EffectValue;
+    void CheckBuffType() {
+        if (IsStatusUpBuff) {
+            PlayerBuffController.PlayerStatusUp(BuffDuration, HPBuff, MPBuff, ATKBuff, DEFBuff, APBuff, CritBuff);
+        }
     }
     void DestroySelf() {
             Destroy(gameObject);

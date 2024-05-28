@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Char Knuckle
+  m_EditorClassIdentifier: 
+  ItemName: "\uCC60 \uB108\uD074"
+  ItemCount: 1
+  ItemCost: 720
+  Type: 0
+  ItemImage: {fileID: 21300000, guid: 23d95914f91439542b3b04bbd683a1a6, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: 06511be5da72d8f4ab185ab3fc1ba0a9, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uBB38\uC790 \uC790\uB8CC\uD615 \uCC60\uB97C \uBCF8\uB530 \uB9CC\uB4E0
+    \uAC15\uCCA0 \uB108\uD074\uC774\uB2E4.\r\n\r\n\uCC29\uC6A9 \uC2DC \uACF5\uACA9\uB825\uC774
+    3\uB9CC\uD07C, \uAC00\uC18D\uB825\uC774 18\uB9CC\uD07C \uC99D\uAC00\uD55C\uB2E4.\r\n\r\n\uBB38\uC790
+    \uC790\uB8CC\uD615 'char'\uB294 \uD504\uB85C\uADF8\uB798\uBC0D\uC5D0\uC11C \uB2E8\uC77C
+    \uBB38\uC790\uB97C \uC800\uC7A5\uD558\uB294 \uB370 \uC0AC\uC6A9\uB418\uB294 \uC790\uB8CC\uD615
+    \uC911 \uD558\uB098\uC774\uB2E4. \uBCF4\uD1B5 1\uBC14\uC774\uD2B8\uC758 \uD06C\uAE30\uB97C
+    \uAC00\uC9C4\uB2E4. 'char'\uC758 \uBC1C\uC74C\uC740 \uC560\uB9E4\uBAA8\uD638\uD574
+    \uAC1C\uBC1C\uC790\uB4E4\uB3C4 \uB2E4\uC591\uD55C \uBC1C\uC74C\uC73C\uB85C \uBD80\uB978\uB2E4."

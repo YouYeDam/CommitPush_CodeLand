@@ -87,6 +87,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Tunnel",
+                    "type": "Button",
+                    "id": "e82e51c2-4d47-4b74-ac18-afb8e8b29c06",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "QSkill",
                     "type": "Button",
                     "id": "bc77ef9e-327f-4bd9-b993-4f3dade06db1",
@@ -96,9 +105,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Tunnel",
+                    "name": "WSkill",
                     "type": "Button",
-                    "id": "e82e51c2-4d47-4b74-ac18-afb8e8b29c06",
+                    "id": "3b6439e6-50f7-4899-baad-063df4b800ca",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -350,23 +359,34 @@
                 },
                 {
                     "name": "",
-                    "id": "9e517fb7-eaf4-4ab4-888c-7f31f9f04ff6",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "QSkill",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4a5aee4a-5fda-4099-80e1-7f1a97999b78",
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Tunnel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e58e36d0-c974-4d68-bafa-5d2c12d83040",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e517fb7-eaf4-4ab4-888c-7f31f9f04ff6",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "QSkill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

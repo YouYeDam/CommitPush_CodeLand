@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 1652058328434829399}
   - component: {fileID: 6252826259264600955}
   - component: {fileID: 7763548691440157341}
+  - component: {fileID: 4736015717296487049}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -398,7 +399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MyAnimator: {fileID: 0}
   IsWalkingAllowed: 1
-  targetLayerMask:
+  TargetLayerMask:
     serializedVersion: 2
     m_Bits: 0
   IsAlive: 1
@@ -421,10 +422,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalAttack: {fileID: 8885825609034438207, guid: 7796c015e9a8dbb438ab721afee996c1, type: 3}
   QSkill: {fileID: 8885825609034438207, guid: ca446e7c5ca234d45960607dc8b2e268, type: 3}
+  WSkill: {fileID: 8885825609034438207, guid: 08eb687b78a4fb3499dae1134b6121a8, type: 3}
   SkillSpot: {fileID: 1635159961687940443}
-  BuffSpot: {fileID: 0}
+  BuffSpot: {fileID: 4214793044141808167}
   GlobalCoolDown: 0.3
   QSkillCoolDown: 0
+  WSkillCoolDown: 0
   BackToIdleAnimTime: 0.2
 --- !u!114 &2205046119036907785
 MonoBehaviour:
@@ -443,6 +446,8 @@ MonoBehaviour:
   Character: {fileID: 0}
   Equipment: {fileID: 0}
   Dialogue: {fileID: 0}
+  Shop: {fileID: 0}
+  ShopButtonObject: {fileID: 0}
   DialogueButtonObject: {fileID: 0}
 --- !u!114 &5045011585957937535
 MonoBehaviour:
@@ -457,6 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UICanvas: {fileID: 0}
+  InventoryScript: {fileID: 0}
 --- !u!114 &4620007604820390355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,6 +533,18 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   DamageBar: {fileID: 6382830084018992234, guid: e22d1cf4b2a941743a8d9137ce366cf0, type: 3}
   DamageBarInstance: {fileID: 0}
+--- !u!114 &4736015717296487049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902140102076735292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2519ff8b769a83243a8ab4645c18f99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7569024645267090874
 GameObject:
   m_ObjectHideFlags: 0
