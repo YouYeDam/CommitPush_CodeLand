@@ -18,6 +18,8 @@ TagManager:
   - TempInfo
   - LadderGroundForMonster
   - Tunnel
+  - UIManager
+  - SoundManager
   layers:
   - Default
   - TransparentFX
