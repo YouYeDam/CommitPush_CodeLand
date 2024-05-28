@@ -16,6 +16,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public ItemQuickSlot QuickSlotReference;
     ItemToolTip ItemToolTip;
     PlayerMovement PlayerMovement;
+    PlayerStatus PlayerStatus;
     PlayerMoney PlayerMoney;
     [SerializeField] TMP_Text TextCount;
     [SerializeField] GameObject CountImage;
@@ -38,6 +39,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
         
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
         PlayerMoney  = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
     }
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
@@ -211,7 +213,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         if (Item.Type == Item.ItemType.Used) // 소비 아이템시 실행
         {
             UsedItem UsedItem = Item.ItemPrefab.GetComponent<UsedItem>();
-            UsedItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+            UsedItem.PlayerStatus = PlayerStatus;
             if (UsedItem != null)
             {
                 UsedItem.EffectItem();
@@ -221,11 +223,16 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         else if (Item.Type == Item.ItemType.Equipment) // 장비 아이템시 실행
         {
             EquipmentItem EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
-            EquipmentItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+            EquipmentItem.PlayerStatus = PlayerStatus;
             if (EquipmentItem != null)
             {
-                EquipmentItem.EquipItem(Item);
-                ClearSlot();
+                if (PlayerStatus.PlayerLevel > EquipmentItem.RequireLevel) {
+                    EquipmentItem.EquipItem(Item);
+                    ClearSlot();
+                }
+                else {
+                    return;
+                }
             }
         }
     }

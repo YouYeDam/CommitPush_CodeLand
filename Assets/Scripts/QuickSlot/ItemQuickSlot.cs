@@ -148,7 +148,7 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         }
     }
-    public void UseItem() // 슬롯 더블클릭
+    public void UseItem() // 아이템 사용
     {
         if (Item == null || !PlayerMovement.IsAlive) {
             return;
