@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7071375704911589134
+--- !u!1 &8550988904389216802
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 478891392632186724}
-  - component: {fileID: 2874374701854324121}
+  - component: {fileID: 2326338573029836937}
+  - component: {fileID: 4851175910022436608}
   m_Layer: 0
   m_Name: SaveManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &478891392632186724
+--- !u!4 &2326338573029836937
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7071375704911589134}
+  m_GameObject: {fileID: 8550988904389216802}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,21 +32,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2874374701854324121
+--- !u!114 &4851175910022436608
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7071375704911589134}
+  m_GameObject: {fileID: 8550988904389216802}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afb45780556494ae689767d87477bd96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
-  uiManagerPrefab: {fileID: 0}
-  PaueseMenu: {fileID: 0}
-  GameDataSlot: {fileID: 0}
-  playerObject: {fileID: 0}
+  playerPrefab: {fileID: 902140102076735292, guid: 0679ff1bc9f5e074ebb2ef3ec1101871, type: 3}
+  uiManagerPrefab: {fileID: 2327944111166365452, guid: 46af2769a13de3c4c9250f6736cf5288, type: 3}
+  PaueseMenu: {fileID: 8387125697714015322, guid: fcca88685be6b421e9b53983638dc74a, type: 3}
+  playerObject: {fileID: 902140102076735292, guid: 0679ff1bc9f5e074ebb2ef3ec1101871, type: 3}
   currentAniController: {fileID: 0}
