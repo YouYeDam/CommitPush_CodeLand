@@ -62,13 +62,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EquipmentType: "\uC2E0\uBC1C"
-  RequireLevel: 1
+  RequireLevel: 3
   EquipmentItemGrade: "\uC77C\uBC18"
-  HPValue: 0
+  HPValue: 20
   MPValue: 0
   ATKValue: 0
-  DEFValue: 2
-  APValue: 0.04
+  DEFValue: 1
+  APValue: 0.06
   CritValue: 0
   PlayerStatus: {fileID: 0}
   Equipment: {fileID: 0}

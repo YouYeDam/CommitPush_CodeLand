@@ -24,13 +24,14 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if (ToolTipObject != null) {
         ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
         }
+    }
 
+    public void ConnectUIManager() {
         UICanvas = GameObject.Find("UIManager");
         if (UICanvas != null) {
             InventoryScript = UICanvas.GetComponent<Inventory>();
         }
     }
-
     public void InitialEquip() {
             if (Item != null) { // 초기 아이템 설정
             EquipmentItem EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();

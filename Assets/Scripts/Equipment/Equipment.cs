@@ -15,12 +15,27 @@ public class Equipment : MonoBehaviour
 
     void Start() {
         HelmetSlot.InitialEquip();
+        HelmetSlot.ConnectUIManager();
+
         BodySlot.InitialEquip();
+        BodySlot.ConnectUIManager();
+
         PantsSlot.InitialEquip();
+        PantsSlot.ConnectUIManager();
+
         WeaponSlot.InitialEquip();
+        WeaponSlot.ConnectUIManager();
+
         GloveSlot.InitialEquip();
+        GloveSlot.ConnectUIManager();
+
         ShoesSlot.InitialEquip();
+        ShoesSlot.ConnectUIManager();
+
         PetSlot.InitialEquip();
+        PetSlot.ConnectUIManager();
+
         TrinketSlot.InitialEquip();
+        TrinketSlot.ConnectUIManager();
     }
 }

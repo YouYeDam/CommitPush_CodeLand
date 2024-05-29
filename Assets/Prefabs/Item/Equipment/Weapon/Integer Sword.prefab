@@ -66,7 +66,7 @@ MonoBehaviour:
   EquipmentItemGrade: "\uC77C\uBC18"
   HPValue: 0
   MPValue: 0
-  ATKValue: 6
+  ATKValue: 5
   DEFValue: 0
   APValue: 0.06
   CritValue: 0

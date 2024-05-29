@@ -66,9 +66,9 @@ MonoBehaviour:
   EquipmentItemGrade: "\uC77C\uBC18"
   HPValue: 0
   MPValue: 0
-  ATKValue: 3
+  ATKValue: 2
   DEFValue: 0
-  APValue: 0.1
+  APValue: 0.08
   CritValue: 0
   PlayerStatus: {fileID: 0}
   Equipment: {fileID: 0}
