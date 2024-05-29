@@ -203,10 +203,12 @@ public class SaveManager : MonoBehaviour
             uiManager = Instantiate(uiManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             uiManager.name = uiManagerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(uiManager); // 씬 전환 시 파괴되지 않도록 설정
-            // for(int i = 0; i < slots.Length; i++){ // 여기서 문제가 생긴다. 다음 작업은 여기서부터...
-            //     if(data.items[i].name != null){
-            // uiManager.GetComponentInChildren<Slot>(true).AddItem(data.items[i], data.itemCounts[i]);}}
-
+            for(int i = 0; i < data.items.Length; i++){ 
+                if(data.items[i] != null){
+                    uiManager.GetComponentsInChildren<Slot>(true)[i].AddItem(data.items[i], data.itemCounts[i]);
+                    Debug.Log("Item name of " + i + " " + data.items[i].name);
+                }
+            }
         }
         Debug.Log("log8: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP ); 
 
