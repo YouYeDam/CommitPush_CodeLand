@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3519783608232367046}
   - component: {fileID: 4696956795978963348}
   - component: {fileID: -5925642797384708847}
+  - component: {fileID: -5923812138342739028}
   m_Layer: 8
   m_Name: Hello World
   m_TagString: Untagged
@@ -205,3 +206,16 @@ MonoBehaviour:
   DEFBuff: 5
   APBuff: 0
   CritBuff: 0
+--- !u!114 &-5923812138342739028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885825609034438207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f90e74095945254288b32782f8612cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillName: "\uD5EC\uB85C \uC6D4\uB4DC"

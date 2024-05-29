@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject StatusBar;
-    [SerializeField] GameObject QuickSlot;
+    [SerializeField] GameObject ItemQuickSlot;
+    [SerializeField] GameObject SkillQuickSlot;
     
     public void Awake()
     {
@@ -15,8 +16,9 @@ public class UIManager : MonoBehaviour
     }
 
     public void Start() {
-        StatusBar = gameObject.transform.GetChild(4).gameObject;
-        QuickSlot = gameObject.transform.GetChild(0).gameObject;
+        StatusBar = gameObject.transform.GetChild(7).gameObject;
+        ItemQuickSlot = gameObject.transform.GetChild(0).gameObject;
+        SkillQuickSlot = gameObject.transform.GetChild(1).gameObject;
     }
     private void OnDestroy()
     {
@@ -47,15 +49,17 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        // 씬이 로드될 때 플레이어 인풋이 막힌 상황이면 Player Status Bar도 비활성화
+        // 씬이 로드될 때 플레이어 인풋이 막힌 상황이면 스테이터스바, 퀵슬롯들도 비활성화
         GameObject StopPlayerInput = GameObject.FindWithTag("StopPlayerInput");
         if (StopPlayerInput != null) {
             StatusBar.SetActive(false);
-            QuickSlot.SetActive(false);
+            ItemQuickSlot.SetActive(false);
+            SkillQuickSlot.SetActive(false);
         }
         else {
             StatusBar.SetActive(true);
-            QuickSlot.SetActive(true);
+            ItemQuickSlot.SetActive(true);
+            SkillQuickSlot.SetActive(true);
         }
     }
 

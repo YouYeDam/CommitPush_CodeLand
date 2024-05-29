@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Skill",
+                    "type": "Button",
+                    "id": "4bbf05fd-9ff3-4f23-9b69-6f05aef2abc9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Equipment",
                     "type": "Button",
                     "id": "df7f144c-ab56-4987-9678-20d4f928787a",
@@ -108,6 +117,42 @@
                     "name": "WSkill",
                     "type": "Button",
                     "id": "3b6439e6-50f7-4899-baad-063df4b800ca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ESkill",
+                    "type": "Button",
+                    "id": "0d7860a4-abca-48af-a1eb-cf0ad26b8c8a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RSkill",
+                    "type": "Button",
+                    "id": "98faedef-60ef-45dc-9d5c-2b4c5b656cf7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SSkill",
+                    "type": "Button",
+                    "id": "726dbe63-f0f7-4fd3-a064-4d1db99c5f50",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DSkill",
+                    "type": "Button",
+                    "id": "8d6a95d0-7dfc-4cbf-9305-1ba4f42e852a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -387,6 +432,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "QSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "acfe998b-aec9-4cbd-b449-08185c0b0282",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e16dc403-69ba-479e-a18e-524ed43870e8",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ESkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0216d768-8354-42fa-9aae-784d3ce908d2",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b9c8010-1ff2-4a02-9f87-b4b7ef90feea",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f1fddb82-4cb3-4361-980a-4309d9c3bd41",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DSkill",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

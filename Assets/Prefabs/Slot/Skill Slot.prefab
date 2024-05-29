@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7544580938878496901}
   - component: {fileID: 7314548888441073289}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Skill NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,10 +99,10 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 5
+  m_characterSpacing: 10
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 7707499207254116886}
   - component: {fileID: 5497334905204475389}
   m_Layer: 5
-  m_Name: Skill Info Background
+  m_Name: Skill Name Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 7743696169550890403}
   - component: {fileID: 2705164957936398351}
   - component: {fileID: 5082835151661835501}
-  - component: {fileID: 2077729562710040530}
+  - component: {fileID: 4369965576679285313}
   m_Layer: 5
   m_Name: Skill Slot
   m_TagString: Untagged
@@ -288,7 +288,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2077729562710040530
+--- !u!114 &4369965576679285313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,18 +297,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5086997239477778314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 871c5dd46f287a3448957d188aa0535d, type: 3}
+  m_Script: {fileID: 11500000, guid: eb29370c091ebc94da231ddd44ef2d99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 0}
-  ItemCount: 0
-  ItemImage: {fileID: 965319633467504896}
-  DropItemInputNumber: {fileID: 0}
-  SellItemInputField: {fileID: 0}
-  QuickSlotReference: {fileID: 0}
-  TextCount: {fileID: 0}
-  CountImage: {fileID: 0}
-  IsSyncing: 0
+  SkillImage: {fileID: 965319633467504896}
+  SkillPrefab: {fileID: 0}
+  SkillNameText: {fileID: 7314548888441073289}
+  SkillName: 
 --- !u!1 &5630727234703395444
 GameObject:
   m_ObjectHideFlags: 0

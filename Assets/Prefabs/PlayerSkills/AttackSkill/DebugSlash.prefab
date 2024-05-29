@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2615267158344992849}
   - component: {fileID: 3519783608232367046}
   - component: {fileID: -2769534496952994686}
+  - component: {fileID: -1100430982042493478}
   - component: {fileID: 4696956795978963348}
   m_Layer: 8
   m_Name: DebugSlash
@@ -77,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 794951137
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: -964029519, guid: f1527df6a7b206f42b9d43322e9d9bb7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5400bf50a16019740b934637ed18be0f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -151,7 +152,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.0400001, y: 1.0009766}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 1.2615579, y: 0.69249994}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -179,6 +180,23 @@ MonoBehaviour:
   CoolDown: 3.5
   MPUse: 25
   DestroyTime: 0.4
+--- !u!114 &-1100430982042493478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885825609034438207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f90e74095945254288b32782f8612cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillName: "\uB514\uBC84\uADF8 \uC2AC\uB798\uC2DC"
+  SkillType: "\uACF5\uACA9\uD615"
+  SkillMPUse: 25
+  SkillCoolDown: "3.5\uCD08"
+  SkillExplain: "\uB514\uBC84\uADF8 \uC2AC\uB798\uC2DC\uC774\uB2E4."
 --- !u!95 &4696956795978963348
 Animator:
   serializedVersion: 5

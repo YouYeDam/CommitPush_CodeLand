@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2615267158344992849}
   - component: {fileID: 3519783608232367046}
   - component: {fileID: -2769534496952994686}
+  - component: {fileID: -2015121379850043125}
   - component: {fileID: 4696956795978963348}
   m_Layer: 8
   m_Name: Normal Attack
@@ -179,6 +180,19 @@ MonoBehaviour:
   CoolDown: 3
   MPUse: 0
   DestroyTime: 0.1
+--- !u!114 &-2015121379850043125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8885825609034438207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f90e74095945254288b32782f8612cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillName: "\uAE30\uBCF8 \uACF5\uACA9"
 --- !u!95 &4696956795978963348
 Animator:
   serializedVersion: 5

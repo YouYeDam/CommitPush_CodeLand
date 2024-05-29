@@ -421,8 +421,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalAttack: {fileID: 8885825609034438207, guid: 7796c015e9a8dbb438ab721afee996c1, type: 3}
-  QSkill: {fileID: 8885825609034438207, guid: ca446e7c5ca234d45960607dc8b2e268, type: 3}
-  WSkill: {fileID: 8885825609034438207, guid: 08eb687b78a4fb3499dae1134b6121a8, type: 3}
+  QSkill: {fileID: 0}
+  WSkill: {fileID: 0}
   SkillSpot: {fileID: 1635159961687940443}
   BuffSpot: {fileID: 4214793044141808167}
   GlobalCoolDown: 0.3
@@ -444,6 +444,7 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   Inventory: {fileID: 0}
   Character: {fileID: 0}
+  Skill: {fileID: 0}
   Equipment: {fileID: 0}
   Dialogue: {fileID: 0}
   Shop: {fileID: 0}
