@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     DyingCheck DyingCheck;
     public Animator MyAnimator;
     public bool IsWalkingAllowed = true;
-    public LayerMask targetLayerMask;
+    public LayerMask TargetLayerMask;
 
     public bool IsAlive = true;
     bool IsInvincible = false;

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Semicolon Warglaive
+  m_EditorClassIdentifier: 
+  ItemName: "\uC138\uBBF8\uCF5C\uB860"
+  ItemCount: 1
+  ItemCost: 2250
+  Type: 0
+  ItemImage: {fileID: 21300000, guid: b2b413a23ee073846af143c3f1a7ad55, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: 02fd93147158c8c46adc8846c7c5f94b, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uC138\uBBF8\uCF5C\uB860\uC744 \uD615\uC0C1\uD654\uD55C \uC804\uD22C\uAC80\uC774\uB2E4.
+    \uC219\uB828\uB41C \uAC1C\uBC1C\uC790\uAC00 \uB418\uAE30 \uC704\uD574 \uD55C
+    \uBC88\uCBE4 \uAC70\uCCD0\uAC00\uB294 \uBB34\uAE30\uB85C, \uB2E4\uB8E8\uAE30
+    \uC5B4\uB835\uC9C0\uB294 \uC54A\uC9C0\uB9CC \uCD08\uBCF4 \uAC1C\uBC1C\uC790\uB77C\uBA74
+    \uC2E4\uC218\uD558\uAE30 \uC26C\uC6CC \uC8FC\uC758\uAC00 \uD544\uC694\uD558\uB2E4.\r\n\r\n\uCC29\uC6A9
+    \uC2DC \uACF5\uACA9\uB825\uC774 13\uB9CC\uD07C, \uAC00\uC18D\uB825\uC774 10\uB9CC\uD07C
+    \uC99D\uAC00\uD55C\uB2E4.\r\n\r\n\uC138\uBBF8\uCF5C\uB860\uC740 \uD504\uB85C\uADF8\uB798\uBC0D\uC5D0\uC11C
+    \uBA85\uB839\uBB38\uC758 \uB05D\uC744 \uB098\uD0C0\uB0B4\uB294 \uC911\uC694\uD55C
+    \uAD6C\uBB38 \uC694\uC18C\uC774\uB2E4. \uC8FC\uB85C C, C++, Java, JavaScript
+    \uB4F1 \uB9CE\uC740 \uC5B8\uC5B4\uC5D0\uC11C \uC0AC\uC6A9\uB41C\uB2E4. \uC138\uBBF8\uCF5C\uB860\uC774
+    \uBE60\uC9C0\uBA74 \uBB38\uBC95 \uC624\uB958\uAC00 \uBC1C\uC0DD\uD560 \uC218
+    \uC788\uC5B4, \uC815\uD655\uD55C \uC0AC\uC6A9\uC774 \uC911\uC694\uD558\uB2E4."

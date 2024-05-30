@@ -303,6 +303,8 @@ MonoBehaviour:
     SpawnProbability: 0.2
   - ItemPrefab: {fileID: 4338472210403635751, guid: 5aace9a2a57df6642ac53e2059441b7f, type: 3}
     SpawnProbability: 0.1
+  - ItemPrefab: {fileID: 4338472210403635751, guid: 06511be5da72d8f4ab185ab3fc1ba0a9, type: 3}
+    SpawnProbability: 0.03
   MonsterBit: 13
   MonsterSnippet: 0
 --- !u!114 &-8855345390103764750

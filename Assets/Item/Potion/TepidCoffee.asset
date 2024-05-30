@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: "\uBBF8\uC9C0\uADFC\uD55C \uCEE4\uD53C"
   ItemCount: 1
-  ItemCost: 30
+  ItemCost: 20
   Type: 1
   ItemImage: {fileID: 21300000, guid: b3b6862280aa5044b9ff67a26bcd9e5e, type: 3}
   ItemPrefab: {fileID: 4338472210403635751, guid: e3bd7ef95c002f8478b90bfbe69e738c, type: 3}

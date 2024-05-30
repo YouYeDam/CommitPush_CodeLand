@@ -9,7 +9,7 @@ public class Item : ScriptableObject
     {
         Equipment, // 장비
         Used, // 소비
-        Quest, // 퀘스트
+        SourceCode, // 소스코드
         ETC, //기타
     }
 

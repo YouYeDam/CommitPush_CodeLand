@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour
     
     public void AcquireItem(Item Item, int Count = 1) // 아이템 획득
     {
-        if(Item.ItemType.Equipment != Item.Type)
+        if(Item.ItemType.Used == Item.Type || Item.ItemType.ETC == Item.Type)
         {
             for (int i = 0; i < Slots.Length; i++)
             {

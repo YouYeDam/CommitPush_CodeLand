@@ -8,23 +8,27 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject UIManager;
     [SerializeField] GameObject Inventory;
     [SerializeField] GameObject Character;
+    [SerializeField] GameObject Skill;
     [SerializeField] GameObject Equipment;
     [SerializeField] GameObject Dialogue;
     [SerializeField] public GameObject Shop;
     PlayerManager PlayerManager;
     private Vector2 InventoryOriginalPosition;
     private Vector2 CharacterOriginalPosition;
+    private Vector2 SkillOriginalPosition;
     private Vector2 EquipmentOriginalPosition;
     private Vector2 ShopOriginalPosition;
 
     GameObject InventoryButtonObject;
     GameObject CharacterButtonObject;
+    GameObject SkillButtonObject;
     GameObject EquipmentButtonObject;
     public GameObject ShopButtonObject;
     public GameObject DialogueButtonObject;
 
     Button InventoryButton;
     Button CharacterButton;
+    Button SkillButton;
     Button EquipmentButton;
     Button DialogueButton;
     Button ShopButton;
@@ -35,15 +39,18 @@ public class PlayerUI : MonoBehaviour
         PlayerLevelUpController = GetComponent<PlayerLevelUpController>();
         PlayerManager = GetComponent<PlayerManager>();
         UIManager = GameObject.Find("UIManager");
-        Character = UIManager.transform.GetChild(1).gameObject;
-        Equipment = UIManager.transform.GetChild(2).gameObject;
-        Inventory = UIManager.transform.GetChild(3).gameObject;
-        Dialogue = UIManager.transform.GetChild(5).gameObject.transform.GetChild(0).gameObject;
-        Shop = UIManager.transform.GetChild(7).gameObject;
+        Character = UIManager.transform.GetChild(2).gameObject;
+        Skill = UIManager.transform.GetChild(3).gameObject;
+        Equipment = UIManager.transform.GetChild(4).gameObject;
+        Inventory = UIManager.transform.GetChild(5).gameObject;
+        Dialogue = UIManager.transform.GetChild(8).gameObject.transform.GetChild(0).gameObject;
+        Shop = UIManager.transform.GetChild(6).gameObject;
+
         // 원래 위치 저장
-        InventoryOriginalPosition = Inventory.GetComponent<RectTransform>().anchoredPosition;
         CharacterOriginalPosition = Character.GetComponent<RectTransform>().anchoredPosition;
+        SkillOriginalPosition = Skill.GetComponent<RectTransform>().anchoredPosition;
         EquipmentOriginalPosition = Equipment.GetComponent<RectTransform>().anchoredPosition;
+        InventoryOriginalPosition = Inventory.GetComponent<RectTransform>().anchoredPosition;
         ShopOriginalPosition = Shop.GetComponent<RectTransform>().anchoredPosition;
     }
 
@@ -88,6 +95,27 @@ public class PlayerUI : MonoBehaviour
             }
         }
     }
+    public void OnSkill() {
+        if (Skill == null || !PlayerManager.CanInput) {
+            return;
+        }
+        if (Skill.activeSelf) {
+            Skill.SetActive(false);
+        }
+        else {
+            Skill.SetActive(true);
+            // 원래 위치로 복원
+            Skill.GetComponent<RectTransform>().anchoredPosition = SkillOriginalPosition;
+
+            // 닫기 버튼 연결
+            if (SkillButtonObject == null) {
+                SkillButtonObject = GameObject.Find("Skill Close Button");
+                SkillButton = SkillButtonObject.GetComponent<Button>();
+                SkillButton.onClick.AddListener(OnSkill);
+            }
+        }
+    }
+
     public void OnEquipment() {
         if (Equipment == null || !PlayerManager.CanInput) {
             return;

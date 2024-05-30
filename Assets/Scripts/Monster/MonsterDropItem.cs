@@ -18,6 +18,7 @@ public class MonsterDropItem : MonoBehaviour {
     [SerializeField] public int MonsterBit = 0;
     [SerializeField] public int MonsterSnippet = 0;
     void Start() {
+        GroundLayer = LayerMask.GetMask("Ground");
         MonsterBit = Mathf.FloorToInt(MonsterBit * Random.Range(1.0f, 1.51f));
     }
     void Update() {
@@ -65,12 +66,12 @@ public class MonsterDropItem : MonoBehaviour {
     }
 
     // 레이캐스트를 이용해 Ground 레이어가 근처에 있는지 검사하는 메서드
-    private bool IsGroundNearby(Vector3 position) {
-        float CheckDistance = 3.0f; // 검사할 거리
-        RaycastHit Hit;
-        // 좌우로 레이캐스트
-        if (Physics.Raycast(position, Vector3.right, out Hit, CheckDistance, GroundLayer) ||
-            Physics.Raycast(position, Vector3.left, out Hit, CheckDistance, GroundLayer)) {
+    bool IsGroundNearby(Vector3 position) {
+        float CheckDistance = 0.6f; // 검사할 거리
+        RaycastHit2D HitRight = Physics2D.Raycast(position, Vector2.right, CheckDistance, GroundLayer);
+        RaycastHit2D HitLeft = Physics2D.Raycast(position, Vector2.left, CheckDistance, GroundLayer);
+
+        if (HitRight.collider != null || HitLeft.collider != null) {
             return true;
         }
         return false;

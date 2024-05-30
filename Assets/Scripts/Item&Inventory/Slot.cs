@@ -16,9 +16,14 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public ItemQuickSlot QuickSlotReference;
     ItemToolTip ItemToolTip;
     PlayerMovement PlayerMovement;
+    PlayerStatus PlayerStatus;
     PlayerMoney PlayerMoney;
     [SerializeField] TMP_Text TextCount;
     [SerializeField] GameObject CountImage;
+
+    // 스킬북 기능 구현 변수
+    [SerializeField] private GameObject SkillContent;  // 스킬 슬롯의 부모인 Content
+    private SkillSlot[] SkillSlots;  // 스킬 슬롯들 배열
 
     // 더블클릭 기능 구현 변수
     private int ClickCount = 0;
@@ -38,7 +43,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
         
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
         PlayerMoney  = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
+
+        SkillSlots = SkillContent.GetComponentsInChildren<SkillSlot>();
+
     }
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
         Color Color = ItemImage.color;
@@ -52,7 +61,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         ItemImage.sprite = this.Item.ItemImage;
         QuickSlotReference = QuickSlot;
 
-        if (this.Item.Type != Item.ItemType.Equipment)
+        if (this.Item.Type == Item.ItemType.Used || this.Item.Type == Item.ItemType.ETC)
         {
             CountImage.SetActive(true);
             TextCount.text = ItemCount.ToString();
@@ -89,7 +98,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
         TextCount.text = "0";
         CountImage.SetActive(false);
-
+        ItemToolTip.HideToolTip();
         // QuickSlotReference 초기화
         if (QuickSlotReference != null) {
             QuickSlotReference.SlotReference = null;
@@ -147,10 +156,10 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         if (Item != null) 
         {
-            Vector3 globalMousePos;
-            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(ItemDrag.Instance.MyRectTransform, eventData.position, eventData.pressEventCamera, out globalMousePos))
+            Vector3 GlobalMousePos;
+            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(ItemDrag.Instance.MyRectTransform, eventData.position, eventData.pressEventCamera, out GlobalMousePos))
             {
-                ItemDrag.Instance.MyRectTransform.position = globalMousePos;
+                ItemDrag.Instance.MyRectTransform.position = GlobalMousePos;
             }
         }
     }
@@ -204,14 +213,15 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     }
 
     void OnDoubleClickForUse() // 슬롯 더블클릭
-    {
+    {   
         if (Item == null || !PlayerMovement.IsAlive) {
             return;
         }
+
         if (Item.Type == Item.ItemType.Used) // 소비 아이템시 실행
         {
             UsedItem UsedItem = Item.ItemPrefab.GetComponent<UsedItem>();
-            UsedItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+            UsedItem.PlayerStatus = PlayerStatus;
             if (UsedItem != null)
             {
                 UsedItem.EffectItem();
@@ -221,11 +231,43 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         else if (Item.Type == Item.ItemType.Equipment) // 장비 아이템시 실행
         {
             EquipmentItem EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
-            EquipmentItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+            EquipmentItem.PlayerStatus = PlayerStatus;
             if (EquipmentItem != null)
             {
-                EquipmentItem.EquipItem(Item);
-                ClearSlot();
+                if (PlayerStatus.PlayerLevel > EquipmentItem.RequireLevel) {
+                    EquipmentItem.EquipItem(Item);
+                    ClearSlot();
+                }
+                else {
+                    return;
+                }
+            }
+        }
+        else if (Item.Type == Item.ItemType.SourceCode) // 스킬북 아이템시 실행
+        {   
+            SourceCodeItem SourceCodeItem = Item.ItemPrefab.GetComponent<SourceCodeItem>();
+            if (SourceCodeItem != null)
+            {   
+                for (int i = 0; i < SkillSlots.Length; i++)
+                {
+                    if (SourceCodeItem.SkillName == SkillSlots[i].SkillName) // 이름이 같으면 추가하지 않음
+                    {   
+                        return;
+                    }
+                }
+            }
+
+            if (SourceCodeItem != null)
+            {  
+                for (int i = 0; i < SkillSlots.Length; i++)
+                {   
+                    if (SkillSlots[i].SkillPrefab == null)
+                    {
+                        SkillSlots[i].AddItem(SourceCodeItem.SkillPrefab);
+                        ClearSlot();
+                        return;
+                    }
+                }
             }
         }
     }
@@ -235,11 +277,12 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         if (Item == null || !PlayerMovement.IsAlive) {
             return;
         }
-        if (Item.Type == Item.ItemType.Used) // 소비 아이템시 실행
+
+        if (Item.Type == Item.ItemType.Used || Item.Type == Item.ItemType.ETC) // 소비, 기타 아이템시 실행
         {
             SellItemInputField.OpenInputField(this);
         }
-        else if (Item.Type == Item.ItemType.Equipment) // 장비 아이템시 실행
+        else if (Item.Type == Item.ItemType.Equipment || Item.Type == Item.ItemType.SourceCode) // 장비, 스킬북 아이템시 실행
         {
             PlayerMoney.Bit += Item.ItemCost;
             ClearSlot();

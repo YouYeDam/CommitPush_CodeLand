@@ -32,7 +32,7 @@ public class SellItemInputField : MonoBehaviour
         InputFieldText.text = SellItemSlot.ItemCount.ToString();
         TextInput.text = SellItemSlot.ItemCount.ToString();
 
-        if (BuyItemInputField.InputFieldBase.activeSelf) {
+        if (BuyItemInputField != null && BuyItemInputField.InputFieldBase.activeSelf) {
             BuyItemInputField.Cancel();
         }
     }
