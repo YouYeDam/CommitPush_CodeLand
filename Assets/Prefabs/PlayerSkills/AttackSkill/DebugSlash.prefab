@@ -195,7 +195,7 @@ MonoBehaviour:
   SkillName: "\uB514\uBC84\uADF8 \uC2AC\uB798\uC2DC"
   SkillType: "\uACF5\uACA9\uD615"
   SkillMPUse: 25
-  SkillCoolDown: "3.5\uCD08"
+  SkillCoolDown: 3.5
   SkillExplain: "\uB514\uBC84\uADF8 \uC2AC\uB798\uC2DC\uC774\uB2E4."
 --- !u!95 &4696956795978963348
 Animator:

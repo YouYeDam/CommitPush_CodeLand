@@ -22,22 +22,29 @@ public class PlayerSkills : MonoBehaviour
     [SerializeField] Transform SkillSpot;
     [SerializeField] Transform BuffSpot;
     [SerializeField] float GlobalCoolDown = 0.3f;
-    [SerializeField] float QSkillCoolDown;
-    [SerializeField] float WSkillCoolDown;
-    [SerializeField] float ESkillCoolDown;
-    [SerializeField] float RSkillCoolDown;
-    [SerializeField] float SSkillCoolDown;
-    [SerializeField] float DSkillCoolDown;
+    [SerializeField] public float QSkillCoolDown;
+    [SerializeField] public float WSkillCoolDown;
+    [SerializeField] public float ESkillCoolDown;
+    [SerializeField] public float RSkillCoolDown;
+    [SerializeField] public float SSkillCoolDown;
+    [SerializeField] public float DSkillCoolDown;
 
     [SerializeField] float BackToIdleAnimTime = 0.2f;
 
     bool CanAttack = true;
-    bool CanQSkill = true;
-    bool CanWSkill = true;
-    bool CanESkill = true;
-    bool CanRSkill = true;
-    bool CanSSkill = true;
-    bool CanDSkill = true;
+    public bool CanQSkill = true;
+    public bool CanWSkill = true;
+    public bool CanESkill = true;
+    public bool CanRSkill = true;
+    public bool CanSSkill = true;
+    public bool CanDSkill = true;
+
+    public float QSkillRemainingCoolDown = 0;
+    public float WSkillRemainingCoolDown = 0;
+    public float ESkillRemainingCoolDown = 0;
+    public float RSkillRemainingCoolDown = 0;
+    public float SSkillRemainingCoolDown = 0;
+    public float DSkillRemainingCoolDown = 0;
 
     int QSkillMPUse;
     int WSkillMPUse;
@@ -54,6 +61,24 @@ public class PlayerSkills : MonoBehaviour
         PlayerStatus = FindObjectOfType<PlayerStatus>();
         PlayerManager = GetComponent<PlayerManager>();
         GlobalCoolDown -= PlayerStatus.PlayerAP; // 글쿨 가속력 공식: 글쿨 - 가속력
+    }
+
+    void Update() {
+        UpdateSkillCoolDown(ref QSkillRemainingCoolDown);
+        UpdateSkillCoolDown(ref WSkillRemainingCoolDown);
+        UpdateSkillCoolDown(ref ESkillRemainingCoolDown);
+        UpdateSkillCoolDown(ref RSkillRemainingCoolDown);
+        UpdateSkillCoolDown(ref SSkillRemainingCoolDown);
+        UpdateSkillCoolDown(ref DSkillRemainingCoolDown);
+    }
+
+    void UpdateSkillCoolDown(ref float SkillCoolDown) {
+        if (SkillCoolDown > 0) {
+            SkillCoolDown -= Time.deltaTime;
+            if (SkillCoolDown < 0) {
+                SkillCoolDown = 0;
+            }
+        }
     }
 
     void OnNormalAttack() {
@@ -101,7 +126,7 @@ public class PlayerSkills : MonoBehaviour
                 if (PlayerStatus.PlayerCurrentMP < 0) {
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
-
+                QSkillRemainingCoolDown = QSkillCoolDown;
                 Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("ResetQSkill", QSkillCoolDown); // 쿨다운 이후 RestQSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
@@ -134,7 +159,7 @@ public class PlayerSkills : MonoBehaviour
                 if (PlayerStatus.PlayerCurrentMP < 0) {
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
-
+                WSkillRemainingCoolDown = WSkillCoolDown;
                 Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("ResetWSkill", WSkillCoolDown); // 쿨다운 이후 RestQSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
@@ -166,7 +191,7 @@ public class PlayerSkills : MonoBehaviour
                 if (PlayerStatus.PlayerCurrentMP < 0) {
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
-
+                ESkillRemainingCoolDown = ESkillCoolDown;
                 Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("ResetESkill", ESkillCoolDown); // 쿨다운 이후 RestQSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
@@ -198,7 +223,7 @@ public class PlayerSkills : MonoBehaviour
                 if (PlayerStatus.PlayerCurrentMP < 0) {
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
-
+                RSkillRemainingCoolDown = RSkillCoolDown;
                 Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("ResetRSkill", RSkillCoolDown); // 쿨다운 이후 ResetRSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
@@ -231,7 +256,7 @@ public class PlayerSkills : MonoBehaviour
                 if (PlayerStatus.PlayerCurrentMP < 0) {
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
-
+                SSkillRemainingCoolDown = SSkillCoolDown;
                 Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("ResetSSkill", SSkillCoolDown); // 쿨다운 이후 ResetSSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
@@ -263,7 +288,7 @@ public class PlayerSkills : MonoBehaviour
                 if (PlayerStatus.PlayerCurrentMP < 0) {
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
-
+                DSkillRemainingCoolDown = DSkillCoolDown;
                 Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("ResetDSkill", DSkillCoolDown); // 쿨다운 이후 ResetDSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
                 Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경

@@ -213,7 +213,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     }
 
     void OnDoubleClickForUse() // 슬롯 더블클릭
-    {
+    {   
         if (Item == null || !PlayerMovement.IsAlive) {
             return;
         }
@@ -244,26 +244,26 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             }
         }
         else if (Item.Type == Item.ItemType.SourceCode) // 스킬북 아이템시 실행
-        {
-            SourceCodeItem SkillBookItem = Item.ItemPrefab.GetComponent<SourceCodeItem>();
-            if (SkillBookItem != null)
-            {
+        {   
+            SourceCodeItem SourceCodeItem = Item.ItemPrefab.GetComponent<SourceCodeItem>();
+            if (SourceCodeItem != null)
+            {   
                 for (int i = 0; i < SkillSlots.Length; i++)
                 {
-                    if (SkillBookItem.SkillName == SkillSlots[i].SkillName) // 이름이 같으면 추가하지 않음
-                    {
+                    if (SourceCodeItem.SkillName == SkillSlots[i].SkillName) // 이름이 같으면 추가하지 않음
+                    {   
                         return;
                     }
                 }
             }
 
-            if (SkillBookItem != null)
-            {
+            if (SourceCodeItem != null)
+            {  
                 for (int i = 0; i < SkillSlots.Length; i++)
-                {
+                {   
                     if (SkillSlots[i].SkillPrefab == null)
                     {
-                        SkillSlots[i].AddItem(SkillBookItem.SkillPrefab);
+                        SkillSlots[i].AddItem(SourceCodeItem.SkillPrefab);
                         ClearSlot();
                         return;
                     }

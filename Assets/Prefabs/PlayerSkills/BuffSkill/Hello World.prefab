@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 794951137
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: -598644842, guid: 14904cf8b7da1934a87d468b956a1aad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c07a354a5dd238d479307f81576ba51f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -152,7 +152,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.1, y: 1.7333333}
+    oldSize: {x: 0.32, y: 0.32}
     newSize: {x: 1.785, y: 1.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -219,3 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillName: "\uD5EC\uB85C \uC6D4\uB4DC"
+  SkillType: "\uBC84\uD504\uD615"
+  SkillMPUse: 60
+  SkillCoolDown: 120
+  SkillExplain: "\uD5EC\uB85C \uC6D4\uB4DC\uC774\uB2E4."

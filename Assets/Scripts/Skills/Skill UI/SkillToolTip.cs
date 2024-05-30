@@ -27,7 +27,7 @@ public class SkillToolTip : MonoBehaviour
         SkillInfoText.text = SkillPrefab.GetComponent<SkillInfo>().SkillExplain;
         SkillMPUseText.text = "소모 정신력: " + SkillPrefab.GetComponent<SkillInfo>().SkillMPUse + " MP";
         SkillTypeText.text = "스킬 유형: " + SkillPrefab.GetComponent<SkillInfo>().SkillType;
-        SkillCoolDownText.text = "쿨타임: " + SkillPrefab.GetComponent<SkillInfo>().SkillCoolDown;
+        SkillCoolDownText.text = "쿨타임: " + SkillPrefab.GetComponent<SkillInfo>().SkillCoolDown + "초";
         SpriteRenderer SkillSpriteRenderer = SkillPrefab.GetComponent<SpriteRenderer>();
         SkillImage.sprite = SkillSpriteRenderer.sprite;
     }

@@ -11,7 +11,8 @@ public class SkillSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public string SkillName;
     SkillToolTip SkillToolTip;
     public SkillQuickSlot QuickSlotReference;
-
+    public bool CantMove = false;
+    public bool CanDelete = true;
     void Start() {
         GameObject ToolTipObject = GameObject.Find("SkillToolTip");
         if (ToolTipObject != null) {
@@ -45,7 +46,10 @@ public class SkillSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if(SkillPrefab != null)
+        if (QuickSlotReference != null) {
+            QuickSlotReference.CheckCoolDown();
+        }
+        if(SkillPrefab != null && !CantMove && CanDelete)
         {
             SkillDrag.Instance.SkillDragSlot = this;
             SkillDrag.Instance.DragSetImage(SkillImage);
@@ -56,7 +60,7 @@ public class SkillSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (SkillPrefab != null) 
+        if (SkillPrefab != null && !CantMove) 
         {
             Vector3 GlobalMousePos;
             if (RectTransformUtility.ScreenPointToWorldPointInRectangle(SkillDrag.Instance.MyRectTransform, eventData.position, eventData.pressEventCamera, out GlobalMousePos))
