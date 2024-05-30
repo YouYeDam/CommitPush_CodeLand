@@ -301,10 +301,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterName: "\uBD80\uD328\uD55C \uD2B8\uB9AC"
   MonsterLevel: 15
-  MonsterMaxHealth: 5000
+  MonsterMaxHealth: 3500
   MonsterCurrentHealth: 0
   MonsterDamage: 120
-  MonsterEXP: 400
+  MonsterEXP: 800
   HPBarPos: 3.3
   MonsterInfoPos: 4.3
   UIManager: {fileID: 0}

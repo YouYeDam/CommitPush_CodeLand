@@ -57,7 +57,7 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
     }
 
-    void ClearSlot() { // 해당 슬롯 하나 삭제
+    public void ClearSlot() { // 해당 슬롯 하나 삭제
         Item = null;
         ItemCount = 0;
         ItemImage.sprite = null;
@@ -65,11 +65,6 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         TextCount.text = "0";
         CountImage.SetActive(false);
-        // SlotReference 초기화
-        if (SlotReference != null) {
-            SlotReference.QuickSlotReference = null;
-            SlotReference = null;
-        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)

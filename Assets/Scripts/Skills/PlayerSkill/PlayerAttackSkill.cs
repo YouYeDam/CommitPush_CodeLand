@@ -10,6 +10,7 @@ public class PlayerAttackSkill : MonoBehaviour
     PlayerMovement PlayerMovement;
     PlayerStatus PlayerStatus;
     bool IsAttackDone = false;
+    [SerializeField] bool CanHitMany = false;
     bool IsCrit = false;
     public float CoolDown = 3f;
     public int MPUse = 0;
@@ -42,10 +43,12 @@ public class PlayerAttackSkill : MonoBehaviour
             return;
         }
         if (other is BoxCollider2D && other.gameObject.tag == "Monster") {
-            IsAttackDone = true;
             BasicMonsterMovement BaiscMonsterMovement = other.gameObject.GetComponent<BasicMonsterMovement>();
             BaiscMonsterMovement.TakeDamage(Damage, IsCrit);
-            Invoke("DestroySelf", DestroyTime);
+            if (!CanHitMany) {
+                Invoke("DestroySelf", DestroyTime);
+                IsAttackDone = true;
+            }
         }
     }
 
@@ -57,6 +60,6 @@ public class PlayerAttackSkill : MonoBehaviour
 
     void DestroySelf()
     {
-            Destroy(gameObject);
+        Destroy(gameObject);
     }
 }

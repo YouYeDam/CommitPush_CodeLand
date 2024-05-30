@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float RunSpeed = 10f;
     [SerializeField] float JumpSpeed = 5f;
     [SerializeField] float ClimbSpeed = 5f;
+    private Coroutine CurrentSpeedChangeCoroutine;
     float OriginalRunSpeed;
     float OriginalJumpSpeed;
     float OriginalClimbSpeed;
@@ -296,7 +297,7 @@ public class PlayerMovement : MonoBehaviour
         { // 무적상태면 실행안함
             return;
         }
-        Damage -= Mathf.CeilToInt(PlayerStatus.PlayerDEF * 1.7f); // 방어력 공식: DEF * 2
+        Damage -= Mathf.CeilToInt(PlayerStatus.PlayerDEF * 2.2f); // 방어력 공식: DEF * 2.2
         Damage = Mathf.FloorToInt(Damage * Random.Range(0.8f, 1.21f)); // 데미지 랜덤값: 계산된 데미지의 0.8 ~ 1.2배로 조정
         if (Damage < 1)
         {
@@ -374,19 +375,28 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void ApplySlow(float SlowTime, float SlowFactor) // 이속감소 디버프에 걸렸을 때 호출
+    public void SpeedChange(float Duration, float MoveSpeedFactor, float JumpSpeedFactor, float ClimbSpeedFactor)
     {
-        StartCoroutine(SlowCoroutine(SlowTime, SlowFactor));
+        if (CurrentSpeedChangeCoroutine != null)
+        {
+            StopCoroutine(CurrentSpeedChangeCoroutine);
+        }
+
+        CurrentSpeedChangeCoroutine = StartCoroutine(SpeedChangeCoroutine(Duration, MoveSpeedFactor, JumpSpeedFactor, ClimbSpeedFactor));
     }
 
-    private IEnumerator SlowCoroutine(float SlowTime, float SlowFactor)
+    private IEnumerator SpeedChangeCoroutine(float Duration, float MoveSpeedFactor, float JumpSpeedFactor, float ClimbSpeedFactor)
     {
-        RunSpeed *= SlowFactor;
-        JumpSpeed *= SlowFactor;
-        ClimbSpeed *= SlowFactor;
-        yield return new WaitForSeconds(SlowTime);
+        RunSpeed *= MoveSpeedFactor;
+        JumpSpeed *= JumpSpeedFactor;
+        ClimbSpeed *= ClimbSpeedFactor;
+
+        yield return new WaitForSeconds(Duration);
+
         RunSpeed = OriginalRunSpeed;
         JumpSpeed = OriginalJumpSpeed;
         ClimbSpeed = OriginalClimbSpeed;
+
+        CurrentSpeedChangeCoroutine = null;
     }
 }

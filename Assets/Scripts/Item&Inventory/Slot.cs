@@ -74,16 +74,18 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         SetColor(1);
     }
 
-    
     public void SetSlotCount(int Count) {
         ItemCount += Count;
         TextCount.text = ItemCount.ToString();
 
         if (ItemCount <= 0) {
+            if (QuickSlotReference != null && !QuickSlotReference.IsSyncing) {
+                IsSyncing = true;
+                QuickSlotReference.ClearSlot(); // QuickSlot도 초기화
+                IsSyncing = false;
+            }
             ClearSlot();
-        }
-
-        if (QuickSlotReference != null && !QuickSlotReference.IsSyncing) {
+        } else if (QuickSlotReference != null && !QuickSlotReference.IsSyncing) {
             IsSyncing = true;
             QuickSlotReference.SetSlotCount(Count); // QuickSlot과 동기화
             IsSyncing = false;
@@ -234,7 +236,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             EquipmentItem.PlayerStatus = PlayerStatus;
             if (EquipmentItem != null)
             {
-                if (PlayerStatus.PlayerLevel > EquipmentItem.RequireLevel) {
+                if (PlayerStatus.PlayerLevel >= EquipmentItem.RequireLevel) {
                     EquipmentItem.EquipItem(Item);
                     ClearSlot();
                 }

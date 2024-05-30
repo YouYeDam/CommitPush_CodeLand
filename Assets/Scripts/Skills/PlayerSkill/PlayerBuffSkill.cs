@@ -19,8 +19,14 @@ public class PlayerBuffSkill : MonoBehaviour
     [SerializeField] int MPBuff = 0;
     [SerializeField] int ATKBuff = 0;
     [SerializeField] int DEFBuff = 0;
-    [SerializeField] int APBuff = 0;
-    [SerializeField] int CritBuff = 0;
+    [SerializeField] float APBuff = 0f;
+    [SerializeField] float CritBuff = 0f;
+
+    [SerializeField] bool IsSpeedUpBuff = false; // 플레이어 이동속도업 버프인지
+    [SerializeField] float MoveSpeedBuff = 1f;
+    [SerializeField] float JumpSpeedBuff = 1f;
+    [SerializeField] float ClimbSpeedBuff = 1f;
+
 
     void Start() {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -34,18 +40,19 @@ public class PlayerBuffSkill : MonoBehaviour
 
     void Update() {
         // 플레이어의 x 좌표를 가져오기
-        float playerX = Player.transform.position.x;
+        float PlayerX = Player.transform.position.x;
+        float PlayerY = Player.transform.position.y + 1.5f;
 
-        // 현재 오브젝트의 y 좌표를 YSpeed 만큼 업데이트하기
-        float NewY = transform.position.y + (YSpeed * Time.deltaTime);
-
-        // 현재 오브젝트의 x 좌표를 플레이어의 x 좌표로, y 좌표를 업데이트된 NewY로 설정
-        transform.position = new Vector3(playerX, NewY, transform.position.z);
+        // 현재 오브젝트의 x 좌표를 플레이어의 x 좌표로, y 좌표를 플레이어의 x 좌표로 설정
+        transform.position = new Vector3(PlayerX, PlayerY, transform.position.z);
     }
 
     void CheckBuffType() {
         if (IsStatusUpBuff) {
             PlayerBuffController.PlayerStatusUp(BuffDuration, HPBuff, MPBuff, ATKBuff, DEFBuff, APBuff, CritBuff);
+        }
+        if (IsSpeedUpBuff) {
+            PlayerBuffController.PlayerSpeedUp(BuffDuration, MoveSpeedBuff, JumpSpeedBuff, ClimbSpeedBuff);
         }
     }
     void DestroySelf() {
