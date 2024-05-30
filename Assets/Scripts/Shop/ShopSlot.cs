@@ -85,11 +85,11 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             return;
         }
 
-        if (Item.Type == Item.ItemType.Used) // 소비 아이템시 실행
+        if (Item.Type == Item.ItemType.Used || Item.Type == Item.ItemType.ETC) // 소비 혹은 기타 아이템 시 실행
         {
             BuyItemInputField.OpenInputField(this);
         }
-        else if (Item.Type == Item.ItemType.Equipment) // 장비 아이템시 실행
+        else if (Item.Type == Item.ItemType.Equipment || Item.Type == Item.ItemType.SourceCode) // 장비 혹은 스킬북 아이템시 실행
         {
             if (PlayerMoney.Bit >= Item.ItemCost) {
                 PlayerMoney.Bit -= Item.ItemCost;
