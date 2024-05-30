@@ -38,6 +38,8 @@ public class PlayerData
     // 아이템 저장을 위해선 item 과 item count로 구성된 2차원 배열을 저장해야함.
     public Item[] items = new Item[40];
     public int[] itemCounts = new int[40];
+    // 장비 저장 데이터
+    public Item[] equipments = new Item[8];
 }
 
 public class SaveManager : MonoBehaviour
@@ -52,6 +54,7 @@ public class SaveManager : MonoBehaviour
     public GameObject playerObject;
     GameObject uiManager;
     public Slot[] slots;
+    public EquipmentSlot[] equipmentSlots;
     GameObject Character;
     PlayerUI playerUI;
     public RuntimeAnimatorController currentAniController;
@@ -62,6 +65,7 @@ public class SaveManager : MonoBehaviour
         currentAniController = null;
         uiManager = null;
         slots = null;
+        equipmentSlots = null;
         DontDestroyOnLoad(this.gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -73,11 +77,12 @@ public class SaveManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             playerObject = GameObject.FindWithTag("Player");
-            Debug.Log("log10: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP ); 
-            
+            Debug.Log("log10: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP);
+
             uiManager = GameObject.FindWithTag("UIManager");
-            
+
             slots = uiManager.GetComponentsInChildren<Slot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정.
+            equipmentSlots = uiManager.GetComponentsInChildren<EquipmentSlot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정.
             currentAniController = playerObject.GetComponent<Animator>().runtimeAnimatorController;
             if (playerObject != null)
             {
@@ -85,7 +90,7 @@ public class SaveManager : MonoBehaviour
                 playerStatus = playerObject.GetComponent<PlayerStatus>();
                 playerMoney = playerObject.GetComponent<PlayerMoney>();
                 Debug.Log(playerStatus);
-                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController, playerMoney, slots);
+                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController, playerMoney, slots, equipmentSlots);
                 Debug.Log("플레이어 진행 상황이 저장되었습니다.");
             }
         }
@@ -112,7 +117,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void SavePlayerProgress(Vector3 playerPosition, string currentSceneName, PlayerStatus playerStatus, RuntimeAnimatorController currentAniController, PlayerMoney playerMoney, Slot[] slots)
+    public void SavePlayerProgress(Vector3 playerPosition, string currentSceneName, PlayerStatus playerStatus, RuntimeAnimatorController currentAniController, PlayerMoney playerMoney, Slot[] slots, EquipmentSlot[] equipmentSlots)
     {
         PlayerData data = new PlayerData
         {
@@ -139,9 +144,45 @@ public class SaveManager : MonoBehaviour
             LevelUpPoint = playerStatus.LevelUpPoint,
             Bit = playerMoney.Bit,
             Snippet = playerMoney.Snippet,
-            runtimeAnimatorController = currentAniController
-            // 슬롯의 수에 따라 배열 크기를 설정합니다.
+            runtimeAnimatorController = currentAniController,
         };
+
+        SaveItems(slots, data);
+        SaveEquipments(equipmentSlots, data);
+
+        Debug.Log("log5: Max Hp on saving: " + data.PlayerMaxHP);
+        // Debug.Log("log1666: slot saved: " + data.slots[0].Item);
+        string json = JsonUtility.ToJson(data);
+        string path = Path.Combine(Application.persistentDataPath, "playerData.json");
+        File.WriteAllText(path, json);
+        PlayerPrefs.SetString("PlayerProgress", json);
+        PlayerPrefs.Save();
+    }
+
+    private static void SaveEquipments(EquipmentSlot[] equipmentSlots, PlayerData data)
+    {
+        Item[] equipments = new Item[equipmentSlots.Length];
+
+        // 각 슬롯의 equipment item을 저장
+        for (int i = 0; i < equipmentSlots.Length; i++)
+        {
+            equipments[i] = equipmentSlots[i].Item;
+        };
+        // 정리된 배열들을 data에 저장
+        data.equipments = equipments;
+
+        // Print the equipments if they are not null
+        for (int i = 0; i < data.equipments.Length; i++)
+        {
+            if (data.equipments[i] != null)
+            {
+            Debug.Log("Log123: Equipment " + i + ": " + data.equipments[i]);
+            }
+        }
+    }
+
+    private static void SaveItems(Slot[] slots, PlayerData data)
+    {
         Item[] items = new Item[slots.Length];
         int[] itemCounts = new int[slots.Length];
 
@@ -154,14 +195,6 @@ public class SaveManager : MonoBehaviour
         // 정리된 배열들을 data에 저장
         data.items = items;
         data.itemCounts = itemCounts;
-        
-        Debug.Log("log5: Max Hp on saving: " + data.PlayerMaxHP);
-        // Debug.Log("log1666: slot saved: " + data.slots[0].Item);
-        string json = JsonUtility.ToJson(data);
-        string path = Path.Combine(Application.persistentDataPath, "playerData.json");
-        File.WriteAllText(path, json);
-        PlayerPrefs.SetString("PlayerProgress", json);
-        PlayerPrefs.Save();
     }
 
     public void InstantiateOnSavePoint(PlayerData data)
@@ -172,7 +205,9 @@ public class SaveManager : MonoBehaviour
             playerObject = Instantiate(playerPrefab, new Vector3(data.x, data.y, data.z), Quaternion.identity);
             playerObject.name = playerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
-            playerObject.GetComponent<Animator>().runtimeAnimatorController = data.runtimeAnimatorController; // hell yeah
+
+            playerObject.GetComponent<Animator>().runtimeAnimatorController = data.runtimeAnimatorController; 
+
             playerObject.GetComponent<PlayerStatus>().PlayerLevel = data.PlayerLevel;
             playerObject.GetComponent<PlayerStatus>().PlayerCurrentHP = data.PlayerCurrentHP;
             playerObject.GetComponent<PlayerStatus>().PlayerMaxHP = data.PlayerMaxHP;
@@ -187,30 +222,21 @@ public class SaveManager : MonoBehaviour
             playerObject.GetComponent<PlayerStatus>().PlayerAP = data.PlayerAP;
             playerObject.GetComponent<PlayerStatus>().PlayerCrit = data.PlayerCrit;
             playerObject.GetComponent<PlayerStatus>().LevelUpPoint = data.LevelUpPoint;
+            playerObject.GetComponent<PlayerStatus>().IsLoaded = true;
+            
             playerObject.GetComponent<PlayerMoney>().Bit = data.Bit;
             playerObject.GetComponent<PlayerMoney>().Snippet = data.Snippet;
-            Debug.Log("log6: Max Hp on instantiating: " + data.PlayerMaxHP);
-            // Debug.Log("log1777: instantiated slot: " + data.slots.Length); //응 안돼.
-            // Debug.Log("log1888: instantiated slot: " + data.slots[0].Item); //응 안돼. 왜? none이라서 slot은 null이 아닌데 새부 값은 아닌가봄. 그러면 그냥 item data 써야지...
-
-            Debug.Log("log7: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP ); 
         }
-            // PlayerAP
+
         if (uiManager == null)
-            // PlayerCrit
         {
             // LevelUpPoint
             uiManager = Instantiate(uiManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             uiManager.name = uiManagerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(uiManager); // 씬 전환 시 파괴되지 않도록 설정
-            for(int i = 0; i < data.items.Length; i++){ 
-                if(data.items[i] != null){
-                    uiManager.GetComponentsInChildren<Slot>(true)[i].AddItem(data.items[i], data.itemCounts[i]);
-                    Debug.Log("Item name of " + i + " " + data.items[i].name);
-                }
-            }
+            LoadItems(data);
+            LoadEquipments(data);
         }
-        Debug.Log("log8: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP ); 
 
         if (uiManager != null && data.PlayerNameInfo != null && data.PlayerNameInfoInstance == null)
         {
@@ -218,8 +244,31 @@ public class SaveManager : MonoBehaviour
             playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance = Instantiate(data.PlayerNameInfo, uiManager.transform);
             playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance.GetComponent<TMP_Text>().text = data.PlayerName;
         }
-        Debug.Log("log9: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP ); 
 
+    }
+
+    private void LoadEquipments(PlayerData data)
+    {
+        for (int i = 0; i < data.equipments.Length; i++)
+        {
+            if (data.equipments[i] != null)
+            {
+                uiManager.GetComponentsInChildren<EquipmentSlot>(true)[i].AddItem(data.equipments[i]);
+                Debug.Log("Item name of " + i + " " + data.items[i].name);
+            }
+        }
+    }
+
+    private void LoadItems(PlayerData data)
+    {
+        for (int i = 0; i < data.items.Length; i++)
+        {
+            if (data.items[i] != null)
+            {
+                uiManager.GetComponentsInChildren<Slot>(true)[i].AddItem(data.items[i], data.itemCounts[i]);
+                Debug.Log("Item name of " + i + " " + data.items[i].name);
+            }
+        }
     }
 
     void ActivatePauseMenu()
