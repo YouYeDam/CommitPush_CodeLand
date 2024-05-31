@@ -110,14 +110,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanQSkill) {
             if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
-                if (QSkill.GetComponent<SkillInfo>().SkillType == "공격형") {
-                    Instantiate(QSkill, SkillSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsAttacking", true);
-                }
-                else {
-                    Instantiate(QSkill, BuffSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsBuffing", true);
-                }
+                CheckSkillType(QSkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanQSkill = false;
                 PlayerMovement.IsWalkingAllowed = false; // 스킬을 사용한 후 이동 멈춤 설정
@@ -143,14 +136,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanWSkill) {
             if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
-                if (WSkill.GetComponent<SkillInfo>().SkillType == "공격형") {
-                    Instantiate(WSkill, SkillSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsAttacking", true);
-                }
-                else {
-                    Instantiate(WSkill, BuffSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsBuffing", true);
-                }
+                CheckSkillType(WSkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanWSkill = false;
                 PlayerMovement.IsWalkingAllowed = false; // 스킬을 사용한 후 이동 멈춤 설정
@@ -175,14 +161,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanESkill) {
             if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
-                if (ESkill.GetComponent<SkillInfo>().SkillType == "공격형") {
-                    Instantiate(ESkill, SkillSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsAttacking", true);
-                }
-                else {
-                    Instantiate(ESkill, BuffSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsBuffing", true);
-                }
+                CheckSkillType(ESkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanESkill = false;
                 PlayerMovement.IsWalkingAllowed = false; // 스킬을 사용한 후 이동 멈춤 설정
@@ -207,14 +186,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanRSkill) {
             if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
-                if (RSkill.GetComponent<SkillInfo>().SkillType == "공격형") {
-                    Instantiate(RSkill, SkillSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsAttacking", true);
-                }
-                else {
-                    Instantiate(RSkill, BuffSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsBuffing", true);
-                }
+                CheckSkillType(RSkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanRSkill = false;
                 PlayerMovement.IsWalkingAllowed = false; // 스킬을 사용한 후 이동 멈춤 설정
@@ -240,14 +212,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanSSkill) {
             if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
-                if (SSkill.GetComponent<SkillInfo>().SkillType == "공격형") {
-                    Instantiate(SSkill, SkillSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsAttacking", true);
-                }
-                else {
-                    Instantiate(SSkill, BuffSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsBuffing", true);
-                }
+                CheckSkillType(SSkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanSSkill = false;
                 PlayerMovement.IsWalkingAllowed = false; // 스킬을 사용한 후 이동 멈춤 설정
@@ -272,14 +237,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanDSkill) {
             if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
-                if (DSkill.GetComponent<SkillInfo>().SkillType == "공격형") {
-                    Instantiate(DSkill, SkillSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsAttacking", true);
-                }
-                else {
-                    Instantiate(DSkill, BuffSpot.position, transform.rotation);
-                    MyAnimator.SetBool("IsBuffing", true);
-                }
+                CheckSkillType(DSkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanDSkill = false;
                 PlayerMovement.IsWalkingAllowed = false; // 스킬을 사용한 후 이동 멈춤 설정
@@ -296,10 +254,25 @@ public class PlayerSkills : MonoBehaviour
         }
     }
 
+    void CheckSkillType(GameObject Skill) {
+        switch(Skill.GetComponent<SkillInfo>().SkillType) {
+            case "공격형":
+                Instantiate(Skill, SkillSpot.position, transform.rotation);
+                MyAnimator.SetBool("IsAttacking", true);
+                break;
+            case "버프형":
+                Instantiate(Skill, BuffSpot.position, transform.rotation);
+                MyAnimator.SetBool("IsBuffing", true);
+                break;
+            case "타겟형":
+                Instantiate(Skill, SkillSpot.position, transform.rotation);
+                MyAnimator.SetBool("IsAttacking", true);
+                break;
+        }
+    }
     void ResetCanAttack() {
         CanAttack = true;
     }
-
     void ResetQSkill() {
         CanQSkill = true;
     }
