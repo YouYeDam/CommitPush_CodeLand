@@ -165,7 +165,7 @@ public class SkillQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     public void CheckCoolDown() {
         CanDelete = false;
-        SlotReference.CanDelete = false;
+        SlotReference.CanDelete = false; //?
         switch (ButtonKey) {
             case "Q":
                 if (PlayerSkills.CanQSkill == true) {

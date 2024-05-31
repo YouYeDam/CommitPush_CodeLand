@@ -6,7 +6,6 @@ using System.IO;
 using TMPro;
 using UnityEngine.UI;
 using System;
-using UnityEditor.Animations;
 using Unity.VisualScripting;
 using UnityEditor;
 
@@ -39,6 +38,11 @@ public class PlayerData
     public RuntimeAnimatorController runtimeAnimatorController;
     // 아이템 저장을 위해선 item 과 item count로 구성된 2차원 배열을 저장해야함.
     public Item[] items = new Item[40];
+    public GameObject[] skillPrefabs = new GameObject[10];
+    public GameObject[] quickSkillPrefabs = new GameObject[6];
+    public SkillSlot[] slotReferences = new SkillSlot[6];
+    public Item[] quickItems = new Item[4];
+    public int[] quickItemCounts = new int[4];
     public int[] itemCounts = new int[40];
     public bool[] isEquipment = new bool[40];
 
@@ -58,6 +62,7 @@ public class SaveManager : MonoBehaviour
     public GameObject playerObject;
     GameObject uiManager;
     public Slot[] slots;
+    public SkillSlot[] skillSlots;
     public EquipmentSlot[] equipmentSlots;
     GameObject Character;
     PlayerUI playerUI;
@@ -69,6 +74,7 @@ public class SaveManager : MonoBehaviour
         currentAniController = null;
         uiManager = null;
         slots = null;
+        skillSlots = null;
         equipmentSlots = null;
         DontDestroyOnLoad(this.gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -77,15 +83,17 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             playerObject = GameObject.FindWithTag("Player");
             Debug.Log("log10: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP);
 
             uiManager = GameObject.FindWithTag("UIManager");
+            UIManager UM = uiManager.GetComponent<UIManager>();
 
             slots = uiManager.GetComponentsInChildren<Slot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정. 모든 슬롯을 가져옴.
             equipmentSlots = uiManager.GetComponentsInChildren<EquipmentSlot>(true); // 역시 모든 장비 슬롯 가져옴.
+            skillSlots = uiManager.GetComponentsInChildren<SkillSlot>(true);
             currentAniController = playerObject.GetComponent<Animator>().runtimeAnimatorController;
             if (playerObject != null)
             {
@@ -93,7 +101,7 @@ public class SaveManager : MonoBehaviour
                 playerStatus = playerObject.GetComponent<PlayerStatus>();
                 playerMoney = playerObject.GetComponent<PlayerMoney>();
                 Debug.Log(playerStatus);
-                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController, playerMoney, slots, equipmentSlots); // 이거 그냥 결국 playerObject랑 uiManager 두개로 단순화 할 수 있을텐데. 나중에 보고 하기.
+                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController, playerMoney, slots, equipmentSlots, skillSlots, UM); // 이거 그냥 결국 playerObject랑 uiManager 두개로 단순화 할 수 있을텐데. 나중에 보고 하기.
                 Debug.Log("플레이어 진행 상황이 저장되었습니다.");
             }
         }
@@ -120,7 +128,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void SavePlayerProgress(Vector3 playerPosition, string currentSceneName, PlayerStatus playerStatus, RuntimeAnimatorController currentAniController, PlayerMoney playerMoney, Slot[] slots, EquipmentSlot[] equipmentSlots)
+    public void SavePlayerProgress(Vector3 playerPosition, string currentSceneName, PlayerStatus playerStatus, RuntimeAnimatorController currentAniController, PlayerMoney playerMoney, Slot[] slots, EquipmentSlot[] equipmentSlots, SkillSlot[] skillSlots, UIManager uIManager)
     {
         PlayerData data = new PlayerData
         {
@@ -149,8 +157,12 @@ public class SaveManager : MonoBehaviour
             Snippet = playerMoney.Snippet,
             runtimeAnimatorController = currentAniController,
         };
-
+        SkillQuickSlot[] skillQuickSlots = uIManager.GetComponentsInChildren<SkillQuickSlot>();
+        ItemQuickSlot[] itemQuickSlots = uIManager.GetComponentsInChildren<ItemQuickSlot>();
         SaveItems(slots, data);
+        SaveSkills(skillSlots, data);
+        SaveQuickSkills(skillQuickSlots, data);
+        SaveQuickItems(itemQuickSlots, data);
         SaveEquipments(equipmentSlots, data);
 
         string json = JsonUtility.ToJson(data);
@@ -171,15 +183,31 @@ public class SaveManager : MonoBehaviour
         };
         // 정리된 배열들을 data에 저장
         data.equipments = equipments;
-
-        // Print the equipments if they are not null
-        for (int i = 0; i < data.equipments.Length; i++)
+    }
+    private static void SaveQuickSkills(SkillQuickSlot[] skillQuickSlots, PlayerData data){
+        GameObject[] skillPrefabs = new GameObject[skillQuickSlots.Length];
+        SkillSlot[] slotReferences = new SkillSlot[skillQuickSlots.Length];
+        for (int i = 0; i < skillQuickSlots.Length; i++)
         {
-            if (data.equipments[i] != null)
-            {
-                Debug.Log("Log123: Equipment " + i + ": " + data.equipments[i]);
-            }
-        }
+            skillPrefabs[i] = skillQuickSlots[i].SkillPrefab;
+            slotReferences[i] = skillQuickSlots[i].SlotReference;
+        };
+        // 정리된 배열들을 data에 저장
+        data.quickSkillPrefabs = skillPrefabs;
+        data.slotReferences = slotReferences;
+    }
+
+    private static void SaveSkills(SkillSlot[] skillSlots, PlayerData data)
+    {
+        GameObject[] skillPrefabs = new GameObject[skillSlots.Length];
+
+        // 각 슬롯의 skillprefab을 저장
+        for (int i = 0; i < skillSlots.Length; i++)
+        {
+            skillPrefabs[i] = skillSlots[i].SkillPrefab;
+        };
+        // 정리된 배열들을 data에 저장
+        data.skillPrefabs = skillPrefabs;
     }
 
     private static void SaveItems(Slot[] slots, PlayerData data)
@@ -196,6 +224,18 @@ public class SaveManager : MonoBehaviour
         // 정리된 배열들을 data에 저장
         data.items = items;
         data.itemCounts = itemCounts;
+    }
+    private static void SaveQuickItems(ItemQuickSlot[] itemQuickSlots, PlayerData data){
+        Item[] items = new Item[itemQuickSlots.Length];
+        int[] itemCounts = new int[itemQuickSlots.Length];
+        for (int i = 0; i < itemQuickSlots.Length; i++)
+        {
+            items[i] = itemQuickSlots[i].Item;
+            itemCounts[i] = itemQuickSlots[i].ItemCount;
+        };
+        // 정리된 배열들을 data에 저장
+        data.quickItems = items;
+        data.quickItemCounts = itemCounts;
     }
 
     public void InstantiateOnSavePoint(PlayerData data)
@@ -237,16 +277,34 @@ public class SaveManager : MonoBehaviour
             uiManager.name = uiManagerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(uiManager); // 씬 전환 시 파괴되지 않도록 설정
             LoadItems(data);
+            LoadQuickItems(data);
             LoadEquipments(data);
+            LoadSkills(data);
+            LoadQuickSkills(data);
         }
 
         if (uiManager != null && data.PlayerNameInfo != null && data.PlayerNameInfoInstance == null)
         {
-            Debug.Log(1111);
             playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance = Instantiate(data.PlayerNameInfo, uiManager.transform);
             playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance.GetComponent<TMP_Text>().text = data.PlayerName;
         }
 
+    }
+
+    private void LoadSkills(PlayerData data){
+        for (int i = 0; i < data.skillPrefabs.Length; i++){
+            if(data.skillPrefabs[i] != null){
+                uiManager.GetComponentsInChildren<SkillSlot>(true)[i].AddItem(data.skillPrefabs[i]);
+            }
+        }
+    }
+    private void LoadQuickSkills(PlayerData data){
+        for (int i = 0; i < data.quickSkillPrefabs.Length; i++){
+            if(data.quickSkillPrefabs[i] != null){
+                // 아니 왜 제대로 넘겨줘도 안 됨
+                uiManager.GetComponentsInChildren<SkillQuickSlot>(true)[i].AddItem(data.quickSkillPrefabs[i], data.slotReferences[i]); //여기서 그냥 null 값으로 넘어갔구나. slot도 같이 넘겨줘야하네 그럼.
+            }
+        }
     }
 
     private void LoadEquipments(PlayerData data)
@@ -267,21 +325,17 @@ public class SaveManager : MonoBehaviour
         {
             if (data.items[i] != null)
             {
-                if (data.items[i].Type == Item.ItemType.Used)
-                {
-                    Debug.Log("템템");
-                }
-                else if (data.items[i].Type == Item.ItemType.Equipment)
-                {
-                    Debug.Log("장비장비");
-                }
-                else if (data.items[i].Type == Item.ItemType.SourceCode){
-                    Debug.Log("스킬스킬");
-                }
-                else{
-                    Debug.Log("뭥미");
-                }
                 uiManager.GetComponentsInChildren<Slot>(true)[i].AddItem(data.items[i], data.itemCounts[i]);
+            }
+        }
+    }
+    private void LoadQuickItems(PlayerData data) // data의 아이템이 아이템인지 장비인지 구별해야함. isEquipment 함수를 자료형에 추가하고. 또 장비의 슬롯 인덱스도 저장해야함.
+    {
+        for (int i = 0; i < data.quickItems.Length; i++)
+        {
+            if (data.quickItems[i] != null)
+            {
+                uiManager.GetComponentsInChildren<ItemQuickSlot>(true)[i].AddItem(data.quickItems[i], data.quickItemCounts[i]);
             }
         }
     }
