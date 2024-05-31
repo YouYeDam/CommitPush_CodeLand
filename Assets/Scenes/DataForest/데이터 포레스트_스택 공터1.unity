@@ -12291,7 +12291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1093031328540769238, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_text
-      value: "\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\n\uC2A4\uD0DD \uACF5\uD1301"
+      value: "\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8\n\uC2A4\uD0DD \uACF5\uD1301"
       objectReference: {fileID: 0}
     - target: {fileID: 1438965535650828236, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_BoundingShape2D
