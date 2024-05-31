@@ -7,6 +7,8 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using UnityEditor.Animations;
+using Unity.VisualScripting;
+using UnityEditor;
 
 [System.Serializable]
 public class PlayerData
@@ -202,6 +204,7 @@ public class SaveManager : MonoBehaviour
 
         if (playerObject == null)
         {
+            Debug.Log("Wow");
             playerObject = Instantiate(playerPrefab, new Vector3(data.x, data.y, data.z), Quaternion.identity);
             playerObject.name = playerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
@@ -251,10 +254,10 @@ public class SaveManager : MonoBehaviour
     {
         for (int i = 0; i < data.equipments.Length; i++)
         {
+            Debug.Log("log999: " + i);
             if (data.equipments[i] != null)
             {
                 uiManager.GetComponentsInChildren<EquipmentSlot>(true)[i].AddItem(data.equipments[i]);
-                Debug.Log("Item name of " + i + " " + data.items[i].name);
             }
         }
     }
@@ -263,6 +266,7 @@ public class SaveManager : MonoBehaviour
     {
         for (int i = 0; i < data.items.Length; i++)
         {
+            Debug.Log("log889: " + i);
             if (data.items[i] != null)
             {
                 uiManager.GetComponentsInChildren<Slot>(true)[i].AddItem(data.items[i], data.itemCounts[i]);
