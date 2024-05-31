@@ -12,9 +12,11 @@ public class PlayerBuffController : MonoBehaviour
         PlayerMovement = GetComponent<PlayerMovement>();
     }
 
-    public void PlayerStatusUp(float BuffDuration, int HP, int MP, int ATK, int DEF, int AP, int Crit) {
+    public void PlayerStatusUp(float BuffDuration, int HP, int MP, int ATK, int DEF, float AP, float Crit) { // 스탯업 버프
         PlayerStatus.PlayerMaxHP += HP;
+        PlayerStatus.PlayerCurrentHP += HP;
         PlayerStatus.PlayerMaxMP += MP;
+        PlayerStatus.PlayerCurrentMP += MP;
         PlayerStatus.PlayerATK += ATK;
         PlayerStatus.PlayerDEF += DEF;
         PlayerStatus.PlayerAP += AP;
@@ -24,17 +26,28 @@ public class PlayerBuffController : MonoBehaviour
         StartCoroutine(RemoveBuffAfterDuration(BuffDuration, HP, MP, ATK, DEF, AP, Crit));
     }
 
-    public void PlayerStatusDown(int HP, int MP, int ATK, int DEF, int AP, int Crit) {
+    public void PlayerStatusDown(int HP, int MP, int ATK, int DEF, float AP, float Crit) {
         PlayerStatus.PlayerMaxHP -= HP;
         PlayerStatus.PlayerMaxMP -= MP;
         PlayerStatus.PlayerATK -= ATK;
         PlayerStatus.PlayerDEF -= DEF;
         PlayerStatus.PlayerAP -= AP;
         PlayerStatus.PlayerCrit -= Crit;
+
+        if (PlayerStatus.PlayerCurrentHP > PlayerStatus.PlayerMaxHP) {
+            PlayerStatus.PlayerCurrentHP = PlayerStatus.PlayerMaxHP;
+        }
+        if (PlayerStatus.PlayerCurrentMP > PlayerStatus.PlayerMaxMP) {
+            PlayerStatus.PlayerCurrentMP = PlayerStatus.PlayerMaxMP;
+        }
     }
 
-    private IEnumerator RemoveBuffAfterDuration(float duration, int HP, int MP, int ATK, int DEF, int AP, int Crit) {
-        yield return new WaitForSeconds(duration);
+    private IEnumerator RemoveBuffAfterDuration(float Duration, int HP, int MP, int ATK, int DEF, float AP, float Crit) {
+        yield return new WaitForSeconds(Duration);
         PlayerStatusDown(HP, MP, ATK, DEF, AP, Crit);
+    }
+
+    public void PlayerSpeedUp(float BuffDuration, float MoveSpeedBuff, float JumpSpeedBuff, float ClimbSpeedBuff) {
+        PlayerMovement.SpeedChange(BuffDuration, MoveSpeedBuff, JumpSpeedBuff, ClimbSpeedBuff);
     }
 }

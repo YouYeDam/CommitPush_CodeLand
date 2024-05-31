@@ -76,7 +76,7 @@ public class MonsterAttackSkill : MonoBehaviour
             PlayerMovement.TakeDamage(Damage);
             if (IsSlowingSkill)
             {
-                PlayerMovement.ApplySlow(SlowTime, SlowFactor);
+                PlayerMovement.SpeedChange(SlowTime, SlowFactor, SlowFactor, SlowFactor);
             }
         }
         if (other.gameObject.tag == "Player")

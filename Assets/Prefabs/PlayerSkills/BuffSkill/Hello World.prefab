@@ -202,8 +202,8 @@ MonoBehaviour:
   IsStatusUpBuff: 1
   HPBuff: 50
   MPBuff: 0
-  ATKBuff: 5
-  DEFBuff: 5
+  ATKBuff: 10
+  DEFBuff: 10
   APBuff: 0
   CritBuff: 0
 --- !u!114 &-5923812138342739028
