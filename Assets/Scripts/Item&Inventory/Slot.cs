@@ -215,11 +215,13 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     void OnDoubleClickForUse() // 슬롯 더블클릭
     {   
         if (Item == null || !PlayerMovement.IsAlive) {
+            Debug.Log("log121: 1111");
             return;
         }
 
         if (Item.Type == Item.ItemType.Used) // 소비 아이템시 실행
         {
+            Debug.Log("log121: 2222");
             UsedItem UsedItem = Item.ItemPrefab.GetComponent<UsedItem>();
             UsedItem.PlayerStatus = PlayerStatus;
             if (UsedItem != null)
@@ -230,12 +232,13 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
         else if (Item.Type == Item.ItemType.Equipment) // 장비 아이템시 실행
         {
+            Debug.Log("log121: 3333");
             EquipmentItem EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
             EquipmentItem.PlayerStatus = PlayerStatus;
             if (EquipmentItem != null)
             {
-                if (PlayerStatus.PlayerLevel > EquipmentItem.RequireLevel) {
-                    EquipmentItem.EquipItem(Item);
+                if (PlayerStatus.PlayerLevel >= EquipmentItem.RequireLevel) {
+                    EquipmentItem.EquipItem(Item); //-> 이 코드가 어딘가 꼬여 있음.
                     ClearSlot();
                 }
                 else {
@@ -245,6 +248,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
         else if (Item.Type == Item.ItemType.SourceCode) // 스킬북 아이템시 실행
         {   
+            Debug.Log("log121: 4444");
             SourceCodeItem SourceCodeItem = Item.ItemPrefab.GetComponent<SourceCodeItem>();
             if (SourceCodeItem != null)
             {   

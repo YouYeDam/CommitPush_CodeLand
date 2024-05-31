@@ -40,6 +40,8 @@ public class PlayerData
     // 아이템 저장을 위해선 item 과 item count로 구성된 2차원 배열을 저장해야함.
     public Item[] items = new Item[40];
     public int[] itemCounts = new int[40];
+    public bool[] isEquipment = new bool[40];
+
     // 장비 저장 데이터
     public Item[] equipments = new Item[8];
 }
@@ -75,7 +77,6 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 조건문 처리 잘못하면 계속하기에서 에러 남.
         if (Input.GetKeyDown(KeyCode.S))
         {
             playerObject = GameObject.FindWithTag("Player");
@@ -83,8 +84,8 @@ public class SaveManager : MonoBehaviour
 
             uiManager = GameObject.FindWithTag("UIManager");
 
-            slots = uiManager.GetComponentsInChildren<Slot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정.
-            equipmentSlots = uiManager.GetComponentsInChildren<EquipmentSlot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정.
+            slots = uiManager.GetComponentsInChildren<Slot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정. 모든 슬롯을 가져옴.
+            equipmentSlots = uiManager.GetComponentsInChildren<EquipmentSlot>(true); // 역시 모든 장비 슬롯 가져옴.
             currentAniController = playerObject.GetComponent<Animator>().runtimeAnimatorController;
             if (playerObject != null)
             {
@@ -92,7 +93,7 @@ public class SaveManager : MonoBehaviour
                 playerStatus = playerObject.GetComponent<PlayerStatus>();
                 playerMoney = playerObject.GetComponent<PlayerMoney>();
                 Debug.Log(playerStatus);
-                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController, playerMoney, slots, equipmentSlots);
+                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController, playerMoney, slots, equipmentSlots); // 이거 그냥 결국 playerObject랑 uiManager 두개로 단순화 할 수 있을텐데. 나중에 보고 하기.
                 Debug.Log("플레이어 진행 상황이 저장되었습니다.");
             }
         }
@@ -152,8 +153,6 @@ public class SaveManager : MonoBehaviour
         SaveItems(slots, data);
         SaveEquipments(equipmentSlots, data);
 
-        Debug.Log("log5: Max Hp on saving: " + data.PlayerMaxHP);
-        // Debug.Log("log1666: slot saved: " + data.slots[0].Item);
         string json = JsonUtility.ToJson(data);
         string path = Path.Combine(Application.persistentDataPath, "playerData.json");
         File.WriteAllText(path, json);
@@ -178,7 +177,7 @@ public class SaveManager : MonoBehaviour
         {
             if (data.equipments[i] != null)
             {
-            Debug.Log("Log123: Equipment " + i + ": " + data.equipments[i]);
+                Debug.Log("Log123: Equipment " + i + ": " + data.equipments[i]);
             }
         }
     }
@@ -209,7 +208,7 @@ public class SaveManager : MonoBehaviour
             playerObject.name = playerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
 
-            playerObject.GetComponent<Animator>().runtimeAnimatorController = data.runtimeAnimatorController; 
+            playerObject.GetComponent<Animator>().runtimeAnimatorController = data.runtimeAnimatorController;
 
             playerObject.GetComponent<PlayerStatus>().PlayerLevel = data.PlayerLevel;
             playerObject.GetComponent<PlayerStatus>().PlayerCurrentHP = data.PlayerCurrentHP;
@@ -226,7 +225,7 @@ public class SaveManager : MonoBehaviour
             playerObject.GetComponent<PlayerStatus>().PlayerCrit = data.PlayerCrit;
             playerObject.GetComponent<PlayerStatus>().LevelUpPoint = data.LevelUpPoint;
             playerObject.GetComponent<PlayerStatus>().IsLoaded = true;
-            
+
             playerObject.GetComponent<PlayerMoney>().Bit = data.Bit;
             playerObject.GetComponent<PlayerMoney>().Snippet = data.Snippet;
         }
@@ -262,15 +261,27 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    private void LoadItems(PlayerData data)
+    private void LoadItems(PlayerData data) // data의 아이템이 아이템인지 장비인지 구별해야함. isEquipment 함수를 자료형에 추가하고. 또 장비의 슬롯 인덱스도 저장해야함.
     {
         for (int i = 0; i < data.items.Length; i++)
         {
-            Debug.Log("log889: " + i);
             if (data.items[i] != null)
             {
+                if (data.items[i].Type == Item.ItemType.Used)
+                {
+                    Debug.Log("템템");
+                }
+                else if (data.items[i].Type == Item.ItemType.Equipment)
+                {
+                    Debug.Log("장비장비");
+                }
+                else if (data.items[i].Type == Item.ItemType.SourceCode){
+                    Debug.Log("스킬스킬");
+                }
+                else{
+                    Debug.Log("뭥미");
+                }
                 uiManager.GetComponentsInChildren<Slot>(true)[i].AddItem(data.items[i], data.itemCounts[i]);
-                Debug.Log("Item name of " + i + " " + data.items[i].name);
             }
         }
     }

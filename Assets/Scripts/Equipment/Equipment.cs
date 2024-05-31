@@ -16,30 +16,28 @@ public class Equipment : MonoBehaviour
 
     void Start() {
         playerStatus = FindObjectOfType<PlayerStatus>();
-        if (!playerStatus.IsLoaded){
-        HelmetSlot.InitialEquip();
-
-        BodySlot.InitialEquip();
-
-        PantsSlot.InitialEquip();
-
-        WeaponSlot.InitialEquip();
-
-        GloveSlot.InitialEquip();
-
-        ShoesSlot.InitialEquip();
-
-        PetSlot.InitialEquip();
-
-        TrinketSlot.InitialEquip();
-        }
+        HelmetSlot.InitialEquip(playerStatus.IsLoaded);
         HelmetSlot.ConnectUIManager();
+
+        BodySlot.InitialEquip(playerStatus.IsLoaded);
         BodySlot.ConnectUIManager();
+
+        PantsSlot.InitialEquip(playerStatus.IsLoaded);
         PantsSlot.ConnectUIManager();
+
+        WeaponSlot.InitialEquip(playerStatus.IsLoaded);
         WeaponSlot.ConnectUIManager();
+
+        GloveSlot.InitialEquip(playerStatus.IsLoaded);
         GloveSlot.ConnectUIManager();
+
+        ShoesSlot.InitialEquip(playerStatus.IsLoaded);
         ShoesSlot.ConnectUIManager();
+
+        PetSlot.InitialEquip(playerStatus.IsLoaded);
         PetSlot.ConnectUIManager();
+
+        TrinketSlot.InitialEquip(playerStatus.IsLoaded);
         TrinketSlot.ConnectUIManager();
     }
 }

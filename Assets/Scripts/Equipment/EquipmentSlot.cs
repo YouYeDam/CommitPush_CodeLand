@@ -13,7 +13,7 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     EquipmentItem EquipmentItem;
 
     [SerializeField] GameObject UICanvas;
-    Inventory InventoryScript;
+    public Inventory InventoryScript;
 
     private int ClickCount = 0;
     private float LastClickTime = 0f;
@@ -32,11 +32,13 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             InventoryScript = UICanvas.GetComponent<Inventory>();
         }
     }
-    public void InitialEquip() {
+    public void InitialEquip(bool IsLoaded) {
             if (Item != null) { // 초기 아이템 설정
             EquipmentItem EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
             EquipmentItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
-            AddItem(Item);
+            // if (!IsLoaded) { 
+                AddItem(Item, IsLoaded); // 이게 하나의 일만 하는게 아니라서 문제를 일으킨다...
+            // }
         }
     }
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
@@ -45,9 +47,12 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         ItemImage.color = Color;
     }
 
-    void ClearSlot() { // 장비 슬롯에 아이템 탈착
+    public void ClearSlot() { // 장비 슬롯에 아이템 탈착
+        Debug.Log("log112: 1111 "+EquipmentItem);
         EquipmentItem.DecreaseStat();
+        Debug.Log("log112: 2222");
         Item = null;
+        Debug.Log("log112: 3333");
         ItemImage.sprite = null;
         SetColor(0);
     }
@@ -88,20 +93,30 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         ItemToolTip.HideToolTip();
     }
 
-    public void AddItem(Item Item) { //장비 슬롯에 아이템 장착
+    public void AddItem(Item Item, bool IsLoaded) { //장비 슬롯에 아이템 장착
+        EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
+        if(!IsLoaded){
+            this.Item = Item;
+            EquipmentItem.IncreaseStat();
+            ItemImage.sprite = this.Item.ItemImage;
+            SetColor(1);
+        }
+    }
+
+    public void AddItem(Item Item) { // 다형성
         this.Item = Item;
-        ItemImage.sprite = this.Item.ItemImage;
-        SetColor(1);
         EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
         EquipmentItem.IncreaseStat();
+        ItemImage.sprite = this.Item.ItemImage;
+        SetColor(1);
     }
 
     public void CheckNull(Item NewItem) {
         if (Item == null) {
             AddItem(NewItem);
         }
-        else {
-            InventoryScript.AcquireItem(Item);
+        else { 
+            //InventoryScript.AcquireItem(Item); //-> 얘가 문제였음. 중복 작동하는 거 같음. 문제 되면 여기 우선적으로 확인
             ClearSlot();
             AddItem(NewItem);
         }
