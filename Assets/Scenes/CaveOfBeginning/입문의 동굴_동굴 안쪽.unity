@@ -9695,6 +9695,10 @@ PrefabInstance:
       propertyPath: m_Lens.OrthographicSize
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1093031328540769238, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
+      propertyPath: m_text
+      value: "\uC785\uBB38\uC758 \uB3D9\uAD74\n\uB3D9\uAD74 \uC548\uCABD "
+      objectReference: {fileID: 0}
     - target: {fileID: 1438965535650828236, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_BoundingShape2D
       value: 
@@ -9705,7 +9709,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4977721
+      value: -0.526636
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y

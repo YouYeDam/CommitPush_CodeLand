@@ -10581,7 +10581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1093031328540769238, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_text
-      value: "\uC785\uBB38\uC758 \uB3D9\uAD74_\uB3D9\uAD74 \uCD08\uC785"
+      value: "\uC785\uBB38\uC758 \uB3D9\uAD74\n\uB3D9\uAD74 \uCD08\uC785"
       objectReference: {fileID: 0}
     - target: {fileID: 1438965535650828236, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_BoundingShape2D
@@ -10593,7 +10593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.4886197
+      value: -0.52663505
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
