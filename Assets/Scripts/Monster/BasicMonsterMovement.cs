@@ -42,6 +42,9 @@ public class BasicMonsterMovement : MonoBehaviour
     GameObject MonsterRegenerationControllerObject; // 몬스터 재생성기 오브젝트
     MonsterRegenerationController MonsterRegenerationController;
 
+    float OriginalMoveSpeed;
+    float OriginalDirection;
+
     void Start()
     {
         MonsterRigidbody = GetComponent<Rigidbody2D>();
@@ -74,6 +77,8 @@ public class BasicMonsterMovement : MonoBehaviour
             MonsterRegenerationControllerObject = GameObject.Find("MonsterRegenerationObject");
             MonsterRegenerationController = MonsterRegenerationControllerObject.GetComponent<MonsterRegenerationController>();
         }
+        OriginalMoveSpeed = MoveSpeed;
+        OriginalDirection = Mathf.Sign(MoveSpeed);;
     }
 
     void Update()
@@ -254,6 +259,7 @@ public class BasicMonsterMovement : MonoBehaviour
         }
         MonsterAnimator.SetBool("IsDying", true);
         if (MonsterRegenerationController) {
+            RestoreOriginalSpeed(OriginalMoveSpeed, OriginalDirection);
             MonsterRegenerationController.RegenerateMonster(MonsterObject, StartPosition, StartRotation);
         }
         IsAlive = false;
@@ -289,5 +295,29 @@ public class BasicMonsterMovement : MonoBehaviour
             }
             yield return null; // 한 프레임 대기
         }
+    }
+
+    public void MonsterSlowDebuff(float SlowDuration, float SlowDebuffFactor) { // 몬스터 이동속도 감소 디버프
+        StartCoroutine(ApplySlowDebuff(SlowDuration, SlowDebuffFactor));
+    }
+
+    IEnumerator ApplySlowDebuff(float SlowDuration, float SlowDebuffFactor) {
+        float SavedMoveSpeed = Mathf.Abs(MoveSpeed); // 디버프 당시 속도 저장
+        float SavedDirection = Mathf.Sign(MoveSpeed); //  디버프 당시 방향 저장
+
+        MoveSpeed = SavedDirection * SavedMoveSpeed * SlowDebuffFactor;
+
+        // MoveSpeed가 절댓값 2 미만이면 2로 설정
+        if (Mathf.Abs(MoveSpeed) < 2f) {
+            MoveSpeed = SavedDirection * 2f;
+        }
+
+        yield return new WaitForSeconds(SlowDuration);
+
+        RestoreOriginalSpeed(SavedMoveSpeed, SavedDirection);
+    }
+
+    void RestoreOriginalSpeed(float OriginalMoveSpeed, float OriginalDirection) {
+        MoveSpeed = OriginalDirection * OriginalMoveSpeed;
     }
 }

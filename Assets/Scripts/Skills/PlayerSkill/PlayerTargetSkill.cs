@@ -8,8 +8,9 @@ public class PlayerTargetSkill : MonoBehaviour
     [SerializeField] float DestroyDelay = 0.5f;
     [SerializeField] int Damage = 10;
     [SerializeField] float SkillCoefficient = 0.05f; // 스킬계수
-    [SerializeField] float AttackXRange = 5f;
-    [SerializeField] float AttackYRange = 0.5f;
+    [SerializeField] float AttackDistance = 5f; // 캐스트 거리
+    [SerializeField] float BoxHeight = 0.5f; // 박스의 높이
+    [SerializeField] float BoxWidth = 1f; // 박스의 너비
     Rigidbody2D MyRigidbody;
     GameObject Player;
     PlayerMovement PlayerMovement;
@@ -21,6 +22,7 @@ public class PlayerTargetSkill : MonoBehaviour
     public int MPUse = 0;
     float XSpeed;
     GameObject TargetMonster;
+    Vector3 TargetPosition;
 
     void Start()
     {
@@ -30,11 +32,12 @@ public class PlayerTargetSkill : MonoBehaviour
         XSpeed = PlayerMovement.transform.localScale.x * SkillSpeed;
         Invoke("DestroySelf", DestroyDelay);
         FlipSprite();
-        
-        PlayerStatus = FindObjectOfType<PlayerStatus>();    
+
+        PlayerStatus = FindObjectOfType<PlayerStatus>();
         Damage = Mathf.CeilToInt(Damage * (1 + SkillCoefficient * PlayerStatus.PlayerATK)); // 데미지 공식: 스킬계수 * 플레이어ATK
         Damage = Mathf.FloorToInt(Damage * Random.Range(1.0f, 1.31f)); // 데미지 랜덤값: 계산된 데미지의 1 ~ 1.3배로 조정
-        if (Random.value < PlayerStatus.PlayerCrit) {
+        if (Random.value < PlayerStatus.PlayerCrit)
+        {
             IsCrit = true;
             Damage *= 2; // 크리티컬 공식: 최종 데미지 * 2
         }
@@ -51,60 +54,78 @@ public class PlayerTargetSkill : MonoBehaviour
         {
             transform.position = TargetMonster.transform.position;
         }
+        else
+        {
+            transform.position = TargetPosition;
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (IsAttackDone) {
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (IsAttackDone)
+        {
             return;
         }
-        if (other is BoxCollider2D && other.gameObject.tag == "Monster") {
-            BasicMonsterMovement BaiscMonsterMovement = other.gameObject.GetComponent<BasicMonsterMovement>();
-            BaiscMonsterMovement.TakeDamage(Damage, IsCrit);
-            if (!CanHitMany) {
+        if (other is BoxCollider2D && other.gameObject.tag == "Monster")
+        {
+            BasicMonsterMovement MonsterMovement = other.gameObject.GetComponent<BasicMonsterMovement>();
+            MonsterMovement.TakeDamage(Damage, IsCrit);
+            if (!CanHitMany)
+            {
                 IsAttackDone = true;
             }
         }
     }
 
-    void FlipSprite() { //스킬 이펙트 좌우반전
-        if (XSpeed < 0) {
+    void FlipSprite()
+    {
+        if (XSpeed < 0)
+        {
             transform.localScale = new Vector2(-1, 1);
         }
     }
 
     void CheckMonster()
     {
-        Vector2 Direction = PlayerMovement.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
         Vector2 Origin = Player.transform.position;
-        Vector2 Size = new Vector2(AttackXRange, AttackYRange);
+        Vector2 Direction = PlayerMovement.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
+        Vector2 Size = new Vector2(BoxWidth, BoxHeight);
         float Angle = 0f;
 
-        RaycastHit2D[] Hits = Physics2D.BoxCastAll(Origin, Size, Angle, Direction, AttackXRange, LayerMask.GetMask("Monster"));
+        RaycastHit2D[] Hits = Physics2D.BoxCastAll(Origin, Size, Angle, Direction, AttackDistance, LayerMask.GetMask("Monster"));
+        float MinDistance = float.MaxValue;
+        GameObject ClosestMonster = null;
+
         foreach (RaycastHit2D Hit in Hits)
         {
             if (Hit.collider != null && Hit.collider.CompareTag("Monster"))
             {
-                BasicMonsterMovement monsterMovement = Hit.collider.GetComponent<BasicMonsterMovement>();
-                if (monsterMovement != null && monsterMovement.IsAlive)
+                BasicMonsterMovement MonsterMovement = Hit.collider.GetComponent<BasicMonsterMovement>();
+                if (MonsterMovement != null && MonsterMovement.IsAlive)
                 {
-                    TargetMonster = Hit.collider.gameObject;
-                    return;
+                    float Distance = Vector2.Distance(Origin, Hit.point);
+                    if (Distance < MinDistance)
+                    {
+                        MinDistance = Distance;
+                        ClosestMonster = Hit.collider.gameObject;
+                    }
                 }
             }
         }
 
-        // 몬스터가 없으면 Player로부터 AttackXRange 지점 끝에 위치하게 설정
-        GameObject TargetPoint = new GameObject("TargetPoint");
-        TargetPoint.transform.position = Player.transform.position + new Vector3(Direction.x * AttackXRange, 0, 0);
-        TargetMonster = TargetPoint;
+        if (ClosestMonster != null)
+        {
+            TargetMonster = ClosestMonster;
+        }
+        else
+        {
+            // 타겟 몬스터가 없으면 TargetPosition을 플레이어 앞쪽으로 설정
+            TargetPosition = Player.transform.position + new Vector3(Direction.x * AttackDistance, 0, 0);
+        }
     }
 
     void DestroySelf()
     {
-        if (TargetMonster != null && TargetMonster.name == "TargetPoint")
-        {
-            Destroy(TargetMonster);
-        }
         Destroy(gameObject);
     }
 }
