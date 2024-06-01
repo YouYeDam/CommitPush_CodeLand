@@ -8,9 +8,21 @@ public class PlayerManager : MonoBehaviour
     public bool CanInput;
     string ConnectPortalName;
     PlayerInteraction PlayerInteraction;
+    public static PlayerManager Instance;
+    public bool isMiniMapActive = true;
+
     public void Awake() {
-        DontDestroyOnLoad(gameObject);
-        SceneManager.sceneLoaded += OnSceneLoaded; // 씬이 로드될 때마다 OnSceneLoaded를 호출하도록 등록
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded; // 씬이 로드될 때마다 OnSceneLoaded를 호출하도록 등록
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
     }
 
     void Start() {
@@ -54,4 +66,10 @@ public class PlayerManager : MonoBehaviour
             transform.position = ConnectPortal.transform.position;
         }
     }
+
+    public void SetMiniMapState(bool state)
+    {
+        isMiniMapActive = state;
+    }
+
 }
