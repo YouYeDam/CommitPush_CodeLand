@@ -20,6 +20,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     PlayerMoney PlayerMoney;
     [SerializeField] TMP_Text TextCount;
     [SerializeField] GameObject CountImage;
+    QuestManager QuestManager;
 
     // 스킬북 기능 구현 변수
     [SerializeField] private GameObject SkillContent;  // 스킬 슬롯의 부모인 Content
@@ -47,7 +48,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         PlayerMoney  = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
 
         SkillSlots = SkillContent.GetComponentsInChildren<SkillSlot>();
-
+        QuestManager = FindObjectOfType<QuestManager>();
     }
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
         Color Color = ItemImage.color;
@@ -200,18 +201,19 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         Item TempItem = Item;
         int TempItemCount = ItemCount;
+        ItemQuickSlot TempQuickSlotReference = QuickSlotReference;
 
         AddItem(ItemDrag.Instance.DragSlot.Item, ItemDrag.Instance.DragSlot.ItemCount, ItemDrag.Instance.DragSlot.QuickSlotReference);
 
         if (TempItem != null) 
         {
-            ItemDrag.Instance.DragSlot.AddItem(TempItem, TempItemCount);
+            ItemDrag.Instance.DragSlot.AddItem(TempItem, TempItemCount, TempQuickSlotReference);
         }
         else 
         {
             ItemDrag.Instance.DragSlot.ClearSlot();
-
         }
+
     }
 
     void OnDoubleClickForUse() // 슬롯 더블클릭
@@ -265,7 +267,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
                 {   
                     if (SkillSlots[i].SkillPrefab == null)
                     {
-                        SkillSlots[i].AddItem(SourceCodeItem.SkillPrefab);
+                        SkillSlots[i].AddSkill(SourceCodeItem.SkillPrefab);
                         ClearSlot();
                         return;
                     }
@@ -295,5 +297,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         int TotalItemCost = Item.ItemCost * SellItemCount;
         PlayerMoney.Bit += TotalItemCost;
         SetSlotCount(-SellItemCount);
+        QuestManager.UpdateRemoveObjective(Item.ItemName, SellItemCount);
     }
 }

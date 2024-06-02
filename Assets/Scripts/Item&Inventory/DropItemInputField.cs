@@ -11,7 +11,11 @@ public class DropItemInputNumber : MonoBehaviour
     [SerializeField] TMP_InputField InputFieldText;
     [SerializeField] GameObject InputFieldBase;
     public Button OKButton;
+    QuestManager QuestManager;
     
+    void Start() {
+        QuestManager = FindObjectOfType<QuestManager>();
+    }
     void Update() {
         if (InputFieldText.text.Length > 0) {
             OKButton.interactable = true;
@@ -54,8 +58,12 @@ public class DropItemInputNumber : MonoBehaviour
 
     void DropItem(int DropCount)
     {
+        Item Item = ItemDrag.Instance.DragSlot.Item;
         ItemDrag.Instance.DragSlot.SetSlotCount(-DropCount);
         ItemDrag.Instance.DragSlot = null;
         InputFieldBase.SetActive(false);
+
+        // QuestManager에서 아이템 제거 목표 업데이트
+        QuestManager.UpdateRemoveObjective(Item.ItemName, DropCount);
     }
 }

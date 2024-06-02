@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void Start() {
-        StatusBar = gameObject.transform.GetChild(7).gameObject;
+        StatusBar = gameObject.transform.GetChild(8).gameObject;
         ItemQuickSlot = gameObject.transform.GetChild(0).gameObject;
         SkillQuickSlot = gameObject.transform.GetChild(1).gameObject;
     }
@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        int UINum = FindObjectsOfType<PlayerManager>().Length;
+        int UINum = FindObjectsOfType<UIManager>().Length;
         string currentSceneName = scene.name;
 
         if (UINum > 1 || currentSceneName == "Main Menu Scene")
@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
         else
         {
             // 씬이 로드될 때마다 Main Camera를 찾아서 Canvas의 Render Camera로 설정.
+            
             Camera MainCamera = Camera.main;
             if (MainCamera != null)
             {
@@ -47,6 +48,7 @@ public class UIManager : MonoBehaviour
                     Canvas.worldCamera = MainCamera;
                 }
             }
+            
         }
 
         // 씬이 로드될 때 플레이어 인풋이 막힌 상황이면 스테이터스바, 퀵슬롯들도 비활성화

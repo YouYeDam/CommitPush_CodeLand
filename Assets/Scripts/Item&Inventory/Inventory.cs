@@ -49,4 +49,18 @@ public class Inventory : MonoBehaviour
             }
         }
     }
+
+    // 특정 아이템의 수량을 반환하는 메서드
+    public int GetItemAmount(string itemName)
+    {
+        int amount = 0;
+        foreach (var slot in Slots)
+        {
+            if (slot.Item != null && slot.Item.ItemName == itemName)
+            {
+                amount += slot.ItemCount;
+            }
+        }
+        return amount;
+    }
 }

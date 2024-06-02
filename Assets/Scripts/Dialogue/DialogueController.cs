@@ -13,14 +13,19 @@ public class DialogueController : MonoBehaviour
     private int CurrentNodeIndex = 0;  // 현재 노드 인덱스
     PlayerStatus PlayerStatus;
     Character Character;
+    QuestManager QuestManager;
+    NPC CurrentNPC; // 현재 대화 중인 NPC
+
     void Start() {
         PlayerStatus = FindObjectOfType<PlayerStatus>();
         Character = FindObjectOfType<Character>();
+        QuestManager = FindObjectOfType<QuestManager>();
     }
 
-    public void StartDialogue(Dialogue Dialogue)
+    public void StartDialogue(Dialogue dialogue, NPC npc)
     {
-        this.Dialogue = Dialogue;
+        this.Dialogue = dialogue;
+        this.CurrentNPC = npc; // 대화 중인 NPC 설정
         DialogueBase.SetActive(true);
         CurrentNodeIndex = 0;  // 대화 시작 시 첫 노드 인덱스를 0으로 초기화
         DisplayNode();
@@ -43,13 +48,48 @@ public class DialogueController : MonoBehaviour
         }
         else
         {
-            EndDialogue();  // 대화 노드가 더 이상 없으면 대화 종료
+            CheckQuestStatus(); // 퀘스트 상태 확인 후 대화 종료
         }
     }
     
     public void OnNextButtonClicked()
     {
         DisplayNode();  // 사용자가 다음 버튼을 클릭할 때 다음 노드 표시
+    }
+
+    private void CheckQuestStatus()
+    {
+        if (CurrentNPC != null && QuestManager != null)
+        {
+            // 현재 퀘스트 인덱스 사용
+            if (CurrentNPC.currentQuestIndex < CurrentNPC.QuestsToGive.Count)
+            {
+                string questTitle = CurrentNPC.QuestsToGive[CurrentNPC.currentQuestIndex].Title;
+                Debug.Log(questTitle);
+                if (!string.IsNullOrEmpty(questTitle))
+                {
+                    Quest quest = QuestManager.GetQuestByTitle(questTitle);
+                    if (quest != null)
+                    {
+                        if (QuestManager.IsQuestActive(questTitle))
+                        {
+                            // 퀘스트 중 조건을 만족했다면 퀘스트 완료
+                            if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
+                            {
+                                QuestManager.CompleteQuest(questTitle);
+                            }
+                        }
+                        else
+                        {
+                            // 퀘스트를 시작하지 않은 경우 퀘스트 시작
+                            QuestManager.StartQuest(questTitle);
+                        }
+                    }
+                }
+            }
+        }
+
+        EndDialogue(); // 대화 종료
     }
 
     private void EndDialogue()

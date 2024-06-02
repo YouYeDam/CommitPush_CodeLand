@@ -8,5 +8,5 @@ public class SkillInfo : MonoBehaviour
     public string SkillType; //공격형, 버프형
     public string SkillCoolDown;
     public string SkillMPUse;
-    [TextArea] public string SkillExplain;
+    [TextArea(4, 15)] public string SkillExplain;
 }

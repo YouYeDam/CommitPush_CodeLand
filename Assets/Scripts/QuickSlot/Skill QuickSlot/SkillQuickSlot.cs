@@ -34,7 +34,7 @@ public class SkillQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         CoolDownPanel.color = color;
     }
 
-    public void AddItem(GameObject SkillPrefab, SkillSlot Slot = null) { // 퀵슬롯에 새로운 스킬 추가
+    public void AddSkill(GameObject SkillPrefab, SkillSlot Slot = null) { // 퀵슬롯에 새로운 스킬 추가
         this.SkillPrefab = SkillPrefab;
         SpriteRenderer SkillSpriteRenderer = this.SkillPrefab.GetComponent<SpriteRenderer>();
         SkillImage.sprite = SkillSpriteRenderer.sprite;
@@ -102,7 +102,7 @@ public class SkillQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             if (SkillDrag.Instance.SkillDragSlot.QuickSlotReference != null) {
                 SkillDrag.Instance.SkillDragSlot.QuickSlotReference.ClearSlot();
             }
-            AddItem(SkillDrag.Instance.SkillDragSlot.SkillPrefab, SkillDrag.Instance.SkillDragSlot);
+            AddSkill(SkillDrag.Instance.SkillDragSlot.SkillPrefab, SkillDrag.Instance.SkillDragSlot);
         }
     }
 

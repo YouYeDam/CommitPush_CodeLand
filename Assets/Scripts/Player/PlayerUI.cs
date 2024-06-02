@@ -11,6 +11,7 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject Skill;
     [SerializeField] GameObject Equipment;
     [SerializeField] GameObject Dialogue;
+    [SerializeField] GameObject Quest;
     [SerializeField] public GameObject Shop;
     PlayerManager PlayerManager;
     private Vector2 InventoryOriginalPosition;
@@ -18,11 +19,13 @@ public class PlayerUI : MonoBehaviour
     private Vector2 SkillOriginalPosition;
     private Vector2 EquipmentOriginalPosition;
     private Vector2 ShopOriginalPosition;
+    private Vector2 QuestOriginalPosition;
 
     GameObject InventoryButtonObject;
     GameObject CharacterButtonObject;
     GameObject SkillButtonObject;
     GameObject EquipmentButtonObject;
+    GameObject QuestButtonObject;
     public GameObject ShopButtonObject;
     public GameObject DialogueButtonObject;
 
@@ -30,6 +33,7 @@ public class PlayerUI : MonoBehaviour
     Button CharacterButton;
     Button SkillButton;
     Button EquipmentButton;
+    Button QuestButton;
     Button DialogueButton;
     Button ShopButton;
 
@@ -43,7 +47,8 @@ public class PlayerUI : MonoBehaviour
         Skill = UIManager.transform.GetChild(3).gameObject;
         Equipment = UIManager.transform.GetChild(4).gameObject;
         Inventory = UIManager.transform.GetChild(5).gameObject;
-        Dialogue = UIManager.transform.GetChild(8).gameObject.transform.GetChild(0).gameObject;
+        Quest = UIManager.transform.GetChild(7).gameObject;
+        Dialogue = UIManager.transform.GetChild(9).gameObject.transform.GetChild(0).gameObject;
         Shop = UIManager.transform.GetChild(6).gameObject;
 
         // 원래 위치 저장
@@ -51,6 +56,7 @@ public class PlayerUI : MonoBehaviour
         SkillOriginalPosition = Skill.GetComponent<RectTransform>().anchoredPosition;
         EquipmentOriginalPosition = Equipment.GetComponent<RectTransform>().anchoredPosition;
         InventoryOriginalPosition = Inventory.GetComponent<RectTransform>().anchoredPosition;
+        QuestOriginalPosition = Quest.GetComponent<RectTransform>().anchoredPosition;
         ShopOriginalPosition = Shop.GetComponent<RectTransform>().anchoredPosition;
     }
 
@@ -92,6 +98,27 @@ public class PlayerUI : MonoBehaviour
                 CharacterButton = CharacterButtonObject.GetComponent<Button>();
                 CharacterButton.onClick.AddListener(OnCharacter);
                 PlayerLevelUpController.ConnectButton();
+            }
+        }
+    }
+
+    public void OnQuest() {
+        if (Quest == null || !PlayerManager.CanInput) {
+            return;
+        }
+        if (Quest.activeSelf) {
+            Quest.SetActive(false);
+        }
+        else {
+            Quest.SetActive(true);
+            // 원래 위치로 복원
+            Quest.GetComponent<RectTransform>().anchoredPosition = QuestOriginalPosition;
+
+            // 닫기 버튼 연결
+            if (QuestButtonObject == null) {
+                QuestButtonObject = GameObject.Find("Quest Close Button");
+                QuestButton = QuestButtonObject.GetComponent<Button>();
+                QuestButton.onClick.AddListener(OnQuest);
             }
         }
     }

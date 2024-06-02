@@ -271,6 +271,13 @@ public class BasicMonsterMovement : MonoBehaviour
             GenerateMonster.GenerateMonsters();
         }
         StartCoroutine(DestroyAfterAnimation(DieDelay)); // 애니메이션 재생 후 몬스터 파괴
+        
+        // 퀘스트 목표 업데이트
+        QuestManager questManager = FindObjectOfType<QuestManager>();
+        if (questManager != null)
+        {
+            questManager.UpdateObjective(MonsterStatus.MonsterName, 1); // 몬스터 이름과 처치 수량을 전달
+        }
     }
     IEnumerator DestroyAfterAnimation(float DieDelay) {
         yield return new WaitForSeconds(DieDelay);

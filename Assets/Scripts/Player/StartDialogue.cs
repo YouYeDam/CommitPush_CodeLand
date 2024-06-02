@@ -72,21 +72,31 @@ public class StartDialogue : MonoBehaviour
         return NearestNPC;
     }
 
-    void StartDialogueIfPossible(GameObject Npc) {
-        if (Npc.GetComponent<NPC>().IsShop) {
+    void StartDialogueIfPossible(GameObject npc)
+    {
+        if (npc.GetComponent<NPC>().IsShop)
+        {
             PlayerUI.OpenShop();
-            AddShopItem AddShopItem = Npc.GetComponent<AddShopItem>();
-            AddShopItem.SetContent();
-            AddShopItem.AddEachItem();
+            AddShopItem addShopItem = npc.GetComponent<AddShopItem>();
+            addShopItem.SetContent();
+            addShopItem.AddEachItem();
         }
-        Dialogue Dialogue = Npc.GetComponent<NPC>().Dialogue;
-        if (Dialogue != null && DialogueController != null) {
-            DialogueController.StartDialogue(Dialogue);
-            if (PlayerUI.Shop.activeSelf) { // 상점창이 열려있으면 상점창 닫기
-                PlayerUI.CloseShop();
-            }
-            if (PlayerUI.DialogueButtonObject == null) {
-                PlayerUI.SetDialogueButton();
+
+        NPC npcComponent = npc.GetComponent<NPC>();
+        if (npcComponent != null && DialogueController != null)
+        {
+            Dialogue dialogue = npcComponent.GetCurrentDialogue();
+            if (dialogue != null)
+            {
+                DialogueController.StartDialogue(dialogue, npcComponent); // NPC와 함께 대화 시작
+                if (PlayerUI.Shop.activeSelf)
+                {
+                    PlayerUI.CloseShop();
+                }
+                if (PlayerUI.DialogueButtonObject == null)
+                {
+                    PlayerUI.SetDialogueButton();
+                }
             }
         }
     }

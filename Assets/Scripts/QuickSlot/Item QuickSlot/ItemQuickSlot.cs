@@ -65,6 +65,11 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         TextCount.text = "0";
         CountImage.SetActive(false);
+        
+        if (SlotReference != null) {
+            SlotReference.QuickSlotReference = null;
+            SlotReference = null;
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -93,11 +98,14 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        ClearSlot();
+        if (Item != null)
+        {
+            ClearSlot();
+        }
+
         ItemQuickSlotItemDrag.Instance.SetColor(0);
         ItemQuickSlotItemDrag.Instance.DragItemQuickSlot = null;
     }
-
     public void OnDrop(PointerEventData eventData)
     {
         if (ItemDrag.Instance.DragSlot != null) 

@@ -78,6 +78,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Quest",
+                    "type": "Button",
+                    "id": "675391a1-9a60-4363-9db7-b1e769ad79b5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interaction",
                     "type": "Button",
                     "id": "50b0b587-5569-4879-a294-39ed02d8af37",
@@ -487,6 +496,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DSkill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "341265f6-38ce-47f5-830a-3860f527ca86",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Quest",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

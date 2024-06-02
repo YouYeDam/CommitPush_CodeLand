@@ -53,7 +53,7 @@ public class PlayerStatus : MonoBehaviour
         PlayerCurrentHP = PlayerMaxHP;
         PlayerCurrentMP = PlayerMaxMP;
         LevelUpPoint += 3;
-        
+
         PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.6f);
         if (PlayerCurrentEXP >= PlayerMaxEXP) {
             PlayerCurrentEXP = PlayerMaxEXP - 1;
@@ -65,6 +65,18 @@ public class PlayerStatus : MonoBehaviour
             MonsterStatus MonsterStatus = Monster.GetComponent<MonsterStatus>();
             if (MonsterStatus != null) {
                 MonsterStatus.SetLevelDiff(PlayerLevel);
+            }
+        }
+
+        // 레벨업 이벤트 처리
+        UpdateAllNPCQuestStatus();
+    }
+
+    void UpdateAllNPCQuestStatus() {
+        NPC[] npcs = FindObjectsOfType<NPC>();
+        foreach (NPC npc in npcs) {
+            if (npc.QuestsToGive != null && npc.QuestsToGive.Count > 0) {
+                npc.UpdateQuestStatus();
             }
         }
     }
