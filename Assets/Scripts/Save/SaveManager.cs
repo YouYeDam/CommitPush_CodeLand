@@ -40,7 +40,8 @@ public class PlayerData
     public Item[] items = new Item[40];
     public GameObject[] skillPrefabs = new GameObject[10];
     public GameObject[] quickSkillPrefabs = new GameObject[6];
-    public SkillSlot[] slotReferences = new SkillSlot[6];
+    public int[] skillSlotReferencesIdx = new int[6];
+    public int[] itemSlotReferencesIdx = new int[4];
     public Item[] quickItems = new Item[4];
     public int[] quickItemCounts = new int[4];
     public int[] itemCounts = new int[40];
@@ -194,15 +195,16 @@ public class SaveManager : MonoBehaviour
     }
     private static void SaveQuickSkills(SkillQuickSlot[] skillQuickSlots, PlayerData data){
         GameObject[] skillPrefabs = new GameObject[skillQuickSlots.Length];
-        SkillSlot[] slotReferences = new SkillSlot[skillQuickSlots.Length];
+        int[] skillSlotReferencesIdx = new int[skillQuickSlots.Length];
         for (int i = 0; i < skillQuickSlots.Length; i++)
         {
             skillPrefabs[i] = skillQuickSlots[i].SkillPrefab;
-            slotReferences[i] = skillQuickSlots[i].SlotReference;
+            if(skillQuickSlots[i].SlotReference != null){
+            skillSlotReferencesIdx[i] = skillQuickSlots[i].SlotReference.transform.GetSiblingIndex();}
         };
         // 정리된 배열들을 data에 저장
         data.quickSkillPrefabs = skillPrefabs;
-        data.slotReferences = slotReferences;
+        data.skillSlotReferencesIdx = skillSlotReferencesIdx;
     }
 
     private static void SaveSkills(SkillSlot[] skillSlots, PlayerData data)
@@ -236,14 +238,20 @@ public class SaveManager : MonoBehaviour
     private static void SaveQuickItems(ItemQuickSlot[] itemQuickSlots, PlayerData data){
         Item[] items = new Item[itemQuickSlots.Length];
         int[] itemCounts = new int[itemQuickSlots.Length];
+        int[] referSlotsIdx = new int[itemQuickSlots.Length];
         for (int i = 0; i < itemQuickSlots.Length; i++)
         {
             items[i] = itemQuickSlots[i].Item;
             itemCounts[i] = itemQuickSlots[i].ItemCount;
+            if(itemQuickSlots[i].SlotReference != null){
+            referSlotsIdx[i] = itemQuickSlots[i].SlotReference.transform.GetSiblingIndex();}
+            Debug.Log("log1112" + referSlotsIdx[i]);
         };
         // 정리된 배열들을 data에 저장
         data.quickItems = items;
         data.quickItemCounts = itemCounts;
+        data.itemSlotReferencesIdx = referSlotsIdx;
+        Debug.Log("log3332: "+data.itemSlotReferencesIdx[0]);
     }
 
     public void InstantiateOnSavePoint(PlayerData data)
@@ -308,17 +316,19 @@ public class SaveManager : MonoBehaviour
     private void LoadSkills(PlayerData data){
         for (int i = 0; i < data.skillPrefabs.Length; i++){
             if(data.skillPrefabs[i] != null){
-                uiManager.GetComponentsInChildren<SkillSlot>(true)[i].AddItem(data.skillPrefabs[i]);
+                uiManager.GetComponentsInChildren<SkillSlot>(true)[i].AddSkill(data.skillPrefabs[i]);
             }
         }
     }
     private void LoadQuickSkills(PlayerData data){
 
         for (int i = 0; i < data.quickSkillPrefabs.Length; i++){
+            SkillSlot refer_slot = null;
             if(data.quickSkillPrefabs[i] != null){
                 // 아니 왜 제대로 넘겨줘도 안 됨
-                Debug.Log("log1212: 1111" + data.quickSkillPrefabs[i] + " " + data.slotReferences[i]);
-                uiManager.GetComponentsInChildren<SkillQuickSlot>(true)[i].AddItem(data.quickSkillPrefabs[i], data.slotReferences[i]); //여기서 그냥 null 값으로 넘어갔구나. slot도 같이 넘겨줘야하네 그럼.
+                Debug.Log("log1212: 1111" + data.quickSkillPrefabs[i] + " " + data.skillSlotReferencesIdx[i]);
+                refer_slot = uiManager.GetComponentsInChildren<SkillSlot>(true)[data.skillSlotReferencesIdx[i]];
+                uiManager.GetComponentsInChildren<SkillQuickSlot>(true)[i].AddSkill(data.quickSkillPrefabs[i], refer_slot); //여기서 그냥 null 값으로 넘어갔구나. slot도 같이 넘겨줘야하네 그럼.
             }
         }
     }
@@ -347,11 +357,16 @@ public class SaveManager : MonoBehaviour
     }
     private void LoadQuickItems(PlayerData data) // data의 아이템이 아이템인지 장비인지 구별해야함. isEquipment 함수를 자료형에 추가하고. 또 장비의 슬롯 인덱스도 저장해야함.
     {
+        Debug.Log("log7771" + data.itemSlotReferencesIdx[0]);
         for (int i = 0; i < data.quickItems.Length; i++)
         {
+            Slot refer_slot = null;
             if (data.quickItems[i] != null)
             {
-                uiManager.GetComponentsInChildren<ItemQuickSlot>(true)[i].AddItem(data.quickItems[i], data.quickItemCounts[i]);
+                refer_slot = uiManager.GetComponentsInChildren<Slot>(true)[data.itemSlotReferencesIdx[i]];
+                uiManager.GetComponentsInChildren<ItemQuickSlot>(true)[i].AddItem(data.quickItems[i], data.quickItemCounts[i], refer_slot);
+                Debug.Log("log2223 " + data.itemSlotReferencesIdx[i]);
+                Debug.Log("log2223 " + uiManager.GetComponentsInChildren<ItemQuickSlot>(true)[i].SlotReference);
             }
         }
     }
