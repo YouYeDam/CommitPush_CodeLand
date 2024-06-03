@@ -6,14 +6,10 @@ public class PlayerBuffSkill : MonoBehaviour
 {
     [SerializeField] float DestroyDelay = 0.5f;
     GameObject Player;
-    PlayerStatus PlayerStatus;
     PlayerBuffController PlayerBuffController;
     public float CoolDown = 60f;
     public int MPUse = 0;
     public float BuffDuration = 0f;
-    float PlayerX;
-    [SerializeField] float YSpeed;
-    
     [SerializeField] bool IsStatusUpBuff = false; //스탯업 버프인지
     [SerializeField] int HPBuff = 0;
     [SerializeField] int MPBuff = 0;
@@ -30,7 +26,6 @@ public class PlayerBuffSkill : MonoBehaviour
 
     void Start() {
         Player = GameObject.FindGameObjectWithTag("Player");
-        PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
         PlayerBuffController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBuffController>();
 
         CheckBuffType(); // 버프 타입 체크

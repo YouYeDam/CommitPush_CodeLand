@@ -9,7 +9,8 @@ public class PlayerGetItem : MonoBehaviour
     public Inventory InventoryScript;
     PlayerMoney PlayerMoney;
     DropMoney DropMoney;
-    
+    QuestManager QuestManager;
+
     // 이미 획득한 아이템을 추적하기 위한 Set
     HashSet<GameObject> acquiredItems = new HashSet<GameObject>();
     
@@ -19,6 +20,7 @@ public class PlayerGetItem : MonoBehaviour
             InventoryScript = UICanvas.GetComponent<Inventory>();
         }
         PlayerMoney = GetComponent<PlayerMoney>();
+        QuestManager = FindObjectOfType<QuestManager>();
     }
 
     void OnTriggerEnter2D(Collider2D other) { // 아이템과 닿을 시 아이템 획득
@@ -35,7 +37,9 @@ public class PlayerGetItem : MonoBehaviour
         }
 
         if (itemObject.tag == "Item" && InventoryScript != null) {
-            InventoryScript.AcquireItem(itemObject.GetComponent<ItemPickup>().item); // 아이템과 갯수를 전달하여 호출
+            Item item = itemObject.GetComponent<ItemPickup>().item;
+            InventoryScript.AcquireItem(item); // 아이템과 갯수를 전달하여 호출
+            QuestManager.UpdateObjective(item.ItemName, 1, true);
             acquiredItems.Add(itemObject);
             StartCoroutine(DestroyAfterDelay(itemObject));
         }

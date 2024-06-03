@@ -25,7 +25,7 @@ public class SkillSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         SkillImage.color = Color;
     }
 
-    public void AddItem(GameObject SkillPrefab) { // 스킬창에 새로운 스킬 추가
+    public void AddSkill(GameObject SkillPrefab) { // 스킬창에 새로운 스킬 추가
         this.SkillPrefab = SkillPrefab;
         SpriteRenderer SkillSpriteRenderer = this.SkillPrefab.GetComponent<SpriteRenderer>();
         SkillName = SkillPrefab.GetComponent<SkillInfo>().SkillName;

@@ -11,6 +11,6 @@ public class Skill : MonoBehaviour
         SetNormalAttackSlot();
     }
     public void SetNormalAttackSlot() {
-        InitialSkillSlot.AddItem(NormalAttack); // 첫 번째 스킬 슬롯에 기본공격 할당
+        InitialSkillSlot.AddSkill(NormalAttack); // 첫 번째 스킬 슬롯에 기본공격 할당
     }
 }

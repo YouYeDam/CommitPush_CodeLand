@@ -14,6 +14,7 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     PlayerMovement PlayerMovement;
     PlayerGetItem PlayerGetItem;
     PlayerMoney PlayerMoney;
+    QuestManager QuestManager;
 
     // 더블클릭 기능 구현 변수
     private int ClickCount = 0;
@@ -32,6 +33,8 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         PlayerGetItem = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGetItem>();
         PlayerMoney = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
+
+        QuestManager = FindObjectOfType<QuestManager>();
     }
 
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
@@ -94,6 +97,7 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             if (PlayerMoney.Bit >= Item.ItemCost) {
                 PlayerMoney.Bit -= Item.ItemCost;
                 PlayerGetItem.InventoryScript.AcquireItem(Item);
+                QuestManager.UpdateObjective(Item.ItemName, 1, true);
             }
             else {
                 CantBuyAlarm.OpenCantBuyAlarm();
@@ -106,6 +110,7 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (PlayerMoney.Bit >= TotalItemCost) {
             PlayerMoney.Bit -= TotalItemCost;
             PlayerGetItem.InventoryScript.AcquireItem(Item, BuyItemCount);
+            QuestManager.UpdateObjective(Item.ItemName, BuyItemCount, true);
         }
         else {
                 CantBuyAlarm.OpenCantBuyAlarm();

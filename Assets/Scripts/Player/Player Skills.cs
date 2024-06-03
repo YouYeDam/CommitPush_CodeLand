@@ -268,6 +268,14 @@ public class PlayerSkills : MonoBehaviour
                 Instantiate(Skill, SkillSpot.position, transform.rotation);
                 MyAnimator.SetBool("IsAttacking", true);
                 break;
+            case "디버프형":
+                Instantiate(Skill, SkillSpot.position, transform.rotation);
+                MyAnimator.SetBool("IsAttacking", true);
+                break;
+            case "회복형":
+                Instantiate(Skill, BuffSpot.position, transform.rotation);
+                MyAnimator.SetBool("IsBuffing", true);
+                break;
         }
     }
     void ResetCanAttack() {
@@ -296,88 +304,82 @@ public class PlayerSkills : MonoBehaviour
         MyAnimator.SetBool("IsBuffing", false);
     }
 
-    public void SetSkillsCoolTime(string ButtonKey) {
-        switch (ButtonKey) {
-            case "Q":
-                PlayerAttackSkill PlayerQAttackSkill = QSkill.GetComponent<PlayerAttackSkill>();
-                PlayerBuffSkill PlayerQBuffSkill = QSkill.GetComponent<PlayerBuffSkill>();
+    public void SetSkillsCoolTime(string ButtonKey)
+    {
+        GameObject Skill = GetSkillByButtonKey(ButtonKey);
 
-                if (PlayerQAttackSkill != null) {
-                    QSkillCoolDown = PlayerQAttackSkill.CoolDown;
-                    QSkillMPUse = PlayerQAttackSkill.MPUse;
-                    }
-            else if (PlayerQBuffSkill != null) {
-                    QSkillCoolDown = PlayerQBuffSkill.CoolDown;
-                    QSkillMPUse = PlayerQBuffSkill.MPUse;
-                    }
+        if (Skill != null)
+        {
+            PlayerAttackSkill AttackSkill = Skill.GetComponent<PlayerAttackSkill>();
+            PlayerBuffSkill BuffSkill = Skill.GetComponent<PlayerBuffSkill>();
+            PlayerTargetSkill TargetSkill = Skill.GetComponent<PlayerTargetSkill>();
+            PlayerDebuffSkill DebuffSkill = Skill.GetComponent<PlayerDebuffSkill>();
+            PlayerHealingSkill HealingSkill = Skill.GetComponent<PlayerHealingSkill>();
+
+            if (AttackSkill != null)
+            {
+                SetSkillProperties(ButtonKey, AttackSkill.CoolDown, AttackSkill.MPUse);
+            }
+            else if (BuffSkill != null)
+            {
+                SetSkillProperties(ButtonKey, BuffSkill.CoolDown, BuffSkill.MPUse);
+            }
+            else if (TargetSkill != null)
+            {
+                SetSkillProperties(ButtonKey, TargetSkill.CoolDown, TargetSkill.MPUse);
+            }
+            else if (DebuffSkill != null)
+            {
+                SetSkillProperties(ButtonKey, DebuffSkill.CoolDown, DebuffSkill.MPUse);
+            }
+            else if (HealingSkill != null)
+            {
+                SetSkillProperties(ButtonKey, HealingSkill.CoolDown, HealingSkill.MPUse);
+            }
+        }
+    }
+
+    private GameObject GetSkillByButtonKey(string ButtonKey)
+    {
+        switch (ButtonKey)
+        {
+            case "Q": return QSkill;
+            case "W": return WSkill;
+            case "E": return ESkill;
+            case "R": return RSkill;
+            case "S": return SSkill;
+            case "D": return DSkill;
+            default: return null;
+        }
+    }
+
+    private void SetSkillProperties(string ButtonKey, float CoolDown, int MPUse)
+    {
+        switch (ButtonKey)
+        {
+            case "Q":
+                QSkillCoolDown = CoolDown;
+                QSkillMPUse = MPUse;
                 break;
             case "W":
-                PlayerAttackSkill PlayerWAttackSkill = WSkill.GetComponent<PlayerAttackSkill>();
-                PlayerBuffSkill PlayerWBuffSkill = WSkill.GetComponent<PlayerBuffSkill>();
-
-                if (PlayerWAttackSkill != null) {
-                    WSkillCoolDown = PlayerWAttackSkill.CoolDown;
-                    WSkillMPUse = PlayerWAttackSkill.MPUse;
-                }
-                else if (PlayerWBuffSkill != null) {
-                    WSkillCoolDown = PlayerWBuffSkill.CoolDown;
-                    WSkillMPUse = PlayerWBuffSkill.MPUse;
-                }
+                WSkillCoolDown = CoolDown;
+                WSkillMPUse = MPUse;
                 break;
-
             case "E":
-                PlayerAttackSkill PlayerEAttackSkill = ESkill.GetComponent<PlayerAttackSkill>();
-                PlayerBuffSkill PlayerEBuffSkill = ESkill.GetComponent<PlayerBuffSkill>();
-
-                if (PlayerEAttackSkill != null) {
-                    ESkillCoolDown = PlayerEAttackSkill.CoolDown;
-                    ESkillMPUse = PlayerEAttackSkill.MPUse;
-                }
-                else if (PlayerEBuffSkill != null) {
-                    ESkillCoolDown = PlayerEBuffSkill.CoolDown;
-                    ESkillMPUse = PlayerEBuffSkill.MPUse;
-                }
+                ESkillCoolDown = CoolDown;
+                ESkillMPUse = MPUse;
                 break;
             case "R":
-                PlayerAttackSkill PlayerRAttackSkill = RSkill.GetComponent<PlayerAttackSkill>();
-                PlayerBuffSkill PlayerRBuffSkill = RSkill.GetComponent<PlayerBuffSkill>();
-
-                if (PlayerRAttackSkill != null) {
-                    RSkillCoolDown = PlayerRAttackSkill.CoolDown;
-                    RSkillMPUse = PlayerRAttackSkill.MPUse;
-                }
-                else if (PlayerRBuffSkill != null) {
-                    RSkillCoolDown = PlayerRBuffSkill.CoolDown;
-                    RSkillMPUse = PlayerRBuffSkill.MPUse;
-                }
+                RSkillCoolDown = CoolDown;
+                RSkillMPUse = MPUse;
                 break;
             case "S":
-                PlayerAttackSkill PlayerSAttackSkill = SSkill.GetComponent<PlayerAttackSkill>();
-                PlayerBuffSkill PlayerSBuffSkill = SSkill.GetComponent<PlayerBuffSkill>();
-
-                if (PlayerSAttackSkill != null) {
-                    SSkillCoolDown = PlayerSAttackSkill.CoolDown;
-                    SSkillMPUse = PlayerSAttackSkill.MPUse;
-                }
-                else if (PlayerSBuffSkill != null) {
-                    SSkillCoolDown = PlayerSBuffSkill.CoolDown;
-                    SSkillMPUse = PlayerSBuffSkill.MPUse;
-                }
+                SSkillCoolDown = CoolDown;
+                SSkillMPUse = MPUse;
                 break;
             case "D":
-                PlayerAttackSkill PlayerDAttackSkill = DSkill.GetComponent<PlayerAttackSkill>();
-                PlayerBuffSkill PlayerDBuffSkill = DSkill.GetComponent<PlayerBuffSkill>();
-
-                if (PlayerDAttackSkill != null) {
-                    DSkillCoolDown = PlayerDAttackSkill.CoolDown;
-                    DSkillMPUse = PlayerDAttackSkill.MPUse;
-                }
-                else if (PlayerDBuffSkill != null) {
-                    DSkillCoolDown = PlayerDBuffSkill.CoolDown;
-                    DSkillMPUse = PlayerDBuffSkill.MPUse;
-                }
-                break;
-            default:
+                DSkillCoolDown = CoolDown;
+                DSkillMPUse = MPUse;
                 break;
         }
     }

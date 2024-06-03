@@ -20,5 +20,5 @@ public class Item : ScriptableObject
     public Sprite ItemImage; // 아이템의 이미지
     public GameObject ItemPrefab;  // 아이템의 프리팹
     public bool IsAlreadyGet = false; // 아이템 중복 습득 방지
-    [TextArea] public string ItemInfo;
+    [TextArea(4, 15)] public string ItemInfo;
 }
