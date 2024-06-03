@@ -109,7 +109,7 @@ public class SkillQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     void AddButtonKey() {
         switch (ButtonKey) {
             case "Q":
-                PlayerSkills.QSkill = SkillPrefab;
+                PlayerSkills.QSkill = SkillPrefab; // player object 의 playerSkill 컴포넌트 초기화가 필요한 이유.
                 PlayerSkills.SetSkillsCoolTime(ButtonKey);
                 break;
             case "W":

@@ -45,6 +45,7 @@ public class PlayerData
     public int[] quickItemCounts = new int[4];
     public int[] itemCounts = new int[40];
     public bool[] isEquipment = new bool[40];
+    public GameObject QSkill, WSkill, ESkill, RSkill, SSkill, DSkill;
 
     // 장비 저장 데이터
     public Item[] equipments = new Item[8];
@@ -64,6 +65,7 @@ public class SaveManager : MonoBehaviour
     public Slot[] slots;
     public SkillSlot[] skillSlots;
     public EquipmentSlot[] equipmentSlots;
+    
     GameObject Character;
     PlayerUI playerUI;
     public RuntimeAnimatorController currentAniController;
@@ -101,7 +103,7 @@ public class SaveManager : MonoBehaviour
                 playerStatus = playerObject.GetComponent<PlayerStatus>();
                 playerMoney = playerObject.GetComponent<PlayerMoney>();
                 Debug.Log(playerStatus);
-                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController, playerMoney, slots, equipmentSlots, skillSlots, UM); // 이거 그냥 결국 playerObject랑 uiManager 두개로 단순화 할 수 있을텐데. 나중에 보고 하기.
+                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController, playerMoney, slots, equipmentSlots, skillSlots, UM, playerObject); // 이거 그냥 결국 playerObject랑 uiManager 두개로 단순화 할 수 있을텐데. 나중에 보고 하기.
                 Debug.Log("플레이어 진행 상황이 저장되었습니다.");
             }
         }
@@ -128,7 +130,7 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void SavePlayerProgress(Vector3 playerPosition, string currentSceneName, PlayerStatus playerStatus, RuntimeAnimatorController currentAniController, PlayerMoney playerMoney, Slot[] slots, EquipmentSlot[] equipmentSlots, SkillSlot[] skillSlots, UIManager uIManager)
+    public void SavePlayerProgress(Vector3 playerPosition, string currentSceneName, PlayerStatus playerStatus, RuntimeAnimatorController currentAniController, PlayerMoney playerMoney, Slot[] slots, EquipmentSlot[] equipmentSlots, SkillSlot[] skillSlots, UIManager uIManager, GameObject playerObject)
     {
         PlayerData data = new PlayerData
         {
@@ -156,6 +158,12 @@ public class SaveManager : MonoBehaviour
             Bit = playerMoney.Bit,
             Snippet = playerMoney.Snippet,
             runtimeAnimatorController = currentAniController,
+            QSkill = playerObject.GetComponent<PlayerSkills>().QSkill,
+            WSkill = playerObject.GetComponent<PlayerSkills>().WSkill,
+            ESkill = playerObject.GetComponent<PlayerSkills>().ESkill,
+            RSkill = playerObject.GetComponent<PlayerSkills>().RSkill,
+            SSkill = playerObject.GetComponent<PlayerSkills>().SSkill,
+            DSkill = playerObject.GetComponent<PlayerSkills>().DSkill,
         };
         SkillQuickSlot[] skillQuickSlots = uIManager.GetComponentsInChildren<SkillQuickSlot>();
         ItemQuickSlot[] itemQuickSlots = uIManager.GetComponentsInChildren<ItemQuickSlot>();
@@ -268,6 +276,12 @@ public class SaveManager : MonoBehaviour
 
             playerObject.GetComponent<PlayerMoney>().Bit = data.Bit;
             playerObject.GetComponent<PlayerMoney>().Snippet = data.Snippet;
+            playerObject.GetComponent<PlayerSkills>().QSkill = data.QSkill;
+            playerObject.GetComponent<PlayerSkills>().WSkill = data.WSkill;
+            playerObject.GetComponent<PlayerSkills>().ESkill = data.ESkill;
+            playerObject.GetComponent<PlayerSkills>().RSkill = data.RSkill;
+            playerObject.GetComponent<PlayerSkills>().SSkill = data.SSkill;
+            playerObject.GetComponent<PlayerSkills>().DSkill = data.DSkill;
         }
 
         if (uiManager == null)
@@ -299,9 +313,11 @@ public class SaveManager : MonoBehaviour
         }
     }
     private void LoadQuickSkills(PlayerData data){
+
         for (int i = 0; i < data.quickSkillPrefabs.Length; i++){
             if(data.quickSkillPrefabs[i] != null){
                 // 아니 왜 제대로 넘겨줘도 안 됨
+                Debug.Log("log1212: 1111" + data.quickSkillPrefabs[i] + " " + data.slotReferences[i]);
                 uiManager.GetComponentsInChildren<SkillQuickSlot>(true)[i].AddItem(data.quickSkillPrefabs[i], data.slotReferences[i]); //여기서 그냥 null 값으로 넘어갔구나. slot도 같이 넘겨줘야하네 그럼.
             }
         }
