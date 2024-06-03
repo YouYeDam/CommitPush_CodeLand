@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HelloWorld SourceCode
   m_EditorClassIdentifier: 
   ItemName: "\uD5EC\uB85C \uC6D4\uB4DC \uC18C\uC2A4\uCF54\uB4DC"
+  ItemDetailType: "\uC18C\uC2A4\uCF54\uB4DC"
   ItemCount: 1
   ItemCost: 0
   Type: 2

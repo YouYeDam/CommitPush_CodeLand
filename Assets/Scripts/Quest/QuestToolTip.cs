@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-
 public class QuestToolTip : MonoBehaviour
 {
     [SerializeField] GameObject QuestToolTipBase;
@@ -12,16 +11,34 @@ public class QuestToolTip : MonoBehaviour
     [SerializeField] TMP_Text QuestDescText;
     [SerializeField] TMP_Text QuestProgressText;
 
-    public void ShowToolTip(Quest Quest) {
+    public void ShowToolTip(Quest quest)
+    {
         QuestToolTipBase.SetActive(true);
-        if (Quest == null) {
+        if (quest == null)
+        {
             return;
         }
-        QuestNameText.text = Quest.Title;
-        QuestDescText.text = Quest.Description;
+
+        QuestNameText.text = quest.Title;
+        QuestDescText.text = quest.Description;
+
+        // 목표 진행 상황 초기화
+        QuestProgressText.text = "";
+
+        // 각 목표의 진행 상황을 텍스트에 추가
+        foreach (var objective in quest.Objectives)
+        {
+            // 퀘스트가 완료된 상태라면 CurrentAmount를 RequiredAmount와 동일하게 설정
+            if (quest.IsCompleted)
+            {
+                objective.CurrentAmount = objective.RequiredAmount;
+            }
+            QuestProgressText.text += $"{objective.TargetName}: {objective.CurrentAmount}/{objective.RequiredAmount}\n";
+        }
     }
 
-    public void HideToolTip() {
+    public void HideToolTip()
+    {
         QuestToolTipBase.SetActive(false);
     }
 }

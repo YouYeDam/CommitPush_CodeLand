@@ -12,7 +12,7 @@ public class ItemToolTip : MonoBehaviour
     [SerializeField] TMP_Text ItemCostText;
     [SerializeField] TMP_Text ItemRequireLVText;
     [SerializeField] TMP_Text ItemGradeText;
-
+    [SerializeField] TMP_Text ItemDetailTypeText;
     [SerializeField] Image ItemImage;
 
     void Start() {
@@ -24,6 +24,7 @@ public class ItemToolTip : MonoBehaviour
         ItemNameText.text = Item.ItemName;
         ItemInfoText.text = Item.ItemInfo;
         ItemCostText.text = Item.ItemCost.ToString();
+        ItemDetailTypeText.text = "아이템 유형: " + Item.ItemDetailType;
         ItemImage.sprite = Item.ItemImage;
 
         if (Item.Type == Item.ItemType.Equipment) { // 장비 아이템일 경우에만 장비 아이템 정보 보이기

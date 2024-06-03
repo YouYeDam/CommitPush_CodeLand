@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Times Shoes
   m_EditorClassIdentifier: 
   ItemName: "\uD0C0\uC784\uC988 \uC2E0\uBC1C"
+  ItemDetailType: "\uC7A5\uBE44(\uC2E0\uBC1C)"
   ItemCount: 1
   ItemCost: 200
   Type: 0

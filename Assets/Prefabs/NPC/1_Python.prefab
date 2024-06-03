@@ -47,13 +47,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dce98ef6376c6e4a90bf811322f4e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dialogue: {fileID: 11400000, guid: 3d3c82711d0d36b4d8238308f8e76f43, type: 2}
+  QuestsToGive:
+  - {fileID: 11400000, guid: b48adf171461c4743a4782df91a558c6, type: 2}
+  - {fileID: 11400000, guid: 72670e91d5aba744c80477afc11b1bf7, type: 2}
+  QuestDialogues:
+  - PreQuestDialogue: {fileID: 11400000, guid: 0c6ff876dc309364c809fdd5ce81ccd8, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: a6909cb89f044ba47a3e6406216b9486, type: 2}
+    PostQuestDialogue: {fileID: 11400000, guid: f681b073d7e3e534ba6dea2d16155b15, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: 671befcafa96b514bb7049ba7bbba3b4, type: 2}
+  - PreQuestDialogue: {fileID: 11400000, guid: 5633b2032c160b2458a6b0a243739b1d, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: c63cd3cf3e84ec645b5e19ed137db973, type: 2}
+    PostQuestDialogue: {fileID: 11400000, guid: 03d0a5f8033431948b5abf38745a795a, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: bf6fa3d0f1bf2a54198cfcbee4d008b1, type: 2}
+  currentQuestIndex: 0
+  DefaultDialogue: {fileID: 11400000, guid: 6bd3125614f0b8b498a533ce40cc76d5, type: 2}
   UIManager: {fileID: 0}
   NPCName: "\uD30C\uC774\uC36C"
+  NPCJob: 
   NPCNameInfo: {fileID: 7337256740539332341, guid: b57da644c15344546acebcacfc6f353f, type: 3}
   NPCNameInfoText: {fileID: 0}
   NPCNameInfoInstance: {fileID: 0}
-  NPCNameInfoPos: 0.6
+  NPCNameInfoPos: 0.7
+  NPCJobInfo: {fileID: 0}
+  NPCJobInfoText: {fileID: 0}
+  NPCJobInfoInstance: {fileID: 0}
+  NPCQuestStatus: {fileID: 7337256740539332341, guid: e8b5189164f1eb348a3c39754a8a2040, type: 3}
+  NPCQuestStatusText: {fileID: 0}
+  NPCQuestStatusInstance: {fileID: 0}
+  NPCQuestStatusPos: 1
+  IsShop: 0
+  HavingJob: 0
 --- !u!212 &717382888131969278
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -93,7 +116,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 847609113
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 919737148, guid: ce2b8f95bd7c18e4ebeeb03ca64a6018, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -114,7 +137,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349573210681341999}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

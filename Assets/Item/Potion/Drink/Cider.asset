@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Cider
+  m_EditorClassIdentifier: 
+  ItemName: "\uC0AC\uC774\uB2E4"
+  ItemDetailType: "\uC18C\uBE44(\uC74C\uB8CC)"
+  ItemCount: 1
+  ItemCost: 220
+  Type: 1
+  ItemImage: {fileID: 21300000, guid: 0b1f08f60b262c6449ed66a895515b03, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: f2d4ac044fbc28d4db851a6b8d7ae982, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uCC28\uAC00\uC6B4 \uC0AC\uC774\uB2E4\uC774\uB2E4. \uD0C4\uC0B0\uC774
+    \uB9CE\uACE0 \uB77C\uC784\uD5A5\uC774 \uCCA8\uAC00\uB418\uC5B4 \uAE30\uBD84\uC744
+    \uB354 \uC0C1\uCF8C\uD558\uAC8C \uD55C\uB2E4. \r\n\r\n\uC0AC\uC6A9 \uC2DC MP\uB97C
+    200\uB9CC\uD07C \uD68C\uBCF5\uD55C\uB2E4."

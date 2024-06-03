@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: EnergyBar
   m_EditorClassIdentifier: 
   ItemName: "\uC5D0\uB108\uC9C0\uBC14"
+  ItemDetailType: "\uC18C\uBE44(\uC74C\uC2DD)"
   ItemCount: 1
   ItemCost: 45
   Type: 1

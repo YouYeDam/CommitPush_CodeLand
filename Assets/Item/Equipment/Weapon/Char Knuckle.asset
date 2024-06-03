@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Char Knuckle
   m_EditorClassIdentifier: 
   ItemName: "\uCC60 \uB108\uD074"
+  ItemDetailType: "\uC7A5\uBE44(\uBB34\uAE30)"
   ItemCount: 1
   ItemCost: 720
   Type: 0

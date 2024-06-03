@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CanCoke
   m_EditorClassIdentifier: 
   ItemName: "\uCE94\uCF5C\uB77C"
+  ItemDetailType: "\uC18C\uBE44(\uC74C\uB8CC)"
   ItemCount: 1
   ItemCost: 100
   Type: 1

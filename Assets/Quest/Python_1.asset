@@ -19,12 +19,8 @@ MonoBehaviour:
   ItemRewards:
   - {fileID: 11400000, guid: 78d0f21291f91614d8d6938efc061abd, type: 2}
   Objectives:
-  - Type: 0
-    TargetName: "\uC6D0\uBE44\uD130"
+  - Type: 1
+    TargetName: "\uC778\uD2B8 \uC18C\uB4DC"
     RequiredAmount: 1
     CurrentAmount: 0
-  - Type: 0
-    TargetName: 
-    RequiredAmount: 0
-    CurrentAmount: 0
-  RequiredLevel: 2
+  RequiredLevel: 1

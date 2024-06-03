@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Equal Doublet
   m_EditorClassIdentifier: 
   ItemName: "\uC774\uD004 \uB354\uBE14\uB9BF"
+  ItemDetailType: "\uC7A5\uBE44(\uC0C1\uC758)"
   ItemCount: 1
   ItemCost: 600
   Type: 0

@@ -70,16 +70,11 @@ public class QuestManager : MonoBehaviour
             if (PlayerStatus.PlayerLevel >= quest.RequiredLevel)
             {
                 activeQuests.Add(quest);
-                Debug.Log("퀘스트 시작: " + quest.Title);
                 AddQuestSlot(quest); // UI에 퀘스트 추가
 
                 // 현재 인벤토리를 체크하여 수집 목표 업데이트
                 CheckInventoryForQuestItems(quest);
                 UpdateNPCQuestStatus(questTitle);
-            }
-            else
-            {
-                Debug.Log($"퀘스트 시작 불가: 플레이어 레벨이 {quest.RequiredLevel} 이상이어야 합니다.");
             }
         }
     }
@@ -100,7 +95,6 @@ public class QuestManager : MonoBehaviour
     private void SetQuestReadyToComplete(Quest quest)
     {
         quest.IsReadyToComplete = true;
-        Debug.Log("퀘스트 완료 준비: " + quest.Title);
         UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
         UpdateNPCQuestStatus(quest.Title);
     }
@@ -111,16 +105,19 @@ public class QuestManager : MonoBehaviour
         Quest quest = activeQuests.Find(q => q.Title == questTitle);
         if (quest != null && quest.IsReadyToComplete)
         {
+            // 목표의 CurrentAmount 초기화 및 아이템 차감
+            foreach (var objective in quest.Objectives)
+            {
+                if (objective.Type == QuestObjective.ObjectiveType.Collect)
+                {
+                    PlayerGetItem.InventoryScript.RemoveItem(objective.TargetName, objective.RequiredAmount);
+                }
+                objective.ResetCurrentAmount();
+            }
+
             quest.IsCompleted = true;
             activeQuests.Remove(quest);
             completedQuests.Add(quest);
-            Debug.Log("퀘스트 완료: " + quest.Title);
-
-            // 목표의 CurrentAmount 초기화
-            foreach (var objective in quest.Objectives)
-            {
-                objective.ResetCurrentAmount();
-            }
 
             // 보상 지급
             RewardPlayer(quest);
@@ -184,13 +181,6 @@ public class QuestManager : MonoBehaviour
                 if (!isItem && objective.Type == QuestObjective.ObjectiveType.Kill && objective.TargetName == targetName)
                 {
                     objective.CurrentAmount += amount;
-                    Debug.Log($"목표 업데이트: {objective.TargetName}, 현재 수량: {objective.CurrentAmount}/{objective.RequiredAmount}");
-
-                    // 목표가 완료되었는지 체크
-                    if (objective.IsComplete())
-                    {
-                        Debug.Log($"목표 완료: {objective.TargetName}");
-                    }
 
                     // 퀘스트가 모두 완료되었는지 체크
                     if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
@@ -205,13 +195,6 @@ public class QuestManager : MonoBehaviour
                 if (isItem && objective.Type == QuestObjective.ObjectiveType.Collect && objective.TargetName == targetName)
                 {
                     objective.CurrentAmount += amount;
-                    Debug.Log($"아이템 수집 목표 업데이트: {objective.TargetName}, 현재 수량: {objective.CurrentAmount}/{objective.RequiredAmount}");
-
-                    // 목표가 완료되었는지 체크
-                    if (objective.IsComplete())
-                    {
-                        Debug.Log($"아이템 수집 목표 완료: {objective.TargetName}");
-                    }
 
                     // 퀘스트가 모두 완료되었는지 체크
                     if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
@@ -236,7 +219,6 @@ public class QuestManager : MonoBehaviour
                 {
                     objective.CurrentAmount -= amount;
                     if (objective.CurrentAmount < 0) objective.CurrentAmount = 0;
-                    Debug.Log($"아이템 제거 목표 업데이트: {objective.TargetName}, 현재 수량: {objective.CurrentAmount}/{objective.RequiredAmount}");
 
                     // 퀘스트가 완료된 상태에서 다시 제거될 때의 처리
                     if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
@@ -265,13 +247,6 @@ public class QuestManager : MonoBehaviour
                 if (currentAmount > 0)
                 {
                     objective.CurrentAmount += currentAmount;
-                    Debug.Log($"현재 소지한 아이템 업데이트: {objective.TargetName}, 현재 수량: {objective.CurrentAmount}/{objective.RequiredAmount}");
-
-                    // 목표가 완료되었는지 체크
-                    if (objective.IsComplete())
-                    {
-                        Debug.Log($"아이템 수집 목표 완료: {objective.TargetName}");
-                    }
 
                     // 퀘스트가 모두 완료되었는지 체크
                     if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))

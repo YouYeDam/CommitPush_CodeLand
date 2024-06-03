@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: TepidCoffee
   m_EditorClassIdentifier: 
   ItemName: "\uBBF8\uC9C0\uADFC\uD55C \uCEE4\uD53C"
+  ItemDetailType: "\uC18C\uBE44(\uC74C\uB8CC)"
   ItemCount: 1
   ItemCost: 20
   Type: 1

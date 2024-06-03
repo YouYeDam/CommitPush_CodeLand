@@ -198,7 +198,6 @@ MonoBehaviour:
   CoolDown: 90
   MPUse: 40
   BuffDuration: 15
-  YSpeed: 0.5
   IsStatusUpBuff: 0
   HPBuff: 0
   MPBuff: 0
@@ -207,7 +206,7 @@ MonoBehaviour:
   APBuff: 0
   CritBuff: 0
   IsSpeedUpBuff: 1
-  MoveSpeedBuff: 1.3
+  MoveSpeedBuff: 1.4
   JumpSpeedBuff: 1
   ClimbSpeedBuff: 1
 --- !u!114 &-5923812138342739028
@@ -222,9 +221,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f90e74095945254288b32782f8612cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: "\uD391\uC158 \uCF5C(\uC2A4\uD53C\uB4DC\uC5C5)"
+  SkillName: "\uD391\uC158 \uCF5C(\uC2A4\uD53C\uB4DC \uC5C5)"
   SkillType: "\uBC84\uD504\uD615"
   SkillCoolDown: 90
   SkillMPUse: 40
-  SkillExplain: "\uC774\uB3D9\uC18D\uB3C4\uB97C \uC99D\uAC00\uC2DC\uD0A4\uB294 \uD568\uC218\uB97C
-    \uD638\uCD9C\uD55C\uB2E4."
+  SkillExplain: "\uC774\uB3D9\uC18D\uB3C4\uB97C \uD5A5\uC0C1\uC2DC\uD0A4\uB294 \uD568\uC218\uB97C
+    \uD638\uCD9C\uD558\uB294 \uAE30\uC220\uC778 \uD391\uC158 \uCF5C(\uC2A4\uD53C\uB4DC
+    \uC5C5)\uC774\uB2E4. \uD568\uC218\uC758 \uB9E4\uAC1C\uBCC0\uC218\uB85C '\uC2A4\uD53C\uB4DC
+    \uC5C5'\uC744 \uC804\uB2EC\uD558\uC5EC \uC774\uB3D9\uC18D\uB3C4\uB97C \uD06C\uAC8C
+    \uD5A5\uC0C1\uC2DC\uD0A8\uB2E4.\r\n\r\n15\uCD08 \uB3D9\uC548 \uC774\uB3D9\uC18D\uB3C4\uAC00
+    1.4\uBC30 \uC99D\uAC00\uD55C\uB2E4.\n\n\uD568\uC218\uB294 \uD2B9\uC815 \uC791\uC5C5\uC744
+    \uC218\uD589\uD558\uB294 \uCF54\uB4DC \uBE14\uB85D\uC774\uB2E4. \uD568\uC218\uB97C
+    \uD638\uCD9C\uD558\uBA74 \uADF8 \uD568\uC218\uAC00 \uC2E4\uD589\uB418\uC5B4 \uC815\uC758\uB41C
+    \uC791\uC5C5\uC744 \uC218\uD589\uD55C\uB2E4. \uD568\uC218\uB294 \uC785\uB825
+    \uAC12\uC744 \uBC1B\uC744 \uC218 \uC788\uC73C\uBA70, \uC774\uB97C \uB9E4\uAC1C\uBCC0\uC218\uB77C\uACE0
+    \uD55C\uB2E4."

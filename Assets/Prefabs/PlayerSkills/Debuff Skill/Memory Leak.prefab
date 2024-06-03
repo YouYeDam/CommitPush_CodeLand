@@ -78,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: 794951137
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b5a493488841d57458c04de95338a4bd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f6fde71cfe0eb442aa0262b58898c2e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.2615579, y: 0.69249994}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -153,7 +153,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.32, y: 0.32}
-    newSize: {x: 1.2615579, y: 0.69249994}
+    newSize: {x: 0.32, y: 0.32}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -199,7 +199,20 @@ MonoBehaviour:
   SkillType: "\uB514\uBC84\uD504\uD615"
   SkillCoolDown: 20
   SkillMPUse: 40
-  SkillExplain: "\uBA54\uBAA8\uB9AC \uB204\uC218\uC774\uB2E4."
+  SkillExplain: "\uC801\uC758 \uBA54\uBAA8\uB9AC\uC5D0 \uB204\uC218\uB97C \uC720\uBC1C\uD574
+    \uC774\uB3D9\uC18D\uB3C4\uB97C \uAC10\uC18C\uC2DC\uD0A4\uB294 \uAE30\uC220\uC778
+    \uBA54\uBAA8\uB9AC \uB204\uC218\uC774\uB2E4. \uBD88\uD544\uC694\uD55C \uBA54\uBAA8\uB9AC\uB97C
+    \uACC4\uC18D \uC810\uC720\uD558\uB3C4\uB85D \uD558\uC5EC \uC774\uB3D9\uC18D\uB3C4\uB97C
+    \uD06C\uAC8C \uAC10\uC18C\uC2DC\uD0A8\uB2E4.\r\n\r\n5\uCD08 \uB3D9\uC548 \uC801
+    \uD558\uB098\uC758 \uAC1C\uCCB4\uC758 \uC774\uB3D9\uC18D\uB3C4\uB97C 50%\uB9CC\uD07C
+    \uAC10\uC18C\uC2DC\uD0A8\uB2E4.\r\n\r\n\uBA54\uBAA8\uB9AC\uB294 \uCEF4\uD4E8\uD130\uAC00
+    \uB370\uC774\uD130\uB97C \uC800\uC7A5\uD558\uACE0 \uC811\uADFC\uD558\uB294 \uB370
+    \uC0AC\uC6A9\uD558\uB294 \uACF5\uAC04\uC774\uB2E4. \uBA54\uBAA8\uB9AC \uB204\uC218\uB294
+    \uD504\uB85C\uADF8\uB7A8\uC774 \uB354 \uC774\uC0C1 \uD544\uC694\uD558\uC9C0 \uC54A\uC740
+    \uBA54\uBAA8\uB9AC\uB97C \uD574\uC81C\uD558\uC9C0 \uC54A\uACE0 \uACC4\uC18D \uC810\uC720\uD558\uB294
+    \uD604\uC0C1\uC774\uB2E4. \uBA54\uBAA8\uB9AC \uB204\uC218\uAC00 \uBC1C\uC0DD\uD558\uBA74
+    \uD504\uB85C\uADF8\uB7A8\uC774\uB098 \uC2DC\uC2A4\uD15C\uC774 \uB290\uB824\uC9C0\uAC70\uB098
+    \uBE44\uC815\uC0C1\uC801\uC73C\uB85C \uB3D9\uC791\uD560 \uC218 \uC788\uB2E4."
 --- !u!95 &4696956795978963348
 Animator:
   serializedVersion: 5

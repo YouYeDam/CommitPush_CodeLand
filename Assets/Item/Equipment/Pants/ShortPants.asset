@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ShortPants
   m_EditorClassIdentifier: 
   ItemName: "\uBC18\uBC14\uC9C0"
+  ItemDetailType: "\uC7A5\uBE44(\uD558\uC758)"
   ItemCount: 1
   ItemCost: 10
   Type: 0

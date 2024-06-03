@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Gaming Keyboard
   m_EditorClassIdentifier: 
   ItemName: "\uAC8C\uC774\uBC0D \uD0A4\uBCF4\uB4DC"
+  ItemDetailType: "\uC7A5\uBE44(\uBB34\uAE30)"
   ItemCount: 1
   ItemCost: 10
   Type: 0

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Not Equal Pants
   m_EditorClassIdentifier: 
   ItemName: "\uB0AB \uC774\uD004 \uBC14\uC9C0"
+  ItemDetailType: "\uC7A5\uBE44(\uD558\uC758)"
   ItemCount: 1
   ItemCost: 600
   Type: 0

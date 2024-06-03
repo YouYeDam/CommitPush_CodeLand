@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkillPrefab: {fileID: 8885825609034438207, guid: 0e5e1820b913f5c4da4aa6adc73d6b38, type: 3}
-  SkillName: "\uD391\uC158 \uCF5C(\uC2A4\uD53C\uB4DC\uC5C5)"
+  SkillName: "\uD391\uC158 \uCF5C(\uC2A4\uD53C\uB4DC \uC5C5)"
 --- !u!212 &1634756597062129806
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Onigiri
   m_EditorClassIdentifier: 
   ItemName: "\uC0BC\uAC01\uAE40\uBC25"
+  ItemDetailType: "\uC18C\uBE44(\uC74C\uC2DD)"
   ItemCount: 1
   ItemCost: 100
   Type: 1

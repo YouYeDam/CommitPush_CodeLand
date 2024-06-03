@@ -50,6 +50,28 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    // 아이템을 제거하는 메소드
+    public void RemoveItem(string itemName, int count)
+    {
+        foreach (var slot in Slots)
+        {
+            if (slot.Item != null && slot.Item.ItemName == itemName)
+            {
+                if (slot.ItemCount >= count)
+                {
+                    slot.SetSlotCount(-count); // 기존 수량에서 count만큼 감소
+                    return;
+                }
+                else
+                {
+                    int remainingCount = count - slot.ItemCount;
+                    slot.SetSlotCount(-slot.ItemCount); // 슬롯을 0으로 설정
+                    count = remainingCount;
+                }
+            }
+        }
+    }
+
     // 특정 아이템의 수량을 반환하는 메서드
     public int GetItemAmount(string itemName)
     {

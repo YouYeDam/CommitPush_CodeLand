@@ -14,6 +14,7 @@ public class Item : ScriptableObject
     }
 
     public string ItemName; // 아이템의 이름
+    public string ItemDetailType; // 아이템의 세부타입
     public int ItemCount = 1; // 아이템 개수
     public int ItemCost = 0; // 아이템 가격
     public ItemType Type; // 아이템 유형

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CanCoffee
   m_EditorClassIdentifier: 
   ItemName: "\uCE94\uCEE4\uD53C"
+  ItemDetailType: "\uC18C\uBE44(\uC74C\uB8CC)"
   ItemCount: 1
   ItemCost: 45
   Type: 1

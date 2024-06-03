@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ChocoBar
   m_EditorClassIdentifier: 
   ItemName: "\uCD08\uCF54\uBC14"
+  ItemDetailType: "\uC18C\uBE44(\uC74C\uC2DD)"
   ItemCount: 1
   ItemCost: 20
   Type: 1

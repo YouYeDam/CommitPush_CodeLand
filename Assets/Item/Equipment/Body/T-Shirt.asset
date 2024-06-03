@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: T-Shirt
   m_EditorClassIdentifier: 
   ItemName: "\uD2F0\uC154\uCE20"
+  ItemDetailType: "\uC7A5\uBE44(\uC0C1\uC758)"
   ItemCount: 1
   ItemCost: 10
   Type: 0
