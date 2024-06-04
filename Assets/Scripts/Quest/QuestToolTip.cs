@@ -20,7 +20,7 @@ public class QuestToolTip : MonoBehaviour
         }
 
         QuestNameText.text = quest.Title;
-        QuestDescText.text = quest.Description;
+        QuestDescText.text = quest.QuestDescription;
 
         // 목표 진행 상황 초기화
         QuestProgressText.text = "";

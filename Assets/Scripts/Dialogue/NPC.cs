@@ -8,8 +8,8 @@ public class QuestDialogue
 {
     public Dialogue PreQuestDialogue;
     public Dialogue InProgressDialogue;
-    public Dialogue PostQuestDialogue;
     public Dialogue ReadyToCompleteDialogue;
+    public Dialogue PostQuestDialogue;
 }
 
 public class NPC : MonoBehaviour

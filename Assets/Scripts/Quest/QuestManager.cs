@@ -78,16 +78,25 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
-
     private void AddQuestSlot(Quest quest)
     {
-        foreach (QuestSlot questSlot in QuestSlots)
+        bool slotFound = false;
+        
+        for (int i = 0; i < QuestSlots.Length; i++)
         {
-            if (questSlot.QuestNameText.text == "")
+            if (QuestSlots[i].QuestNameText.text == "")
             {
-                questSlot.AddQuest(quest);
+                QuestSlots[i].AddQuest(quest);
+                slotFound = true;
                 break;
             }
+        }
+
+        // 남는 퀘스트 슬롯이 없는 경우
+        if (!slotFound)
+        {
+            activeQuests.Remove(quest); // 활성화된 퀘스트 리스트에서 제거
+            UpdateNPCQuestStatus(quest.Title); // NPC 퀘스트 상태 업데이트
         }
     }
 
