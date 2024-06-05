@@ -324,9 +324,10 @@ public class QuestManager : MonoBehaviour
         int UINum = FindObjectsOfType<QuestManager>().Length;
         string currentSceneName = scene.name;
 
-        if (UINum > 1 || currentSceneName == "Main Menu Scene")
-        {
-            Destroy(gameObject);
-        }
+        // SaveManager의 GoHome 함수가 이 기능을 하기 때문에 필요 없을듯 합니다.
+        // if (UINum > 1 || currentSceneName == "Main Menu Scene")
+        // {
+            // Destroy(gameObject);
+        // }
     }
 }

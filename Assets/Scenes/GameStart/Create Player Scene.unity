@@ -449,10 +449,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 517760928}
-        m_TargetAssemblyTypeName: LoadScenes, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+      - m_Target: {fileID: 4851175910022436608, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+        m_TargetAssemblyTypeName: SaveManager, Assembly-CSharp
+        m_MethodName: GoBackHome
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

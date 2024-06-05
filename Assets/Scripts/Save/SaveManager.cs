@@ -58,9 +58,8 @@ public class SaveManager : MonoBehaviour
     public GameObject playerPrefab; // 플레이어 프리팹 참조
     public GameObject uiManagerPrefab; // UIManager 프리팹 참조
     public GameObject questManagerPrefab; // UIManager 프리팹 참조
-    public GameObject PaueseMenu;
+    public GameObject PaueseMenu; // Pause Menu 프리팹 참조
     private GameObject PauseMenuInstance = null;
-    // public GameObject GameDataSlot;
     public GameObject playerObject;
     public GameObject questManagerObject;
     QuestManager questManager;
@@ -70,11 +69,7 @@ public class SaveManager : MonoBehaviour
     public Slot[] slots;
     public SkillSlot[] skillSlots;
     public EquipmentSlot[] equipmentSlots;
-    
-    GameObject Character;
-    PlayerUI playerUI;
     public RuntimeAnimatorController currentAniController;
-    // Start is called before the first frame update
     void Start()
     {
         playerObject = null;
@@ -91,23 +86,23 @@ public class SaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            playerObject = GameObject.FindWithTag("Player");
-            uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
-            if (playerObject != null)
-            {
-                SavePlayerProgress(SceneManager.GetActiveScene().name, uiManager, playerObject, questManagerObject); 
-                Debug.Log("플레이어 진행 상황이 저장되었습니다.");
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (SceneManager.GetActiveScene().name != "Main Menu Scene")
+            if (SceneManager.GetActiveScene().name != "Main Menu Scene" && SceneManager.GetActiveScene().name != "Create Player Scene")
             {
                 ActivatePauseMenu();
             }
         }
+    }
+
+    void DoSave(){
+        playerObject = GameObject.FindWithTag("Player");
+            uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
+            if (playerObject != null)
+            {
+                SavePlayerProgress(SceneManager.GetActiveScene().name, uiManager, playerObject, questManagerObject); 
+            }
+        InactivatePauseMenu();
     }
 
     public void SavePlayerProgress(string currentSceneName, UIManager uIManager, GameObject playerObject, GameObject questManager)
@@ -184,7 +179,6 @@ public class SaveManager : MonoBehaviour
         // 각 슬롯의 equipment item을 저장
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
-            Debug.Log("log1112321: "+equipmentSlots[i].Item);
             equipments[i] = equipmentSlots[i].Item;
         };
         // 정리된 배열들을 data에 저장
@@ -254,7 +248,6 @@ public class SaveManager : MonoBehaviour
 
         if (playerObject == null)
         {
-            Debug.Log("Wow");
             playerObject = Instantiate(playerPrefab, new Vector3(data.x, data.y, data.z), Quaternion.identity);
             playerObject.name = playerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
@@ -294,8 +287,6 @@ public class SaveManager : MonoBehaviour
             // set current values.
             playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
             playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
-            Debug.Log("log444: "+ data.PlayerCurrentHP);
-            Debug.Log("log444: "+ playerStatus.PlayerCurrentHP);
             playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
 
             
@@ -323,8 +314,6 @@ public class SaveManager : MonoBehaviour
             ////////////
             playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
             playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
-            Debug.Log("log444: "+ data.PlayerCurrentHP);
-            Debug.Log("log444: "+ playerStatus.PlayerCurrentHP);
             playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
         }
 
@@ -343,15 +332,12 @@ public class SaveManager : MonoBehaviour
             playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance.GetComponent<TMP_Text>().text = data.PlayerName;
             playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
             playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
-            Debug.Log("log444: "+ data.PlayerCurrentHP);
-            Debug.Log("log444: "+ playerStatus.PlayerCurrentHP);
             playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
         }
         
         // {
         //     StatusBar statusBar = uiManager.GetComponent<StatusBar>();
         //     statusBar.PlayerStatus = playerStatus;
-        //     Debug.Log("log4441: " + playerStatus.PlayerCurrentHP);
         //     if (playerStatus.PlayerCurrentHP > 0)
         //         statusBar.HPMeter.fillAmount = (float)playerStatus.PlayerCurrentHP / playerStatus.PlayerMaxHP;
         //     else
@@ -367,7 +353,6 @@ public class SaveManager : MonoBehaviour
         //     else
         //         statusBar.EXPMeter.fillAmount = 0;
                 
-        //     Debug.Log("log4442: " +playerStatus.PlayerCurrentHP);
         //     statusBar.HPDisplay.text = playerStatus.PlayerCurrentHP + " / " + playerStatus.PlayerMaxHP;
         //     statusBar.MPDisplay.text = playerStatus.PlayerCurrentMP + " / " + playerStatus.PlayerMaxMP;
         //     statusBar.EXPDisplay.text = playerStatus.PlayerCurrentEXP + " / " + playerStatus.PlayerMaxEXP;
@@ -417,7 +402,6 @@ public class SaveManager : MonoBehaviour
             uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true)[i].Item = null;
             if (data.equipments[i] != null)
             {
-                Debug.Log("log999: added" + i);
                 uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true)[i].AddItem(data.equipments[i]);
             }
         }
@@ -439,7 +423,6 @@ public class SaveManager : MonoBehaviour
         {
             Slot refer_slot = uiManagerObject.GetComponentsInChildren<Slot>(true)[data.itemSlotReferencesIdx[i]];
             refer_slot.ItemToolTip = uiManagerObject.GetComponentInChildren<ItemToolTip>(true);
-                Debug.Log("log1232 " + refer_slot.ItemToolTip);
 
             if (data.quickItems[i] != null)
             {
@@ -461,12 +444,12 @@ public class SaveManager : MonoBehaviour
             PauseMenuInstance.SetActive(true);
             Button[] PauseMenuBtns = PauseMenuInstance.GetComponentsInChildren<Button>();
             PauseMenuBtns[0].onClick.AddListener(InactivatePauseMenu);
-            PauseMenuBtns[1].onClick.AddListener(InactivatePauseMenu);
+            PauseMenuBtns[1].onClick.AddListener(DoSave);
             PauseMenuBtns[2].onClick.AddListener(GoBackHome);
         }
     }
 
-    void GoBackHome()
+    public void GoBackHome()
     {
         GameObject soundManager = GameObject.FindWithTag("SoundManager");
         GameObject uiManagerObject = GameObject.FindWithTag("UIManager");
@@ -478,12 +461,10 @@ public class SaveManager : MonoBehaviour
         Destroy(questManager);
         Destroy(saveManager);
         Destroy(player);
-        Debug.Log("log3: sound manager destroied");
         SceneManager.LoadScene("Main Menu Scene");
     }
     void InactivatePauseMenu()
     {
-        Debug.Log("inactive!!!");
         if (PauseMenuInstance != null)
         {
             Destroy(PauseMenuInstance);
@@ -497,7 +478,6 @@ public class SaveManager : MonoBehaviour
         if (scene.name == "Main Menu Scene")
         {
             // 원하는 오브젝트를 파괴합니다.
-            Debug.Log("log1: save manager destroy.");
             Destroy(this.gameObject);
         }
     }
