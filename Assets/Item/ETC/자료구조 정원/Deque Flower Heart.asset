@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Deque Flower Heart
+  m_EditorClassIdentifier: 
+  ItemName: "\uB371\uD50C\uB77C\uC6CC\uC758 \uC2EC\uC7A5"
+  ItemDetailType: "\uAE30\uD0C0"
+  ItemCount: 1
+  ItemCost: 19
+  Type: 3
+  ItemImage: {fileID: 21300000, guid: 4946597064e9c6a40ba5fcc7fad4b4b9, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: f3052aca303610e48ab89a06c2224ac6, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uC544\uC9C1\uB3C4 \uACE0\uB3D9\uCE58\uB294 \uB4EF\uD55C \uB371\uD50C\uB77C\uC6CC\uC758
+    \uC2EC\uC7A5\uC774\uB2E4. \uC2EC\uC7A5\uC744 \uBCF4\uD638\uD558\uAE30 \uC704\uD574
+    \uC904\uAE30\uAC00 \uC2EC\uC7A5\uC744 \uAC10\uC2F8\uACE0 \uC788\uB2E4.\n\n\uB371\uC740
+    \uC591\uCABD \uB05D\uC5D0\uC11C \uC0BD\uC785\uACFC \uC0AD\uC81C\uAC00 \uBAA8\uB450
+    \uAC00\uB2A5\uD55C \uC120\uD615 \uC790\uB8CC\uAD6C\uC870\uB2E4. \uD050\uC640
+    \uC2A4\uD0DD\uC758 \uAE30\uB2A5\uC744 \uBAA8\uB450 \uD3EC\uD568\uD558\uACE0 \uC788\uC5B4,
+    \uC55E\uACFC \uB4A4\uC5D0\uC11C \uC694\uC18C\uB97C \uCD94\uAC00\uD558\uAC70\uB098
+    \uC81C\uAC70\uD560 \uC218 \uC788\uB2E4. \uB371\uC740 \uC720\uC5F0\uD55C \uB370\uC774\uD130
+    \uCC98\uB9AC\uAC00 \uD544\uC694\uD560 \uB54C \uC720\uC6A9\uD558\uBA70, \uB300\uAE30\uC5F4
+    \uAD00\uB9AC\uB098 \uD68C\uC804 \uBC84\uD37C \uB4F1\uC5D0 \uD65C\uC6A9\uB41C\uB2E4."

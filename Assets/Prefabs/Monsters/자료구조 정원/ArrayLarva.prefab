@@ -151,8 +151,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0070927683, y: -0.053925708}
-  m_Size: {x: 0.7150419, y: 0.533081}
+  m_Offset: {x: 0.0070927707, y: -0.033961076}
+  m_Size: {x: 0.715042, y: 0.4931523}
   m_Direction: 1
 --- !u!61 &5267109138259723723
 BoxCollider2D:
@@ -186,18 +186,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0069384575, y: -0.05622691}
+  m_Offset: {x: 0.0069384575, y: -0.03432381}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.725, y: 0.65}
+    oldSize: {x: 0.725, y: 0.6}
     newSize: {x: 0.8125, y: 0.625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7126522, y: 0.53780305}
+  m_Size: {x: 0.7126522, y: 0.49399686}
   m_EdgeRadius: 0
 --- !u!95 &1478778526055664882
 Animator:
@@ -268,7 +268,7 @@ MonoBehaviour:
   MonsterDamage: 15
   MonsterEXP: 3
   HPBarPos: 0.5
-  MonsterInfoPos: 0.6
+  MonsterInfoPos: 0.4
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}
@@ -297,6 +297,8 @@ MonoBehaviour:
   ItemDrops:
   - ItemPrefab: {fileID: 4338472210403635751, guid: 00e07d54bea641949a9c054f1e9dbbac, type: 3}
     SpawnProbability: 0.6
+  - ItemPrefab: {fileID: 4338472210403635751, guid: b1dfe6a7caba4c74c9d0bff5ca26da26, type: 3}
+    SpawnProbability: 0.4
   - ItemPrefab: {fileID: 4338472210403635751, guid: 1efa8118dec067347b7ec11c7d7255ee, type: 3}
     SpawnProbability: 0.1
   MonsterBit: 3

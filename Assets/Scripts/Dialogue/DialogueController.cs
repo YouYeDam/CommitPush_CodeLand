@@ -65,7 +65,6 @@ public class DialogueController : MonoBehaviour
             if (CurrentNPC.currentQuestIndex < CurrentNPC.QuestsToGive.Count)
             {
                 string questTitle = CurrentNPC.QuestsToGive[CurrentNPC.currentQuestIndex].Title;
-                Debug.Log(questTitle);
                 if (!string.IsNullOrEmpty(questTitle))
                 {
                     Quest quest = QuestManager.GetQuestByTitle(questTitle);

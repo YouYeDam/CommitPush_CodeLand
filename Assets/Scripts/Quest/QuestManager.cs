@@ -70,7 +70,6 @@ public class QuestManager : MonoBehaviour
             if (PlayerStatus.PlayerLevel >= quest.RequiredLevel)
             {
                 activeQuests.Add(quest);
-                Debug.Log("퀘스트 시작: " + quest.Title);
                 AddQuestSlot(quest); // UI에 퀘스트 추가
 
                 // 현재 인벤토리를 체크하여 수집 목표 업데이트
