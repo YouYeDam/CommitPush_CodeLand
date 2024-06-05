@@ -45,7 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuestDatas:
-  - {fileID: 11400000, guid: b48adf171461c4743a4782df91a558c6, type: 2}
-  - {fileID: 11400000, guid: 72670e91d5aba744c80477afc11b1bf7, type: 2}
   - {fileID: 11400000, guid: 9794455f6a1e06d4784bf141d87e89ef, type: 2}
+  - {fileID: 11400000, guid: 94ba7b23e674dec45b856cd211bedde2, type: 2}
+  - {fileID: 11400000, guid: 79e25b713a9e4114f94b972d5ae69bf4, type: 2}
+  - {fileID: 11400000, guid: 494a25e242653d94a98ee548c944085a, type: 2}
+  - {fileID: 11400000, guid: 483d08771c9991d4fa23a55d13a47975, type: 2}
   PlayerStatus: {fileID: 0}

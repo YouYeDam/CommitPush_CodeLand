@@ -9698,6 +9698,10 @@ PrefabInstance:
       propertyPath: DefaultDialogue
       value: 
       objectReference: {fileID: 11400000, guid: 0c6ff876dc309364c809fdd5ce81ccd8, type: 2}
+    - target: {fileID: 5410975148291012644, guid: 0b9f1240de0c17b4aa531eb9761aab85, type: 3}
+      propertyPath: QuestsToGive.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

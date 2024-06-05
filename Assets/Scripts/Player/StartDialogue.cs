@@ -37,7 +37,8 @@ public class StartDialogue : MonoBehaviour
         RaycastHit2D Hit = Physics2D.Raycast(MousePos, Vector2.zero, Mathf.Infinity, npcLayerMask);
 
         if (Hit.collider != null && Hit.collider.CompareTag("NPC")) {
-            StartDialogueIfPossible(Hit.collider.gameObject);
+            DialogueNPC = Hit.collider.gameObject;
+            StartDialogueIfPossible(DialogueNPC);
         }
     }
 

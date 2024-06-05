@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dec15e8a1c78bb47b2371542ceba74a, type: 3}
-  m_Name: Guido Van Rossum_0
+  m_Name: Guido Van Rossum_1_0
   m_EditorClassIdentifier: 
   nodes:
   - SpeakerName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"
@@ -18,7 +18,7 @@ MonoBehaviour:
       \uADF8 \uAC1C\uBC1C\uC790\uB85C\uAD70. \uC601\uBB38\uB3C4 \uBAA8\uB978\uCC44
       \uCF54\uB4DC\uB79C\uB4DC\uC5D0 \uC624\uAC8C \uB418\uC5B4\uC11C \uB9CE\uC774
       \uB2F9\uD669\uC2A4\uB7EC\uC6B8\uAC8C\uC57C."
-    SpeakerImage: {fileID: 21300000, guid: aba7e5b844dff1d40b05116c529d15b0, type: 3}
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
   - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
     DialogueText: "\uB3C4\uB300\uCCB4 \uC774 \uACF3\uC740 \uC5B4\uB514\uC8E0? \uC65C
       \uC81C\uAC00 \uC774 \uC138\uACC4\uB85C \uBD88\uB824\uC624\uAC8C \uB41C\uAC70\uC8E0?"
@@ -30,7 +30,7 @@ MonoBehaviour:
       \uC6D0\uB798\uB294 \uC790\uB124 \uC138\uACC4\uC758 \uC6B0\uB9AC\uC640 \uCE5C\uBD84\uC774
       \uC788\uB294 \uC544\uC8FC \uC720\uB2A5\uD55C \uAC1C\uBC1C\uC790\uB97C \uBD88\uB7EC\uC624\uB824\uACE0
       \uD588\uC9C0."
-    SpeakerImage: {fileID: 21300000, guid: aba7e5b844dff1d40b05116c529d15b0, type: 3}
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
   - SpeakerName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"
     DialogueText: "\uADF8\uB7F0\uB370 \uD604\uC7AC \uCF54\uB4DC\uB79C\uB4DC\uAC00
       \uB9CE\uC774 \uBD88\uC548\uC815\uD55C \uC0C1\uD0DC\uB77C\uC11C \uADF8 \uC790
@@ -39,7 +39,7 @@ MonoBehaviour:
       \uBD88\uC548\uC815\uD568\uC744 \uD574\uACB0\uD558\uAE30 \uC704\uD574 \uADF8
       \uC790\uB97C \uB370\uB824\uC624\uB824\uACE0 \uD588\uB358 \uAC83\uC778\uB370
       \uB9D0\uC774\uC57C."
-    SpeakerImage: {fileID: 21300000, guid: aba7e5b844dff1d40b05116c529d15b0, type: 3}
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
   - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
     DialogueText: "\uADF8\uB807\uB2E4\uBA74, \uBE68\uB9AC \uC800\uB97C \uB2E4\uC2DC
       \uC6D0\uB798 \uC138\uACC4\uB85C \uB3CC\uB824\uBCF4\uB0B4\uC8FC\uC138\uC694.
@@ -53,7 +53,7 @@ MonoBehaviour:
       \uC544\uB9C8 \uCF54\uB4DC\uB79C\uB4DC\uAC00 \uD68C\uBCF5\uB418\uAE30 \uC804\uAE4C\uC9C4
       \uC790\uB124\uB97C \uB3CC\uB824\uBCF4\uB0BC \uBC29\uBC95\uC774 \uC5C6\uB294
       \uAC83 \uAC19\uB124. \uC815\uB9D0 \uBBF8\uC548\uD558\uB124."
-    SpeakerImage: {fileID: 21300000, guid: aba7e5b844dff1d40b05116c529d15b0, type: 3}
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
   - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
     DialogueText: "\uADF8\uB7FC \uC800\uB294 \uC774\uC81C \uC5B4\uB5BB\uAC8C \uD574\uC57C\uD558\uB098\uC694?"
     SpeakerImage: {fileID: 0}
@@ -62,13 +62,13 @@ MonoBehaviour:
       \uB54C \uAE4C\uC9C0 \uC774 \uC232\uC744 \uCC9C\uCC9C\uD788 \uB458\uB7EC\uBCF4\uB77C\uACE0
       \uAD8C\uD558\uACE0 \uC2F6\uC9C0\uB9CC, \uC232\uC758 \uBAAC\uC2A4\uD130\uB4E4\uC774
       \uB09C\uD3ED\uD558\uAC8C \uBCC0\uD574\uBC84\uB9AC\uACE0 \uB9D0\uC558\uB124."
-    SpeakerImage: {fileID: 21300000, guid: aba7e5b844dff1d40b05116c529d15b0, type: 3}
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
   - SpeakerName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"
     DialogueText: "\uC774\uB7F0 \uB9D0\uC744 \uD558\uB294 \uAC83\uC774 \uB3C4\uB9AC\uAC00
       \uC544\uB2CC \uAC83\uC744 \uC544\uB124\uB9CC, \uC790\uB124\uC5D0\uAC8C \uAC1C\uBC1C\uC790\uB85C\uC11C\uC758
       \uAE30\uC220\uC744 \uC804\uC218\uD574\uB450\uB294 \uAC83\uC774 \uC88B\uACA0\uB2E4\uB294
       \uC0DD\uAC01\uC774 \uB4DC\uB124."
-    SpeakerImage: {fileID: 21300000, guid: aba7e5b844dff1d40b05116c529d15b0, type: 3}
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
   - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
     DialogueText: "\uC74C... \uC88B\uC544\uC694. \uB0B4\uD0A4\uC9C0\uB294 \uC54A\uC9C0\uB9CC,
       \uC774\uB7F0 \uACF3\uC5D0\uC11C \uD5C8\uBB34\uD558\uAC8C \uC8FD\uB294 \uAC83
@@ -80,9 +80,9 @@ MonoBehaviour:
       \uB3D9\uAD74\uC5D0\uC11C \uC5B4\uB290 \uC815\uB3C4 \uC775\uD614\uC744 \uAC83\uC774\uB77C
       \uC0DD\uAC01\uD558\uB124. \uD558\uC9C0\uB9CC \uADF8 \uC678\uC5D0\uB3C4 \uC544\uC9C1
       \uBC30\uC6B8 \uAC83\uC774 \uB9CE\uC774 \uB0A8\uC544\uC788\uB2E4\uB124."
-    SpeakerImage: {fileID: 21300000, guid: aba7e5b844dff1d40b05116c529d15b0, type: 3}
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
   - SpeakerName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"
     DialogueText: "\uADF8\uB807\uB2E4\uBA74, \uB098\uC5D0\uAC8C \uB2E4\uC2DC \uB9D0\uC744
       \uAC78\uC5B4\uC8FC\uAC8C. \uC790\uB124\uC5D0\uAC8C \uB2A5\uB825\uCE58\uC5D0
       \uB300\uD574 \uC124\uBA85\uD574\uC8FC\uACA0\uB124."
-    SpeakerImage: {fileID: 21300000, guid: aba7e5b844dff1d40b05116c529d15b0, type: 3}
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
