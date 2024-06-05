@@ -70,11 +70,17 @@ public class QuestManager : MonoBehaviour
             if (PlayerStatus.PlayerLevel >= quest.RequiredLevel)
             {
                 activeQuests.Add(quest);
+                Debug.Log("퀘스트 시작: " + quest.Title);
                 AddQuestSlot(quest); // UI에 퀘스트 추가
 
                 // 현재 인벤토리를 체크하여 수집 목표 업데이트
                 CheckInventoryForQuestItems(quest);
-                UpdateNPCQuestStatus(questTitle);
+
+                // 퀘스트 목표 즉시 완료 여부 체크
+                if (quest.Objectives.TrueForAll(obj => obj.Type == QuestObjective.ObjectiveType.None || obj.IsComplete()))
+                {
+                    SetQuestReadyToComplete(quest);
+                }
             }
         }
     }
@@ -96,7 +102,6 @@ public class QuestManager : MonoBehaviour
         if (!slotFound)
         {
             activeQuests.Remove(quest); // 활성화된 퀘스트 리스트에서 제거
-            UpdateNPCQuestStatus(quest.Title); // NPC 퀘스트 상태 업데이트
         }
     }
 
@@ -105,7 +110,6 @@ public class QuestManager : MonoBehaviour
     {
         quest.IsReadyToComplete = true;
         UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
-        UpdateNPCQuestStatus(quest.Title);
     }
 
     // 퀘스트 완료
@@ -131,7 +135,6 @@ public class QuestManager : MonoBehaviour
             // 보상 지급
             RewardPlayer(quest);
             UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
-            UpdateNPCQuestStatus(questTitle);
             IncrementNPCQuestIndex(questTitle);
         }
     }
@@ -148,7 +151,6 @@ public class QuestManager : MonoBehaviour
                     {
                         npc.currentQuestIndex++;
                     }
-                    npc.UpdateQuestStatus();
                     break;
                 }
             }
@@ -282,25 +284,6 @@ public class QuestManager : MonoBehaviour
     public List<Quest> GetActiveQuests()
     {
         return activeQuests;
-    }
-
-    private void UpdateNPCQuestStatus(string questTitle) // 관련 NPC 퀘스트 상태 업데이트
-    {
-        NPC[] npcs = FindObjectsOfType<NPC>();
-        foreach (NPC npc in npcs)
-        {
-            foreach (var questData in npc.QuestsToGive)
-            {
-                if (questData != null && questData.Title == questTitle)
-                {
-                    if (npc.currentQuestIndex < npc.QuestsToGive.Count && npc.QuestsToGive[npc.currentQuestIndex].Title == questTitle)
-                    {
-                        npc.UpdateQuestStatus();
-                        return; // 일치하는 퀘스트를 찾으면 종료
-                    }
-                }
-            }
-        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

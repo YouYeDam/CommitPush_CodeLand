@@ -52,7 +52,7 @@ MonoBehaviour:
   QuestDialogues:
   - PreQuestDialogue: {fileID: 11400000, guid: a4987c551db73ab46a5c83eddeabf0ea, type: 2}
     InProgressDialogue: {fileID: 11400000, guid: febc5280da1a3024e83defa447e9045c, type: 2}
-    ReadyToCompleteDialogue: {fileID: 11400000, guid: 732c875e4b368054eac26460dcea822a, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: febc5280da1a3024e83defa447e9045c, type: 2}
     PostQuestDialogue: {fileID: 11400000, guid: 2b5e0334eab99a5479a658bcaffa4dd9, type: 2}
   currentQuestIndex: 0
   DefaultDialogue: {fileID: 11400000, guid: 2b5e0334eab99a5479a658bcaffa4dd9, type: 2}

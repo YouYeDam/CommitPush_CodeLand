@@ -43,13 +43,13 @@ public class NPC : MonoBehaviour
         QuestManager = FindObjectOfType<QuestManager>();
         DisplayNPCNameInfo();
         DisplayNPCJobInfo();
-        UpdateQuestStatus();
     }
 
     void Update() {
         SetNPCNameInfoPosition();
         SetNPCJobInfoPosition();
         SetNPCQuestStatusPosition();
+        UpdateQuestStatus();
     }
 
     public void DisplayNPCNameInfo() { // NPC 이름 보이기
