@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Semicolon Warglaive
   m_EditorClassIdentifier: 
   ItemName: "\uC138\uBBF8\uCF5C\uB860"
+  ItemDetailType: "\uC7A5\uBE44(\uBB34\uAE30)"
   ItemCount: 1
   ItemCost: 2250
   Type: 0

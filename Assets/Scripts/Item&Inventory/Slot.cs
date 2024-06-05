@@ -101,7 +101,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
         TextCount.text = "0";
         CountImage.SetActive(false);
-        ItemToolTip.HideToolTip();
+        if (ItemToolTip != null) {
+            ItemToolTip.HideToolTip();
+        }
         // QuickSlotReference 초기화
         if (QuickSlotReference != null) {
             QuickSlotReference.SlotReference = null;
@@ -300,7 +302,10 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public void SellManyItem(int SellItemCount) {
         int TotalItemCost = Item.ItemCost * SellItemCount;
         PlayerMoney.Bit += TotalItemCost;
-        SetSlotCount(-SellItemCount);
+
+        // QuestManager에서 아이템 제거 목표 업데이트
         QuestManager.UpdateRemoveObjective(Item.ItemName, SellItemCount);
+        
+        SetSlotCount(-SellItemCount);
     }
 }

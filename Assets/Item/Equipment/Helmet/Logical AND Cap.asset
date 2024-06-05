@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Logical AND Cap
   m_EditorClassIdentifier: 
   ItemName: "\uB85C\uC9C0\uCEEC \uC564\uB4DC \uBAA8\uC790"
+  ItemDetailType: "\uC7A5\uBE44(\uBA38\uB9AC)"
   ItemCount: 1
   ItemCost: 600
   Type: 0

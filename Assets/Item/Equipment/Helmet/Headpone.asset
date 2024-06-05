@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Headpone
   m_EditorClassIdentifier: 
   ItemName: "\uD5E4\uB4DC\uD3F0"
+  ItemDetailType: "\uC7A5\uBE44(\uBA38\uB9AC)"
   ItemCount: 1
   ItemCost: 10
   Type: 0

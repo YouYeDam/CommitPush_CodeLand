@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Minus Pants
   m_EditorClassIdentifier: 
   ItemName: "\uB9C8\uC774\uB108\uC2A4 \uBC14\uC9C0"
+  ItemDetailType: "\uC7A5\uBE44(\uD558\uC758)"
   ItemCount: 1
   ItemCost: 200
   Type: 0

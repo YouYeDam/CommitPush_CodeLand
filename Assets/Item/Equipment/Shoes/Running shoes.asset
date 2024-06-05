@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Running shoes
   m_EditorClassIdentifier: 
   ItemName: "\uC6B4\uB3D9\uD654"
+  ItemDetailType: "\uC7A5\uBE44(\uC2E0\uBC1C)"
   ItemCount: 1
   ItemCost: 10
   Type: 0

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Short Dagger
   m_EditorClassIdentifier: 
   ItemName: "\uC20F \uB300\uAC70"
+  ItemDetailType: "\uC7A5\uBE44(\uBB34\uAE30)"
   ItemCount: 1
   ItemCost: 200
   Type: 0

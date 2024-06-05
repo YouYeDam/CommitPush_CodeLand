@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Plus Shirt
   m_EditorClassIdentifier: 
   ItemName: "\uD50C\uB7EC\uC2A4 \uC154\uCE20"
+  ItemDetailType: "\uC7A5\uBE44(\uC0C1\uC758)"
   ItemCount: 1
   ItemCost: 200
   Type: 0

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Logical OR Boots
   m_EditorClassIdentifier: 
   ItemName: "\uB85C\uC9C0\uCEEC \uC624\uC5B4 \uBD80\uCE20"
+  ItemDetailType: "\uC7A5\uBE44(\uC2E0\uBC1C)"
   ItemCount: 1
   ItemCost: 600
   Type: 0

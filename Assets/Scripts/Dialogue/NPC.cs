@@ -8,8 +8,8 @@ public class QuestDialogue
 {
     public Dialogue PreQuestDialogue;
     public Dialogue InProgressDialogue;
-    public Dialogue PostQuestDialogue;
     public Dialogue ReadyToCompleteDialogue;
+    public Dialogue PostQuestDialogue;
 }
 
 public class NPC : MonoBehaviour
@@ -43,13 +43,13 @@ public class NPC : MonoBehaviour
         QuestManager = FindObjectOfType<QuestManager>();
         DisplayNPCNameInfo();
         DisplayNPCJobInfo();
-        UpdateQuestStatus();
     }
 
     void Update() {
         SetNPCNameInfoPosition();
         SetNPCJobInfoPosition();
         SetNPCQuestStatusPosition();
+        UpdateQuestStatus();
     }
 
     public void DisplayNPCNameInfo() { // NPC 이름 보이기

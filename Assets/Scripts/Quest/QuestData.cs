@@ -5,7 +5,7 @@ using UnityEngine;
 public class QuestData : ScriptableObject
 {
     public string Title; // 퀘스트 제목
-    public string Description; // 퀘스트 설명
+    [TextArea(3, 10)] public string Description; // 퀘스트 설명
     public int ExperienceReward; // 경험치 보상
     public int BitReward; // 비트 보상
     public List<Item> ItemRewards; // 아이템 보상 리스트

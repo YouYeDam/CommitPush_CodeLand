@@ -69,18 +69,6 @@ public class PlayerStatus : MonoBehaviour
                 MonsterStatus.SetLevelDiff(PlayerLevel);
             }
         }
-
-        // 레벨업 이벤트 처리
-        UpdateAllNPCQuestStatus();
-    }
-
-    void UpdateAllNPCQuestStatus() {
-        NPC[] npcs = FindObjectsOfType<NPC>();
-        foreach (NPC npc in npcs) {
-            if (npc.QuestsToGive != null && npc.QuestsToGive.Count > 0) {
-                npc.UpdateQuestStatus();
-            }
-        }
     }
 
     public void DisplayPlayerNameInfo() { // 캐릭터 이름 보이기

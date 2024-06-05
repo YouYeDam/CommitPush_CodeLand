@@ -5,8 +5,9 @@ public class QuestObjective
 {
     public enum ObjectiveType
     {
-        Kill,    // 몬스터 처치
-        Collect  // 아이템 수집
+        None,   // 목표 없음
+        Kill,   // 몬스터 처치
+        Collect // 아이템 수집
     }
 
     public ObjectiveType Type; // 목표 타입
@@ -25,7 +26,7 @@ public class QuestObjective
     // 목표 달성 여부를 확인하는 메서드
     public bool IsComplete()
     {
-        return CurrentAmount >= RequiredAmount;
+        return Type == ObjectiveType.None || CurrentAmount >= RequiredAmount;
     }
 
     // 목표를 초기화하는 메서드

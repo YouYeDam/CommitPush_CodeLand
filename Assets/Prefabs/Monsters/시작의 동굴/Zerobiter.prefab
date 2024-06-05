@@ -79,7 +79,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 859613945
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -445348486, guid: 41a5001eec69c8948a2150c5398832ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -240,9 +240,15 @@ MonoBehaviour:
   WaitCanWalk: 3
   DieDelay: 0.8
   PlayerOverlapRange: 0.1
+  FollowDelay: 15
+  MonsterBoxCollider: {fileID: 0}
   IsAlive: 1
   IsLeft: 0
+  IsAttackMonster: 0
   IsTakeDamge: 0
+  CanWalk: 1
+  CanTriggerDamage: 1
+  AttackDelayTime: 3
 --- !u!114 &3157593347497917494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,7 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterName: "\uC81C\uB85C\uBE44\uD130"
-  MonsterLV: 1
+  MonsterLevel: 1
   MonsterMaxHealth: 20
   MonsterCurrentHealth: 0
   MonsterDamage: 10
@@ -266,10 +272,16 @@ MonoBehaviour:
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}
+  HPPercentText: {fileID: 0}
   HPMeterInstance: {fileID: 0}
   MonsterInfo: {fileID: 7337256740539332341, guid: 1549b685081dae94bab992933a341a66, type: 3}
   MonsterInfoText: {fileID: 0}
   MonsterInfoInstance: {fileID: 0}
+  LevelDiff: 0
+  BiggerThanPlayerLevel: 0
+  IsBossMonster: 0
+  IsSummoningMonster: 0
+  IsSummonedMonster: 0
 --- !u!114 &2853819430215722925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +297,8 @@ MonoBehaviour:
   ItemDrops:
   - ItemPrefab: {fileID: 4338472210403635751, guid: 00e07d54bea641949a9c054f1e9dbbac, type: 3}
     SpawnProbability: 0.6
+  - ItemPrefab: {fileID: 4338472210403635751, guid: 12af9070e47c0da4483959dae6181b01, type: 3}
+    SpawnProbability: 0.4
   - ItemPrefab: {fileID: 4338472210403635751, guid: 1efa8118dec067347b7ec11c7d7255ee, type: 3}
     SpawnProbability: 0.1
   MonsterBit: 1

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Mod Bracelet
   m_EditorClassIdentifier: 
   ItemName: "\uBAA8\uB4DC \uD314\uCC0C"
+  ItemDetailType: "\uC7A5\uBE44(\uC7A5\uAC11)"
   ItemCount: 1
   ItemCost: 200
   Type: 0

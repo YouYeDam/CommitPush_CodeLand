@@ -297,9 +297,9 @@ MonoBehaviour:
   ItemDrops:
   - ItemPrefab: {fileID: 4338472210403635751, guid: 00e07d54bea641949a9c054f1e9dbbac, type: 3}
     SpawnProbability: 0.6
+  - ItemPrefab: {fileID: 4338472210403635751, guid: 0904420c0d980ac4e871fabd4c482cdd, type: 3}
+    SpawnProbability: 0.2
   - ItemPrefab: {fileID: 4338472210403635751, guid: 1efa8118dec067347b7ec11c7d7255ee, type: 3}
-    SpawnProbability: 0.1
-  - ItemPrefab: {fileID: 4338472210403635751, guid: e3bd7ef95c002f8478b90bfbe69e738c, type: 3}
     SpawnProbability: 0.1
   - ItemPrefab: {fileID: 4338472210403635751, guid: a0bcb99be41bed4499c9805e009e8ff6, type: 3}
     SpawnProbability: 0.02

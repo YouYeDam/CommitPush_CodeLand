@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Logical NOT Glove
   m_EditorClassIdentifier: 
   ItemName: "\uB85C\uC9C0\uCEEC \uB0AB \uC7A5\uAC11"
+  ItemDetailType: "\uC7A5\uBE44(\uC7A5\uAC11)"
   ItemCount: 1
   ItemCost: 600
   Type: 0

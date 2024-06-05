@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bool Axe
   m_EditorClassIdentifier: 
   ItemName: "\uBD80\uC6B8 \uC561\uC2A4"
+  ItemDetailType: "\uC7A5\uBE44(\uBB34\uAE30)"
   ItemCount: 1
   ItemCost: 1200
   Type: 0

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Over Cap
   m_EditorClassIdentifier: 
   ItemName: "\uC624\uBC84 \uBAA8\uC790"
+  ItemDetailType: "\uC7A5\uBE44(\uBA38\uB9AC)"
   ItemCount: 1
   ItemCost: 200
   Type: 0

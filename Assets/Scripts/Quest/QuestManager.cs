@@ -75,24 +75,33 @@ public class QuestManager : MonoBehaviour
 
                 // 현재 인벤토리를 체크하여 수집 목표 업데이트
                 CheckInventoryForQuestItems(quest);
-                UpdateNPCQuestStatus(questTitle);
-            }
-            else
-            {
-                Debug.Log($"퀘스트 시작 불가: 플레이어 레벨이 {quest.RequiredLevel} 이상이어야 합니다.");
+
+                // 퀘스트 목표 즉시 완료 여부 체크
+                if (quest.Objectives.TrueForAll(obj => obj.Type == QuestObjective.ObjectiveType.None || obj.IsComplete()))
+                {
+                    SetQuestReadyToComplete(quest);
+                }
             }
         }
     }
-
     private void AddQuestSlot(Quest quest)
     {
-        foreach (QuestSlot questSlot in QuestSlots)
+        bool slotFound = false;
+        
+        for (int i = 0; i < QuestSlots.Length; i++)
         {
-            if (questSlot.QuestNameText.text == "")
+            if (QuestSlots[i].QuestNameText.text == "")
             {
-                questSlot.AddQuest(quest);
+                QuestSlots[i].AddQuest(quest);
+                slotFound = true;
                 break;
             }
+        }
+
+        // 남는 퀘스트 슬롯이 없는 경우
+        if (!slotFound)
+        {
+            activeQuests.Remove(quest); // 활성화된 퀘스트 리스트에서 제거
         }
     }
 
@@ -100,9 +109,7 @@ public class QuestManager : MonoBehaviour
     private void SetQuestReadyToComplete(Quest quest)
     {
         quest.IsReadyToComplete = true;
-        Debug.Log("퀘스트 완료 준비: " + quest.Title);
         UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
-        UpdateNPCQuestStatus(quest.Title);
     }
 
     // 퀘스트 완료
@@ -111,21 +118,23 @@ public class QuestManager : MonoBehaviour
         Quest quest = activeQuests.Find(q => q.Title == questTitle);
         if (quest != null && quest.IsReadyToComplete)
         {
+            // 목표의 CurrentAmount 초기화 및 아이템 차감
+            foreach (var objective in quest.Objectives)
+            {
+                if (objective.Type == QuestObjective.ObjectiveType.Collect)
+                {
+                    PlayerGetItem.InventoryScript.RemoveItem(objective.TargetName, objective.RequiredAmount);
+                }
+                objective.ResetCurrentAmount();
+            }
+
             quest.IsCompleted = true;
             activeQuests.Remove(quest);
             completedQuests.Add(quest);
-            Debug.Log("퀘스트 완료: " + quest.Title);
-
-            // 목표의 CurrentAmount 초기화
-            foreach (var objective in quest.Objectives)
-            {
-                objective.ResetCurrentAmount();
-            }
 
             // 보상 지급
             RewardPlayer(quest);
             UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
-            UpdateNPCQuestStatus(questTitle);
             IncrementNPCQuestIndex(questTitle);
         }
     }
@@ -142,7 +151,6 @@ public class QuestManager : MonoBehaviour
                     {
                         npc.currentQuestIndex++;
                     }
-                    npc.UpdateQuestStatus();
                     break;
                 }
             }
@@ -184,13 +192,6 @@ public class QuestManager : MonoBehaviour
                 if (!isItem && objective.Type == QuestObjective.ObjectiveType.Kill && objective.TargetName == targetName)
                 {
                     objective.CurrentAmount += amount;
-                    Debug.Log($"목표 업데이트: {objective.TargetName}, 현재 수량: {objective.CurrentAmount}/{objective.RequiredAmount}");
-
-                    // 목표가 완료되었는지 체크
-                    if (objective.IsComplete())
-                    {
-                        Debug.Log($"목표 완료: {objective.TargetName}");
-                    }
 
                     // 퀘스트가 모두 완료되었는지 체크
                     if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
@@ -205,13 +206,6 @@ public class QuestManager : MonoBehaviour
                 if (isItem && objective.Type == QuestObjective.ObjectiveType.Collect && objective.TargetName == targetName)
                 {
                     objective.CurrentAmount += amount;
-                    Debug.Log($"아이템 수집 목표 업데이트: {objective.TargetName}, 현재 수량: {objective.CurrentAmount}/{objective.RequiredAmount}");
-
-                    // 목표가 완료되었는지 체크
-                    if (objective.IsComplete())
-                    {
-                        Debug.Log($"아이템 수집 목표 완료: {objective.TargetName}");
-                    }
 
                     // 퀘스트가 모두 완료되었는지 체크
                     if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
@@ -236,7 +230,6 @@ public class QuestManager : MonoBehaviour
                 {
                     objective.CurrentAmount -= amount;
                     if (objective.CurrentAmount < 0) objective.CurrentAmount = 0;
-                    Debug.Log($"아이템 제거 목표 업데이트: {objective.TargetName}, 현재 수량: {objective.CurrentAmount}/{objective.RequiredAmount}");
 
                     // 퀘스트가 완료된 상태에서 다시 제거될 때의 처리
                     if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
@@ -265,13 +258,6 @@ public class QuestManager : MonoBehaviour
                 if (currentAmount > 0)
                 {
                     objective.CurrentAmount += currentAmount;
-                    Debug.Log($"현재 소지한 아이템 업데이트: {objective.TargetName}, 현재 수량: {objective.CurrentAmount}/{objective.RequiredAmount}");
-
-                    // 목표가 완료되었는지 체크
-                    if (objective.IsComplete())
-                    {
-                        Debug.Log($"아이템 수집 목표 완료: {objective.TargetName}");
-                    }
 
                     // 퀘스트가 모두 완료되었는지 체크
                     if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
@@ -298,25 +284,6 @@ public class QuestManager : MonoBehaviour
     public List<Quest> GetActiveQuests()
     {
         return activeQuests;
-    }
-
-    private void UpdateNPCQuestStatus(string questTitle) // 관련 NPC 퀘스트 상태 업데이트
-    {
-        NPC[] npcs = FindObjectsOfType<NPC>();
-        foreach (NPC npc in npcs)
-        {
-            foreach (var questData in npc.QuestsToGive)
-            {
-                if (questData != null && questData.Title == questTitle)
-                {
-                    if (npc.currentQuestIndex < npc.QuestsToGive.Count && npc.QuestsToGive[npc.currentQuestIndex].Title == questTitle)
-                    {
-                        npc.UpdateQuestStatus();
-                        return; // 일치하는 퀘스트를 찾으면 종료
-                    }
-                }
-            }
-        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

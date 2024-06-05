@@ -48,7 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dce98ef6376c6e4a90bf811322f4e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dialogue: {fileID: 0}
+  QuestsToGive: []
+  QuestDialogues: []
+  currentQuestIndex: 0
+  DefaultDialogue: {fileID: 0}
   UIManager: {fileID: 0}
   NPCName: "\uC2A4\uD2F0\uBE0C \uC7A1\uC2A4"
   NPCJob: "\uC7A1\uD654 \uC0C1\uC778"
@@ -59,6 +62,10 @@ MonoBehaviour:
   NPCJobInfo: {fileID: 7337256740539332341, guid: 5041c7fe0df0a71429debe0a9bc8336f, type: 3}
   NPCJobInfoText: {fileID: 0}
   NPCJobInfoInstance: {fileID: 0}
+  NPCQuestStatus: {fileID: 0}
+  NPCQuestStatusText: {fileID: 0}
+  NPCQuestStatusInstance: {fileID: 0}
+  NPCQuestStatusPos: 1
   IsShop: 1
   HavingJob: 1
 --- !u!212 &101798419204784940
@@ -200,10 +207,14 @@ MonoBehaviour:
   ShopItems:
   - {fileID: 11400000, guid: d43d765280a64cf4083fb405c8bcb670, type: 2}
   - {fileID: 11400000, guid: f74a1526ef42e8146870d62bd9d5d455, type: 2}
-  - {fileID: 11400000, guid: be0aa86a0c187bb44ba696e5428f1825, type: 2}
+  - {fileID: 11400000, guid: ecff7d2d39c503344868a5b227d0d84c, type: 2}
+  - {fileID: 11400000, guid: b6316e2a637393741a1bee30159c5562, type: 2}
+  - {fileID: 11400000, guid: aa029451af716324f95d0806f7c49d44, type: 2}
   - {fileID: 11400000, guid: 2e6afa2ec7553a74aa8da5f00f45cd32, type: 2}
   - {fileID: 11400000, guid: 47ad2d4ffd98c3349864589a2cf5132f, type: 2}
   - {fileID: 11400000, guid: c44c17c6aa28d124caad58666c55f96e, type: 2}
+  - {fileID: 11400000, guid: bd6eca51320c27f4098b9dead5d66985, type: 2}
+  - {fileID: 11400000, guid: 7fbd33f60669e59488042ad9fcc145c6, type: 2}
   - {fileID: 11400000, guid: 0314e79dc75bc984ba15fa280783daee, type: 2}
   - {fileID: 11400000, guid: 35fe9629f67694a4a9add84ff916ca0b, type: 2}
   - {fileID: 11400000, guid: d53805cba6f571345ab96d4c5616c3d6, type: 2}

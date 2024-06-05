@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pen
   m_EditorClassIdentifier: 
   ItemName: "\uD39C"
+  ItemDetailType: "\uC7A5\uBE44(\uC7A5\uC2E0\uAD6C)"
   ItemCount: 1
   ItemCost: 10
   Type: 0
