@@ -2081,10 +2081,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4851175910022436608, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
-      propertyPath: questManagerPrefab
-      value: 
-      objectReference: {fileID: 2524805494701730861, guid: fac302966178e354a9be0a396d6edfb1, type: 3}
     - target: {fileID: 8550988904389216802, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_Name
       value: SaveManager

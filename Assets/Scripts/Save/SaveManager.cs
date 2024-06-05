@@ -261,11 +261,9 @@ public class SaveManager : MonoBehaviour
             playerObject.GetComponent<Animator>().runtimeAnimatorController = data.runtimeAnimatorController;
             playerStatus = playerObject.GetComponent<PlayerStatus>();
             playerStatus.PlayerLevel = data.PlayerLevel;
-            playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
             playerStatus.PlayerMaxHP = data.PlayerMaxHP;
-            playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
             playerStatus.PlayerMaxMP = data.PlayerMaxMP;
-            playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
+            
             playerStatus.PlayerMaxEXP = data.PlayerMaxEXP;
             playerStatus.PlayerClass = data.PlayerClass;
             playerStatus.PlayerName = data.PlayerName;
@@ -293,6 +291,13 @@ public class SaveManager : MonoBehaviour
             playerObject.GetComponent<PlayerSkills>().SSkillCoolDown = data.SSkillCoolDown;
             playerObject.GetComponent<PlayerSkills>().DSkillCoolDown = data.DSkillCoolDown;
 
+            // set current values.
+            playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
+            playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
+            Debug.Log("log444: "+ data.PlayerCurrentHP);
+            Debug.Log("log444: "+ playerStatus.PlayerCurrentHP);
+            playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
+
             
         }
 
@@ -315,9 +320,15 @@ public class SaveManager : MonoBehaviour
             
             // 이 지점에서 초기화 시켜줘야 오류가 없음.
             playerObject.GetComponent<PlayerLevelUpController>().Character = uiManagerObject.GetComponentInChildren<Character>(true).gameObject;
+            ////////////
+            playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
+            playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
+            Debug.Log("log444: "+ data.PlayerCurrentHP);
+            Debug.Log("log444: "+ playerStatus.PlayerCurrentHP);
+            playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
         }
 
-        
+        // questmanager initialize
         if (questManagerObject == null){
             questManagerObject = Instantiate(questManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             questManager = FindObjectOfType<QuestManager>();
@@ -325,14 +336,44 @@ public class SaveManager : MonoBehaviour
             DontDestroyOnLoad(questManagerObject); // 씬 전환 시 파괴되지 않도록 설정
         }
 
-
+        // name tag initialize
         if (uiManagerObject != null && data.PlayerNameInfo != null && data.PlayerNameInfoInstance == null)
         {
             playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance = Instantiate(data.PlayerNameInfo, uiManagerObject.transform);
             playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance.GetComponent<TMP_Text>().text = data.PlayerName;
+            playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
+            playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
+            Debug.Log("log444: "+ data.PlayerCurrentHP);
+            Debug.Log("log444: "+ playerStatus.PlayerCurrentHP);
+            playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
         }
         
+        // {
+        //     StatusBar statusBar = uiManager.GetComponent<StatusBar>();
+        //     statusBar.PlayerStatus = playerStatus;
+        //     Debug.Log("log4441: " + playerStatus.PlayerCurrentHP);
+        //     if (playerStatus.PlayerCurrentHP > 0)
+        //         statusBar.HPMeter.fillAmount = (float)playerStatus.PlayerCurrentHP / playerStatus.PlayerMaxHP;
+        //     else
+        //         statusBar.HPMeter.fillAmount = 0;
 
+        //     if (playerStatus.PlayerCurrentMP > 0)
+        //         statusBar.MPMeter.fillAmount = (float)playerStatus.PlayerCurrentMP / playerStatus.PlayerMaxMP;
+        //     else
+        //         statusBar.MPMeter.fillAmount = 0;
+
+        //     if (playerStatus.PlayerCurrentEXP > 0)
+        //         statusBar.EXPMeter.fillAmount = (float)playerStatus.PlayerCurrentEXP / playerStatus.PlayerMaxEXP;
+        //     else
+        //         statusBar.EXPMeter.fillAmount = 0;
+                
+        //     Debug.Log("log4442: " +playerStatus.PlayerCurrentHP);
+        //     statusBar.HPDisplay.text = playerStatus.PlayerCurrentHP + " / " + playerStatus.PlayerMaxHP;
+        //     statusBar.MPDisplay.text = playerStatus.PlayerCurrentMP + " / " + playerStatus.PlayerMaxMP;
+        //     statusBar.EXPDisplay.text = playerStatus.PlayerCurrentEXP + " / " + playerStatus.PlayerMaxEXP;
+        //     statusBar.PlayerLV.text = "LV." + playerStatus.PlayerLevel + " " + playerStatus.PlayerClass;
+        //     statusBar.PlayerName.text = playerStatus.PlayerName;
+        // }
     }
 
     private void InitialEquipmentItems(){

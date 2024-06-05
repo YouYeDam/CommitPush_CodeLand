@@ -12,7 +12,7 @@ public class StatusBar : MonoBehaviour
     public TMP_Text EXPDisplay;
     public TMP_Text PlayerLV;
     public TMP_Text PlayerName;
-    PlayerStatus PlayerStatus;
+    public PlayerStatus PlayerStatus;
     void Start(){
         PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
     }
