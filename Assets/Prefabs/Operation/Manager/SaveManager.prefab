@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4851175910022436608}
   m_Layer: 0
   m_Name: SaveManager
-  m_TagString: Untagged
+  m_TagString: SaveManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 902140102076735292, guid: 0679ff1bc9f5e074ebb2ef3ec1101871, type: 3}
   uiManagerPrefab: {fileID: 2327944111166365452, guid: 46af2769a13de3c4c9250f6736cf5288, type: 3}
+  questManagerPrefab: {fileID: 2524805494701730861, guid: fac302966178e354a9be0a396d6edfb1, type: 3}
   PaueseMenu: {fileID: 8387125697714015322, guid: fcca88685be6b421e9b53983638dc74a, type: 3}
   playerObject: {fileID: 902140102076735292, guid: 0679ff1bc9f5e074ebb2ef3ec1101871, type: 3}
+  questManagerObject: {fileID: 2524805494701730861, guid: fac302966178e354a9be0a396d6edfb1, type: 3}
+  slots: []
+  skillSlots: []
+  equipmentSlots: []
   currentAniController: {fileID: 0}

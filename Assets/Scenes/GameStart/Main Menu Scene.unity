@@ -2041,63 +2041,51 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 478891392632186724, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+    - target: {fileID: 2326338573029836937, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 478891392632186724, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+    - target: {fileID: 2326338573029836937, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 478891392632186724, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+    - target: {fileID: 2326338573029836937, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 478891392632186724, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+    - target: {fileID: 2326338573029836937, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 478891392632186724, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+    - target: {fileID: 2326338573029836937, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 478891392632186724, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+    - target: {fileID: 2326338573029836937, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 478891392632186724, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+    - target: {fileID: 2326338573029836937, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 478891392632186724, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+    - target: {fileID: 2326338573029836937, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 478891392632186724, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+    - target: {fileID: 2326338573029836937, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 478891392632186724, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+    - target: {fileID: 2326338573029836937, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2874374701854324121, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
-      propertyPath: PaueseMenu
+    - target: {fileID: 4851175910022436608, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+      propertyPath: questManagerPrefab
       value: 
-      objectReference: {fileID: 8387125697714015322, guid: fcca88685be6b421e9b53983638dc74a, type: 3}
-    - target: {fileID: 2874374701854324121, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
-      propertyPath: playerObject
-      value: 
-      objectReference: {fileID: 902140102076735292, guid: 0679ff1bc9f5e074ebb2ef3ec1101871, type: 3}
-    - target: {fileID: 2874374701854324121, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
-      propertyPath: playerPrefab
-      value: 
-      objectReference: {fileID: 902140102076735292, guid: 0679ff1bc9f5e074ebb2ef3ec1101871, type: 3}
-    - target: {fileID: 2874374701854324121, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
-      propertyPath: uiManagerPrefab
-      value: 
-      objectReference: {fileID: 2327944111166365452, guid: 46af2769a13de3c4c9250f6736cf5288, type: 3}
-    - target: {fileID: 7071375704911589134, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
+      objectReference: {fileID: 2524805494701730861, guid: fac302966178e354a9be0a396d6edfb1, type: 3}
+    - target: {fileID: 8550988904389216802, guid: b9d64f67d1e0a4b4097a8fa6d5556a8b, type: 3}
       propertyPath: m_Name
       value: SaveManager
       objectReference: {fileID: 0}

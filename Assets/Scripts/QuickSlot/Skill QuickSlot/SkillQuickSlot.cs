@@ -14,7 +14,7 @@ public class SkillQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public SkillSlot SlotReference;
     [SerializeField] GameObject QuickSlotBase;
     [SerializeField] string ButtonKey;
-    PlayerSkills PlayerSkills;
+    public PlayerSkills PlayerSkills;
     bool CanDelete = true;
 
     void Start() {

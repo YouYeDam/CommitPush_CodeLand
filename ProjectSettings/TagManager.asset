@@ -20,6 +20,9 @@ TagManager:
   - Tunnel
   - UIManager
   - SoundManager
+  - QuestManager
+  - SaveManager
+  - ItemToolTip
   layers:
   - Default
   - TransparentFX

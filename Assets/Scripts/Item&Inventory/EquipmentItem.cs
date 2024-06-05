@@ -18,41 +18,31 @@ public class EquipmentItem : MonoBehaviour
         PlayerStatus = FindObjectOfType<PlayerStatus>();
     }
     public void EquipItem(Item NewItem) {
-        Debug.Log("log778: 1111");
         Equipment = FindObjectOfType<Equipment>();
-        Debug.Log("log778: 2222 " + Equipment); // 왜 equipment가 uimanager로 얻어지지? 그게 정상인건가?
         switch (EquipmentType) {
             case "머리":
                 Equipment.HelmetSlot.CheckNull(NewItem);
-                Debug.Log("log778: 3333");
                 break;
             case "상의":
                 Equipment.BodySlot.CheckNull(NewItem);
-                Debug.Log("log778: 4444");
                 break;
             case "하의":
                 Equipment.PantsSlot.CheckNull(NewItem);
-                Debug.Log("log778: 5555");
                 break;
             case "무기":
                 Equipment.WeaponSlot.CheckNull(NewItem);
-                Debug.Log("log778: 6666");
                 break;
             case "장갑":
                 Equipment.GloveSlot.CheckNull(NewItem);
-                Debug.Log("log778: 7777");
                 break;
             case "신발":
                 Equipment.ShoesSlot.CheckNull(NewItem);
-                Debug.Log("log778: 8888");
                 break;
             case "펫":
                 Equipment.PetSlot.CheckNull(NewItem);
-                Debug.Log("log778: 9999");
                 break;
             case "장신구":
                 Equipment.TrinketSlot.CheckNull(NewItem);
-                Debug.Log("log778: 0000");
                 break;
             default:
                 break;

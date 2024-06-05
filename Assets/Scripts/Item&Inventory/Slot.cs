@@ -14,7 +14,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public DropItemInputNumber DropItemInputNumber;
     public SellItemInputField SellItemInputField;
     public ItemQuickSlot QuickSlotReference;
-    ItemToolTip ItemToolTip;
+    public ItemToolTip ItemToolTip;
     PlayerMovement PlayerMovement;
     PlayerStatus PlayerStatus;
     PlayerMoney PlayerMoney;
@@ -40,7 +40,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
         GameObject ToolTipObject = GameObject.Find("ItemToolTip");
         if (ToolTipObject != null) {
-        ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
+            ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
         }
         
         PlayerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();

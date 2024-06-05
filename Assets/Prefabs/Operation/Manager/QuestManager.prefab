@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7857334002533193197}
   m_Layer: 0
   m_Name: QuestManager
-  m_TagString: Untagged
+  m_TagString: QuestManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,4 @@ MonoBehaviour:
   QuestDatas:
   - {fileID: 11400000, guid: b48adf171461c4743a4782df91a558c6, type: 2}
   - {fileID: 11400000, guid: 72670e91d5aba744c80477afc11b1bf7, type: 2}
-  QuestContent: {fileID: 0}
   PlayerStatus: {fileID: 0}
-  UICanvas: {fileID: 0}

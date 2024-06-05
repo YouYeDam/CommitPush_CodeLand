@@ -14,7 +14,7 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     PlayerMovement PlayerMovement;
     PlayerGetItem PlayerGetItem;
     PlayerMoney PlayerMoney;
-    QuestManager QuestManager;
+    public QuestManager QuestManager;
 
     // 더블클릭 기능 구현 변수
     private int ClickCount = 0;

@@ -19,7 +19,7 @@ public class PlayerLevelUpController : MonoBehaviour
     PlayerStatus PlayerStatus;
 
     GameObject UIManager;
-    GameObject Character;
+    public GameObject Character;
     void Start() {
         PlayerStatus = GetComponent<PlayerStatus>();
         UIManager = GameObject.Find("UIManager");

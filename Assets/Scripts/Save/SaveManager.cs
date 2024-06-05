@@ -47,6 +47,7 @@ public class PlayerData
     public int[] itemCounts = new int[40];
     public bool[] isEquipment = new bool[40];
     public GameObject QSkill, WSkill, ESkill, RSkill, SSkill, DSkill;
+    public float QSkillCoolDown, WSkillCoolDown, ESkillCoolDown, RSkillCoolDown, SSkillCoolDown, DSkillCoolDown;
 
     // 장비 저장 데이터
     public Item[] equipments = new Item[8];
@@ -56,13 +57,16 @@ public class SaveManager : MonoBehaviour
 {
     public GameObject playerPrefab; // 플레이어 프리팹 참조
     public GameObject uiManagerPrefab; // UIManager 프리팹 참조
+    public GameObject questManagerPrefab; // UIManager 프리팹 참조
     public GameObject PaueseMenu;
     private GameObject PauseMenuInstance = null;
     // public GameObject GameDataSlot;
-    PlayerStatus playerStatus;
-    PlayerMoney playerMoney;
     public GameObject playerObject;
-    GameObject uiManager;
+    public GameObject questManagerObject;
+    QuestManager questManager;
+    UIManager uiManager;
+    PlayerStatus playerStatus;
+    GameObject uiManagerObject;
     public Slot[] slots;
     public SkillSlot[] skillSlots;
     public EquipmentSlot[] equipmentSlots;
@@ -74,6 +78,7 @@ public class SaveManager : MonoBehaviour
     void Start()
     {
         playerObject = null;
+        questManagerObject = null;
         currentAniController = null;
         uiManager = null;
         slots = null;
@@ -89,37 +94,11 @@ public class SaveManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             playerObject = GameObject.FindWithTag("Player");
-            Debug.Log("log10: Max Hp on instantiated: " + playerObject.GetComponent<PlayerStatus>().PlayerMaxHP);
-
-            uiManager = GameObject.FindWithTag("UIManager");
-            UIManager UM = uiManager.GetComponent<UIManager>();
-
-            slots = uiManager.GetComponentsInChildren<Slot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정. 모든 슬롯을 가져옴.
-            equipmentSlots = uiManager.GetComponentsInChildren<EquipmentSlot>(true); // 역시 모든 장비 슬롯 가져옴.
-            skillSlots = uiManager.GetComponentsInChildren<SkillSlot>(true);
-            currentAniController = playerObject.GetComponent<Animator>().runtimeAnimatorController;
+            uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
             if (playerObject != null)
             {
-                Vector3 playerPosition = playerObject.transform.position;
-                playerStatus = playerObject.GetComponent<PlayerStatus>();
-                playerMoney = playerObject.GetComponent<PlayerMoney>();
-                Debug.Log(playerStatus);
-                SavePlayerProgress(playerPosition, SceneManager.GetActiveScene().name, playerStatus, currentAniController, playerMoney, slots, equipmentSlots, skillSlots, UM, playerObject); // 이거 그냥 결국 playerObject랑 uiManager 두개로 단순화 할 수 있을텐데. 나중에 보고 하기.
+                SavePlayerProgress(SceneManager.GetActiveScene().name, uiManager, playerObject, questManagerObject); 
                 Debug.Log("플레이어 진행 상황이 저장되었습니다.");
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.L))
-        {
-            PlayerData data = LoadPlayerProgress();
-            if (data != null)
-            {
-                string json = JsonUtility.ToJson(data);
-                Debug.Log("저장된 플레이어 진행 상황: " + json);
-                Debug.Log(playerStatus);
-            }
-            else
-            {
-                Debug.Log("저장된 플레이어 진행 상황이 없습니다.");
             }
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
@@ -131,8 +110,19 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    public void SavePlayerProgress(Vector3 playerPosition, string currentSceneName, PlayerStatus playerStatus, RuntimeAnimatorController currentAniController, PlayerMoney playerMoney, Slot[] slots, EquipmentSlot[] equipmentSlots, SkillSlot[] skillSlots, UIManager uIManager, GameObject playerObject)
+    public void SavePlayerProgress(string currentSceneName, UIManager uIManager, GameObject playerObject, GameObject questManager)
     {
+        Slot[] slots = uiManager.GetComponentsInChildren<Slot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정. 모든 슬롯을 가져옴.
+        EquipmentSlot[] equipmentSlots = uiManager.GetComponentsInChildren<EquipmentSlot>(true); 
+        SkillSlot[] skillSlots = uiManager.GetComponentsInChildren<SkillSlot>(true);
+        RuntimeAnimatorController currentAniController = playerObject.GetComponent<Animator>().runtimeAnimatorController;
+        PlayerStatus playerStatus = playerObject.GetComponent<PlayerStatus>();
+        PlayerMoney playerMoney = playerObject.GetComponent<PlayerMoney>();
+        Vector3 playerPosition = playerObject.transform.position;
+        PlayerSkills playerSkills = playerObject.GetComponent<PlayerSkills>();
+        SkillQuickSlot[] skillQuickSlots = uIManager.GetComponentsInChildren<SkillQuickSlot>();
+        ItemQuickSlot[] itemQuickSlots = uIManager.GetComponentsInChildren<ItemQuickSlot>();
+        
         PlayerData data = new PlayerData
         {
             x = playerPosition.x,
@@ -159,15 +149,21 @@ public class SaveManager : MonoBehaviour
             Bit = playerMoney.Bit,
             Snippet = playerMoney.Snippet,
             runtimeAnimatorController = currentAniController,
-            QSkill = playerObject.GetComponent<PlayerSkills>().QSkill,
-            WSkill = playerObject.GetComponent<PlayerSkills>().WSkill,
-            ESkill = playerObject.GetComponent<PlayerSkills>().ESkill,
-            RSkill = playerObject.GetComponent<PlayerSkills>().RSkill,
-            SSkill = playerObject.GetComponent<PlayerSkills>().SSkill,
-            DSkill = playerObject.GetComponent<PlayerSkills>().DSkill,
+            QSkill = playerSkills.QSkill,
+            WSkill = playerSkills.WSkill,
+            ESkill = playerSkills.ESkill,
+            RSkill = playerSkills.RSkill,
+            SSkill = playerSkills.SSkill,
+            DSkill = playerSkills.DSkill,
+            QSkillCoolDown = playerSkills.QSkillCoolDown,
+            WSkillCoolDown = playerSkills.WSkillCoolDown,
+            ESkillCoolDown = playerSkills.ESkillCoolDown,
+            RSkillCoolDown = playerSkills.RSkillCoolDown,
+            SSkillCoolDown = playerSkills.SSkillCoolDown,
+            DSkillCoolDown = playerSkills.DSkillCoolDown,
+            
         };
-        SkillQuickSlot[] skillQuickSlots = uIManager.GetComponentsInChildren<SkillQuickSlot>();
-        ItemQuickSlot[] itemQuickSlots = uIManager.GetComponentsInChildren<ItemQuickSlot>();
+        
         SaveItems(slots, data);
         SaveSkills(skillSlots, data);
         SaveQuickSkills(skillQuickSlots, data);
@@ -188,6 +184,7 @@ public class SaveManager : MonoBehaviour
         // 각 슬롯의 equipment item을 저장
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
+            Debug.Log("log1112321: "+equipmentSlots[i].Item);
             equipments[i] = equipmentSlots[i].Item;
         };
         // 정리된 배열들을 data에 저장
@@ -245,13 +242,11 @@ public class SaveManager : MonoBehaviour
             itemCounts[i] = itemQuickSlots[i].ItemCount;
             if(itemQuickSlots[i].SlotReference != null){
             referSlotsIdx[i] = itemQuickSlots[i].SlotReference.transform.GetSiblingIndex();}
-            Debug.Log("log1112" + referSlotsIdx[i]);
         };
         // 정리된 배열들을 data에 저장
         data.quickItems = items;
         data.quickItemCounts = itemCounts;
         data.itemSlotReferencesIdx = referSlotsIdx;
-        Debug.Log("log3332: "+data.itemSlotReferencesIdx[0]);
     }
 
     public void InstantiateOnSavePoint(PlayerData data)
@@ -263,84 +258,126 @@ public class SaveManager : MonoBehaviour
             playerObject = Instantiate(playerPrefab, new Vector3(data.x, data.y, data.z), Quaternion.identity);
             playerObject.name = playerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
-
             playerObject.GetComponent<Animator>().runtimeAnimatorController = data.runtimeAnimatorController;
-
-            playerObject.GetComponent<PlayerStatus>().PlayerLevel = data.PlayerLevel;
-            playerObject.GetComponent<PlayerStatus>().PlayerCurrentHP = data.PlayerCurrentHP;
-            playerObject.GetComponent<PlayerStatus>().PlayerMaxHP = data.PlayerMaxHP;
-            playerObject.GetComponent<PlayerStatus>().PlayerCurrentMP = data.PlayerCurrentMP;
-            playerObject.GetComponent<PlayerStatus>().PlayerMaxMP = data.PlayerMaxMP;
-            playerObject.GetComponent<PlayerStatus>().PlayerCurrentEXP = data.PlayerCurrentEXP;
-            playerObject.GetComponent<PlayerStatus>().PlayerMaxEXP = data.PlayerMaxEXP;
-            playerObject.GetComponent<PlayerStatus>().PlayerClass = data.PlayerClass;
-            playerObject.GetComponent<PlayerStatus>().PlayerName = data.PlayerName;
-            playerObject.GetComponent<PlayerStatus>().PlayerATK = data.PlayerATK;
-            playerObject.GetComponent<PlayerStatus>().PlayerDEF = data.PlayerDEF;
-            playerObject.GetComponent<PlayerStatus>().PlayerAP = data.PlayerAP;
-            playerObject.GetComponent<PlayerStatus>().PlayerCrit = data.PlayerCrit;
-            playerObject.GetComponent<PlayerStatus>().LevelUpPoint = data.LevelUpPoint;
-            playerObject.GetComponent<PlayerStatus>().IsLoaded = true;
+            playerStatus = playerObject.GetComponent<PlayerStatus>();
+            playerStatus.PlayerLevel = data.PlayerLevel;
+            playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
+            playerStatus.PlayerMaxHP = data.PlayerMaxHP;
+            playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
+            playerStatus.PlayerMaxMP = data.PlayerMaxMP;
+            playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
+            playerStatus.PlayerMaxEXP = data.PlayerMaxEXP;
+            playerStatus.PlayerClass = data.PlayerClass;
+            playerStatus.PlayerName = data.PlayerName;
+            playerStatus.PlayerATK = data.PlayerATK;
+            playerStatus.PlayerDEF = data.PlayerDEF;
+            playerStatus.PlayerAP = data.PlayerAP;
+            playerStatus.PlayerCrit = data.PlayerCrit;
+            playerStatus.LevelUpPoint = data.LevelUpPoint;
+            playerStatus.IsLoaded = true;
 
             playerObject.GetComponent<PlayerMoney>().Bit = data.Bit;
             playerObject.GetComponent<PlayerMoney>().Snippet = data.Snippet;
+
             playerObject.GetComponent<PlayerSkills>().QSkill = data.QSkill;
             playerObject.GetComponent<PlayerSkills>().WSkill = data.WSkill;
             playerObject.GetComponent<PlayerSkills>().ESkill = data.ESkill;
             playerObject.GetComponent<PlayerSkills>().RSkill = data.RSkill;
             playerObject.GetComponent<PlayerSkills>().SSkill = data.SSkill;
             playerObject.GetComponent<PlayerSkills>().DSkill = data.DSkill;
+
+            playerObject.GetComponent<PlayerSkills>().QSkillCoolDown = data.QSkillCoolDown;
+            playerObject.GetComponent<PlayerSkills>().WSkillCoolDown = data.WSkillCoolDown;
+            playerObject.GetComponent<PlayerSkills>().ESkillCoolDown = data.ESkillCoolDown;
+            playerObject.GetComponent<PlayerSkills>().RSkillCoolDown = data.RSkillCoolDown;
+            playerObject.GetComponent<PlayerSkills>().SSkillCoolDown = data.SSkillCoolDown;
+            playerObject.GetComponent<PlayerSkills>().DSkillCoolDown = data.DSkillCoolDown;
+
+            
         }
 
-        if (uiManager == null)
+        if (uiManagerObject == null)
         {
             // LevelUpPoint
-            uiManager = Instantiate(uiManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            uiManager.name = uiManagerPrefab.name; // "(Clone)" 접미사 제거
-            DontDestroyOnLoad(uiManager); // 씬 전환 시 파괴되지 않도록 설정
-            LoadItems(data);
-            LoadQuickItems(data);
+            uiManagerObject = Instantiate(uiManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            uiManager = uiManagerObject.GetComponent<UIManager>();
+            uiManagerObject.name = uiManagerPrefab.name; // "(Clone)" 접미사 제거
+            DontDestroyOnLoad(uiManagerObject); // 씬 전환 시 파괴되지 않도록 설정
+            
+            InitialEquipmentItems();
             LoadEquipments(data);
+
+            LoadItems(data);    
+            LoadQuickItems(data);
             LoadSkills(data);
             LoadQuickSkills(data);
+            ShopSlotInit();
+            
+            // 이 지점에서 초기화 시켜줘야 오류가 없음.
+            playerObject.GetComponent<PlayerLevelUpController>().Character = uiManagerObject.GetComponentInChildren<Character>(true).gameObject;
         }
 
-        if (uiManager != null && data.PlayerNameInfo != null && data.PlayerNameInfoInstance == null)
+        
+        if (questManagerObject == null){
+            questManagerObject = Instantiate(questManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            questManager = FindObjectOfType<QuestManager>();
+            questManagerObject.name = questManagerPrefab.name; // "(Clone)" 접미사 제거
+            DontDestroyOnLoad(questManagerObject); // 씬 전환 시 파괴되지 않도록 설정
+        }
+
+
+        if (uiManagerObject != null && data.PlayerNameInfo != null && data.PlayerNameInfoInstance == null)
         {
-            playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance = Instantiate(data.PlayerNameInfo, uiManager.transform);
+            playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance = Instantiate(data.PlayerNameInfo, uiManagerObject.transform);
             playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance.GetComponent<TMP_Text>().text = data.PlayerName;
         }
+        
 
+    }
+
+    private void InitialEquipmentItems(){
+        EquipmentItem[] equipmentItems = uiManager.GetComponentsInChildren<EquipmentItem>();
+        for(int i = 0; i < equipmentItems.Length; i++){
+            equipmentItems[i].PlayerStatus = playerStatus;
+        }
+    }
+
+    private void ShopSlotInit(){
+        ShopSlot[] shopSlot = uiManager.GetComponentsInChildren<ShopSlot>(true);
+        for (int i = 0; i < shopSlot.Length; i++){
+            shopSlot[i].QuestManager = questManager;
+        }
     }
 
     private void LoadSkills(PlayerData data){
         for (int i = 0; i < data.skillPrefabs.Length; i++){
             if(data.skillPrefabs[i] != null){
-                uiManager.GetComponentsInChildren<SkillSlot>(true)[i].AddSkill(data.skillPrefabs[i]);
+                uiManagerObject.GetComponentsInChildren<SkillSlot>(true)[i].AddSkill(data.skillPrefabs[i]);
             }
         }
     }
     private void LoadQuickSkills(PlayerData data){
-
         for (int i = 0; i < data.quickSkillPrefabs.Length; i++){
+            SkillQuickSlot skillQuickSlot = uiManagerObject.GetComponentsInChildren<SkillQuickSlot>(true)[i];
+            skillQuickSlot.PlayerSkills = playerObject.GetComponent<PlayerSkills>();
             SkillSlot refer_slot = null;
             if(data.quickSkillPrefabs[i] != null){
-                // 아니 왜 제대로 넘겨줘도 안 됨
-                Debug.Log("log1212: 1111" + data.quickSkillPrefabs[i] + " " + data.skillSlotReferencesIdx[i]);
-                refer_slot = uiManager.GetComponentsInChildren<SkillSlot>(true)[data.skillSlotReferencesIdx[i]];
-                uiManager.GetComponentsInChildren<SkillQuickSlot>(true)[i].AddSkill(data.quickSkillPrefabs[i], refer_slot); //여기서 그냥 null 값으로 넘어갔구나. slot도 같이 넘겨줘야하네 그럼.
+                refer_slot = uiManagerObject.GetComponentsInChildren<SkillSlot>(true)[data.skillSlotReferencesIdx[i]];
+                skillQuickSlot.AddSkill(data.quickSkillPrefabs[i], refer_slot); //여기서 그냥 null 값으로 넘어갔구나. slot도 같이 넘겨줘야하네 그럼.
             }
         }
     }
 
     private void LoadEquipments(PlayerData data)
     {
+        
         for (int i = 0; i < data.equipments.Length; i++)
         {
-            Debug.Log("log999: " + i);
+            uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true)[i].Item = null;
             if (data.equipments[i] != null)
             {
-                uiManager.GetComponentsInChildren<EquipmentSlot>(true)[i].AddItem(data.equipments[i]);
+                Debug.Log("log999: added" + i);
+                uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true)[i].AddItem(data.equipments[i]);
             }
         }
     }
@@ -351,22 +388,22 @@ public class SaveManager : MonoBehaviour
         {
             if (data.items[i] != null)
             {
-                uiManager.GetComponentsInChildren<Slot>(true)[i].AddItem(data.items[i], data.itemCounts[i]);
+                uiManagerObject.GetComponentsInChildren<Slot>(true)[i].AddItem(data.items[i], data.itemCounts[i]);
             }
         }
     }
     private void LoadQuickItems(PlayerData data) // data의 아이템이 아이템인지 장비인지 구별해야함. isEquipment 함수를 자료형에 추가하고. 또 장비의 슬롯 인덱스도 저장해야함.
     {
-        Debug.Log("log7771" + data.itemSlotReferencesIdx[0]);
         for (int i = 0; i < data.quickItems.Length; i++)
         {
-            Slot refer_slot = null;
+            Slot refer_slot = uiManagerObject.GetComponentsInChildren<Slot>(true)[data.itemSlotReferencesIdx[i]];
+            refer_slot.ItemToolTip = uiManagerObject.GetComponentInChildren<ItemToolTip>(true);
+                Debug.Log("log1232 " + refer_slot.ItemToolTip);
+
             if (data.quickItems[i] != null)
             {
-                refer_slot = uiManager.GetComponentsInChildren<Slot>(true)[data.itemSlotReferencesIdx[i]];
-                uiManager.GetComponentsInChildren<ItemQuickSlot>(true)[i].AddItem(data.quickItems[i], data.quickItemCounts[i], refer_slot);
-                Debug.Log("log2223 " + data.itemSlotReferencesIdx[i]);
-                Debug.Log("log2223 " + uiManager.GetComponentsInChildren<ItemQuickSlot>(true)[i].SlotReference);
+                uiManagerObject.GetComponentsInChildren<ItemQuickSlot>(true)[i].AddItem(data.quickItems[i], data.quickItemCounts[i], refer_slot);
+                
             }
         }
     }
@@ -391,7 +428,15 @@ public class SaveManager : MonoBehaviour
     void GoBackHome()
     {
         GameObject soundManager = GameObject.FindWithTag("SoundManager");
+        GameObject uiManagerObject = GameObject.FindWithTag("UIManager");
+        GameObject questManager = GameObject.FindWithTag("QuestManager");
+        GameObject saveManager = GameObject.FindWithTag("SaveManager");
+        GameObject player = GameObject.FindWithTag("Player");
         Destroy(soundManager);
+        Destroy(uiManagerObject);
+        Destroy(questManager);
+        Destroy(saveManager);
+        Destroy(player);
         Debug.Log("log3: sound manager destroied");
         SceneManager.LoadScene("Main Menu Scene");
     }
@@ -403,17 +448,6 @@ public class SaveManager : MonoBehaviour
             Destroy(PauseMenuInstance);
             PauseMenuInstance = null;
         }
-    }
-
-    public PlayerData LoadPlayerProgress()
-    {
-        if (PlayerPrefs.HasKey("PlayerProgress"))
-        {
-            string json = PlayerPrefs.GetString("PlayerProgress");
-            PlayerData data = JsonUtility.FromJson<PlayerData>(json);
-            return data;
-        }
-        return null; // 저장된 데이터가 없는 경우
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

@@ -33,12 +33,13 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
     public void InitialEquip(bool IsLoaded) {
-            if (Item != null) { // 초기 아이템 설정
+        if (Item != null) { // 초기 아이템 설정
             EquipmentItem EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
             EquipmentItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
-            // if (!IsLoaded) { 
-                AddItem(Item, IsLoaded); // 이게 하나의 일만 하는게 아니라서 문제를 일으킨다...
-            // }
+            if (!IsLoaded)
+            {
+                AddItem(Item);
+            } 
         }
     }
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
@@ -48,13 +49,13 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
 
     public void ClearSlot() { // 장비 슬롯에 아이템 탈착
-        Debug.Log("log112: 1111 "+EquipmentItem);
-        EquipmentItem.DecreaseStat();
-        Debug.Log("log112: 2222");
-        Item = null;
-        Debug.Log("log112: 3333");
-        ItemImage.sprite = null;
-        SetColor(0);
+        if (EquipmentItem != null)
+        {
+            EquipmentItem.DecreaseStat();
+            Item = null;
+            ItemImage.sprite = null;
+            SetColor(0);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData) {
@@ -78,8 +79,8 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     void OnDoubleClick() // 슬롯 더블클릭
     {
         if (Item != null) {
-        InventoryScript.AcquireItem(Item);
-        ClearSlot();
+            InventoryScript.AcquireItem(Item);
+            ClearSlot();
         }
     }
 
@@ -93,17 +94,8 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         ItemToolTip.HideToolTip();
     }
 
-    public void AddItem(Item Item, bool IsLoaded) { //장비 슬롯에 아이템 장착
-        EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
-        if(!IsLoaded){
-            this.Item = Item;
-            EquipmentItem.IncreaseStat();
-            ItemImage.sprite = this.Item.ItemImage;
-            SetColor(1);
-        }
-    }
 
-    public void AddItem(Item Item) { // 다형성
+    public void AddItem(Item Item) {
         this.Item = Item;
         EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
         EquipmentItem.IncreaseStat();
@@ -116,7 +108,7 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             AddItem(NewItem);
         }
         else { 
-            //InventoryScript.AcquireItem(Item); //-> 얘가 문제였음. 중복 작동하는 거 같음. 문제 되면 여기 우선적으로 확인
+            InventoryScript.AcquireItem(Item);
             ClearSlot();
             AddItem(NewItem);
         }
