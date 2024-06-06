@@ -63,6 +63,10 @@ EditorBuildSettings:
       \uBBF8\uB85C.unity"
     guid: f51aaeb0ccfd91d4aa37477fe03511ac
   - enabled: 1
+    path: "Assets/Scenes/DataForest/\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uD0D0\uC0C9\uC758
+      \uBBF8\uB85C2.unity"
+    guid: eab16630087b849cb829da75fe593562
+  - enabled: 1
     path: "Assets/Scenes/DataForest/\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uBE44\uC120\uD615
       \uADF8\uB298\uC232 \uCD08\uC785.unity"
     guid: 903259d20e2e1864bab4fb4e353f3206

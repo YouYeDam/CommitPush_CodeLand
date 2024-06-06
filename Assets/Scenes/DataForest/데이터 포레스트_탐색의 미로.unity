@@ -20746,6 +20746,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1115762442}
+  - {fileID: 1711424437}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1664278272
@@ -20955,6 +20956,76 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6939425423564658731, guid: c86c3d3c0440e1345bc8d9d1b3cb7b08, type: 3}
   m_PrefabInstance: {fileID: 1704449720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1711424436
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1658684273}
+    m_Modifications:
+    - target: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 49.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 13.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.6197145
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882101390858264316, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: LoadSceneName
+      value: "\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8_\uD0D0\uC0C9\uC758 \uBBF8\uB85C2"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2882101390858264316, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: ConnectPortalName
+      value: PortalLeft
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127581827792844616, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+      propertyPath: m_Name
+      value: BossPortal
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+--- !u!4 &1711424437 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1425216572840966551, guid: 0e86e4c58cdd5b946b57778c89ffd4fa, type: 3}
+  m_PrefabInstance: {fileID: 1711424436}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1720834332
 GameObject:
@@ -25195,11 +25266,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.2867326
+      value: -0.16477859
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.4159393
+      value: -3.4158669
       objectReference: {fileID: 0}
     - target: {fileID: 3546177479845366616, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_ScreenY
