@@ -53,7 +53,8 @@ public class PlayerData
     public List<Quest> allQuests = new List<Quest>(); // 모든 퀘스트 리스트
     public List<Quest> activeQuests = new List<Quest>(); // 활성화된 퀘스트 리스트
     public List<Quest> completedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
-    public Quest[] quests = new Quest[30];
+    public Quest[] quests;
+    public int[] currentQuestIndex;
 
     // 장비 저장 데이터
     public Item[] equipments = new Item[8];
@@ -177,7 +178,7 @@ public class SaveManager : MonoBehaviour
         SaveQuickSkills(skillQuickSlots, data);
         SaveQuickItems(itemQuickSlots, data);
         SaveEquipments(equipmentSlots, data);
-        SaveQuestSlot(questSlots, data);
+        SaveQuestSlot(questSlots, data, questManager);
         //  9999
         string json = JsonUtility.ToJson(data);
         string path = Path.Combine(Application.persistentDataPath, "playerData.json");
@@ -186,9 +187,28 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private static void SaveQuestSlot(QuestSlot[] questSlots, PlayerData data){
+    private static void SaveQuestSlot(QuestSlot[] questSlots, PlayerData data, QuestManager questManager){
+        NPC[] npcs = FindObjectsOfType<NPC>();
+        data.currentQuestIndex = new int[npcs.Length];
+        foreach(Quest quest in questManager.allQuests)
+        {
+            string questTitle = quest.Title;
+            foreach (NPC npc in npcs)
+            {
+                for (int i = 0; i < npc.QuestsToGive.Count; i++)
+                {
+                    if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
+                    {
+                        data.currentQuestIndex[i] = npc.currentQuestIndex;
+                        Debug.Log("log: q0: " + data.currentQuestIndex[i] + " " + npc.currentQuestIndex);
+                        Debug.Log("log: q01: " + questTitle);
+                    }
+                }
+            }
+        }
+
+        data.quests = new Quest[30];
         Quest[] quests = new Quest[questSlots.Length];
-        Debug.Log("log1114 "+ questSlots.Length);
         for(int i = 0; i < questSlots.Length; i++){
             quests[i] = questSlots[i].Quest;
         }
@@ -412,8 +432,25 @@ public class SaveManager : MonoBehaviour
     }
     
     private void LoadQuests(PlayerData data){
-        Debug.Log("log1132: quest loaded" + data.quests);
-        
+        NPC[] npcs = FindObjectsOfType<NPC>();
+        foreach(Quest quest in data.allQuests)
+        {
+            string questTitle = quest.Title;
+            foreach (NPC npc in npcs)
+            {
+                for (int i = 0; i < npc.QuestsToGive.Count; i++)
+                {
+                    if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
+                    {
+                        npc.currentQuestIndex = data.currentQuestIndex[i];
+                        Debug.Log("log: q1: " + npc.currentQuestIndex + " " + data.currentQuestIndex[i]);
+                        Debug.Log("log: q1: " + questTitle);
+                    }
+                }
+            }
+        }
+
+
         for (int i = 0; i < data.quests.Length; i++){
             uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].Quest = null;
             if(data.quests[i] != null){
@@ -421,6 +458,7 @@ public class SaveManager : MonoBehaviour
                 uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].AddQuest(data.quests[i]);
             }
         }
+        
     }   
     
     private void LoadQuickSkills(PlayerData data){

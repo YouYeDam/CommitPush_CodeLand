@@ -150,6 +150,7 @@ public class QuestManager : MonoBehaviour
                     if (npc.currentQuestIndex < npc.QuestsToGive.Count - 1)
                     {
                         npc.currentQuestIndex++;
+                        Debug.Log("log: q3" + npc.name + " : " + npc.currentQuestIndex); // 여기가 아닌듯.
                     }
                     break;
                 }
