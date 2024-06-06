@@ -50,4 +50,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 79e25b713a9e4114f94b972d5ae69bf4, type: 2}
   - {fileID: 11400000, guid: 494a25e242653d94a98ee548c944085a, type: 2}
   - {fileID: 11400000, guid: 483d08771c9991d4fa23a55d13a47975, type: 2}
+  - {fileID: 11400000, guid: 8b526e31381faf04c84f049750997eb9, type: 2}
   PlayerStatus: {fileID: 0}

@@ -55,7 +55,7 @@ MonoBehaviour:
     ReadyToCompleteDialogue: {fileID: 11400000, guid: 9891baf33431ee5408f8e78c163a1fd4, type: 2}
     PostQuestDialogue: {fileID: 11400000, guid: d61409a7bd4e90c47a278d338b259bf6, type: 2}
   currentQuestIndex: 0
-  DefaultDialogue: {fileID: 11400000, guid: 9f0d8420621a5c3459cab545f741dd6f, type: 2}
+  DefaultDialogue: {fileID: 11400000, guid: 029ae02d3d987ee4aa7a6cac6f508bdc, type: 2}
   UIManager: {fileID: 0}
   NPCName: "\uB3C4\uB110\uB4DC \uCEE4\uB204\uC2A4"
   NPCJob: 
