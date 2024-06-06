@@ -253,11 +253,17 @@ public class SaveManager : MonoBehaviour
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
             playerObject.GetComponent<Animator>().runtimeAnimatorController = data.runtimeAnimatorController;
             playerStatus = playerObject.GetComponent<PlayerStatus>();
+            // set level
             playerStatus.PlayerLevel = data.PlayerLevel;
+            // set max values
             playerStatus.PlayerMaxHP = data.PlayerMaxHP;
             playerStatus.PlayerMaxMP = data.PlayerMaxMP;
-            
             playerStatus.PlayerMaxEXP = data.PlayerMaxEXP;
+            // set current values.
+            playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
+            playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
+            playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
+            
             playerStatus.PlayerClass = data.PlayerClass;
             playerStatus.PlayerName = data.PlayerName;
             playerStatus.PlayerATK = data.PlayerATK;
@@ -283,19 +289,19 @@ public class SaveManager : MonoBehaviour
             playerObject.GetComponent<PlayerSkills>().RSkillCoolDown = data.RSkillCoolDown;
             playerObject.GetComponent<PlayerSkills>().SSkillCoolDown = data.SSkillCoolDown;
             playerObject.GetComponent<PlayerSkills>().DSkillCoolDown = data.DSkillCoolDown;
-
-            // set current values.
-            playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
-            playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
-            playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
-
-            
         }
+        
 
         if (uiManagerObject == null)
         {
             // LevelUpPoint
             uiManagerObject = Instantiate(uiManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            // name tag initialize
+            if (uiManagerObject != null && data.PlayerNameInfo != null && data.PlayerNameInfoInstance == null)
+            {
+                playerStatus.PlayerNameInfoInstance = Instantiate(data.PlayerNameInfo, uiManagerObject.transform);
+                playerStatus.PlayerNameInfoInstance.GetComponent<TMP_Text>().text = data.PlayerName;
+            }
             uiManager = uiManagerObject.GetComponent<UIManager>();
             uiManagerObject.name = uiManagerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(uiManagerObject); // 씬 전환 시 파괴되지 않도록 설정
@@ -311,10 +317,8 @@ public class SaveManager : MonoBehaviour
             
             // 이 지점에서 초기화 시켜줘야 오류가 없음.
             playerObject.GetComponent<PlayerLevelUpController>().Character = uiManagerObject.GetComponentInChildren<Character>(true).gameObject;
-            ////////////
-            playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
-            playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
-            playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
+            
+
         }
 
         // questmanager initialize
@@ -323,17 +327,12 @@ public class SaveManager : MonoBehaviour
             questManager = FindObjectOfType<QuestManager>();
             questManagerObject.name = questManagerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(questManagerObject); // 씬 전환 시 파괴되지 않도록 설정
+            
         }
 
-        // name tag initialize
-        if (uiManagerObject != null && data.PlayerNameInfo != null && data.PlayerNameInfoInstance == null)
-        {
-            playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance = Instantiate(data.PlayerNameInfo, uiManagerObject.transform);
-            playerObject.GetComponent<PlayerStatus>().PlayerNameInfoInstance.GetComponent<TMP_Text>().text = data.PlayerName;
-            playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
-            playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
-            playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
-        }
+        // set sibling indices...
+
+        
         
         // {
         //     StatusBar statusBar = uiManager.GetComponent<StatusBar>();
