@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 public class QuestManager : MonoBehaviour
 {
     public List<QuestData> QuestDatas; // 모든 퀘스트 데이터 리스트
-    private List<Quest> allQuests = new List<Quest>(); // 모든 퀘스트 리스트
-    private List<Quest> activeQuests = new List<Quest>(); // 활성화된 퀘스트 리스트
-    private List<Quest> completedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
+    public List<Quest> allQuests = new List<Quest>(); // 모든 퀘스트 리스트
+    public List<Quest> activeQuests = new List<Quest>(); // 활성화된 퀘스트 리스트
+    public List<Quest> completedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
     private GameObject QuestContent;  // 퀘스트 슬롯의 부모인 Content
-    private QuestSlot[] QuestSlots;
+    public QuestSlot[] QuestSlots;
     public PlayerStatus PlayerStatus;
     PlayerGetItem PlayerGetItem;
     PlayerMoney PlayerMoney;

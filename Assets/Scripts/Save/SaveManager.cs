@@ -48,6 +48,12 @@ public class PlayerData
     public bool[] isEquipment = new bool[40];
     public GameObject QSkill, WSkill, ESkill, RSkill, SSkill, DSkill;
     public float QSkillCoolDown, WSkillCoolDown, ESkillCoolDown, RSkillCoolDown, SSkillCoolDown, DSkillCoolDown;
+    // quest datas. 필요 없는거 나중에 제거
+    public List<QuestData> QuestDatas; // 모든 퀘스트 데이터 리스트
+    public List<Quest> allQuests = new List<Quest>(); // 모든 퀘스트 리스트
+    public List<Quest> activeQuests = new List<Quest>(); // 활성화된 퀘스트 리스트
+    public List<Quest> completedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
+    public Quest[] quests = new Quest[30];
 
     // 장비 저장 데이터
     public Item[] equipments = new Item[8];
@@ -97,7 +103,8 @@ public class SaveManager : MonoBehaviour
 
     void DoSave(){
         playerObject = GameObject.FindWithTag("Player");
-            uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
+        questManagerObject = GameObject.FindWithTag("QuestManager");
+        uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
             if (playerObject != null)
             {
                 SavePlayerProgress(SceneManager.GetActiveScene().name, uiManager, playerObject, questManagerObject); 
@@ -105,7 +112,7 @@ public class SaveManager : MonoBehaviour
         InactivatePauseMenu();
     }
 
-    public void SavePlayerProgress(string currentSceneName, UIManager uIManager, GameObject playerObject, GameObject questManager)
+    public void SavePlayerProgress(string currentSceneName, UIManager uIManager, GameObject playerObject, GameObject questManagerObject)
     {
         Slot[] slots = uiManager.GetComponentsInChildren<Slot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정. 모든 슬롯을 가져옴.
         EquipmentSlot[] equipmentSlots = uiManager.GetComponentsInChildren<EquipmentSlot>(true); 
@@ -117,6 +124,8 @@ public class SaveManager : MonoBehaviour
         PlayerSkills playerSkills = playerObject.GetComponent<PlayerSkills>();
         SkillQuickSlot[] skillQuickSlots = uIManager.GetComponentsInChildren<SkillQuickSlot>();
         ItemQuickSlot[] itemQuickSlots = uIManager.GetComponentsInChildren<ItemQuickSlot>();
+        QuestManager questManager = questManagerObject.GetComponent<QuestManager>();
+        QuestSlot[] questSlots = uiManager.gameObject.GetComponentsInChildren<QuestSlot>(true);
         
         PlayerData data = new PlayerData
         {
@@ -156,7 +165,11 @@ public class SaveManager : MonoBehaviour
             RSkillCoolDown = playerSkills.RSkillCoolDown,
             SSkillCoolDown = playerSkills.SSkillCoolDown,
             DSkillCoolDown = playerSkills.DSkillCoolDown,
-            
+            //8888
+            QuestDatas = questManager.QuestDatas,
+            allQuests = questManager.allQuests,
+            activeQuests = questManager.activeQuests,
+            completedQuests = questManager.completedQuests,
         };
         
         SaveItems(slots, data);
@@ -164,12 +177,24 @@ public class SaveManager : MonoBehaviour
         SaveQuickSkills(skillQuickSlots, data);
         SaveQuickItems(itemQuickSlots, data);
         SaveEquipments(equipmentSlots, data);
-
+        SaveQuestSlot(questSlots, data);
+        //  9999
         string json = JsonUtility.ToJson(data);
         string path = Path.Combine(Application.persistentDataPath, "playerData.json");
         File.WriteAllText(path, json);
         PlayerPrefs.SetString("PlayerProgress", json);
         PlayerPrefs.Save();
+    }
+
+    private static void SaveQuestSlot(QuestSlot[] questSlots, PlayerData data){
+        Quest[] quests = new Quest[questSlots.Length];
+        Debug.Log("log1114 "+ questSlots.Length);
+        for(int i = 0; i < questSlots.Length; i++){
+            quests[i] = questSlots[i].Quest;
+        }
+        data.quests = quests;
+        // Debug.Log("log1414: " + quests[0].Title);
+        // Debug.Log("log1414: " + data.quests[0].Title);
     }
 
     private static void SaveEquipments(EquipmentSlot[] equipmentSlots, PlayerData data)
@@ -314,6 +339,7 @@ public class SaveManager : MonoBehaviour
             LoadSkills(data);
             LoadQuickSkills(data);
             ShopSlotInit();
+            LoadQuests(data);
             
             // 이 지점에서 초기화 시켜줘야 오류가 없음.
             playerObject.GetComponent<PlayerLevelUpController>().Character = uiManagerObject.GetComponentInChildren<Character>(true).gameObject;
@@ -327,7 +353,10 @@ public class SaveManager : MonoBehaviour
             questManager = FindObjectOfType<QuestManager>();
             questManagerObject.name = questManagerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(questManagerObject); // 씬 전환 시 파괴되지 않도록 설정
-            
+            questManager.QuestDatas = data.QuestDatas;
+            questManager.allQuests = data.allQuests;
+            questManager.activeQuests = data.activeQuests;
+            questManager.completedQuests = data.completedQuests;
         }
 
         // set sibling indices...
@@ -381,6 +410,19 @@ public class SaveManager : MonoBehaviour
             }
         }
     }
+    
+    private void LoadQuests(PlayerData data){
+        Debug.Log("log1132: quest loaded" + data.quests);
+        
+        for (int i = 0; i < data.quests.Length; i++){
+            uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].Quest = null;
+            if(data.quests[i] != null){
+                Debug.Log("log1132: quest loaded" + data.quests[i]);
+                uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].AddQuest(data.quests[i]);
+            }
+        }
+    }   
+    
     private void LoadQuickSkills(PlayerData data){
         for (int i = 0; i < data.quickSkillPrefabs.Length; i++){
             SkillQuickSlot skillQuickSlot = uiManagerObject.GetComponentsInChildren<SkillQuickSlot>(true)[i];

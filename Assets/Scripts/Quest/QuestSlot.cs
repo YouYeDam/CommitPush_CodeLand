@@ -9,7 +9,7 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 {
     public TMP_Text QuestNameText;
     public string QuestName;
-    private Quest Quest;
+    public Quest Quest;
     private QuestToolTip QuestToolTip;
     
     void Start() {
