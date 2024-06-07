@@ -50,5 +50,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 79e25b713a9e4114f94b972d5ae69bf4, type: 2}
   - {fileID: 11400000, guid: 494a25e242653d94a98ee548c944085a, type: 2}
   - {fileID: 11400000, guid: 483d08771c9991d4fa23a55d13a47975, type: 2}
+  - {fileID: 11400000, guid: 98e3398fd09057841b8a3ec476c6fe5e, type: 2}
   - {fileID: 11400000, guid: 8b526e31381faf04c84f049750997eb9, type: 2}
+  - {fileID: 11400000, guid: 01a2e5e39a1fa534a97f6d860d6d0446, type: 2}
+  - {fileID: 11400000, guid: 1722bd38bce56314685be9eac2bdcb7d, type: 2}
+  - {fileID: 11400000, guid: 8f865372a49bab2469ba1c6b951caf37, type: 2}
+  - {fileID: 11400000, guid: d9b1e3cbe32181c4b8532f8f45369997, type: 2}
+  - {fileID: 11400000, guid: e189d1d43a4a49a418674fbc828aee94, type: 2}
+  - {fileID: 11400000, guid: 405742499a360be489fbbdd28220a490, type: 2}
+  - {fileID: 11400000, guid: df0062b678278ae4595db7534ff5720d, type: 2}
   PlayerStatus: {fileID: 0}

@@ -108,7 +108,7 @@ public class PlayerStatus : MonoBehaviour
     }
 
     public void APUp() {
-        PlayerAP += 0.02f;
+        PlayerAP += 0.008f;
         LevelUpPoint -= 1;
     }
 

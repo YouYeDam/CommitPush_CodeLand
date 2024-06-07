@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20005bd27f3e7f544bcd1cb1deeee4c8, type: 3}
+  m_Name: Tony Hoare_2
+  m_EditorClassIdentifier: 
+  Title: "\uC2A4\uD0DD \uB2F4\uBCBC\uB77D \uB9CC\uB4E4\uAE30(2)"
+  Description: 
+  ExperienceReward: 80
+  BitReward: 0
+  ItemRewards: []
+  Objectives:
+  - Type: 2
+    TargetName: "\uB2E8\uB2E8\uD55C \uC2A4\uD0DD \uBE14\uB85D"
+    RequiredAmount: 3
+    CurrentAmount: 0
+  RequiredLevel: 5
+  NPCName: "\uD1A0\uB2C8 \uD638\uC5B4"
+  Place: "\uBD84\uAE30 \uAC08\uB9BC\uAE38"

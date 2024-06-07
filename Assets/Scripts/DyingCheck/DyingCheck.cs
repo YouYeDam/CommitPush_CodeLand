@@ -1,6 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using System;
+using TMPro;
 
 public class DyingCheck : MonoBehaviour
 {
@@ -9,6 +9,7 @@ public class DyingCheck : MonoBehaviour
     PlayerStatus PlayerStatus;
     ReviveSceneName ReviveSceneName;
     UIManager UIManager;
+    public TextMeshProUGUI ButtonText;
     void Start() {
         PlayerStatus = FindObjectOfType<PlayerStatus>();
         UIManager = FindObjectOfType<UIManager>();
@@ -28,6 +29,7 @@ public class DyingCheck : MonoBehaviour
         if (ReviveSceneNameObject != null) {
             ReviveSceneName = ReviveSceneNameObject.GetComponent<ReviveSceneName>();
             string ReviveSceneNameInfo = ReviveSceneName.ReviveSceneNameInfo;
+            ButtonText.color = Color.white;
             DyingCheckBase.SetActive(false);
             SceneManager.LoadScene(ReviveSceneNameInfo);
         }

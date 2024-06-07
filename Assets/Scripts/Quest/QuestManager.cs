@@ -42,7 +42,9 @@ public class QuestManager : MonoBehaviour
                 questData.BitReward,
                 questData.ItemRewards,
                 questData.Objectives,
-                questData.RequiredLevel // 추가된 요구 레벨
+                questData.RequiredLevel,
+                questData.Place, // 추가된 부분
+                questData.NPCName // 추가된 부분
             );
             allQuests.Add(quest);
         }

@@ -8,6 +8,8 @@ public class QuestToolTip : MonoBehaviour
 {
     [SerializeField] GameObject QuestToolTipBase;
     [SerializeField] TMP_Text QuestNameText;
+    [SerializeField] TMP_Text QuestNPCText;
+    [SerializeField] TMP_Text QuestPlaceText;
     [SerializeField] TMP_Text QuestDescText;
     [SerializeField] TMP_Text QuestProgressText;
 
@@ -21,7 +23,8 @@ public class QuestToolTip : MonoBehaviour
 
         QuestNameText.text = quest.Title;
         QuestDescText.text = quest.QuestDescription;
-
+        QuestNPCText.text = "NPC 이름: " + quest.NPCName;
+        QuestPlaceText.text = "위치: " + quest.Place;
         // 목표 진행 상황 초기화
         QuestProgressText.text = "";
 

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Null Headband
+  m_EditorClassIdentifier: 
+  ItemName: "\uB110 \uBA38\uB9AC\uB760"
+  ItemDetailType: "\uC7A5\uBE44(\uBA38\uB9AC)"
+  ItemCount: 1
+  ItemCost: 720
+  Type: 0
+  ItemImage: {fileID: 21300000, guid: aa763c414eb1b0f40afcbd55e2d41b93, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: a1dfa64cab3ff764ea8ac802144cf9b8, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uBA38\uB9AC\uC5D0 \uB450\uB97C \uC218 \uC788\uB294 \uBD89\uC740 \uC0C9\uC0C1\uC758
+    \uB110 \uBA38\uB9AC\uB760\uC774\uB2E4. \r\n\r\n\uCC29\uC6A9 \uC2DC \uCCB4\uB825\uC774
+    60\uB9CC\uD07C, \uC815\uC2E0\uB825\uC774 60\uB9CC\uD07C \uC99D\uAC00\uD55C\uB2E4.\r\n\r\n'\uB110(null)'\uC740
+    \uBCC0\uC218\uAC00 \uC544\uBB34\uB7F0 \uAC12\uC744 \uAC00\uC9C0\uC9C0 \uC54A\uB294
+    \uC0C1\uD0DC\uB97C \uB098\uD0C0\uB0B4\uB294 \uD2B9\uC218\uD55C \uAC12\uC774\uB2E4.
+    \uC774\uB294 \uBCC0\uC218\uAC00 \uCD08\uAE30\uD654\uB418\uC9C0 \uC54A\uC558\uAC70\uB098,
+    \uD2B9\uC815 \uAC1D\uCCB4\uB098 \uAC12\uC744 \uAC00\uB9AC\uD0A4\uC9C0 \uC54A\uC74C\uC744
+    \uC758\uBBF8\uD55C\uB2E4. \uB110 \uAC12\uC740 \uC798\uBABB \uC0AC\uC6A9\uD558\uBA74
+    \uD504\uB85C\uADF8\uB7A8\uC5D0\uC11C \uC624\uB958\uB97C \uBC1C\uC0DD\uC2DC\uD0AC
+    \uC218 \uC788\uC73C\uBBC0\uB85C \uC8FC\uC758\uD574\uC11C \uB2E4\uB904\uC57C \uD55C\uB2E4."

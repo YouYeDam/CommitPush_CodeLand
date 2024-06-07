@@ -47,18 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dce98ef6376c6e4a90bf811322f4e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuestsToGive:
-  - {fileID: 11400000, guid: b48adf171461c4743a4782df91a558c6, type: 2}
-  - {fileID: 11400000, guid: 72670e91d5aba744c80477afc11b1bf7, type: 2}
-  QuestDialogues:
-  - PreQuestDialogue: {fileID: 11400000, guid: 0c6ff876dc309364c809fdd5ce81ccd8, type: 2}
-    InProgressDialogue: {fileID: 11400000, guid: a6909cb89f044ba47a3e6406216b9486, type: 2}
-    PostQuestDialogue: {fileID: 11400000, guid: f681b073d7e3e534ba6dea2d16155b15, type: 2}
-    ReadyToCompleteDialogue: {fileID: 11400000, guid: 671befcafa96b514bb7049ba7bbba3b4, type: 2}
-  - PreQuestDialogue: {fileID: 11400000, guid: 5633b2032c160b2458a6b0a243739b1d, type: 2}
-    InProgressDialogue: {fileID: 11400000, guid: c63cd3cf3e84ec645b5e19ed137db973, type: 2}
-    PostQuestDialogue: {fileID: 11400000, guid: 03d0a5f8033431948b5abf38745a795a, type: 2}
-    ReadyToCompleteDialogue: {fileID: 11400000, guid: bf6fa3d0f1bf2a54198cfcbee4d008b1, type: 2}
+  QuestsToGive: []
+  QuestDialogues: []
   currentQuestIndex: 0
   DefaultDialogue: {fileID: 11400000, guid: 6bd3125614f0b8b498a533ce40cc76d5, type: 2}
   UIManager: {fileID: 0}

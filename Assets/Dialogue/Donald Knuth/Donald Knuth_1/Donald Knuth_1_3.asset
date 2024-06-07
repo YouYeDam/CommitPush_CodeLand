@@ -18,3 +18,6 @@ MonoBehaviour:
       \uACE0\uB9D9\uB124! \uC774\uC81C \uC790\uC138\uD788 \uC5F0\uAD6C\uD574 \uBCFC
       \uC77C\uB9CC \uB0A8\uC558\uAD70 \uADF8\uB798. "
     SpeakerImage: {fileID: 21300000, guid: 6719acf27f070f741b4de76e171af64b, type: 3}
+  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
+    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 30\uACBD\uD5D8\uCE58, 150\uBE44\uD2B8"
+    SpeakerImage: {fileID: 0}

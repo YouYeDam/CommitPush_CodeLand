@@ -20,3 +20,6 @@ MonoBehaviour:
       \uC774 \uCE5C\uAD6C\uB3C4 \uB0B4\uAC00 \uC544\uB07C\uB294 \uB140\uC11D\uC774\uACE0
       \uC790\uB124\uC5D0\uAC8C \uB3C4\uC6C0\uC774 \uB420\uAC78\uC138."
     SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
+  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
+    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 5\uACBD\uD5D8\uCE58, \uD30C\uC774\uC36C"
+    SpeakerImage: {fileID: 0}

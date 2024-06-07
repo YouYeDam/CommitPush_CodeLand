@@ -18,10 +18,11 @@ MonoBehaviour:
   BitReward: 0
   ItemRewards:
   - {fileID: 11400000, guid: 35fe9629f67694a4a9add84ff916ca0b, type: 2}
-  - {fileID: 11400000, guid: bd21aa8329ee1ec46bb20bdab6dd720e, type: 2}
   Objectives:
   - Type: 0
     TargetName: 
     RequiredAmount: 0
     CurrentAmount: 0
   RequiredLevel: 3
+  NPCName: "\uB370\uB2C8\uC2A4 \uB9AC\uCE58"
+  Place: "\uB370\uC774\uD130 \uBE4C\uB9AC\uC9C0"

@@ -13,8 +13,10 @@ public class Quest
     public bool IsCompleted; // 퀘스트 완료 여부
     public bool IsReadyToComplete; // 퀘스트 완료 준비 여부
     public int RequiredLevel; // 퀘스트 요구 레벨
+    public string NPCName; // 퀘스트 수행 NPC 이름
+    public string Place; // 퀘스트 수행 장소
 
-    public Quest(string title, string description, int experienceReward, int bitReward, List<Item> itemRewards, List<QuestObjective> objectives, int requiredLevel)
+    public Quest(string title, string description, int experienceReward, int bitReward, List<Item> itemRewards, List<QuestObjective> objectives, int requiredLevel, string place, string npcName)
     {
         Title = title;
         QuestDescription = description;
@@ -25,5 +27,7 @@ public class Quest
         IsCompleted = false;
         IsReadyToComplete = false;
         RequiredLevel = requiredLevel;
+        Place = place;
+        NPCName = npcName;
     }
 }

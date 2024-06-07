@@ -88,3 +88,6 @@ MonoBehaviour:
       \uBC14\uB77C\uB124. \uADF8 \uD6C4, \uB2E4\uC2DC \uB098\uC5D0\uAC8C \uB9D0\uC744
       \uAC78\uBA74 \uC2A4\uD0AC\uC5D0 \uB300\uD574 \uC54C\uB824\uC8FC\uACA0\uB124."
     SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
+  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
+    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 10\uACBD\uD5D8\uCE58"
+    SpeakerImage: {fileID: 0}

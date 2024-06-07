@@ -23,3 +23,5 @@ MonoBehaviour:
     RequiredAmount: 0
     CurrentAmount: 0
   RequiredLevel: 1
+  Place: "\uB370\uC774\uD130 \uBE4C\uB9AC\uC9C0"
+  NPCName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"
