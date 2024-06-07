@@ -49,11 +49,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestsToGive:
   - {fileID: 11400000, guid: 8f865372a49bab2469ba1c6b951caf37, type: 2}
+  - {fileID: 11400000, guid: d9b1e3cbe32181c4b8532f8f45369997, type: 2}
+  - {fileID: 11400000, guid: e189d1d43a4a49a418674fbc828aee94, type: 2}
+  - {fileID: 11400000, guid: 405742499a360be489fbbdd28220a490, type: 2}
+  - {fileID: 11400000, guid: df0062b678278ae4595db7534ff5720d, type: 2}
   QuestDialogues:
-  - PreQuestDialogue: {fileID: 11400000, guid: af2510439a58cae4ca860ade92efdb0d, type: 2}
-    InProgressDialogue: {fileID: 11400000, guid: 7c6bd6b9521426143b6934caa8008ce8, type: 2}
-    ReadyToCompleteDialogue: {fileID: 11400000, guid: 7c6bd6b9521426143b6934caa8008ce8, type: 2}
-    PostQuestDialogue: {fileID: 11400000, guid: 9f0d8420621a5c3459cab545f741dd6f, type: 2}
+  - PreQuestDialogue: {fileID: 11400000, guid: 8231766da15e2294e956b4042f980689, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: 751ed17492a776a44b0d30f79028aba4, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: ead2ed128e7d92f4682a4782f1b4fa6c, type: 2}
+    PostQuestDialogue: {fileID: 11400000, guid: 1bae6be9ef5ab3b41b357bdb16edbd3d, type: 2}
+  - PreQuestDialogue: {fileID: 11400000, guid: f97af5f05a1281d4889500030ada404d, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: b28f7b1a7f099aa40bd8eee2fd5ef810, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: 80efffb3ce01f8c46bac62b245d860d3, type: 2}
+    PostQuestDialogue: {fileID: 11400000, guid: 3dd5754d2535f5f4f92be0bcac6e352c, type: 2}
+  - PreQuestDialogue: {fileID: 11400000, guid: d09f077e590a1024285a060c56a986c5, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: 5497d631fbf50524096046b051a6a9f4, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: 00ae185c3e3a15e46ab1b70b2609349b, type: 2}
+    PostQuestDialogue: {fileID: 11400000, guid: 0a7ad235c03c8ad43b07a68670c70020, type: 2}
+  - PreQuestDialogue: {fileID: 11400000, guid: eee3289a45dc8ea4098be7fc9c547e75, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: 42185c7a0ec347f45bcf7f98aaaf605e, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: e8fe166ccdd9883439be0ce4b0e90aeb, type: 2}
+    PostQuestDialogue: {fileID: 11400000, guid: 4110ab72879b7314a8aa65089d2cff5f, type: 2}
+  - PreQuestDialogue: {fileID: 11400000, guid: dea0cb33c1d1c9c4e84bac3d7fae0d10, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: 69772c37af5d72742805a4571be6cf83, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: 0210c57ef61fb8541bf02a8d169e23fc, type: 2}
+    PostQuestDialogue: {fileID: 11400000, guid: f73ffa96c266cc640b32b5c3f065838a, type: 2}
   currentQuestIndex: 0
   DefaultDialogue: {fileID: 11400000, guid: f73ffa96c266cc640b32b5c3f065838a, type: 2}
   UIManager: {fileID: 0}

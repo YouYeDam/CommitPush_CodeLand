@@ -14,10 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - SpeakerName: "\uB3C4\uB110\uB4DC \uCEE4\uB204\uC2A4"
-    DialogueText: "\uC54C\uC744 \uB2E4 \uBAA8\uC544\uC628\uAC90\uAC00? \uC815\uB9D0
-      \uACE0\uB9D9\uB124! \uC774\uC81C \uC790\uC138\uD788 \uC5F0\uAD6C\uD574 \uBCFC
-      \uC77C\uB9CC \uB0A8\uC558\uAD70 \uADF8\uB798. "
+    DialogueText: "\uB77C\uBC14\uB4E4\uC740 \uADF8 \uC790\uCCB4\uB85C \uC131\uCDA9\uC774\uB77C\uB124.
+      \uB180\uB78D\uC9C0 \uC54A\uC740\uAC00? \uC54C\uC744 \uBCF4\uAD00\uD558\uB294
+      \uC2B5\uC131\uB3C4 \uADF8\uB807\uACE0 \uCC38 \uC2E0\uAE30\uD55C \uC874\uC7AC\uAC19\uB2E4\uB294
+      \uC0DD\uAC01\uC774 \uB4DC\uB294\uAD70."
     SpeakerImage: {fileID: 21300000, guid: 6719acf27f070f741b4de76e171af64b, type: 3}
-  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
-    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 30\uACBD\uD5D8\uCE58, 150\uBE44\uD2B8"
-    SpeakerImage: {fileID: 0}

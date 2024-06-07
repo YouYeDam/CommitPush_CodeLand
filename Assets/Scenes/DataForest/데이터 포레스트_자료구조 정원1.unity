@@ -9072,10 +9072,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Donald Knuth
       objectReference: {fileID: 0}
-    - target: {fileID: 5410975148291012644, guid: caa425792279465488daf348b8f0fa98, type: 3}
-      propertyPath: DefaultDialogue
-      value: 
-      objectReference: {fileID: 11400000, guid: 27152f4e28f40574fae5b8e46256df84, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17088,11 +17084,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.6434382
+      value: -0.6145743
       objectReference: {fileID: 0}
     - target: {fileID: 2347245941840634764, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.298569
+      value: -2.2982907
       objectReference: {fileID: 0}
     - target: {fileID: 3546177479845366616, guid: 92a2799c6477fd141b82e9198351a3d0, type: 3}
       propertyPath: m_ScreenY

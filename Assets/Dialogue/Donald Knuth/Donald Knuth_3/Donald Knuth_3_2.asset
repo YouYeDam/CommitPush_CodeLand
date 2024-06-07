@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dec15e8a1c78bb47b2371542ceba74a, type: 3}
+  m_Name: Donald Knuth_3_2
+  m_EditorClassIdentifier: 
+  nodes:
+  - SpeakerName: "\uB3C4\uB110\uB4DC \uCEE4\uB204\uC2A4"
+    DialogueText: "\uAC70\uBBF8\uC904\uC744 \uAC00\uC838\uB2E4\uC918\uC11C \uACE0\uB9D9\uB124.
+      \uBE44\uC120\uD615 \uADF8\uB298\uC232\uC740 \uC5B4\uB560\uB098? \uC870\uAE08
+      \uC624\uC2F9\uD558\uC9C0 \uC54A\uB358\uAC00?"
+    SpeakerImage: {fileID: 21300000, guid: 6719acf27f070f741b4de76e171af64b, type: 3}
+  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
+    DialogueText: "\uB124, \uB9CE\uC774 \uC73C\uC2A4\uC2A4\uD588\uC5B4\uC694. \uC5EC\uAE30\uC640
+      \uB2E4\uB974\uAC8C \uB098\uBB34\uB4E4\uB3C4 \uB9CE\uC774 \uC8FD\uACE0 \uC369\uC5B4\uC788\uB354\uB77C\uAD6C\uC694."
+    SpeakerImage: {fileID: 0}
+  - SpeakerName: "\uB3C4\uB110\uB4DC \uCEE4\uB204\uC2A4"
+    DialogueText: "\uB098\uBB34\uB4E4\uC774 \uC369\uC5B4\uC788\uB2E4\uACE0? \uC774\uC0C1\uD558\uAD70.
+      \uADF8\uB298\uC232\uC774 \uC870\uAE08 \uC5B4\uB461\uAE34 \uD558\uC9C0\uB9CC,
+      \uB098\uBB34\uB4E4\uC774 \uC369\uB294 \uC77C\uC740 \uC5C6\uC5C8\uB294\uB370.
+      \uC54C\uB824\uC918\uC11C \uACE0\uB9D9\uB124."
+    SpeakerImage: {fileID: 21300000, guid: 6719acf27f070f741b4de76e171af64b, type: 3}
+  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
+    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 220\uACBD\uD5D8\uCE58, 450\uBE44\uD2B8"
+    SpeakerImage: {fileID: 0}

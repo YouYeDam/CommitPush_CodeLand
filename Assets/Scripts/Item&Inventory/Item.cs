@@ -10,7 +10,8 @@ public class Item : ScriptableObject
         Equipment, // 장비
         Used, // 소비
         SourceCode, // 소스코드
-        ETC, //기타
+        ETC, // 기타
+        Quest, // 퀘스트
     }
 
     public string ItemName; // 아이템의 이름

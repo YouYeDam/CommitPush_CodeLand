@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20005bd27f3e7f544bcd1cb1deeee4c8, type: 3}
+  m_Name: Donald Knuth_5
+  m_EditorClassIdentifier: 
+  Title: "\uB05D\uB9C8\uCE5C \uC870\uC0AC"
+  Description: 
+  ExperienceReward: 100
+  BitReward: 0
+  ItemRewards:
+  - {fileID: 11400000, guid: 5ceb61df0994b664fa045047cf534ff6, type: 2}
+  Objectives:
+  - Type: 0
+    TargetName: 
+    RequiredAmount: 0
+    CurrentAmount: 0
+  RequiredLevel: 10
+  NPCName: "\uB3C4\uB110\uB4DC \uCEE4\uB204\uC2A4"
+  Place: "\uC790\uB8CC\uAD6C\uC870 \uC815\uC6D01"

@@ -294,6 +294,9 @@ public class BasicMonsterMovement : MonoBehaviour
                 
                 // 플레이어가 앞뒤 사정거리 내에 있을 때만 스킬 발사
                 if (DistanceToPlayer <= MonsterSkills.UseSkillDistance) {
+                    if (MonsterSkills.IsSkilling) {
+                    yield return new WaitForSeconds(5f); // 스킬을 사용하는 중이면 추가 대기 시간
+                    }
                     MonsterSkills.StartShootSkill();
                     CanAttack = false; // 공격 후 잠시 공격 불가 상태로 설정
                     yield return new WaitForSeconds(AttackDelayTime); // 공격 후 지연 시간 대기

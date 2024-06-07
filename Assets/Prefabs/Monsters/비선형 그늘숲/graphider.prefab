@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 8549501631449802584}
   - component: {fileID: -4538376756304972617}
   m_Layer: 9
-  m_Name: graphider
+  m_Name: Graphider
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   MonsterDamage: 65
   MonsterEXP: 23
   HPBarPos: 0.8
-  MonsterInfoPos: 0.9
+  MonsterInfoPos: 0.8
   UIManager: {fileID: 0}
   HPBar: {fileID: 860324342356648368, guid: 5bc8fe328609da540bf6c2eb316c2740, type: 3}
   HPMeterImage: {fileID: 0}
@@ -336,7 +336,8 @@ MonoBehaviour:
   Projectile: {fileID: 8885825609034438207, guid: c6da33263b956e34e9b4e3311af82d57, type: 3}
   SkillSpot: {fileID: 996483565461003212}
   BackToIdleAnimTime: 0.25
-  Delay: 1
+  PreSkillDelay: 1
+  SkillDelayForAnim: 0
   UseSkillDistance: 10
   IsSkilling: 0
 --- !u!1 &8171183535710225854

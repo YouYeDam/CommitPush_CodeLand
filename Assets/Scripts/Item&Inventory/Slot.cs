@@ -284,7 +284,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             return;
         }
 
-        if (Item.Type == Item.ItemType.Used || Item.Type == Item.ItemType.ETC) // 소비, 기타 아이템시 실행
+        if (Item.Type == Item.ItemType.Quest) // 퀘스트 아이템시 판매불가
+        {
+            return;
+        }
+        else if (Item.Type == Item.ItemType.Used || Item.Type == Item.ItemType.ETC) // 소비, 기타 아이템시 실행
         {
             SellItemInputField.OpenInputField(this);
         }

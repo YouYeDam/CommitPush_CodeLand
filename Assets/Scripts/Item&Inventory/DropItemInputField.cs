@@ -48,7 +48,7 @@ public class DropItemInputNumber : MonoBehaviour
         if (DropCount > ItemDrag.Instance.DragSlot.ItemCount) {
             DropCount = ItemDrag.Instance.DragSlot.ItemCount;
         } 
-        else if (DropCount <= 0) {
+        else if (DropCount <= 0 || ItemDrag.Instance.DragSlot.Item.Type == Item.ItemType.Quest) { // 드랍 개수가 0개 이하거나 퀘스트 아이템이면 드랍 불가능
             Cancel();
             return;
         }

@@ -49,10 +49,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestsToGive:
   - {fileID: 11400000, guid: 483d08771c9991d4fa23a55d13a47975, type: 2}
+  - {fileID: 11400000, guid: 98e3398fd09057841b8a3ec476c6fe5e, type: 2}
   QuestDialogues:
   - PreQuestDialogue: {fileID: 11400000, guid: af2510439a58cae4ca860ade92efdb0d, type: 2}
     InProgressDialogue: {fileID: 11400000, guid: 7c6bd6b9521426143b6934caa8008ce8, type: 2}
     ReadyToCompleteDialogue: {fileID: 11400000, guid: 7c6bd6b9521426143b6934caa8008ce8, type: 2}
+    PostQuestDialogue: {fileID: 11400000, guid: 9f0d8420621a5c3459cab545f741dd6f, type: 2}
+  - PreQuestDialogue: {fileID: 11400000, guid: c2a88975746b0b14f8a58c6e88ef92e5, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: eaf7a8a56d4c0e441aea00457a86f0cf, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: 9f61cf9c966f837499cb4bdfd3a3456e, type: 2}
     PostQuestDialogue: {fileID: 11400000, guid: 9f0d8420621a5c3459cab545f741dd6f, type: 2}
   currentQuestIndex: 0
   DefaultDialogue: {fileID: 11400000, guid: 9f0d8420621a5c3459cab545f741dd6f, type: 2}

@@ -36,7 +36,12 @@ public class QuestToolTip : MonoBehaviour
             {
                 objective.CurrentAmount = objective.RequiredAmount;
             }
+            if (quest.Objectives.TrueForAll(obj => obj.Type == QuestObjective.ObjectiveType.None)) {
+                QuestProgressText.text = quest.NPCName + "과 대화하기";
+            }
+            else {
             QuestProgressText.text += $"{objective.TargetName}: {objective.CurrentAmount}/{objective.RequiredAmount}\n";
+            }
         }
     }
 

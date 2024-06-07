@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: DataForest Rune
+  m_EditorClassIdentifier: 
+  ItemName: "\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8 \uB8EC"
+  ItemDetailType: "\uD018\uC2A4\uD2B8"
+  ItemCount: 1
+  ItemCost: 0
+  Type: 4
+  ItemImage: {fileID: 21300000, guid: 9dd6861a92637a54293224b3d6958ce4, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: bf9698caf499ea74ab13eb5ff462b32b, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uB370\uC774\uD130 \uD3EC\uB808\uC2A4\uD2B8\uB97C \uC9C0\uD0F1\uD558\uB294
+    \uB8EC\uC774\uB2E4. \uCD08\uB85D\uC0C9\uC73C\uB85C \uBE5B\uB098\uACE0 \uC788\uC73C\uBA70,
+    \uC5C4\uCCAD\uB09C \uC591\uC758 \uB370\uC774\uD130\uAC00 \uB290\uAEF4\uC9C4\uB2E4. "

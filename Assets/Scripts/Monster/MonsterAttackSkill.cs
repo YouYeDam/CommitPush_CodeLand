@@ -16,7 +16,8 @@ public class MonsterAttackSkill : MonoBehaviour
     [SerializeField] bool IsSlowingSkill;
     [SerializeField] float SlowTime = 3f;
     [SerializeField] float SlowFactor = 0.5f;
-    [SerializeField]float RotationSpeed = 360f;
+    [SerializeField] float RotationSpeed = 360f;
+    [SerializeField] float DestroyTime = 0.15f;
 
     public bool IsLeft = false;
     float XSpeed;
@@ -40,7 +41,6 @@ public class MonsterAttackSkill : MonoBehaviour
         }
 
         Invoke("DestroySelf", DestroyDelay);
-        FlipSprite();
     }
 
     void Update()
@@ -49,17 +49,17 @@ public class MonsterAttackSkill : MonoBehaviour
         {
             MyRigidbody.velocity = new Vector2(XSpeed, 0f);
         }
-        if (IsRotationing) {
-            transform.Rotate(0, 0, RotationSpeed * Time.deltaTime);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (IsHoming && Player != null)
+        else if (Player != null)
         {
             Vector2 direction = (Player.transform.position - transform.position).normalized;
             MyRigidbody.velocity = direction * SkillSpeed;
+        }
+
+        FlipSprite();
+
+        if (IsRotationing)
+        {
+            transform.Rotate(0, 0, RotationSpeed * Time.deltaTime);
         }
     }
 
@@ -81,15 +81,19 @@ public class MonsterAttackSkill : MonoBehaviour
         }
         if (other.gameObject.tag == "Player")
         {
-            Invoke("DestroySelf", 0.15f);
+            Invoke("DestroySelf", DestroyTime);
         }
     }
 
     void FlipSprite()
     {
-        if (XSpeed < 0)
+        if (MyRigidbody.velocity.x < 0)
         {
             transform.localScale = new Vector2(-1, 1);
+        }
+        else if (MyRigidbody.velocity.x > 0)
+        {
+            transform.localScale = new Vector2(1, 1);
         }
     }
 
