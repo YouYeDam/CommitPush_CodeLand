@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20005bd27f3e7f544bcd1cb1deeee4c8, type: 3}
+  m_Name: Dennis Ritchie_1
+  m_EditorClassIdentifier: 
+  Title: "\uD5EC\uB85C \uC6D4\uB4DC!"
+  Description: 
+  ExperienceReward: 5
+  BitReward: 0
+  ItemRewards:
+  - {fileID: 11400000, guid: 35fe9629f67694a4a9add84ff916ca0b, type: 2}
+  Objectives:
+  - Type: 0
+    TargetName: 
+    RequiredAmount: 0
+    CurrentAmount: 0
+  RequiredLevel: 3
+  NPCName: "\uB370\uB2C8\uC2A4 \uB9AC\uCE58"
+  Place: "\uB370\uC774\uD130 \uBE4C\uB9AC\uC9C0"

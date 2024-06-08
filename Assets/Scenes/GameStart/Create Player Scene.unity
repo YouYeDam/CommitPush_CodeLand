@@ -1403,9 +1403,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3caab63cc0ed9004689ba879028d204e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonText: {fileID: 2144923974}
-  defaultColor: {r: 0, g: 0, b: 0, a: 1}
-  highlightColor: {r: 0.8396226, g: 0.78313446, b: 0.13069598, a: 1}
+  ButtonText: {fileID: 2144923974}
+  DefaultColor: {r: 1, g: 1, b: 1, a: 1}
+  HighlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &767665958
 MonoBehaviour:
   m_ObjectHideFlags: 0

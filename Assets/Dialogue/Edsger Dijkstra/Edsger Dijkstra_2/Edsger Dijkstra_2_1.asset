@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dec15e8a1c78bb47b2371542ceba74a, type: 3}
+  m_Name: Edsger Dijkstra_2_1
+  m_EditorClassIdentifier: 
+  nodes:
+  - SpeakerName: "\uC5D0\uCE20\uD5C8\uB974 \uB2E4\uC775\uC2A4\uD2B8\uB77C"
+    DialogueText: "\uAC81\uC774 \uB098\uB294 \uAC74 \uC54C\uC9C0\uB9CC, \uADF8\uB807\uB2E4\uACE0
+      \uC774 \uB178\uC778\uB124\uAC00 \uAC08 \uC21C \uC5C6\uC9C0 \uC54A\uB098? \uC774
+      \uC2E4\uD0C0\uB798\uAC00 \uC5C6\uC73C\uBA74 \uC870\uC0AC\uAC00 \uD798\uB4E4\uC5B4
+      \uC9C8\uAC78\uC138."
+    SpeakerImage: {fileID: 21300000, guid: 60fee337681584b47ab1e9e7ead8495e, type: 3}

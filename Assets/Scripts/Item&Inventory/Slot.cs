@@ -288,20 +288,24 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             return;
         }
 
-        if (Item.Type == Item.ItemType.Used || Item.Type == Item.ItemType.ETC) // 소비, 기타 아이템시 실행
+        if (Item.Type == Item.ItemType.Quest) // 퀘스트 아이템시 판매불가
+        {
+            return;
+        }
+        else if (Item.Type == Item.ItemType.Used || Item.Type == Item.ItemType.ETC) // 소비, 기타 아이템시 실행
         {
             SellItemInputField.OpenInputField(this);
         }
-        else if (Item.Type == Item.ItemType.Equipment || Item.Type == Item.ItemType.SourceCode) // 장비, 스킬북 아이템시 실행
+        else // 그 외 아이템 시 실행
         {
-            PlayerMoney.Bit += Item.ItemCost;
+            PlayerMoney.Bit += Mathf.RoundToInt(Item.ItemCost * 0.7f); // 판매할 때 아이템 가격 70%로 조정
             ClearSlot();
         }
     }
 
     public void SellManyItem(int SellItemCount) {
         int TotalItemCost = Item.ItemCost * SellItemCount;
-        PlayerMoney.Bit += TotalItemCost;
+        PlayerMoney.Bit += Mathf.RoundToInt(TotalItemCost * 0.7f); // 판매할 때 아이템 가격 70%로 조정
 
         // QuestManager에서 아이템 제거 목표 업데이트
         QuestManager.UpdateRemoveObjective(Item.ItemName, SellItemCount);

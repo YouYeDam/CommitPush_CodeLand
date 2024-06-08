@@ -9,6 +9,8 @@ public class MonsterAttackSkill : MonoBehaviour
     [SerializeField] int Damage = 10;
     [SerializeField] bool IsHoming = false; // 유도탄 여부를 결정하는 변수
     [SerializeField] bool IsRotationing = false; // 회전하는 물체인지를 경정하는 변수
+    [SerializeField] bool IsDropSkill = false; // 수직 낙하 스킬 여부를 결정하는 변수
+    [SerializeField] float DropPos = 10f; // 플레이어의 머리 위로부터 생성 위치
     Rigidbody2D MyRigidbody;
     public BasicMonsterMovement BasicMonsterMovement;
     public MonsterStatus MonsterStatus;
@@ -16,7 +18,8 @@ public class MonsterAttackSkill : MonoBehaviour
     [SerializeField] bool IsSlowingSkill;
     [SerializeField] float SlowTime = 3f;
     [SerializeField] float SlowFactor = 0.5f;
-    [SerializeField]float RotationSpeed = 360f;
+    [SerializeField] float RotationSpeed = 360f;
+    [SerializeField] float DestroyTime = 0.15f;
 
     public bool IsLeft = false;
     float XSpeed;
@@ -27,7 +30,7 @@ public class MonsterAttackSkill : MonoBehaviour
         MyRigidbody = GetComponent<Rigidbody2D>();
         Player = GameObject.FindGameObjectWithTag("Player");
 
-        if (!IsHoming)
+        if (!IsHoming && !IsDropSkill)
         {
             if (IsLeft)
             {
@@ -38,28 +41,36 @@ public class MonsterAttackSkill : MonoBehaviour
                 XSpeed = BasicMonsterMovement.transform.localScale.x * SkillSpeed;
             }
         }
+        else if (IsDropSkill)
+        {
+            Vector3 dropPosition = new Vector3(Player.transform.position.x, Player.transform.position.y + DropPos, Player.transform.position.z);
+            transform.position = dropPosition;
+        }
 
         Invoke("DestroySelf", DestroyDelay);
-        FlipSprite();
     }
 
     void Update()
     {
-        if (!IsHoming)
+        if (!IsHoming && !IsDropSkill)
         {
             MyRigidbody.velocity = new Vector2(XSpeed, 0f);
         }
-        if (IsRotationing) {
-            transform.Rotate(0, 0, RotationSpeed * Time.deltaTime);
-        }
-    }
-
-    void FixedUpdate()
-    {
-        if (IsHoming && Player != null)
+        else if (IsHoming && Player != null)
         {
             Vector2 direction = (Player.transform.position - transform.position).normalized;
             MyRigidbody.velocity = direction * SkillSpeed;
+        }
+        else if (IsDropSkill)
+        {
+            MyRigidbody.velocity = new Vector2(0f, -SkillSpeed);
+        }
+
+        FlipSprite();
+
+        if (IsRotationing)
+        {
+            transform.Rotate(0, 0, RotationSpeed * Time.deltaTime);
         }
     }
 
@@ -81,15 +92,19 @@ public class MonsterAttackSkill : MonoBehaviour
         }
         if (other.gameObject.tag == "Player")
         {
-            Invoke("DestroySelf", 0.15f);
+            Invoke("DestroySelf", DestroyTime);
         }
     }
 
     void FlipSprite()
     {
-        if (XSpeed < 0)
+        if (MyRigidbody.velocity.x < 0)
         {
             transform.localScale = new Vector2(-1, 1);
+        }
+        else if (MyRigidbody.velocity.x > 0)
+        {
+            transform.localScale = new Vector2(1, 1);
         }
     }
 

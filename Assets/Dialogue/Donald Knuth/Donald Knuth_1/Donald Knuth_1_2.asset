@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dec15e8a1c78bb47b2371542ceba74a, type: 3}
+  m_Name: Donald Knuth_1_2
+  m_EditorClassIdentifier: 
+  nodes:
+  - SpeakerName: "\uB3C4\uB110\uB4DC \uCEE4\uB204\uC2A4"
+    DialogueText: "\uC54C\uC744 \uB2E4 \uBAA8\uC544\uC628\uAC90\uAC00? \uC815\uB9D0
+      \uACE0\uB9D9\uB124! \uC774\uC81C \uC790\uC138\uD788 \uC5F0\uAD6C\uD574 \uBCFC
+      \uC77C\uB9CC \uB0A8\uC558\uAD70 \uADF8\uB798. "
+    SpeakerImage: {fileID: 21300000, guid: 6719acf27f070f741b4de76e171af64b, type: 3}
+  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
+    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 30\uACBD\uD5D8\uCE58, 150\uBE44\uD2B8"
+    SpeakerImage: {fileID: 0}

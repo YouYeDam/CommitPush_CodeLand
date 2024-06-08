@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Stack Block
+  m_EditorClassIdentifier: 
+  ItemName: "\uC2A4\uD0DD \uBE14\uB85D"
+  ItemDetailType: "\uAE30\uD0C0"
+  ItemCount: 1
+  ItemCost: 11
+  Type: 3
+  ItemImage: {fileID: 21300000, guid: a4e9dc27807aa374287797da58b669c7, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: 0904420c0d980ac4e871fabd4c482cdd, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uC2A4\uD0DD\uD1A4\uC5D0\uAC8C\uC11C \uB5A8\uC5B4\uC838 \uB098\uC628
+    \uC2A4\uD0DD \uBE14\uB85D\uC774\uB2E4. \n\n\uC2A4\uD0DD\uC740 \uB370\uC774\uD130\uB97C
+    \uC313\uC544 \uC62C\uB9AC\uB294 \uC120\uD615 \uC790\uB8CC\uAD6C\uC870\uB85C,
+    \uB098\uC911\uC5D0 \uCD94\uAC00\uB41C \uB370\uC774\uD130\uAC00 \uBA3C\uC800 \uC0AC\uC6A9\uB41C\uB2E4(\uD6C4\uC785\uC120\uCD9C,
+    LIFO). \uB300\uD45C\uC801\uC73C\uB85C \uBE0C\uB77C\uC6B0\uC800\uC758 \uB4A4\uB85C\uAC00\uAE30
+    \uAE30\uB2A5\uC774\uB098 \uC7AC\uADC0 \uD568\uC218 \uD638\uCD9C \uC2DC \uC0AC\uC6A9\uB418\uBA70,
+    \uB370\uC774\uD130\uC758 \uC21C\uC11C\uB97C \uBC18\uB300\uB85C \uCD9C\uB825\uD558\uB294
+    \uB370\uB3C4 \uD65C\uC6A9\uB41C\uB2E4."

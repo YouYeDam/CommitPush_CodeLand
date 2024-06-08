@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dec15e8a1c78bb47b2371542ceba74a, type: 3}
+  m_Name: Guido Van Rossum_5_0
+  m_EditorClassIdentifier: 
+  nodes:
+  - SpeakerName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"
+    DialogueText: "\uC624\uB79C\uB9CC\uC774\uAD70, \uC790\uB124. \uD639\uC2DC \uB3C4\uB110\uB4DC
+      \uCEE4\uB204\uC2A4\uB77C\uB294 \uBC15\uC0AC\uB97C \uB9CC\uB09C \uC801\uC774
+      \uC788\uB294\uAC00? \uB09C \uBC15\uC0AC\uC758 \uD3B8\uC9C0\uB97C \uAE30\uB2E4\uB9AC\uACE0
+      \uC788\uB2E4\uB124."
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
+  - SpeakerName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"
+    DialogueText: "\uD639\uC2DC, \uD3B8\uC9C0\uB97C \uBC1B\uC9C0 \uC54A\uC558\uB2E4\uBA74
+      \uBC15\uC0AC\uC5D0\uAC8C\uC11C \uC5F0\uAD6C \uACB0\uACFC\uAC00 \uB2F4\uAE34
+      \uD3B8\uC9C0\uB97C \uBC1B\uC544\uC640 \uC904 \uC218 \uC788\uACA0\uB098?"
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}

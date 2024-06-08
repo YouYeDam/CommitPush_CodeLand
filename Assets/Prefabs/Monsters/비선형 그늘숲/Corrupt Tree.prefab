@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 5079127056541043392}
   - component: {fileID: 5369814400074721809}
   - component: {fileID: 6704895050344695363}
+  - component: {fileID: 8477316875732398798}
   m_Layer: 9
   m_Name: Corrupt Tree
   m_TagString: Monster
@@ -301,7 +302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterName: "\uBD80\uD328\uD55C \uD2B8\uB9AC"
   MonsterLevel: 15
-  MonsterMaxHealth: 3500
+  MonsterMaxHealth: 3000
   MonsterCurrentHealth: 0
   MonsterDamage: 120
   MonsterEXP: 800
@@ -337,6 +338,8 @@ MonoBehaviour:
     SpawnProbability: 1
   - ItemPrefab: {fileID: 4338472210403635751, guid: ced1e47a196c61b4e84827ca8fe59c67, type: 3}
     SpawnProbability: 1
+  - ItemPrefab: {fileID: 4338472210403635751, guid: bf9698caf499ea74ab13eb5ff462b32b, type: 3}
+    SpawnProbability: 1
   MonsterBit: 400
   MonsterSnippet: 1
 --- !u!114 &-8855345390103764750
@@ -370,7 +373,8 @@ MonoBehaviour:
   Projectile: {fileID: 8885825609034438207, guid: adbc630096a09194f9f7109b497549e5, type: 3}
   SkillSpot: {fileID: 8763508143990234850}
   BackToIdleAnimTime: 0.4
-  Delay: 0.35
+  PreSkillDelay: 1
+  SkillDelayForAnim: 0
   UseSkillDistance: 20
   IsSkilling: 0
 --- !u!114 &5079127056541043392
@@ -403,12 +407,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsSummonBoss: 1
   IsThrowingBoss: 1
+  IsDroppingBoss: 0
   SummonWaitTime: 25
   ThrowingWaitTime: 12
-  SummonBackToIdleAnimTime: 0.83
-  SummonDelayTime: 1
-  SummonCount: 0
-  SummonSpot: {fileID: 1987699232559368084}
+  DroppingWiatTime: 20
 --- !u!114 &6704895050344695363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,8 +426,27 @@ MonoBehaviour:
   Projectile: {fileID: 8885825609034438207, guid: 551b476ba81103d468938b0af7c033a6, type: 3}
   ThrowingSpot: {fileID: 4801698573816297099}
   BackToIdleAnimTime: 0.3
-  UseSkillDistance: 30
+  SkillDelayForAnim: 0
+  UseSkillDistance: 60
   IsSkilling: 0
+--- !u!114 &8477316875732398798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3523946213023745087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eaca4c781dfc764a8bb0a0bb49872a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsSkilling: 0
+  SummonBackToIdleAnimTime: 0.35
+  SummonDelayTime: 1
+  SummonCount: 0
+  MaxSummonCount: 30
+  SummonSpot: {fileID: 1987699232559368084}
 --- !u!1 &7068998259601782848
 GameObject:
   m_ObjectHideFlags: 0

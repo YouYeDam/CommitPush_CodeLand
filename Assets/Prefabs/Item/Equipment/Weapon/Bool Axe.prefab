@@ -68,7 +68,7 @@ MonoBehaviour:
   MPValue: 0
   ATKValue: 13
   DEFValue: 0
-  APValue: 0.06
+  APValue: 0.024
   CritValue: 0
   PlayerStatus: {fileID: 0}
   Equipment: {fileID: 0}

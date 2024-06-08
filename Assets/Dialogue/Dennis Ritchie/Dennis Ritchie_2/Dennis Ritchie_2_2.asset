@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dec15e8a1c78bb47b2371542ceba74a, type: 3}
+  m_Name: Dennis Ritchie_2_2
+  m_EditorClassIdentifier: 
+  nodes:
+  - SpeakerName: "\uB370\uB2C8\uC2A4 \uB9AC\uCE58"
+    DialogueText: "\uBC14\uB85C \uC774 \uCE74\uB4DC \uBB49\uCE58\uB77C\uB124! \uC815\uB9D0
+      \uACE0\uB9D9\uB124! \uB2E4\uC2DC \uCE74\uB4DC\uB180\uC774\uB97C \uD560 \uC218
+      \uC788\uACA0\uC5B4."
+    SpeakerImage: {fileID: 21300000, guid: d7d420a4174dd74438ea4da02d4318a7, type: 3}
+  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
+    DialogueText: "\uADF8\uB7F0\uB370 \uC774 \uCE74\uB4DC \uBB49\uCE58\uAC00 \uBB50\uAC00
+      \uADF8\uB807\uAC8C \uD2B9\uBCC4\uD55C \uAC70\uC8E0?"
+    SpeakerImage: {fileID: 0}
+  - SpeakerName: "\uB370\uB2C8\uC2A4 \uB9AC\uCE58"
+    DialogueText: "\uC774 \uCE74\uB4DC \uBB49\uCE58\uB294 \uC11E\uC5EC \uC788\uC5B4\uB3C4
+      \uC2DC\uAC04\uC774 \uC9C0\uB098\uBA74 \uC790\uB3D9\uC73C\uB85C \uC815\uB82C\uC774
+      \uB41C\uB2E4\uB124. \uC544\uC8FC \uC2E0\uAE30\uD55C \uCE74\uB4DC \uBB49\uCE58\uC9C0.
+      \uC790\uB124\uC5D0\uAC8C \uB0B4\uAC00 \uB3D9\uB8CC\uC640 \uC9D1\uD544\uD55C
+      \uCC45 \uD55C\uAD8C\uC744 \uC8FC\uACA0\uB124. \uBD84\uBA85 \uC790\uB124\uC5D0\uAC8C
+      \uB3C4\uC6C0\uC774 \uB420\uAC78\uC138."
+    SpeakerImage: {fileID: 21300000, guid: d7d420a4174dd74438ea4da02d4318a7, type: 3}
+  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
+    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 160\uACBD\uD5D8\uCE58, C \uD504\uB85C\uADF8\uB798\uBC0D
+      \uC5B8\uC5B4 \uAD50\uC7AC"
+    SpeakerImage: {fileID: 0}

@@ -25,7 +25,7 @@ public class StartDialogue : MonoBehaviour
             ResetDialogueNPC();
         }
         else { //대화창이 활성화 상태라면 일정거리에서 떨어질 시 대화창 닫기
-            if (DialogueNPC != null && Vector3.Distance(transform.position, DialogueNPC.transform.position) > DetectionRadius + 7f) {
+            if (DialogueNPC != null && Vector3.Distance(transform.position, DialogueNPC.transform.position) > DetectionRadius + 15f) {
             DialogueController.DialogueBase.SetActive(false);
             ResetDialogueNPC();
             }
@@ -37,7 +37,8 @@ public class StartDialogue : MonoBehaviour
         RaycastHit2D Hit = Physics2D.Raycast(MousePos, Vector2.zero, Mathf.Infinity, npcLayerMask);
 
         if (Hit.collider != null && Hit.collider.CompareTag("NPC")) {
-            StartDialogueIfPossible(Hit.collider.gameObject);
+            DialogueNPC = Hit.collider.gameObject;
+            StartDialogueIfPossible(DialogueNPC);
         }
     }
 
@@ -82,13 +83,13 @@ public class StartDialogue : MonoBehaviour
             addShopItem.AddEachItem();
         }
 
-        NPC npcComponent = npc.GetComponent<NPC>();
-        if (npcComponent != null && DialogueController != null)
+        NPC NpcComponent = npc.GetComponent<NPC>();
+        if (NpcComponent != null && DialogueController != null)
         {
-            Dialogue dialogue = npcComponent.GetCurrentDialogue();
-            if (dialogue != null)
+            Dialogue Dialogue = NpcComponent.GetCurrentDialogue();
+            if (Dialogue != null)
             {
-                DialogueController.StartDialogue(dialogue, npcComponent); // NPC와 함께 대화 시작
+                DialogueController.StartDialogue(Dialogue, NpcComponent); // NPC와 함께 대화 시작
                 if (PlayerUI.Shop.activeSelf)
                 {
                     PlayerUI.CloseShop();

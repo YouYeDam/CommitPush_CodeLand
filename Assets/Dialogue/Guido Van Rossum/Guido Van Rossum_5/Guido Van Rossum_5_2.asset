@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dec15e8a1c78bb47b2371542ceba74a, type: 3}
+  m_Name: Guido Van Rossum_5_2
+  m_EditorClassIdentifier: 
+  nodes:
+  - SpeakerName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"
+    DialogueText: "\uD3B8\uC9C0\uB97C \uC804\uB2EC\uD574\uC918\uC11C \uACE0\uB9D9\uB124.
+      \uC7A0\uC2DC \uD3B8\uC9C0\uB97C \uC77D\uC5B4\uBCF4\uACA0\uB124. \uB2E4\uC2DC
+      \uB9D0\uC744 \uAC78\uC5B4\uC8FC\uAC8C."
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
+  - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
+    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 100\uACBD\uD5D8\uCE58"
+    SpeakerImage: {fileID: 0}

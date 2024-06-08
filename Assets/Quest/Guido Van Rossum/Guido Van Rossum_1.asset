@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Guido Van Rossum_1
   m_EditorClassIdentifier: 
   Title: "\uAC1C\uBC1C\uC790\uC758 \uAE30\uC220(1)"
-  Description: "\uCCAB \uBC88\uC9F8 \uD018\uC2A4\uD2B8"
+  Description: 
   ExperienceReward: 10
   BitReward: 0
   ItemRewards: []
@@ -23,3 +23,5 @@ MonoBehaviour:
     RequiredAmount: 0
     CurrentAmount: 0
   RequiredLevel: 1
+  Place: "\uB370\uC774\uD130 \uBE4C\uB9AC\uC9C0"
+  NPCName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"

@@ -60,7 +60,6 @@ public class PlayerSkills : MonoBehaviour
         PlayerMovement = FindObjectOfType<PlayerMovement>();
         PlayerStatus = FindObjectOfType<PlayerStatus>();
         PlayerManager = GetComponent<PlayerManager>();
-        GlobalCoolDown -= PlayerStatus.PlayerAP; // 글쿨 가속력 공식: 글쿨 - 가속력
     }
 
     void Update() {
@@ -70,6 +69,7 @@ public class PlayerSkills : MonoBehaviour
         UpdateSkillCoolDown(ref RSkillRemainingCoolDown);
         UpdateSkillCoolDown(ref SSkillRemainingCoolDown);
         UpdateSkillCoolDown(ref DSkillRemainingCoolDown);
+        SkillCoolDownReduce();
     }
 
     void UpdateSkillCoolDown(ref float SkillCoolDown) {
@@ -381,6 +381,38 @@ public class PlayerSkills : MonoBehaviour
                 DSkillCoolDown = CoolDown;
                 DSkillMPUse = MPUse;
                 break;
+        }
+    }
+
+    void SkillCoolDownReduce() {
+        QSkillCoolDown = QSkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        if (QSkillCoolDown < 0.3f) {
+            QSkillCoolDown = 0.3f;
+        }
+
+        WSkillCoolDown = WSkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        if (WSkillCoolDown < 0.3f) {
+            WSkillCoolDown = 0.3f;
+        }
+
+        ESkillCoolDown = ESkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        if (ESkillCoolDown < 0.3f) {
+            ESkillCoolDown = 0.3f;
+        }
+
+        RSkillCoolDown = RSkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        if (RSkillCoolDown < 0.3f) {
+            RSkillCoolDown = 0.3f;
+        }
+
+        SSkillCoolDown = SSkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        if (SSkillCoolDown < 0.3f) {
+            SSkillCoolDown = 0.3f;
+        }
+
+        DSkillCoolDown = DSkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        if (DSkillCoolDown < 0.3f) {
+            DSkillCoolDown = 0.3f;
         }
     }
 }

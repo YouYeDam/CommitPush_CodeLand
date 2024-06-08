@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dec15e8a1c78bb47b2371542ceba74a, type: 3}
+  m_Name: Scratch_Default
+  m_EditorClassIdentifier: 
+  nodes:
+  - SpeakerName: "\uC2A4\uD06C\uB798\uCE58"
+    DialogueText: "\uBC18\uAC11\uB2E4\uB0E5! \uB098\uB294 \uB5A0\uB3CC\uC774 \uACE0\uC591\uC774
+      \uC2A4\uD06C\uB798\uCE58\uB2E4\uB0E5. \uC5EC\uB7EC \uB9C8\uC744\uC744 \uB3CC\uC544\uB2E4\uB2C8\uBA74\uC11C
+      \uCD08\uBCF4\uC790\uB4E4\uC5D0\uAC8C \uB3C4\uC6C0\uC744 \uC8FC\uACE0 \uC788\uB2E4\uB0E5."
+    SpeakerImage: {fileID: 21300000, guid: 584b391d619c5f84fa40e2e683dfe15d, type: 3}
+  - SpeakerName: "\uC2A4\uD06C\uB798\uCE58"
+    DialogueText: "\uC2A4\uD06C\uB798\uCE58\uB294 \uBE14\uB85D \uAE30\uBC18 \uBE44\uC8FC\uC5BC
+      \uD504\uB85C\uADF8\uB798\uBC0D \uC5B8\uC5B4\uB2E4\uB0E5. \uD504\uB85C\uADF8\uB798\uBC0D
+      \uC785\uBB38\uC790\uB4E4\uC774 \uC27D\uACE0 \uC7AC\uBBF8\uC788\uAC8C \uD504\uB85C\uADF8\uB798\uBC0D\uC744
+      \uBC30\uC6B8 \uC218 \uC788\uB3C4\uB85D \uD558\uB294 \uAC83\uC774 \uB0B4 \uC784\uBB34\uB2E4\uB0E5."
+    SpeakerImage: {fileID: 21300000, guid: 584b391d619c5f84fa40e2e683dfe15d, type: 3}

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20005bd27f3e7f544bcd1cb1deeee4c8, type: 3}
+  m_Name: Guido Van Rossum_5
+  m_EditorClassIdentifier: 
+  Title: "\uAE34\uAE09\uD55C \uC870\uC0AC"
+  Description: 
+  ExperienceReward: 100
+  BitReward: 0
+  ItemRewards: []
+  Objectives:
+  - Type: 2
+    TargetName: "\uAE34\uAE09\uD55C \uD3B8\uC9C0"
+    RequiredAmount: 1
+    CurrentAmount: 0
+  RequiredLevel: 10
+  NPCName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"
+  Place: "\uB370\uC774\uD130 \uBE4C\uB9AC\uC9C0"

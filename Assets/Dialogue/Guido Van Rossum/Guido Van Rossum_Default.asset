@@ -17,4 +17,4 @@ MonoBehaviour:
     DialogueText: "\uC548\uB155\uD558\uC2E0\uAC00! \uB098\uB294 '\uD30C\uC774\uC36C'\uC774\uB77C\uB294
       \uD504\uB85C\uADF8\uB798\uBC0D \uC5B8\uC5B4\uC758 \uCC3D\uC2DC\uC790\uC774\uC790
       \uC774 \uB9C8\uC744\uC758 \uC7A5\uB85C\uC778 \uADC0\uB3C4 \uBC18 \uB85C\uC12C\uC774\uB77C\uB124."
-    SpeakerImage: {fileID: 21300000, guid: aba7e5b844dff1d40b05116c529d15b0, type: 3}
+    SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}

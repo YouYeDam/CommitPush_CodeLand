@@ -16,7 +16,6 @@ public class NPC : MonoBehaviour
 {
     public List<QuestData> QuestsToGive; // NPC가 줄 퀘스트 데이터 리스트
     public List<QuestDialogue> QuestDialogues; // 퀘스트 별 대화 데이터 리스트
-    public int currentQuestIndex = 0;
 
     public Dialogue DefaultDialogue; // 퀘스트가 없는 경우 기본 대화
     public GameObject UIManager;
@@ -36,20 +35,26 @@ public class NPC : MonoBehaviour
     public bool IsShop = false;
     public bool HavingJob = false;
 
-    private QuestManager QuestManager;
+    private QuestManager questManager;
+    public int CurrentQuestIndex;
 
-    void Start() {
+    void Start()
+    {
         UIManager = GameObject.Find("UIManager");
-        QuestManager = FindObjectOfType<QuestManager>();
+        questManager = FindObjectOfType<QuestManager>();
+        CurrentQuestIndex = questManager.NpcQuestState.GetQuestIndex(NPCName);
         DisplayNPCNameInfo();
         DisplayNPCJobInfo();
+        UpdateQuestStatus();
     }
 
-    void Update() {
+    void Update()
+    {
         SetNPCNameInfoPosition();
         SetNPCJobInfoPosition();
         SetNPCQuestStatusPosition();
         UpdateQuestStatus();
+        CurrentQuestIndex = questManager.NpcQuestState.GetQuestIndex(NPCName);
     }
 
     public void DisplayNPCNameInfo() { // NPC 이름 보이기
@@ -83,22 +88,23 @@ public class NPC : MonoBehaviour
             NPCJobInfoInstance.transform.SetAsFirstSibling();
         }
     }
+
     public Dialogue GetCurrentDialogue()
     {
-        if (QuestManager != null && currentQuestIndex < QuestsToGive.Count && currentQuestIndex < QuestDialogues.Count)
+        if (questManager != null && CurrentQuestIndex < QuestsToGive.Count && CurrentQuestIndex < QuestDialogues.Count)
         {
-            Quest quest = QuestManager.GetQuestByTitle(QuestsToGive[currentQuestIndex].Title);
-            QuestDialogue questDialogue = QuestDialogues[currentQuestIndex];
+            Quest quest = questManager.GetQuestByTitle(QuestsToGive[CurrentQuestIndex].Title);
+            QuestDialogue questDialogue = QuestDialogues[CurrentQuestIndex];
 
-            if (currentQuestIndex > 0)
+            if (CurrentQuestIndex > 0)
             {
-                Quest previousQuest = QuestManager.GetQuestByTitle(QuestsToGive[currentQuestIndex - 1].Title);
-                QuestDialogue previousQuestDialogue = QuestDialogues[currentQuestIndex - 1];
+                Quest previousQuest = questManager.GetQuestByTitle(QuestsToGive[CurrentQuestIndex - 1].Title);
+                QuestDialogue previousQuestDialogue = QuestDialogues[CurrentQuestIndex - 1];
 
                 if (previousQuest != null && previousQuest.IsCompleted)
                 {
                     // 다음 퀘스트의 요구 레벨을 만족하지 못하는 경우
-                    if (QuestManager.PlayerStatus.PlayerLevel < quest.RequiredLevel)
+                    if (questManager.PlayerStatus.PlayerLevel < quest.RequiredLevel)
                     {
                         return previousQuestDialogue.PostQuestDialogue;
                     }
@@ -115,11 +121,11 @@ public class NPC : MonoBehaviour
                 {
                     return questDialogue.ReadyToCompleteDialogue; // 퀘스트 완료 가능 상태일 때의 대화 반환
                 }
-                else if (QuestManager.IsQuestActive(QuestsToGive[currentQuestIndex].Title))
+                else if (questManager.IsQuestActive(QuestsToGive[CurrentQuestIndex].Title))
                 {
                     return questDialogue.InProgressDialogue;
                 }
-                else if (QuestManager.PlayerStatus.PlayerLevel < quest.RequiredLevel)
+                else if (questManager.PlayerStatus.PlayerLevel < quest.RequiredLevel)
                 {
                     return DefaultDialogue; // 현재 퀘스트의 요구 레벨을 만족하지 못할 경우 DefaultDialogue 반환
                 }
@@ -134,9 +140,9 @@ public class NPC : MonoBehaviour
 
     public void UpdateQuestStatus()
     {
-        if (QuestManager != null && currentQuestIndex < QuestsToGive.Count)
+        if (questManager != null && CurrentQuestIndex < QuestsToGive.Count)
         {
-            Quest quest = QuestManager.GetQuestByTitle(QuestsToGive[currentQuestIndex].Title);
+            Quest quest = questManager.GetQuestByTitle(QuestsToGive[CurrentQuestIndex].Title);
             if (quest != null)
             {
                 if (quest.IsCompleted)
@@ -147,11 +153,11 @@ public class NPC : MonoBehaviour
                 {
                     DisplayQuestStatus("?", Color.yellow);
                 }
-                else if (QuestManager.IsQuestActive(QuestsToGive[currentQuestIndex].Title))
+                else if (questManager.IsQuestActive(QuestsToGive[CurrentQuestIndex].Title))
                 {
                     DisplayQuestStatus("?", Color.gray);
                 }
-                else if (QuestManager.PlayerStatus.PlayerLevel >= quest.RequiredLevel)
+                else if (questManager.PlayerStatus.PlayerLevel >= quest.RequiredLevel)
                 {
                     DisplayQuestStatus("!", Color.yellow);
                 }

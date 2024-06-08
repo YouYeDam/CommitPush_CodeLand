@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20005bd27f3e7f544bcd1cb1deeee4c8, type: 3}
+  m_Name: Edsger Dijkstra_1
+  m_EditorClassIdentifier: 
+  Title: "\uCD5C\uC0C1\uC758 \uC54C\uACE0\uB9AC\uC998(1)"
+  Description: 
+  ExperienceReward: 220
+  BitReward: 450
+  ItemRewards: []
+  Objectives:
+  - Type: 2
+    TargetName: "\uB3C4\uB451\uC758 \uAC00\uBC29"
+    RequiredAmount: 5
+    CurrentAmount: 0
+  RequiredLevel: 10
+  NPCName: "\uC5D0\uCE20\uD5C8\uB974 \uB2E4\uC775\uC2A4\uD2B8\uB77C"
+  Place: "\uC815\uB82C \uACFC\uC218\uC6D02"

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20005bd27f3e7f544bcd1cb1deeee4c8, type: 3}
+  m_Name: Donald Knuth_2
+  m_EditorClassIdentifier: 
+  Title: "\uAF43\uACFC \uC790\uB8CC\uAD6C\uC870"
+  Description: 
+  ExperienceReward: 100
+  BitReward: 0
+  ItemRewards:
+  - {fileID: 11400000, guid: 4a6c43d0c43502c4eb7943a06f18bd95, type: 2}
+  Objectives:
+  - Type: 1
+    TargetName: "\uD050\uD50C\uB77C\uC6CC"
+    RequiredAmount: 5
+    CurrentAmount: 0
+  - Type: 1
+    TargetName: "\uB371\uD50C\uB77C\uC6CC"
+    RequiredAmount: 5
+    CurrentAmount: 0
+  - Type: 2
+    TargetName: "\uD050\uD50C\uB77C\uC6CC\uC758 \uBA38\uB9AC"
+    RequiredAmount: 3
+    CurrentAmount: 0
+  - Type: 2
+    TargetName: "\uB371\uD50C\uB77C\uC6CC\uC758 \uC2EC\uC7A5"
+    RequiredAmount: 3
+    CurrentAmount: 0
+  RequiredLevel: 5
+  NPCName: "\uB3C4\uB110\uB4DC \uCEE4\uB204\uC2A4"
+  Place: "\uC790\uB8CC\uAD6C\uC870 \uC815\uC6D01"

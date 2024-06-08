@@ -297,9 +297,9 @@ MonoBehaviour:
   ItemDrops:
   - ItemPrefab: {fileID: 4338472210403635751, guid: 00e07d54bea641949a9c054f1e9dbbac, type: 3}
     SpawnProbability: 0.6
+  - ItemPrefab: {fileID: 4338472210403635751, guid: 94c5d77555a27a3419f4a9f9ebf802f9, type: 3}
+    SpawnProbability: 0.4
   - ItemPrefab: {fileID: 4338472210403635751, guid: 1efa8118dec067347b7ec11c7d7255ee, type: 3}
-    SpawnProbability: 0.1
-  - ItemPrefab: {fileID: 4338472210403635751, guid: e3bd7ef95c002f8478b90bfbe69e738c, type: 3}
     SpawnProbability: 0.1
   MonsterBit: 9
   MonsterSnippet: 0

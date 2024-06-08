@@ -13,10 +13,13 @@ public class QuestManager : MonoBehaviour
     public PlayerStatus PlayerStatus;
     PlayerGetItem PlayerGetItem;
     PlayerMoney PlayerMoney;
+    public NPCQuestState NpcQuestState;
+
     public void Awake()
     {
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+        NpcQuestState = gameObject.AddComponent<NPCQuestState>(); // NPCQuestState 추가
     }
 
     void Start()
@@ -42,7 +45,9 @@ public class QuestManager : MonoBehaviour
                 questData.BitReward,
                 questData.ItemRewards,
                 questData.Objectives,
-                questData.RequiredLevel // 추가된 요구 레벨
+                questData.RequiredLevel,
+                questData.Place, // 추가된 부분
+                questData.NPCName // 추가된 부분
             );
             allQuests.Add(quest);
         }
@@ -70,7 +75,6 @@ public class QuestManager : MonoBehaviour
             if (PlayerStatus.PlayerLevel >= quest.RequiredLevel)
             {
                 activeQuests.Add(quest);
-                Debug.Log("퀘스트 시작: " + quest.Title);
                 AddQuestSlot(quest); // UI에 퀘스트 추가
 
                 // 현재 인벤토리를 체크하여 수집 목표 업데이트
@@ -135,27 +139,13 @@ public class QuestManager : MonoBehaviour
             // 보상 지급
             RewardPlayer(quest);
             UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
-            IncrementNPCQuestIndex(questTitle);
+            IncrementNPCQuestIndex(quest.NPCName);
         }
     }
-    private void IncrementNPCQuestIndex(string questTitle) // 퀘스트 인덱스 증가
+    private void IncrementNPCQuestIndex(string npcName) // 퀘스트 인덱스 증가
     {
-        NPC[] npcs = FindObjectsOfType<NPC>();
-        foreach (NPC npc in npcs)
-        {
-            for (int i = 0; i < npc.QuestsToGive.Count; i++)
-            {
-                if (npc.QuestsToGive[i].Title == questTitle)
-                {
-                    if (npc.currentQuestIndex < npc.QuestsToGive.Count - 1)
-                    {
-                        npc.currentQuestIndex++;
-                        Debug.Log("log: q3" + npc.name + " : " + npc.currentQuestIndex); // 여기가 아닌듯.
-                    }
-                    break;
-                }
-            }
-        }
+        int currentQuestIndex = NpcQuestState.GetQuestIndex(npcName);
+        NpcQuestState.SetQuestIndex(npcName, currentQuestIndex + 1);
     }
     //퀘스트 슬롯 갱신
     private void UpdateQuestSlot(Quest quest)
@@ -192,7 +182,9 @@ public class QuestManager : MonoBehaviour
                 // 몬스터 처치 목표 업데이트
                 if (!isItem && objective.Type == QuestObjective.ObjectiveType.Kill && objective.TargetName == targetName)
                 {
-                    objective.CurrentAmount += amount;
+                    if (objective.CurrentAmount <= objective.RequiredAmount) {
+                        objective.CurrentAmount += amount;
+                    }
 
                     // 퀘스트가 모두 완료되었는지 체크
                     if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))

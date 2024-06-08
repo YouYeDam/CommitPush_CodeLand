@@ -33,6 +33,7 @@ public class BasicMonsterMovement : MonoBehaviour
     public bool CanWalk = true;
     public bool CanTriggerDamage = true;
     bool CanAttack = true;
+    public bool IsSkilling = false;
     private Coroutine StopAggressiveModeCoroutine;
     [SerializeField] float AttackDelayTime = 3f;
 
@@ -291,12 +292,18 @@ public class BasicMonsterMovement : MonoBehaviour
             if (CanAttack) {
                 // 플레이어와 몬스터 사이의 거리 계산
                 float DistanceToPlayer = Vector2.Distance(Player.transform.position, transform.position);
-                
+
                 // 플레이어가 앞뒤 사정거리 내에 있을 때만 스킬 발사
                 if (DistanceToPlayer <= MonsterSkills.UseSkillDistance) {
+                    while (IsSkilling) {
+                        yield return new WaitForSeconds(5f); // 스킬을 사용하는 중이면 추가 대기 시간
+                    }
+
                     MonsterSkills.StartShootSkill();
+                    IsSkilling = true; // 스킬 사용 상태로 설정
                     CanAttack = false; // 공격 후 잠시 공격 불가 상태로 설정
                     yield return new WaitForSeconds(AttackDelayTime); // 공격 후 지연 시간 대기
+                    IsSkilling = false; // 스킬 사용 상태 해제
                     CanAttack = true; // 다시 공격 가능 상태로 설정
                 }
             }

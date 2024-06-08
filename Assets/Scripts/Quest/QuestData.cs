@@ -11,4 +11,6 @@ public class QuestData : ScriptableObject
     public List<Item> ItemRewards; // 아이템 보상 리스트
     public List<QuestObjective> Objectives; // 퀘스트 목표 리스트
     public int RequiredLevel; // 퀘스트 요구 레벨 추가
+    public string NPCName; // 퀘스트 수행 NPC 이름
+    public string Place; // 퀘스트 수행 장소
 }
