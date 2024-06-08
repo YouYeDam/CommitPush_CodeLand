@@ -62,16 +62,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EquipmentType: "\uD3AB"
-  RequireLevel: 3
-  EquipmentItemGrade: "\uACE0\uAE09"
+  RequireLevel: 1
+  EquipmentItemGrade: "\uD76C\uADC0"
   HPValue: 0
   MPValue: 0
-  ATKValue: 2
+  ATKValue: 5
   DEFValue: 5
   APValue: 0
   CritValue: 0
   PlayerStatus: {fileID: 0}
   Equipment: {fileID: 0}
+  IsSpecialEquipment: 0
 --- !u!212 &1634756597062129806
 SpriteRenderer:
   m_ObjectHideFlags: 0

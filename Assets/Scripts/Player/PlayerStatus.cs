@@ -117,7 +117,7 @@ public class PlayerStatus : MonoBehaviour
         LevelUpPoint -= 1;
     }
 
-    public void AutoHeal() {
+    public void AutoHeal(float Bonus) {
         if (PlayerCurrentHP != PlayerMaxHP) {
             PlayerCurrentHP += Mathf.RoundToInt(PlayerMaxHP * 0.03f);
             if (PlayerCurrentHP > PlayerMaxHP) {
