@@ -21,5 +21,6 @@ MonoBehaviour:
       \uBD80\uB514 \uBAB8\uC870\uC2EC\uD558\uAC8C\uB098."
     SpeakerImage: {fileID: 21300000, guid: d21464c8b38cf5946ab8fe7de494f48e, type: 3}
   - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
-    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 20\uACBD\uD5D8\uCE58, 100\uBE44\uD2B8"
+    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 20\uACBD\uD5D8\uCE58, 100\uBE44\uD2B8,
+      \uB514\uBC84\uADF8 \uD790 \uC18C\uC2A4\uCF54\uB4DC"
     SpeakerImage: {fileID: 0}

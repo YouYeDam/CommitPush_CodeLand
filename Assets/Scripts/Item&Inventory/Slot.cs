@@ -106,7 +106,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
         // QuickSlotReference 초기화
         if (QuickSlotReference != null) {
-            QuickSlotReference.SlotReference = null;
+            QuickSlotReference.SlotReference = null; // 연동 초기화
             QuickSlotReference = null;
         }
     }
@@ -216,6 +216,16 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             ItemDrag.Instance.DragSlot.ClearSlot();
         }
 
+        // QuickSlot 참조 동기화
+        if (QuickSlotReference != null)
+        {
+            QuickSlotReference.SlotReference = this;
+        }
+
+        if (ItemDrag.Instance.DragSlot.QuickSlotReference != null)
+        {
+            ItemDrag.Instance.DragSlot.QuickSlotReference.SlotReference = ItemDrag.Instance.DragSlot;
+        }
     }
 
     void OnDoubleClickForUse() // 슬롯 더블클릭

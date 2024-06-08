@@ -103,7 +103,7 @@ MonoBehaviour:
   PlayerNameInfoInstance: {fileID: 0}
   LevelUpEffect: {fileID: 8885825609034438207, guid: 359fb0e816ec9544791a30f787f18fa1, type: 3}
   LevelUpSpot: {fileID: 4214793044141808167}
-  PlayerNameInfoPos: 0.8
+  PlayerNameInfoPos: 1
   PlayerLevel: 1
   PlayerMaxHP: 100
   PlayerCurrentHP: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanInput: 0
+  isMiniMapActive: 1
 --- !u!212 &8364632946237569230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -423,12 +424,32 @@ MonoBehaviour:
   NormalAttack: {fileID: 8885825609034438207, guid: 7796c015e9a8dbb438ab721afee996c1, type: 3}
   QSkill: {fileID: 0}
   WSkill: {fileID: 0}
+  ESkill: {fileID: 0}
+  RSkill: {fileID: 0}
+  SSkill: {fileID: 0}
+  DSkill: {fileID: 0}
   SkillSpot: {fileID: 1635159961687940443}
   BuffSpot: {fileID: 4214793044141808167}
   GlobalCoolDown: 0.3
   QSkillCoolDown: 0
   WSkillCoolDown: 0
+  ESkillCoolDown: 0
+  RSkillCoolDown: 0
+  SSkillCoolDown: 0
+  DSkillCoolDown: 0
   BackToIdleAnimTime: 0.2
+  CanQSkill: 1
+  CanWSkill: 1
+  CanESkill: 1
+  CanRSkill: 1
+  CanSSkill: 1
+  CanDSkill: 1
+  QSkillRemainingCoolDown: 0
+  WSkillRemainingCoolDown: 0
+  ESkillRemainingCoolDown: 0
+  RSkillRemainingCoolDown: 0
+  SSkillRemainingCoolDown: 0
+  DSkillRemainingCoolDown: 0
 --- !u!114 &2205046119036907785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,6 +468,7 @@ MonoBehaviour:
   Skill: {fileID: 0}
   Equipment: {fileID: 0}
   Dialogue: {fileID: 0}
+  Quest: {fileID: 0}
   Shop: {fileID: 0}
   ShopButtonObject: {fileID: 0}
   DialogueButtonObject: {fileID: 0}

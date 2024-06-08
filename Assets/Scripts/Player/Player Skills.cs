@@ -29,6 +29,13 @@ public class PlayerSkills : MonoBehaviour
     [SerializeField] public float SSkillCoolDown;
     [SerializeField] public float DSkillCoolDown;
 
+    private float InitialQSkillCoolDown;
+    private float InitialWSkillCoolDown;
+    private float InitialESkillCoolDown;
+    private float InitialRSkillCoolDown;
+    private float InitialSSkillCoolDown;
+    private float InitialDSkillCoolDown;
+
     [SerializeField] float BackToIdleAnimTime = 0.2f;
 
     bool CanAttack = true;
@@ -358,59 +365,59 @@ public class PlayerSkills : MonoBehaviour
         switch (ButtonKey)
         {
             case "Q":
-                QSkillCoolDown = CoolDown;
+                InitialQSkillCoolDown = CoolDown;
                 QSkillMPUse = MPUse;
                 break;
             case "W":
-                WSkillCoolDown = CoolDown;
+                InitialWSkillCoolDown = CoolDown;
                 WSkillMPUse = MPUse;
                 break;
             case "E":
-                ESkillCoolDown = CoolDown;
+                InitialESkillCoolDown = CoolDown;
                 ESkillMPUse = MPUse;
                 break;
             case "R":
-                RSkillCoolDown = CoolDown;
+                InitialRSkillCoolDown = CoolDown;
                 RSkillMPUse = MPUse;
                 break;
             case "S":
-                SSkillCoolDown = CoolDown;
+                InitialSSkillCoolDown = CoolDown;
                 SSkillMPUse = MPUse;
                 break;
             case "D":
-                DSkillCoolDown = CoolDown;
+                InitialDSkillCoolDown = CoolDown;
                 DSkillMPUse = MPUse;
                 break;
         }
     }
 
     void SkillCoolDownReduce() {
-        QSkillCoolDown = QSkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        QSkillCoolDown = InitialQSkillCoolDown * (1 - PlayerStatus.PlayerAP);
         if (QSkillCoolDown < 0.3f) {
             QSkillCoolDown = 0.3f;
         }
 
-        WSkillCoolDown = WSkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        WSkillCoolDown = InitialWSkillCoolDown * (1 - PlayerStatus.PlayerAP);
         if (WSkillCoolDown < 0.3f) {
             WSkillCoolDown = 0.3f;
         }
 
-        ESkillCoolDown = ESkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        ESkillCoolDown = InitialESkillCoolDown * (1 - PlayerStatus.PlayerAP);
         if (ESkillCoolDown < 0.3f) {
             ESkillCoolDown = 0.3f;
         }
 
-        RSkillCoolDown = RSkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        RSkillCoolDown = InitialRSkillCoolDown * (1 - PlayerStatus.PlayerAP);
         if (RSkillCoolDown < 0.3f) {
             RSkillCoolDown = 0.3f;
         }
 
-        SSkillCoolDown = SSkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        SSkillCoolDown = InitialSSkillCoolDown * (1 - PlayerStatus.PlayerAP);
         if (SSkillCoolDown < 0.3f) {
             SSkillCoolDown = 0.3f;
         }
 
-        DSkillCoolDown = DSkillCoolDown * (1 - PlayerStatus.PlayerAP);
+        DSkillCoolDown = InitialDSkillCoolDown * (1 - PlayerStatus.PlayerAP);
         if (DSkillCoolDown < 0.3f) {
             DSkillCoolDown = 0.3f;
         }

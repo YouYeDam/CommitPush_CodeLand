@@ -12859,6 +12859,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Steve Jobs
       objectReference: {fileID: 0}
+    - target: {fileID: 3370142388697944570, guid: c4ca7f65e1a912243bdb0b4bf2e50a97, type: 3}
+      propertyPath: ShopItems.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370142388697944570, guid: c4ca7f65e1a912243bdb0b4bf2e50a97, type: 3}
+      propertyPath: ShopItems.Array.data[10]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d39952303a120345af8e2ee12d31695, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

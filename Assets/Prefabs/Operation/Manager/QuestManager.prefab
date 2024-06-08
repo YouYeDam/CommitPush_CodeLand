@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   QuestDatas:
+  - {fileID: 11400000, guid: b48adf171461c4743a4782df91a558c6, type: 2}
   - {fileID: 11400000, guid: 9794455f6a1e06d4784bf141d87e89ef, type: 2}
   - {fileID: 11400000, guid: 94ba7b23e674dec45b856cd211bedde2, type: 2}
   - {fileID: 11400000, guid: 79e25b713a9e4114f94b972d5ae69bf4, type: 2}
@@ -68,6 +69,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 92dc5d2cb28b6524c92bd6f7207dfa6e, type: 2}
   - {fileID: 11400000, guid: d2a8324cbec075445869ee4b790e31a8, type: 2}
   PlayerStatus: {fileID: 0}
+  NpcQuestState: {fileID: 0}
 --- !u!114 &590498037145830911
 MonoBehaviour:
   m_ObjectHideFlags: 0

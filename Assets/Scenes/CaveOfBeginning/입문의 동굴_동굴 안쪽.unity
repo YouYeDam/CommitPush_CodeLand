@@ -9648,7 +9648,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2836790508595056, guid: 0b9f1240de0c17b4aa531eb9761aab85, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7961712
+      value: -1.73
       objectReference: {fileID: 0}
     - target: {fileID: 2836790508595056, guid: 0b9f1240de0c17b4aa531eb9761aab85, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9688,19 +9688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 349573210681341999, guid: 0b9f1240de0c17b4aa531eb9761aab85, type: 3}
       propertyPath: m_Name
-      value: 1_Python
-      objectReference: {fileID: 0}
-    - target: {fileID: 5410975148291012644, guid: 0b9f1240de0c17b4aa531eb9761aab85, type: 3}
-      propertyPath: Dialogue
-      value: 
-      objectReference: {fileID: 11400000, guid: 0c6ff876dc309364c809fdd5ce81ccd8, type: 2}
-    - target: {fileID: 5410975148291012644, guid: 0b9f1240de0c17b4aa531eb9761aab85, type: 3}
-      propertyPath: DefaultDialogue
-      value: 
-      objectReference: {fileID: 11400000, guid: 0c6ff876dc309364c809fdd5ce81ccd8, type: 2}
-    - target: {fileID: 5410975148291012644, guid: 0b9f1240de0c17b4aa531eb9761aab85, type: 3}
-      propertyPath: QuestsToGive.Array.size
-      value: 0
+      value: Python
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
