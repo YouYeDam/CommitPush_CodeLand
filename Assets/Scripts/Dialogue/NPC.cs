@@ -54,7 +54,10 @@ public class NPC : MonoBehaviour
         SetNPCJobInfoPosition();
         SetNPCQuestStatusPosition();
         UpdateQuestStatus();
+        if (questManager != null)
+        {
         CurrentQuestIndex = questManager.NpcQuestState.GetQuestIndex(NPCName);
+        }
     }
 
     public void DisplayNPCNameInfo() { // NPC 이름 보이기

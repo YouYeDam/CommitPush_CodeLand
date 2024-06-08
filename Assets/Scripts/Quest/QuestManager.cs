@@ -146,6 +146,7 @@ public class QuestManager : MonoBehaviour
     {
         int currentQuestIndex = NpcQuestState.GetQuestIndex(npcName);
         NpcQuestState.SetQuestIndex(npcName, currentQuestIndex + 1);
+        Debug.Log("log112: questindex updated: "+ NpcQuestState.GetQuestIndex(npcName));
     }
     //퀘스트 슬롯 갱신
     private void UpdateQuestSlot(Quest quest)

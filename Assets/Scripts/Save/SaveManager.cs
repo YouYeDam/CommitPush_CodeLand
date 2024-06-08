@@ -55,7 +55,7 @@ public class PlayerData
     public List<Quest> completedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
     public Quest[] quests;
     public int[] currentQuestIndex;
-
+    public string runtimeAnimatorControllerPath;
     // 장비 저장 데이터
     public Item[] equipments = new Item[8];
 }
@@ -76,12 +76,10 @@ public class SaveManager : MonoBehaviour
     public Slot[] slots;
     public SkillSlot[] skillSlots;
     public EquipmentSlot[] equipmentSlots;
-    public RuntimeAnimatorController currentAniController;
     void Start()
     {
         playerObject = null;
         questManagerObject = null;
-        currentAniController = null;
         uiManager = null;
         slots = null;
         skillSlots = null;
@@ -118,7 +116,6 @@ public class SaveManager : MonoBehaviour
         Slot[] slots = uiManager.GetComponentsInChildren<Slot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정. 모든 슬롯을 가져옴.
         EquipmentSlot[] equipmentSlots = uiManager.GetComponentsInChildren<EquipmentSlot>(true); 
         SkillSlot[] skillSlots = uiManager.GetComponentsInChildren<SkillSlot>(true);
-        RuntimeAnimatorController currentAniController = playerObject.GetComponent<Animator>().runtimeAnimatorController;
         PlayerStatus playerStatus = playerObject.GetComponent<PlayerStatus>();
         PlayerMoney playerMoney = playerObject.GetComponent<PlayerMoney>();
         Vector3 playerPosition = playerObject.transform.position;
@@ -127,7 +124,10 @@ public class SaveManager : MonoBehaviour
         ItemQuickSlot[] itemQuickSlots = uIManager.GetComponentsInChildren<ItemQuickSlot>();
         QuestManager questManager = questManagerObject.GetComponent<QuestManager>();
         QuestSlot[] questSlots = uiManager.gameObject.GetComponentsInChildren<QuestSlot>(true);
-        
+        // Save
+        string animatorControllerName = playerObject.GetComponent<Animator>().runtimeAnimatorController.name;
+
+
         PlayerData data = new PlayerData
         {
             x = playerPosition.x,
@@ -153,7 +153,6 @@ public class SaveManager : MonoBehaviour
             LevelUpPoint = playerStatus.LevelUpPoint,
             Bit = playerMoney.Bit,
             Snippet = playerMoney.Snippet,
-            runtimeAnimatorController = currentAniController,
             QSkill = playerSkills.QSkill,
             WSkill = playerSkills.WSkill,
             ESkill = playerSkills.ESkill,
@@ -166,6 +165,7 @@ public class SaveManager : MonoBehaviour
             RSkillCoolDown = playerSkills.RSkillCoolDown,
             SSkillCoolDown = playerSkills.SSkillCoolDown,
             DSkillCoolDown = playerSkills.DSkillCoolDown,
+            runtimeAnimatorControllerPath = "AnimatorControllers/"+animatorControllerName,
             //8888
             QuestDatas = questManager.QuestDatas,
             allQuests = questManager.allQuests,
@@ -199,8 +199,8 @@ public class SaveManager : MonoBehaviour
                 {
                     if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
                     {
-                        data.currentQuestIndex[i] = npc.currentQuestIndex;
-                        Debug.Log("log: q0: " + data.currentQuestIndex[i] + " " + npc.currentQuestIndex);
+                        // data.currentQuestIndex[i] = npc.currentQuestIndex;
+                        // Debug.Log("log: q0: " + data.currentQuestIndex[i] + " " + npc.currentQuestIndex);
                         Debug.Log("log: q01: " + questTitle);
                     }
                 }
@@ -289,14 +289,17 @@ public class SaveManager : MonoBehaviour
     }
 
     public void InstantiateOnSavePoint(PlayerData data)
-    {
-
+    {   
+        if(data.items[0] != null){ Debug.Log("log: 4885" + data.items[0].name);}
+        else Debug.Log("log4885: items null");
+        if(data.equipments[0] != null) Debug.Log("log: 4885" + data.equipments[0].name);
+        else Debug.Log("log4885: equipments null");
         if (playerObject == null)
         {
             playerObject = Instantiate(playerPrefab, new Vector3(data.x, data.y, data.z), Quaternion.identity);
             playerObject.name = playerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
-            playerObject.GetComponent<Animator>().runtimeAnimatorController = data.runtimeAnimatorController;
+            
             playerStatus = playerObject.GetComponent<PlayerStatus>();
             // set level
             playerStatus.PlayerLevel = data.PlayerLevel;
@@ -334,6 +337,9 @@ public class SaveManager : MonoBehaviour
             playerObject.GetComponent<PlayerSkills>().RSkillCoolDown = data.RSkillCoolDown;
             playerObject.GetComponent<PlayerSkills>().SSkillCoolDown = data.SSkillCoolDown;
             playerObject.GetComponent<PlayerSkills>().DSkillCoolDown = data.DSkillCoolDown;
+            // Load animator controller
+            string animatorControllerPath = data.runtimeAnimatorControllerPath;
+            playerObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(animatorControllerPath);
         }
         
 
@@ -341,6 +347,8 @@ public class SaveManager : MonoBehaviour
         {
             // LevelUpPoint
             uiManagerObject = Instantiate(uiManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            // 이 지점에서 초기화 시켜줘야 오류가 없음.
+            playerObject.GetComponent<PlayerLevelUpController>().Character = uiManagerObject.GetComponentInChildren<Character>(true).gameObject;
             // name tag initialize
             if (uiManagerObject != null && data.PlayerNameInfo != null && data.PlayerNameInfoInstance == null)
             {
@@ -361,8 +369,7 @@ public class SaveManager : MonoBehaviour
             ShopSlotInit();
             LoadQuests(data);
             
-            // 이 지점에서 초기화 시켜줘야 오류가 없음.
-            playerObject.GetComponent<PlayerLevelUpController>().Character = uiManagerObject.GetComponentInChildren<Character>(true).gameObject;
+            
             
 
         }
@@ -442,8 +449,8 @@ public class SaveManager : MonoBehaviour
                 {
                     if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
                     {
-                        npc.currentQuestIndex = data.currentQuestIndex[i];
-                        Debug.Log("log: q1: " + npc.currentQuestIndex + " " + data.currentQuestIndex[i]);
+                        // npc.currentQuestIndex = data.currentQuestIndex[i];
+                        // Debug.Log("log: q1: " + npc.currentQuestIndex + " " + data.currentQuestIndex[i]);
                         Debug.Log("log: q1: " + questTitle);
                     }
                 }
