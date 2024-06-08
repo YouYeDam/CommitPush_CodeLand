@@ -92,7 +92,7 @@ public class DialogueController : MonoBehaviour
         EndDialogue(); // 대화 종료
     }
 
-    private void EndDialogue()
+    public void EndDialogue()
     {
         SpeakerNameText.text = "";
         DialogueText.text = "";

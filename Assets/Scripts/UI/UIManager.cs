@@ -8,10 +8,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject StatusBar;
     [SerializeField] GameObject ItemQuickSlot;
     [SerializeField] GameObject SkillQuickSlot;
-    
+
+    DialogueController DialogueController;
     public void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        DialogueController = gameObject.transform.GetChild(9).gameObject.GetComponent<DialogueController>();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -49,6 +51,9 @@ public class UIManager : MonoBehaviour
                 }
             }
             
+        }
+        if (DialogueController != null && DialogueController.DialogueBase.activeSelf) {
+            DialogueController.EndDialogue();
         }
 
         // 씬이 로드될 때 플레이어 인풋이 막힌 상황이면 스테이터스바, 퀵슬롯들도 비활성화

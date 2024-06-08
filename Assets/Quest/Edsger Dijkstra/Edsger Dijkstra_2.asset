@@ -20,11 +20,11 @@ MonoBehaviour:
   Objectives:
   - Type: 2
     TargetName: "\uB108\uBE44 \uC6B0\uC120 \uC2E4\uD0C0\uB798"
-    RequiredAmount: 2
+    RequiredAmount: 1
     CurrentAmount: 0
   - Type: 2
     TargetName: "\uAE4A\uC774 \uC6B0\uC120 \uC2E4\uD0C0\uB798"
-    RequiredAmount: 2
+    RequiredAmount: 1
     CurrentAmount: 0
   RequiredLevel: 10
   NPCName: "\uC5D0\uCE20\uD5C8\uB974 \uB2E4\uC775\uC2A4\uD2B8\uB77C"

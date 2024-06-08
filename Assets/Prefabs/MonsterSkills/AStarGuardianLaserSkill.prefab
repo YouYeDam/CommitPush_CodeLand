@@ -198,6 +198,8 @@ MonoBehaviour:
   Damage: 300
   IsHoming: 0
   IsRotationing: 0
+  IsDropSkill: 0
+  DropPos: 10
   BasicMonsterMovement: {fileID: 0}
   MonsterStatus: {fileID: 0}
   IsSlowingSkill: 0

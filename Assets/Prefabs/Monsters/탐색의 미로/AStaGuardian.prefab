@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1987699232559368084}
   m_Layer: 8
-  m_Name: Summon Spot
+  m_Name: Teleport Spot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 840132556190078372}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.078, y: -2.84, z: 0}
+  m_LocalPosition: {x: 0.078, y: -0.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52,6 +52,8 @@ GameObject:
   - component: {fileID: 5552684333874109378}
   - component: {fileID: 5369814400074721809}
   - component: {fileID: 6704895050344695363}
+  - component: {fileID: 6795811411023838017}
+  - component: {fileID: 1762985715374104516}
   m_Layer: 9
   m_Name: AStaGuardian
   m_TagString: Monster
@@ -285,6 +287,7 @@ MonoBehaviour:
   IsTakeDamge: 1
   CanWalk: 1
   CanTriggerDamage: 1
+  IsSkilling: 0
   AttackDelayTime: 10
 --- !u!114 &3157593347497917494
 MonoBehaviour:
@@ -336,6 +339,8 @@ MonoBehaviour:
     SpawnProbability: 1
   - ItemPrefab: {fileID: 4338472210403635751, guid: ced1e47a196c61b4e84827ca8fe59c67, type: 3}
     SpawnProbability: 1
+  - ItemPrefab: {fileID: 4338472210403635751, guid: d207e5f47edaaa14da7d981605fead40, type: 3}
+    SpawnProbability: 1
   MonsterBit: 600
   MonsterSnippet: 1
 --- !u!114 &-8855345390103764750
@@ -372,7 +377,6 @@ MonoBehaviour:
   PreSkillDelay: 1
   SkillDelayForAnim: 0.9
   UseSkillDistance: 50
-  IsSkilling: 0
 --- !u!114 &5369814400074721809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,12 +391,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsSummonBoss: 0
   IsThrowingBoss: 1
-  SummonWaitTime: 25
-  ThrowingWaitTime: 25
-  SummonBackToIdleAnimTime: 0.83
-  SummonDelayTime: 1
-  SummonCount: 0
-  SummonSpot: {fileID: 1987699232559368084}
+  IsDroppingBoss: 1
+  IsTeleportingBoss: 1
+  SummonWaitTime: 0
+  ThrowingWaitTime: 27
+  DroppingWaitTime: 20
+  TeleportingWaitTime: 23
 --- !u!114 &6704895050344695363
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +414,40 @@ MonoBehaviour:
   BackToIdleAnimTime: 3
   SkillDelayForAnim: 2
   UseSkillDistance: 60
-  IsSkilling: 0
+--- !u!114 &6795811411023838017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3523946213023745087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5fbe53116099414a9a783746e592861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropObject: {fileID: 8885825609034438207, guid: 6a6720059b6d2bc45aa73692528a97db, type: 3}
+  SkillSpot: {fileID: 8763508143990234850}
+  BackToIdleAnimTime: 1.5
+  SkillDelayForAnim: 1.2
+  UseSkillDistance: 60
+--- !u!114 &1762985715374104516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3523946213023745087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 779d4a574b47ccb408b29dfb25dd4a60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackToIdleAnimTime: 1.5
+  TeleportDelayTime: 1.5
+  DestroyEffectTime: 0.5
+  TeleportEffect: {fileID: 8885825609034438207, guid: 75677672d12595d4d8b6f6ae692198c4, type: 3}
+  TeleportSpot: {fileID: 1987699232559368084}
 --- !u!1 &7068998259601782848
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +473,7 @@ Transform:
   m_GameObject: {fileID: 7068998259601782848}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.72, y: 1.07, z: 0}
+  m_LocalPosition: {x: 5.98, y: 1.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

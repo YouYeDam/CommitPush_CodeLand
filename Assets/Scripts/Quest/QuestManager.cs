@@ -192,7 +192,9 @@ public class QuestManager : MonoBehaviour
                 // 몬스터 처치 목표 업데이트
                 if (!isItem && objective.Type == QuestObjective.ObjectiveType.Kill && objective.TargetName == targetName)
                 {
-                    objective.CurrentAmount += amount;
+                    if (objective.CurrentAmount <= objective.RequiredAmount) {
+                        objective.CurrentAmount += amount;
+                    }
 
                     // 퀘스트가 모두 완료되었는지 체크
                     if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
