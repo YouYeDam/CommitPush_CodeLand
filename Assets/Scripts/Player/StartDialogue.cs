@@ -83,13 +83,13 @@ public class StartDialogue : MonoBehaviour
             addShopItem.AddEachItem();
         }
 
-        NPC npcComponent = npc.GetComponent<NPC>();
-        if (npcComponent != null && DialogueController != null)
+        NPC NpcComponent = npc.GetComponent<NPC>();
+        if (NpcComponent != null && DialogueController != null)
         {
-            Dialogue dialogue = npcComponent.GetCurrentDialogue();
-            if (dialogue != null)
+            Dialogue Dialogue = NpcComponent.GetCurrentDialogue();
+            if (Dialogue != null)
             {
-                DialogueController.StartDialogue(dialogue, npcComponent); // NPC와 함께 대화 시작
+                DialogueController.StartDialogue(Dialogue, NpcComponent); // NPC와 함께 대화 시작
                 if (PlayerUI.Shop.activeSelf)
                 {
                     PlayerUI.CloseShop();

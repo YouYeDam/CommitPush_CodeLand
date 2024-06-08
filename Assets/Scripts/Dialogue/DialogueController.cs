@@ -63,9 +63,10 @@ public class DialogueController : MonoBehaviour
         if (CurrentNPC != null && QuestManager != null)
         {
             // 현재 퀘스트 인덱스 사용
-            if (CurrentNPC.currentQuestIndex < CurrentNPC.QuestsToGive.Count)
+            int currentQuestIndex = QuestManager.NpcQuestState.GetQuestIndex(CurrentNPC.NPCName);
+            if (currentQuestIndex < CurrentNPC.QuestsToGive.Count)
             {
-                string questTitle = CurrentNPC.QuestsToGive[CurrentNPC.currentQuestIndex].Title;
+                string questTitle = CurrentNPC.QuestsToGive[currentQuestIndex].Title;
                 if (!string.IsNullOrEmpty(questTitle))
                 {
                     Quest quest = QuestManager.GetQuestByTitle(questTitle);

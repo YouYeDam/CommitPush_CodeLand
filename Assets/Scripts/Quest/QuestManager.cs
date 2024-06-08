@@ -13,10 +13,13 @@ public class QuestManager : MonoBehaviour
     public PlayerStatus PlayerStatus;
     PlayerGetItem PlayerGetItem;
     PlayerMoney PlayerMoney;
+    public NPCQuestState NpcQuestState;
+
     public void Awake()
     {
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+        NpcQuestState = gameObject.AddComponent<NPCQuestState>(); // NPCQuestState 추가
     }
 
     void Start()
@@ -136,26 +139,13 @@ public class QuestManager : MonoBehaviour
             // 보상 지급
             RewardPlayer(quest);
             UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
-            IncrementNPCQuestIndex(questTitle);
+            IncrementNPCQuestIndex(quest.NPCName);
         }
     }
-    private void IncrementNPCQuestIndex(string questTitle) // 퀘스트 인덱스 증가
+    private void IncrementNPCQuestIndex(string npcName) // 퀘스트 인덱스 증가
     {
-        NPC[] npcs = FindObjectsOfType<NPC>();
-        foreach (NPC npc in npcs)
-        {
-            for (int i = 0; i < npc.QuestsToGive.Count; i++)
-            {
-                if (npc.QuestsToGive[i].Title == questTitle)
-                {
-                    if (npc.currentQuestIndex < npc.QuestsToGive.Count - 1)
-                    {
-                        npc.currentQuestIndex++;
-                    }
-                    break;
-                }
-            }
-        }
+        int currentQuestIndex = NpcQuestState.GetQuestIndex(npcName);
+        NpcQuestState.SetQuestIndex(npcName, currentQuestIndex + 1);
     }
     //퀘스트 슬롯 갱신
     private void UpdateQuestSlot(Quest quest)

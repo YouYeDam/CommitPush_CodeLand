@@ -3,25 +3,25 @@ using UnityEngine;
 
 public class NPCQuestState : MonoBehaviour
 {
-    public Dictionary<string, int> npcQuestIndices = new Dictionary<string, int>();
+    public Dictionary<string, int> NpcQuestIndices = new Dictionary<string, int>();
 
     public void SetQuestIndex(string npcName, int index)
     {
-        if (npcQuestIndices.ContainsKey(npcName))
+        if (NpcQuestIndices.ContainsKey(npcName))
         {
-            npcQuestIndices[npcName] = index;
+            NpcQuestIndices[npcName] = index;
         }
         else
         {
-            npcQuestIndices.Add(npcName, index);
+            NpcQuestIndices.Add(npcName, index);
         }
     }
 
     public int GetQuestIndex(string npcName)
     {
-        if (npcQuestIndices.ContainsKey(npcName))
+        if (NpcQuestIndices.ContainsKey(npcName))
         {
-            return npcQuestIndices[npcName];
+            return NpcQuestIndices[npcName];
         }
         else
         {
