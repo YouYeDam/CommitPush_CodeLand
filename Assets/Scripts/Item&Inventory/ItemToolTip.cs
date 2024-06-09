@@ -43,7 +43,10 @@ public class ItemToolTip : MonoBehaviour
 
     void DisplayRequireLevel(Item Item) {
         ItemRequireLVText.gameObject.SetActive(true);
-        int RequireLevel = Item.ItemPrefab.GetComponent<EquipmentItem>().RequireLevel;
+        int RequireLevel = 0;
+        if (Item.ItemPrefab.GetComponent<EquipmentItem>() != null){
+        RequireLevel = Item.ItemPrefab.GetComponent<EquipmentItem>().RequireLevel;}
+
         ItemRequireLVText.text = "필요 코딩력: " + RequireLevel + " LV";
 
         Color color;
@@ -57,6 +60,7 @@ public class ItemToolTip : MonoBehaviour
     }
     void DisplayEquipmentGrade(Item Item) {
         ItemGradeText.gameObject.SetActive(true);
+        Debug.Log("log8808: "+Item.name);
         string EquipmentItemGrade = Item.ItemPrefab.GetComponent<EquipmentItem>().EquipmentItemGrade;
         ItemGradeText.text = "아이템 등급: " + EquipmentItemGrade;
 

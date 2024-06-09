@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Minus Pants
+  m_EditorClassIdentifier: 
+  ItemName: "\uB9C8\uC774\uB108\uC2A4 \uBC14\uC9C0"
+  ItemDetailType: "\uC7A5\uBE44(\uD558\uC758)"
+  ItemCount: 1
+  ItemCost: 200
+  Type: 0
+  ItemImage: {fileID: 21300000, guid: f796e4900939b114d8516b4c0cd766cf, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: f93f68757d6265f45bd3eafad50f0ded, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uCD08\uBCF4 \uAC1C\uBC1C\uC790\uB4E4\uC774 \uC560\uC6A9\uD55C\uB2E4\uB294
+    \uC5F0\uC0B0\uC790 \uAE38\uB4DC\uC5D0\uC11C \uB9CC\uB4E0 \uC218\uC218\uD55C \uBC18\uBC14\uC9C0\uC774\uB2E4.
+    \uC0B0\uC220 \uC5F0\uC0B0\uC790 \uBE7C\uAE30\uB97C \uB098\uD0C0\uB0B8\uB2E4.\r\n\r\n\uCC29\uC6A9
+    \uC2DC \uC815\uC2E0\uB825\uC774 30\uB9CC\uD07C, \uBC29\uC5B4\uB825\uC774 3\uB9CC\uD07C
+    \uC99D\uAC00\uD55C\uB2E4.\r\n\r\n\uC0B0\uC220 \uC5F0\uC0B0\uC790 '-'\uB294 \uD504\uB85C\uADF8\uB798\uBC0D\uC5D0\uC11C
+    \uD55C \uC22B\uC790\uC5D0\uC11C \uB2E4\uB978 \uC22B\uC790\uB97C \uBE7C\uB294
+    \uB370 \uC0AC\uC6A9\uB418\uB294 \uC5F0\uC0B0\uC790 \uC911 \uD558\uB098\uC774\uB2E4.
+    \uBCF4\uD1B5 \uC218\uD559\uC801 \uACC4\uC0B0\uC5D0\uC11C \uBE84\uC148\uC744 \uC218\uD589\uD55C\uB2E4."

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: CanCoffee
+  m_EditorClassIdentifier: 
+  ItemName: "\uCE94\uCEE4\uD53C"
+  ItemDetailType: "\uC18C\uBE44(\uC74C\uB8CC)"
+  ItemCount: 1
+  ItemCost: 45
+  Type: 1
+  ItemImage: {fileID: 21300000, guid: 2c41710c676c1c74b96d9e9da71e5370, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: a20cea60472899840ade3f6a44eed7f1, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uCC28\uAC00\uC6B4 \uCE94\uCEE4\uD53C\uC774\uB2E4. \uC5B8\uC81C \uC5B4\uB514\uC11C\uB098
+    \uAC04\uD3B8\uD558\uAC8C \uB9C8\uC2E4 \uC218 \uC788\uC5B4 \uAC1C\uBC1C \uC911
+    \uC190\uC27D\uAC8C \uCE74\uD398\uC778\uC744 \uC12D\uCDE8\uD560 \uC218 \uC788\uB2E4.\n\n\uC0AC\uC6A9
+    \uC2DC MP\uB97C 50\uB9CC\uD07C \uD68C\uBCF5\uD55C\uB2E4."

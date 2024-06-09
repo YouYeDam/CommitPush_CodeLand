@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Divide And Conquer
+  m_EditorClassIdentifier: 
+  ItemName: "\uBD84\uD560\uACFC \uC815\uBCF5"
+  ItemDetailType: "\uC7A5\uBE44(\uC0C1\uC758)"
+  ItemCount: 1
+  ItemCost: 900
+  Type: 0
+  ItemImage: {fileID: 21300000, guid: ce6dc56783c947a4fb86ecf61ca16782, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: 9c9d6c724079d1d4087b9ce4b6c929ba, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uC54C\uACE0\uB9AC\uC998 \uD559\uAD50\uC5D0\uC11C \uC815\uB82C \uC54C\uACE0\uB9AC\uC998\uC5D0
+    \uC5B4\uB290 \uC815\uB3C4 \uC219\uB2EC\uD55C \uAC1C\uBC1C\uC790\uC5D0\uAC8C \uC8FC\uC5C8\uB358
+    \uC637\uC774\uB2E4. \uAC00\uBCCD\uACE0 \uB9E4\uC6B0 \uC9C8\uAE30\uB2E4. \uC637\uC5D0\uB294
+    \uBD84\uD560\uACFC \uC815\uBCF5\uC744 \uB098\uD0C0\uB0B4\uB294 \uBB34\uB2AC\uAC00
+    \uC0C8\uACA8\uC838 \uC788\uB2E4.\n\n\uCC29\uC6A9 \uC2DC \uCCB4\uB825\uC774 60\uB9CC\uD07C,
+    \uBC29\uC5B4\uB825\uC774 9\uB9CC\uD07C \uC99D\uAC00\uD55C\uB2E4.\n\n\uBD84\uD560\uACFC
+    \uC815\uBCF5\uC740 \uBB38\uC81C\uB97C \uC791\uC740 \uBD80\uBD84\uC73C\uB85C \uB098\uB204\uC5B4
+    \uAC01\uAC01 \uD574\uACB0\uD55C \uD6C4, \uACB0\uD569\uD558\uC5EC \uC804\uCCB4
+    \uBB38\uC81C\uB97C \uD574\uACB0\uD558\uB294 \uC54C\uACE0\uB9AC\uC998 \uAE30\uBC95\uC774\uB2E4.
+    \uB300\uD45C\uC801\uC73C\uB85C \uD035 \uC815\uB82C\uACFC \uBCD1\uD569 \uC815\uB82C\uC774
+    \uC788\uB2E4."
