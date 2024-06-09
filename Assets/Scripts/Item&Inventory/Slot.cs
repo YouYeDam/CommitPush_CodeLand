@@ -57,20 +57,30 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     }
 
     public void AddItem(Item Item, int Count = 1, ItemQuickSlot QuickSlot = null) { // 인벤토리에 새로운 아이템 슬롯 추가
+        Debug.Log("slot log 1: "+Item.name);
         this.Item = Item;
+        Debug.Log("slot log 2");
         ItemCount = Count;
+        Debug.Log("slot log 3");
         ItemImage.sprite = this.Item.ItemImage;
+        Debug.Log("slot log 4");
         QuickSlotReference = QuickSlot;
+        Debug.Log("slot log 5");
 
         if (this.Item.Type == Item.ItemType.Used || this.Item.Type == Item.ItemType.ETC)
         {
             CountImage.SetActive(true);
+        Debug.Log("slot log 6");
             TextCount.text = ItemCount.ToString();
+        Debug.Log("slot log 7");
         }
         else
         {
+        Debug.Log("slot log 8");
             TextCount.text = "0";
+        Debug.Log("slot log 9");
             CountImage.SetActive(false);
+        Debug.Log("slot log 10");
         }
         SetColor(1);
     }

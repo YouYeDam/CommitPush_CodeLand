@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 public class EquipmentItem : MonoBehaviour
 {
-    [SerializeField] string EquipmentType; // 소비 유형(머리, 상의, 하의, 무기, 장갑, 신발, 펫, 장신구 등)
+    [SerializeField] public string EquipmentType; // 소비 유형(머리, 상의, 하의, 무기, 장갑, 신발, 펫, 장신구 등)
     [SerializeField] public int RequireLevel = 1; //필요 착용 레벨
     [SerializeField] public string EquipmentItemGrade = "일반";
-    [SerializeField] int HPValue; // HP 영향값
-    [SerializeField] int MPValue; // MP 영향값
-    [SerializeField] int ATKValue; // ATK 영향값
-    [SerializeField] int DEFValue; // DEF 영향값
-    [SerializeField] float APValue; // AP 영향값
-    [SerializeField] float CritValue; // Crit 영향값
+    [SerializeField] public int HPValue; // HP 영향값
+    [SerializeField] public int MPValue; // MP 영향값
+    [SerializeField] public int ATKValue; // ATK 영향값
+    [SerializeField] public int DEFValue; // DEF 영향값
+    [SerializeField] public float APValue; // AP 영향값
+    [SerializeField] public float CritValue; // Crit 영향값
     public PlayerStatus PlayerStatus;
     public Equipment Equipment;
     void Start(){

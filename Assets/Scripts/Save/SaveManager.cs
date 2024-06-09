@@ -511,38 +511,58 @@ public class SaveManager : MonoBehaviour
 
     private void LoadEquipments(PlayerData data)
     {
-
+        Debug.Log("eq1");
         for (int i = 0; i < data.equipmentNames.Length; i++)
         {
+        Debug.Log("eq2");
             var equipmentSlots = uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true);
             if (i >= equipmentSlots.Length)
             {
+        Debug.Log("eq3");
                 break;
             }
 
+        Debug.Log("eq4");
             equipmentSlots[i].Item = null;
 
+        Debug.Log("eq5");
             if (data.equipmentNames[i] != null)
             {
+        Debug.Log("eq6");
                 Item newEquipmentItem = ScriptableObject.CreateInstance<Item>();
+                EquipmentItem equipmentItem = new EquipmentItem();
                 newEquipmentItem.ItemCount = data.itemCounts[i];
+        Debug.Log("eq7");
 
                 newEquipmentItem.ItemName = data.equipmentNames[i];
                 string itemAssetPath = "Items/" + newEquipmentItem.ItemName;
                 Item newItemClass = (Item)Resources.Load(itemAssetPath, typeof(Item));
+        Debug.Log("eq8");
                 if (newItemClass == null)
                 {
                     continue;
                 }
+        Debug.Log("eq9");
 
                 newEquipmentItem.ItemCost = newItemClass.ItemCost;
+                Debug.Log("neq1");
                 newEquipmentItem.ItemDetailType = newItemClass.ItemDetailType;
+                Debug.Log("neq2");
                 newEquipmentItem.ItemImage = newItemClass.ItemImage;
+                Debug.Log("neq3");
                 newEquipmentItem.ItemPrefab = newItemClass.ItemPrefab;
+                Debug.Log("neq4 " + newEquipmentItem.ItemPrefab);
                 newEquipmentItem.IsAlreadyGet = true;
+                Debug.Log("neq5");
                 newEquipmentItem.ItemInfo = newItemClass.ItemInfo;
+                Debug.Log("neq6");
                 newEquipmentItem.Type = newItemClass.Type;
+                
+
+                Debug.Log("neq7");
                 equipmentSlots[i].AddItem(newEquipmentItem);
+                Debug.Log("neq8");
+        Debug.Log("eq10");
             }
         }
     }
@@ -576,6 +596,7 @@ public class SaveManager : MonoBehaviour
                 newItem.IsAlreadyGet = true;
                 newItem.ItemInfo = newItemClass.ItemInfo;
                 newItem.Type = newItemClass.Type;
+                newItem.name = data.itemNames[i];
                 itemSlots[i].AddItem(newItem, newItem.ItemCount);
             }
         }

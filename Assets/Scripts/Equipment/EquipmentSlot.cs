@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -97,7 +98,12 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void AddItem(Item Item) {
         this.Item = Item;
+        GameObject ToolTipObject = GameObject.Find("EquipmentToolTip");
+        if (ToolTipObject != null) {
+        ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
+        }
         EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
+        EquipmentItem.PlayerStatus = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
         EquipmentItem.IncreaseStat();
         ItemImage.sprite = this.Item.ItemImage;
         SetColor(1);
