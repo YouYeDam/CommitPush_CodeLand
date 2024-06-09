@@ -4086,7 +4086,7 @@ GameObject:
   - component: {fileID: 4783034840865294298}
   - component: {fileID: 4122421568890504964}
   m_Layer: 5
-  m_Name: InputNumberBase
+  m_Name: BuyInputNumberBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5935,7 +5935,7 @@ GameObject:
   - component: {fileID: 2358548612192283112}
   - component: {fileID: 1791564262618464327}
   m_Layer: 5
-  m_Name: InputNumberBase
+  m_Name: SellInputNumberBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8771,7 +8771,7 @@ GameObject:
   - component: {fileID: 4374988894590483686}
   - component: {fileID: 8888161207244809291}
   m_Layer: 5
-  m_Name: InputNumberBase
+  m_Name: DropInputNumberBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21422,9 +21422,21 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: BuyInputField
+      value: 
+      objectReference: {fileID: 1846799872893183098}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
       propertyPath: QuickSlotBase
       value: 
       objectReference: {fileID: 615426463936452282}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: DropInputField
+      value: 
+      objectReference: {fileID: 4999045379577244667}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: SellInputField
+      value: 
+      objectReference: {fileID: 2723496635225655360}
     - target: {fileID: 5364779853906581945, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -22689,9 +22701,21 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: BuyInputField
+      value: 
+      objectReference: {fileID: 1846799872893183098}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
       propertyPath: QuickSlotBase
       value: 
       objectReference: {fileID: 615426463936452282}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: DropInputField
+      value: 
+      objectReference: {fileID: 4999045379577244667}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: SellInputField
+      value: 
+      objectReference: {fileID: 2723496635225655360}
     - target: {fileID: 5364779853906581945, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -27648,9 +27672,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 5350936860599429159}
     m_Modifications:
     - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: BuyInputField
+      value: 
+      objectReference: {fileID: 1846799872893183098}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
       propertyPath: QuickSlotBase
       value: 
       objectReference: {fileID: 615426463936452282}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: DropInputField
+      value: 
+      objectReference: {fileID: 4999045379577244667}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: SellInputField
+      value: 
+      objectReference: {fileID: 2723496635225655360}
     - target: {fileID: 5364779853906581945, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -28831,9 +28867,21 @@ PrefabInstance:
 '
       objectReference: {fileID: 0}
     - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: BuyInputField
+      value: 
+      objectReference: {fileID: 1846799872893183098}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
       propertyPath: QuickSlotBase
       value: 
       objectReference: {fileID: 615426463936452282}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: DropInputField
+      value: 
+      objectReference: {fileID: 4999045379577244667}
+    - target: {fileID: 4136345866759659849, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
+      propertyPath: SellInputField
+      value: 
+      objectReference: {fileID: 2723496635225655360}
     - target: {fileID: 5364779853906581945, guid: 90ae7fa66a48eb04fb035c9b4ce6ba0f, type: 3}
       propertyPath: m_Pivot.x
       value: 0
