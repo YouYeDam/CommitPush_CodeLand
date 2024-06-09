@@ -50,11 +50,10 @@ MonoBehaviour:
   QuestsToGive:
   - {fileID: 11400000, guid: 1722bd38bce56314685be9eac2bdcb7d, type: 2}
   QuestDialogues:
-  - PreQuestDialogue: {fileID: 11400000, guid: 54bee985f1c54234bbc664179ff0ec7a, type: 2}
-    InProgressDialogue: {fileID: 11400000, guid: daa7d087073ddaf4294adb36d6430b3f, type: 2}
-    ReadyToCompleteDialogue: {fileID: 11400000, guid: daa7d087073ddaf4294adb36d6430b3f, type: 2}
+  - PreQuestDialogue: {fileID: 11400000, guid: 5a6505341ff5bbb4993065ce3ee27a35, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: 54bee985f1c54234bbc664179ff0ec7a, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: 54bee985f1c54234bbc664179ff0ec7a, type: 2}
     PostQuestDialogue: {fileID: 11400000, guid: 6323cd256a61104428e15a2f190bce5b, type: 2}
-  currentQuestIndex: 0
   DefaultDialogue: {fileID: 11400000, guid: 6323cd256a61104428e15a2f190bce5b, type: 2}
   UIManager: {fileID: 0}
   NPCName: "\uC2A4\uD06C\uB798\uCE58"
@@ -72,6 +71,7 @@ MonoBehaviour:
   NPCQuestStatusPos: 1.2
   IsShop: 0
   HavingJob: 0
+  CurrentQuestIndex: 0
 --- !u!212 &717382888131969278
 SpriteRenderer:
   m_ObjectHideFlags: 0

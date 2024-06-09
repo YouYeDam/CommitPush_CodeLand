@@ -68,6 +68,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: df0062b678278ae4595db7534ff5720d, type: 2}
   - {fileID: 11400000, guid: 92dc5d2cb28b6524c92bd6f7207dfa6e, type: 2}
   - {fileID: 11400000, guid: d2a8324cbec075445869ee4b790e31a8, type: 2}
+  - {fileID: 11400000, guid: dbb0b07a54fee0049a69e56941fb081b, type: 2}
   PlayerStatus: {fileID: 0}
   NpcQuestState: {fileID: 0}
 --- !u!114 &590498037145830911

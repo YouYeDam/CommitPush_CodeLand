@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class MonsterTeleportingSkill : MonoBehaviour
 {
-    [SerializeField] float BackToIdleAnimTime = 0.35f;
-    [SerializeField] float TeleportDelayTime = 1f;
+    [SerializeField] float TeleportDelayTime = 0.35f;
     [SerializeField] float DestroyEffectTime = 0.5f;
-        GameObject TeleportEffectInstance;
+    GameObject TeleportEffectInstance;
     [SerializeField] GameObject TeleportEffect;
     [SerializeField] Transform TeleportSpot;
     Animator MyAnimator;
@@ -31,7 +30,7 @@ public class MonsterTeleportingSkill : MonoBehaviour
 
     IEnumerator TeleportRoutine(Vector3 TeleportPosition)
     {
-        yield return new WaitForSeconds(BackToIdleAnimTime);
+        yield return new WaitForSeconds(TeleportDelayTime);
         MyAnimator.SetBool("IsTeleporting", false);
         BasicMonsterMovement.CanWalk = true;
         BasicMonsterMovement.IsSkilling = false;
