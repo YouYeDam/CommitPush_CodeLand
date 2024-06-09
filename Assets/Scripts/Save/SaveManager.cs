@@ -202,8 +202,6 @@ public class SaveManager : MonoBehaviour
                     if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
                     {
                         // data.currentQuestIndex[i] = npc.currentQuestIndex;
-                        // Debug.Log("log: q0: " + data.currentQuestIndex[i] + " " + npc.currentQuestIndex);
-                        Debug.Log("log: q01: " + questTitle);
                     }
                 }
             }
@@ -216,8 +214,6 @@ public class SaveManager : MonoBehaviour
             quests[i] = questSlots[i].Quest;
         }
         data.quests = quests;
-        // Debug.Log("log1414: " + quests[0].Title);
-        // Debug.Log("log1414: " + data.quests[0].Title);
     }
 
     private static void SaveEquipments(EquipmentSlot[] equipmentSlots, PlayerData data)
@@ -230,7 +226,6 @@ public class SaveManager : MonoBehaviour
             if (equipmentSlots[i].Item != null)
             {
                 equipmentNames[i] = equipmentSlots[i].Item.ItemPrefab.name;
-                Debug.Log("log3131: " + equipmentNames[i]);
             }
 
         };
@@ -280,13 +275,14 @@ public class SaveManager : MonoBehaviour
             {
                 itemNames[i] = slots[i].Item.name;
                 itemCounts[i] = slots[i].ItemCount;
-                Debug.Log("log4554: " + itemCounts[i]);
                 itemCosts[i] = slots[i].Item.ItemCost;
+                Debug.Log("item saving " + itemNames[i]);
             }
         };
         // 정리된 배열들을 data에 저장
         data.itemNames = itemNames;
         data.itemCounts = itemCounts;
+        data.itemCosts = itemCosts;
     }
     private static void SaveQuickItems(ItemQuickSlot[] itemQuickSlots, PlayerData data)
     {
@@ -314,12 +310,42 @@ public class SaveManager : MonoBehaviour
         data.itemSlotReferencesIdx = referSlotsIdx;
     }
 
+    public void DisplaySaveDatas(PlayerData data)
+    {
+        if (data == null)
+        {
+            Console.WriteLine("No data to display.");
+            return;
+        }
+
+        Console.WriteLine("Save Data:");
+        for (int i = 0; i < data.equipmentNames.Length; i++){
+            Debug.Log($"ID: {data.equipmentNames[i]}");
+        }
+        for (int i = 0; i < data.itemNames.Length; i++){
+            Debug.Log($"ID: {data.itemNames[i]}");
+        }
+        for (int i = 0; i < data.quickItemNames.Length; i++){
+            Debug.Log($"ID: {data.quickItemNames[i]}");
+        }
+    }
     public void InstantiateOnSavePoint(PlayerData data)
     {
+        Debug.Log("e1");
         questManagerObject = Instantiate(questManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         questManager = FindObjectOfType<QuestManager>();
+        questManagerObject.name = questManagerPrefab.name; // "(Clone)" 접미사 제거
+        DontDestroyOnLoad(questManagerObject); // 씬 전환 시 파괴되지 않도록 설정
+        questManager.QuestDatas = data.QuestDatas;
+        questManager.allQuests = data.allQuests;
+        questManager.activeQuests = data.activeQuests;
+        questManager.completedQuests = data.completedQuests;
+        
+        Debug.Log("e2");
+        DisplaySaveDatas(data);
         if (playerObject == null)
         {
+        Debug.Log("e3");
             playerObject = Instantiate(playerPrefab, new Vector3(data.x, data.y, data.z), Quaternion.identity);
             playerObject.name = playerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
@@ -331,12 +357,14 @@ public class SaveManager : MonoBehaviour
             playerStatus.PlayerMaxHP = data.PlayerMaxHP;
             playerStatus.PlayerMaxMP = data.PlayerMaxMP;
             playerStatus.PlayerMaxEXP = data.PlayerMaxEXP;
+        Debug.Log("e4");
             // set current values.
             playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
             playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
             playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
 
             playerStatus.PlayerClass = data.PlayerClass;
+        Debug.Log("e5");
             playerStatus.PlayerName = data.PlayerName;
             playerStatus.PlayerATK = data.PlayerATK;
             playerStatus.PlayerDEF = data.PlayerDEF;
@@ -369,6 +397,7 @@ public class SaveManager : MonoBehaviour
 
         if (uiManagerObject == null)
         {
+        Debug.Log("e6");
             // LevelUpPoint
             uiManagerObject = Instantiate(uiManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             // 이 지점에서 초기화 시켜줘야 오류가 없음.
@@ -384,9 +413,13 @@ public class SaveManager : MonoBehaviour
             DontDestroyOnLoad(uiManagerObject); // 씬 전환 시 파괴되지 않도록 설정
 
 
+            Debug.Log("e7");
             InitialEquipmentItems();
+            Debug.Log("e8");
             LoadEquipments(data);
+            Debug.Log("e9");
             LoadItems(data);
+            Debug.Log("e10");
             LoadQuickItems(data);
 
             // LoadSkills(data);
@@ -398,12 +431,7 @@ public class SaveManager : MonoBehaviour
 
 
         }
-        questManagerObject.name = questManagerPrefab.name; // "(Clone)" 접미사 제거
-        DontDestroyOnLoad(questManagerObject); // 씬 전환 시 파괴되지 않도록 설정
-        questManager.QuestDatas = data.QuestDatas;
-        questManager.allQuests = data.allQuests;
-        questManager.activeQuests = data.activeQuests;
-        questManager.completedQuests = data.completedQuests;
+        
 
     }
 
@@ -449,8 +477,6 @@ public class SaveManager : MonoBehaviour
                     if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
                     {
                         // npc.currentQuestIndex = data.currentQuestIndex[i];
-                        // Debug.Log("log: q1: " + npc.currentQuestIndex + " " + data.currentQuestIndex[i]);
-                        Debug.Log("log: q1: " + questTitle);
                     }
                 }
             }
@@ -462,7 +488,6 @@ public class SaveManager : MonoBehaviour
             uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].Quest = null;
             if (data.quests[i] != null)
             {
-                Debug.Log("log1132: quest loaded" + data.quests[i]);
                 uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].AddQuest(data.quests[i]);
             }
         }
@@ -492,7 +517,6 @@ public class SaveManager : MonoBehaviour
             var equipmentSlots = uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true);
             if (i >= equipmentSlots.Length)
             {
-                Debug.LogError("Not enough EquipmentSlot components");
                 break;
             }
 
@@ -505,22 +529,19 @@ public class SaveManager : MonoBehaviour
 
                 newEquipmentItem.ItemName = data.equipmentNames[i];
                 string itemAssetPath = "Items/" + newEquipmentItem.ItemName;
-                Debug.Log("log load path: " + itemAssetPath);
                 Item newItemClass = (Item)Resources.Load(itemAssetPath, typeof(Item));
                 if (newItemClass == null)
                 {
-                    Debug.LogError("Failed to load item asset: " + itemAssetPath);
                     continue;
                 }
 
-                Debug.Log("log loaded class: " + newItemClass);
                 newEquipmentItem.ItemCost = newItemClass.ItemCost;
                 newEquipmentItem.ItemDetailType = newItemClass.ItemDetailType;
                 newEquipmentItem.ItemImage = newItemClass.ItemImage;
                 newEquipmentItem.ItemPrefab = newItemClass.ItemPrefab;
                 newEquipmentItem.IsAlreadyGet = true;
                 newEquipmentItem.ItemInfo = newItemClass.ItemInfo;
-                Debug.Log("log3434: " + newEquipmentItem.ItemName);
+                newEquipmentItem.Type = newItemClass.Type;
                 equipmentSlots[i].AddItem(newEquipmentItem);
             }
         }
@@ -529,37 +550,33 @@ public class SaveManager : MonoBehaviour
     private void LoadItems(PlayerData data) // data의 아이템이 아이템인지 장비인지 구별해야함. isEquipment 함수를 자료형에 추가하고. 또 장비의 슬롯 인덱스도 저장해야함.
     {
         // int[] tmpCnt = new int[data.itemNames.Length];
-        for (int i = 0; i < data.itemNames.Length; i++)
+        var itemSlots = uiManagerObject.GetComponentsInChildren<Slot>(true);
+        for (int i = 0; i < itemSlots.Length; i++)
         {
-            var itemSlots = uiManagerObject.GetComponentsInChildren<Slot>(true);
             if (data.itemNames[i] != null)
-            {
+            {   
+
                 // Item 객체 생성
                 Item newItem = ScriptableObject.CreateInstance<Item>();
 
-                // 속성 설정: serials
                 newItem.ItemName = data.itemNames[i];
+                Debug.Log("Loading items " + newItem.ItemName);
                 newItem.ItemCount = data.itemCounts[i];
-                Debug.Log("log6676: " + newItem.ItemCount);
                 string itemAssetPath = "Items/" + newItem.ItemName;
-                Debug.Log("log load path: " + itemAssetPath);
                 Item newItemClass = (Item)Resources.Load(itemAssetPath);
                 if (newItemClass == null)
                 {
-                    Debug.LogError("Failed to load item asset: " + itemAssetPath);
                     continue;
                 }
-                Debug.Log("1111");
                 // load the asset to set other properties easily
                 newItem.ItemCost = newItemClass.ItemCost; // set
                 newItem.ItemDetailType = newItemClass.ItemDetailType;
                 newItem.ItemImage = newItemClass.ItemImage;
-                Debug.Log("2222");
                 newItem.ItemPrefab = newItemClass.ItemPrefab;
                 newItem.IsAlreadyGet = true;
                 newItem.ItemInfo = newItemClass.ItemInfo;
+                newItem.Type = newItemClass.Type;
                 itemSlots[i].AddItem(newItem, newItem.ItemCount);
-                Debug.Log("3333");
             }
         }
     }
@@ -568,40 +585,52 @@ public class SaveManager : MonoBehaviour
     {
         for (int i = 0; i < data.quickItemNames.Length; i++)
         {
+            Debug.Log("q1");
             Slot refer_slot = uiManagerObject.GetComponentsInChildren<Slot>(true)[data.itemSlotReferencesIdx[i]];
+            Debug.Log("q2");
             refer_slot.ItemToolTip = uiManagerObject.GetComponentInChildren<ItemToolTip>(true);
+            Debug.Log("q3");
             var quickItemSlots = uiManagerObject.GetComponentsInChildren<ItemQuickSlot>(true);
+            Debug.Log("q4");
             if (data.quickItemNames[i] != null)
             {
+            Debug.Log("q5");
                 // Item 객체 생성
                 Item newItem = ScriptableObject.CreateInstance<Item>();
+            Debug.Log("q6");
 
                 // 속성 설정: serials
                 newItem.ItemName = data.quickItemNames[i];
                 newItem.ItemCount = data.quickItemCounts[i];
+            Debug.Log("q7");
+            Debug.Log("q7");
 
                 string itemAssetPath = "Items/" + newItem.ItemName;
-                Debug.Log("log load path" + itemAssetPath);
+            Debug.Log("q8");
                 Item newItemClass = (Item)Resources.Load(itemAssetPath);
                 if (newItemClass == null)
                 {
-                    Debug.LogError("Failed to load item asset: " + itemAssetPath);
+            Debug.Log("q9");
                     continue;
                 }
                 if (newItemClass != null)
                 {
                     // load the asset to set other properties easily
+            Debug.Log("q10");
                     newItem.ItemCost = newItemClass.ItemCost; // set
                     newItem.ItemDetailType = newItemClass.ItemDetailType;
                     newItem.ItemImage = newItemClass.ItemImage;
                     newItem.ItemPrefab = newItemClass.ItemPrefab;
                     newItem.IsAlreadyGet = true;
                     newItem.ItemInfo = newItemClass.ItemInfo;
+                    newItem.Type = newItemClass.Type;
+            Debug.Log("q11");
 
                     quickItemSlots[i].AddItem(newItem, data.quickItemCounts[i], refer_slot);
                 }
             }
 
+            Debug.Log("q12");
         }
     }
 
