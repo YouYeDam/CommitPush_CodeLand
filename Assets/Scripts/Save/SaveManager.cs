@@ -37,17 +37,16 @@ public class PlayerData
     public Animator playerAnimator; // 이거 필요 없었던 거 같은데
     public RuntimeAnimatorController runtimeAnimatorController;
     // 아이템 저장을 위해선 item 과 item count로 구성된 2차원 배열을 저장해야함.
-    public string[] itemNames = new string[40];
+    public string[] itemNames;
     public GameObject[] skillPrefabs = new GameObject[10];
     public GameObject[] quickSkillPrefabs = new GameObject[6];
-    public int[] skillSlotReferencesIdx = new int[6];
-    public int[] itemSlotReferencesIdx = new int[4];
-    public string[] quickItemNames = new string[4];
-    public int[] quickItemCounts = new int[4];
-    public int[] quickItemCosts = new int[4];
-    public int[] itemCounts = new int[40];
-    public int[] itemCosts = new int[40];
-    public bool[] isEquipment = new bool[40];
+    public int[] skillSlotReferencesIdx;
+    public int[] itemSlotReferencesIdx;
+    public string[] quickItemNames;
+    public int[] quickItemCounts;
+    public int[] quickItemCosts;
+    public int[] itemCounts;
+    public int[] itemCosts;
     public GameObject QSkill, WSkill, ESkill, RSkill, SSkill, DSkill;
     public float QSkillCoolDown, WSkillCoolDown, ESkillCoolDown, RSkillCoolDown, SSkillCoolDown, DSkillCoolDown;
     // quest datas. 필요 없는거 나중에 제거
@@ -59,7 +58,7 @@ public class PlayerData
     public int[] currentQuestIndex;
     public string runtimeAnimatorControllerPath;
     // 장비 저장 데이터
-    public string[] equipmentNames = new string[8];
+    public string[] equipmentNames;
 }
 
 public class SaveManager : MonoBehaviour
@@ -75,7 +74,7 @@ public class SaveManager : MonoBehaviour
     UIManager uiManager;
     PlayerStatus playerStatus;
     GameObject uiManagerObject;
-    public Slot[] slots;
+
     public SkillSlot[] skillSlots;
     public EquipmentSlot[] equipmentSlots;
     void Start()
@@ -83,7 +82,6 @@ public class SaveManager : MonoBehaviour
         playerObject = null;
         questManagerObject = null;
         uiManager = null;
-        slots = null;
         skillSlots = null;
         equipmentSlots = null;
         DontDestroyOnLoad(this.gameObject);
@@ -229,9 +227,12 @@ public class SaveManager : MonoBehaviour
         // 각 슬롯의 equipment item을 저장
         for (int i = 0; i < equipmentSlots.Length; i++)
         {
-            if(equipmentSlots[i].Item != null){
-            equipmentNames[i] = equipmentSlots[i].Item.ItemName;}
-            
+            if (equipmentSlots[i].Item != null)
+            {
+                equipmentNames[i] = equipmentSlots[i].Item.ItemPrefab.name;
+                Debug.Log("log3131: " + equipmentNames[i]);
+            }
+
         };
         // 정리된 배열들을 data에 저장
         data.equipmentNames = equipmentNames;
@@ -279,7 +280,7 @@ public class SaveManager : MonoBehaviour
             {
                 itemNames[i] = slots[i].Item.name;
                 itemCounts[i] = slots[i].ItemCount;
-                Debug.Log("log4554: "+itemCounts[i]);
+                Debug.Log("log4554: " + itemCounts[i]);
                 itemCosts[i] = slots[i].Item.ItemCost;
             }
         };
@@ -381,12 +382,12 @@ public class SaveManager : MonoBehaviour
             uiManager = uiManagerObject.GetComponent<UIManager>();
             uiManagerObject.name = uiManagerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(uiManagerObject); // 씬 전환 시 파괴되지 않도록 설정
-            
+
+
+            InitialEquipmentItems();
+            LoadEquipments(data);
             LoadItems(data);
             LoadQuickItems(data);
-
-            // InitialEquipmentItems();
-            // LoadEquipments(data);
 
             // LoadSkills(data);
             // LoadQuickSkills(data);
@@ -404,35 +405,6 @@ public class SaveManager : MonoBehaviour
         questManager.activeQuests = data.activeQuests;
         questManager.completedQuests = data.completedQuests;
 
-
-        // set sibling indices...
-
-
-
-        // {
-        //     StatusBar statusBar = uiManager.GetComponent<StatusBar>();
-        //     statusBar.PlayerStatus = playerStatus;
-        //     if (playerStatus.PlayerCurrentHP > 0)
-        //         statusBar.HPMeter.fillAmount = (float)playerStatus.PlayerCurrentHP / playerStatus.PlayerMaxHP;
-        //     else
-        //         statusBar.HPMeter.fillAmount = 0;
-
-        //     if (playerStatus.PlayerCurrentMP > 0)
-        //         statusBar.MPMeter.fillAmount = (float)playerStatus.PlayerCurrentMP / playerStatus.PlayerMaxMP;
-        //     else
-        //         statusBar.MPMeter.fillAmount = 0;
-
-        //     if (playerStatus.PlayerCurrentEXP > 0)
-        //         statusBar.EXPMeter.fillAmount = (float)playerStatus.PlayerCurrentEXP / playerStatus.PlayerMaxEXP;
-        //     else
-        //         statusBar.EXPMeter.fillAmount = 0;
-
-        //     statusBar.HPDisplay.text = playerStatus.PlayerCurrentHP + " / " + playerStatus.PlayerMaxHP;
-        //     statusBar.MPDisplay.text = playerStatus.PlayerCurrentMP + " / " + playerStatus.PlayerMaxMP;
-        //     statusBar.EXPDisplay.text = playerStatus.PlayerCurrentEXP + " / " + playerStatus.PlayerMaxEXP;
-        //     statusBar.PlayerLV.text = "LV." + playerStatus.PlayerLevel + " " + playerStatus.PlayerClass;
-        //     statusBar.PlayerName.text = playerStatus.PlayerName;
-        // }
     }
 
     private void InitialEquipmentItems()
@@ -517,27 +489,39 @@ public class SaveManager : MonoBehaviour
 
         for (int i = 0; i < data.equipmentNames.Length; i++)
         {
-            uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true)[i].Item = null;
+            var equipmentSlots = uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true);
+            if (i >= equipmentSlots.Length)
+            {
+                Debug.LogError("Not enough EquipmentSlot components");
+                break;
+            }
+
+            equipmentSlots[i].Item = null;
+
             if (data.equipmentNames[i] != null)
             {
                 Item newEquipmentItem = ScriptableObject.CreateInstance<Item>();
+                newEquipmentItem.ItemCount = data.itemCounts[i];
 
                 newEquipmentItem.ItemName = data.equipmentNames[i];
                 string itemAssetPath = "Items/" + newEquipmentItem.ItemName;
-                UnityEngine.Object newItemAsset = Resources.Load<UnityEngine.Object>(itemAssetPath);
-                Item newItemClass = (Item)newItemAsset;
-                if(newItemClass != null){
-                    newEquipmentItem.ItemCost = newItemClass.ItemCost; // set
-                    newEquipmentItem.ItemDetailType = newItemClass.ItemDetailType;
-                    newEquipmentItem.ItemImage = newItemClass.ItemImage;
-                    newEquipmentItem.ItemPrefab = newItemClass.ItemPrefab;
-                    newEquipmentItem.IsAlreadyGet = true;
-                    newEquipmentItem.ItemInfo = newItemClass.ItemInfo;
-                    newEquipmentItem.ItemCount = data.itemCounts[i];
-                    Debug.Log("log3434: "+newEquipmentItem.ItemName);
-                    uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true)[i].AddItem(newEquipmentItem);
-                
+                Debug.Log("log load path: " + itemAssetPath);
+                Item newItemClass = (Item)Resources.Load(itemAssetPath, typeof(Item));
+                if (newItemClass == null)
+                {
+                    Debug.LogError("Failed to load item asset: " + itemAssetPath);
+                    continue;
                 }
+
+                Debug.Log("log loaded class: " + newItemClass);
+                newEquipmentItem.ItemCost = newItemClass.ItemCost;
+                newEquipmentItem.ItemDetailType = newItemClass.ItemDetailType;
+                newEquipmentItem.ItemImage = newItemClass.ItemImage;
+                newEquipmentItem.ItemPrefab = newItemClass.ItemPrefab;
+                newEquipmentItem.IsAlreadyGet = true;
+                newEquipmentItem.ItemInfo = newItemClass.ItemInfo;
+                Debug.Log("log3434: " + newEquipmentItem.ItemName);
+                equipmentSlots[i].AddItem(newEquipmentItem);
             }
         }
     }
@@ -547,29 +531,35 @@ public class SaveManager : MonoBehaviour
         // int[] tmpCnt = new int[data.itemNames.Length];
         for (int i = 0; i < data.itemNames.Length; i++)
         {
-            if (data.itemNames[i].Length != 0)
+            var itemSlots = uiManagerObject.GetComponentsInChildren<Slot>(true);
+            if (data.itemNames[i] != null)
             {
                 // Item 객체 생성
-                Item newItem = new Item();
+                Item newItem = ScriptableObject.CreateInstance<Item>();
 
                 // 속성 설정: serials
                 newItem.ItemName = data.itemNames[i];
-                Debug.Log("log6676: "+newItem.ItemCount);
+                newItem.ItemCount = data.itemCounts[i];
+                Debug.Log("log6676: " + newItem.ItemCount);
                 string itemAssetPath = "Items/" + newItem.ItemName;
-                UnityEngine.Object newItemAsset = Resources.Load<UnityEngine.Object>(itemAssetPath);
-                Item newItemClass = (Item)newItemAsset;
-
-                if(newItemClass != null){
+                Debug.Log("log load path: " + itemAssetPath);
+                Item newItemClass = (Item)Resources.Load(itemAssetPath);
+                if (newItemClass == null)
+                {
+                    Debug.LogError("Failed to load item asset: " + itemAssetPath);
+                    continue;
+                }
+                Debug.Log("1111");
                 // load the asset to set other properties easily
                 newItem.ItemCost = newItemClass.ItemCost; // set
                 newItem.ItemDetailType = newItemClass.ItemDetailType;
                 newItem.ItemImage = newItemClass.ItemImage;
+                Debug.Log("2222");
                 newItem.ItemPrefab = newItemClass.ItemPrefab;
                 newItem.IsAlreadyGet = true;
                 newItem.ItemInfo = newItemClass.ItemInfo;
-                newItem.ItemCount = data.itemCounts[i];
-                uiManagerObject.GetComponentsInChildren<Slot>(true)[i].AddItem(newItem, data.itemCounts[i]);}
-                Debug.Log("log ADD:"+newItem + " ||  "+newItem.ItemCount);
+                itemSlots[i].AddItem(newItem, newItem.ItemCount);
+                Debug.Log("3333");
             }
         }
     }
@@ -580,29 +570,38 @@ public class SaveManager : MonoBehaviour
         {
             Slot refer_slot = uiManagerObject.GetComponentsInChildren<Slot>(true)[data.itemSlotReferencesIdx[i]];
             refer_slot.ItemToolTip = uiManagerObject.GetComponentInChildren<ItemToolTip>(true);
-
+            var quickItemSlots = uiManagerObject.GetComponentsInChildren<ItemQuickSlot>(true);
             if (data.quickItemNames[i] != null)
             {
-                /////////////////////********프리펩이 아니라 에셋을 참조하는 방식으로 바꿔야 할 거 같음.
                 // Item 객체 생성
                 Item newItem = ScriptableObject.CreateInstance<Item>();
+
+                // 속성 설정: serials
                 newItem.ItemName = data.quickItemNames[i];
                 newItem.ItemCount = data.quickItemCounts[i];
-                string itemAssetPath = "Items/" + newItem.ItemName;
-                UnityEngine.Object newItemAsset = Resources.Load<UnityEngine.Object>(itemAssetPath);
-                Item newItemClass = (Item)newItemAsset;
 
-                if(newItemClass != null){
-                // load the asset to set other properties easily
-                newItem.ItemCost = newItemClass.ItemCost; // set
-                newItem.ItemDetailType = newItemClass.ItemDetailType;
-                newItem.ItemImage = newItemClass.ItemImage;
-                newItem.ItemPrefab = newItemClass.ItemPrefab;
-                Debug.Log("log5555: "+ newItem.ItemPrefab.name);
-                newItem.IsAlreadyGet = true;
-                newItem.ItemInfo = newItemClass.ItemInfo;
-                uiManagerObject.GetComponentsInChildren<ItemQuickSlot>(true)[i].AddItem(newItem, data.quickItemCounts[i], refer_slot);}
+                string itemAssetPath = "Items/" + newItem.ItemName;
+                Debug.Log("log load path" + itemAssetPath);
+                Item newItemClass = (Item)Resources.Load(itemAssetPath);
+                if (newItemClass == null)
+                {
+                    Debug.LogError("Failed to load item asset: " + itemAssetPath);
+                    continue;
+                }
+                if (newItemClass != null)
+                {
+                    // load the asset to set other properties easily
+                    newItem.ItemCost = newItemClass.ItemCost; // set
+                    newItem.ItemDetailType = newItemClass.ItemDetailType;
+                    newItem.ItemImage = newItemClass.ItemImage;
+                    newItem.ItemPrefab = newItemClass.ItemPrefab;
+                    newItem.IsAlreadyGet = true;
+                    newItem.ItemInfo = newItemClass.ItemInfo;
+
+                    quickItemSlots[i].AddItem(newItem, data.quickItemCounts[i], refer_slot);
+                }
             }
+
         }
     }
 
