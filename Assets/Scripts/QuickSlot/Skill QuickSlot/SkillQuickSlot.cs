@@ -99,9 +99,15 @@ public class SkillQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
             return;
         }
         if (SkillDrag.Instance.SkillDragSlot != null) {
+            if (this.SkillPrefab != null)
+            {
+                ClearSlot();
+            }
+
             if (SkillDrag.Instance.SkillDragSlot.QuickSlotReference != null) {
                 SkillDrag.Instance.SkillDragSlot.QuickSlotReference.ClearSlot();
             }
+            
             AddSkill(SkillDrag.Instance.SkillDragSlot.SkillPrefab, SkillDrag.Instance.SkillDragSlot);
         }
     }

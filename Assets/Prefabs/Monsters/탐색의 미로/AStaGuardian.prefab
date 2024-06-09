@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2e198bb496d03459a891c87cf8bb1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3.5
+  MoveSpeed: 3.2
   FlipTimeHead: 3
   FlipTimeRear: 8
   StopTimeHead: 4
@@ -303,9 +303,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MonsterName: "\uC5D0\uC774\uC2A4\uD0C0 \uAC00\uB514\uC5B8"
   MonsterLevel: 16
-  MonsterMaxHealth: 5000
+  MonsterMaxHealth: 5500
   MonsterCurrentHealth: 0
-  MonsterDamage: 135
+  MonsterDamage: 150
   MonsterEXP: 1100
   HPBarPos: 2.5
   MonsterInfoPos: 2.7
@@ -443,7 +443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 779d4a574b47ccb408b29dfb25dd4a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BackToIdleAnimTime: 1.5
   TeleportDelayTime: 1.5
   DestroyEffectTime: 0.5
   TeleportEffect: {fileID: 8885825609034438207, guid: 75677672d12595d4d8b6f6ae692198c4, type: 3}

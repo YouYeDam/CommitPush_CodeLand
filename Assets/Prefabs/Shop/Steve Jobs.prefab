@@ -50,7 +50,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestsToGive: []
   QuestDialogues: []
-  currentQuestIndex: 0
   DefaultDialogue: {fileID: 0}
   UIManager: {fileID: 0}
   NPCName: "\uC2A4\uD2F0\uBE0C \uC7A1\uC2A4"
@@ -68,6 +67,7 @@ MonoBehaviour:
   NPCQuestStatusPos: 1
   IsShop: 1
   HavingJob: 1
+  CurrentQuestIndex: 0
 --- !u!212 &101798419204784940
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -215,10 +215,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c44c17c6aa28d124caad58666c55f96e, type: 2}
   - {fileID: 11400000, guid: bd6eca51320c27f4098b9dead5d66985, type: 2}
   - {fileID: 11400000, guid: 7fbd33f60669e59488042ad9fcc145c6, type: 2}
-  - {fileID: 11400000, guid: 0314e79dc75bc984ba15fa280783daee, type: 2}
-  - {fileID: 11400000, guid: 35fe9629f67694a4a9add84ff916ca0b, type: 2}
-  - {fileID: 11400000, guid: d53805cba6f571345ab96d4c5616c3d6, type: 2}
-  - {fileID: 11400000, guid: 1532413c68bd96d4997d1c48762df107, type: 2}
-  - {fileID: 11400000, guid: 662f8867ceff1cc44b636ca10468df2f, type: 2}
-  - {fileID: 11400000, guid: 4d39952303a120345af8e2ee12d31695, type: 2}
-  - {fileID: 11400000, guid: 58bc592cadbe8774ba5459ca501a12d8, type: 2}

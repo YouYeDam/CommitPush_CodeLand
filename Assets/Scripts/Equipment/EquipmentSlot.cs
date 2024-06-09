@@ -12,7 +12,6 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public Image ItemImage;  // 아이템의 이미지
     ItemToolTip ItemToolTip;
     EquipmentItem EquipmentItem;
-
     [SerializeField] GameObject UICanvas;
     public Inventory InventoryScript;
 
@@ -99,11 +98,15 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void AddItem(Item Item) {
         this.Item = Item;
         GameObject ToolTipObject = GameObject.Find("EquipmentToolTip");
+        EquipmentItem.PlayerStatus = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
+        EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
         if (ToolTipObject != null) {
         ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
         }
-        EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
-        EquipmentItem.PlayerStatus = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
+        if (EquipmentItem.IsSpecialEquipment) {
+            SpecialEquipment SpecialEquipment = GetComponent<SpecialEquipment>();
+            SpecialEquipment.SpecialEquipmentEffect(EquipmentItem.EquipmentType, Item.ItemName);
+        }
         EquipmentItem.IncreaseStat();
         ItemImage.sprite = this.Item.ItemImage;
         SetColor(1);

@@ -343,7 +343,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (IsAlive)
             {
-                PlayerStatus.AutoHeal(); // 5초마다 AutoHeal 함수 호출
+                PlayerStatus.AutoHeal(0f); // 5초마다 AutoHeal 함수 호출
             }
             yield return new WaitForSeconds(5f);
         }

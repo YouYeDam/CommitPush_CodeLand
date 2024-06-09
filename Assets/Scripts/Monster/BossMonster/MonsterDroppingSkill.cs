@@ -49,8 +49,5 @@ public class MonsterDroppingSkill : MonoBehaviour
             MonsterAttackSkill.MonsterStatus = MonsterStatus;
             MonsterAttackSkill.IsLeft = BasicMonsterMovement.IsLeft;
         }
-        if (!BasicMonsterMovement.IsAlive) {
-            Destroy(DropObjectInstance);
-        }
     }
 }

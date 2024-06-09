@@ -47,10 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dce98ef6376c6e4a90bf811322f4e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuestsToGive: []
-  QuestDialogues: []
-  currentQuestIndex: 0
-  DefaultDialogue: {fileID: 11400000, guid: 6bd3125614f0b8b498a533ce40cc76d5, type: 2}
+  QuestsToGive:
+  - {fileID: 11400000, guid: b48adf171461c4743a4782df91a558c6, type: 2}
+  QuestDialogues:
+  - PreQuestDialogue: {fileID: 11400000, guid: 7e06a5f52f952aa4d928a23f38a59fe9, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: 79db2ea2a9f2a584fba4ca2a2a0ff9c0, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: 79db2ea2a9f2a584fba4ca2a2a0ff9c0, type: 2}
+    PostQuestDialogue: {fileID: 11400000, guid: f86e9b962072a984397179eea029e9da, type: 2}
+  DefaultDialogue: {fileID: 11400000, guid: f86e9b962072a984397179eea029e9da, type: 2}
   UIManager: {fileID: 0}
   NPCName: "\uD30C\uC774\uC36C"
   NPCJob: 
@@ -67,6 +71,7 @@ MonoBehaviour:
   NPCQuestStatusPos: 1
   IsShop: 0
   HavingJob: 0
+  CurrentQuestIndex: 0
 --- !u!212 &717382888131969278
 SpriteRenderer:
   m_ObjectHideFlags: 0

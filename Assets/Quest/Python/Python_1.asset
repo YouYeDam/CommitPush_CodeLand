@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20005bd27f3e7f544bcd1cb1deeee4c8, type: 3}
   m_Name: Python_1
   m_EditorClassIdentifier: 
-  Title: "\uD30C\uC774\uC36C \uD018\uC2A4\uD2B8"
-  Description: "\uCCAB \uBC88\uC9F8 \uD018\uC2A4\uD2B8"
-  ExperienceReward: 10
-  BitReward: 20
-  ItemRewards:
-  - {fileID: 11400000, guid: 78d0f21291f91614d8d6938efc061abd, type: 2}
+  Title: "\uC0C8\uB85C\uC6B4 \uC138\uACC4"
+  Description: 
+  ExperienceReward: 0
+  BitReward: 0
+  ItemRewards: []
   Objectives:
-  - Type: 1
-    TargetName: "\uC778\uD2B8 \uC18C\uB4DC"
-    RequiredAmount: 1
+  - Type: 0
+    TargetName: 
+    RequiredAmount: 0
     CurrentAmount: 0
   RequiredLevel: 1
+  NPCName: "\uD30C\uC774\uC36C"
+  Place: "\uC785\uBB38\uC758 \uB3D9\uAD74 \uC548\uCABD"

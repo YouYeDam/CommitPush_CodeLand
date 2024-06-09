@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10c11e2fc931eec428040037f99a5af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadSceneName: "\uC2DC\uC791\uC758 \uB3D9\uAD74_\uB3D9\uAD74 \uC548\uCABD"
+  LoadSceneName: 
   ConnectPortalName: 
 --- !u!50 &5395048085078877355
 Rigidbody2D:

@@ -16,7 +16,8 @@ MonoBehaviour:
   Description: 
   ExperienceReward: 20
   BitReward: 100
-  ItemRewards: []
+  ItemRewards:
+  - {fileID: 11400000, guid: 58bc592cadbe8774ba5459ca501a12d8, type: 2}
   Objectives:
   - Type: 1
     TargetName: "\uC81C\uB85C\uBE44\uD130"
@@ -27,5 +28,5 @@ MonoBehaviour:
     RequiredAmount: 5
     CurrentAmount: 0
   RequiredLevel: 2
-  Place: "\uB370\uC774\uD130 \uBE4C\uB9AC\uC9C0"
   NPCName: "\uADC0\uB3C4 \uBC18 \uB85C\uC12C"
+  Place: "\uB370\uC774\uD130 \uBE4C\uB9AC\uC9C0"

@@ -18,6 +18,7 @@ MonoBehaviour:
   BitReward: 0
   ItemRewards:
   - {fileID: 11400000, guid: 4a6c43d0c43502c4eb7943a06f18bd95, type: 2}
+  - {fileID: 11400000, guid: 662f8867ceff1cc44b636ca10468df2f, type: 2}
   Objectives:
   - Type: 1
     TargetName: "\uD050\uD50C\uB77C\uC6CC"

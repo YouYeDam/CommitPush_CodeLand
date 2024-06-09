@@ -113,7 +113,11 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             if (ItemDrag.Instance.DragSlot.Item.Type != Item.ItemType.Used) {
                 return; // 소모품 타입이 아니라면 리턴
             }
-            
+            // 현재 퀵슬롯에 아이템이 있으면 해당 아이템과의 연동을 해제
+            if (this.Item != null)
+            {
+                ClearSlot();
+            }
             if (ItemDrag.Instance.DragSlot.QuickSlotReference != null) {
                 ItemDrag.Instance.DragSlot.QuickSlotReference.ClearSlot();
             }
@@ -121,30 +125,8 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             DropItemInputNumber DropItemInputNumber = FindObjectOfType<DropItemInputNumber>();
             DropItemInputNumber.Cancel();
         }
-
-        if (ItemQuickSlotItemDrag.Instance.DragItemQuickSlot != null)
-        {
-            //ChangeSlot();
-        }
     }
 
-    private void ChangeSlot()
-    {
-        Item TempItem = Item;
-        int TempItemCount = ItemCount;
-        Slot TempSlotReference = SlotReference;
-        AddItem(ItemQuickSlotItemDrag.Instance.DragItemQuickSlot.Item, ItemQuickSlotItemDrag.Instance.DragItemQuickSlot.ItemCount, ItemQuickSlotItemDrag.Instance.DragItemQuickSlot.SlotReference);
-
-        if (TempItem != null) 
-        {
-            ItemQuickSlotItemDrag.Instance.DragItemQuickSlot.AddItem(TempItem, TempItemCount, TempSlotReference);
-        }
-        else 
-        {
-            ItemQuickSlotItemDrag.Instance.DragItemQuickSlot.ClearSlot();
-
-        }
-    }
     public void UseItem() // 아이템 사용
     {
         if (Item == null || !PlayerMovement.IsAlive) {

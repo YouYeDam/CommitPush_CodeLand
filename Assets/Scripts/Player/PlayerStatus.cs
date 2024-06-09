@@ -56,7 +56,15 @@ public class PlayerStatus : MonoBehaviour
         PlayerCurrentMP = PlayerMaxMP;
         LevelUpPoint += 3;
 
-        PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.6f);
+        if (PlayerLevel <= 5) {
+            PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.65f);
+        }
+        if (PlayerLevel <= 8) {
+            PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.6f);
+        }
+        else {
+            PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.55f);
+        }
         if (PlayerCurrentEXP >= PlayerMaxEXP) {
             PlayerCurrentEXP = PlayerMaxEXP - 1;
         }
@@ -119,7 +127,7 @@ public class PlayerStatus : MonoBehaviour
         LevelUpPoint -= 1;
     }
 
-    public void AutoHeal() {
+    public void AutoHeal(float Bonus) {
         if (PlayerCurrentHP != PlayerMaxHP) {
             PlayerCurrentHP += Mathf.RoundToInt(PlayerMaxHP * 0.03f);
             if (PlayerCurrentHP > PlayerMaxHP) {

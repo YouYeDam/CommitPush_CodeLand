@@ -13,10 +13,12 @@ public class EquipmentItem : MonoBehaviour
     [SerializeField] public float APValue; // AP 영향값
     [SerializeField] public float CritValue; // Crit 영향값
     public PlayerStatus PlayerStatus;
+    public bool IsSpecialEquipment = false;
     public Equipment Equipment;
     void Start(){
         PlayerStatus = FindObjectOfType<PlayerStatus>();
     }
+    
     public void EquipItem(Item NewItem) {
         Equipment = FindObjectOfType<Equipment>();
         switch (EquipmentType) {
