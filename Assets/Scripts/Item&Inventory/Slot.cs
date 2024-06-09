@@ -57,30 +57,20 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     }
 
     public void AddItem(Item Item, int Count = 1, ItemQuickSlot QuickSlot = null) { // 인벤토리에 새로운 아이템 슬롯 추가
-        Debug.Log("slot log 1: "+Item.name);
         this.Item = Item;
-        Debug.Log("slot log 2");
         ItemCount = Count;
-        Debug.Log("slot log 3");
         ItemImage.sprite = this.Item.ItemImage;
-        Debug.Log("slot log 4");
         QuickSlotReference = QuickSlot;
-        Debug.Log("slot log 5");
 
         if (this.Item.Type == Item.ItemType.Used || this.Item.Type == Item.ItemType.ETC)
         {
             CountImage.SetActive(true);
-        Debug.Log("slot log 6");
             TextCount.text = ItemCount.ToString();
-        Debug.Log("slot log 7");
         }
         else
         {
-        Debug.Log("slot log 8");
             TextCount.text = "0";
-        Debug.Log("slot log 9");
             CountImage.SetActive(false);
-        Debug.Log("slot log 10");
         }
         SetColor(1);
     }
@@ -231,13 +221,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     void OnDoubleClickForUse() // 슬롯 더블클릭
     {   
         if (Item == null || !PlayerMovement.IsAlive) {
-            Debug.Log("log121: 1111");
             return;
         }
 
         if (Item.Type == Item.ItemType.Used) // 소비 아이템시 실행
         {
-            Debug.Log("log121: 2222");
             UsedItem UsedItem = Item.ItemPrefab.GetComponent<UsedItem>();
             UsedItem.PlayerStatus = PlayerStatus;
             if (UsedItem != null)
@@ -248,7 +236,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
         else if (Item.Type == Item.ItemType.Equipment) // 장비 아이템시 실행
         {
-            Debug.Log("log121: 3333");
             EquipmentItem EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
             EquipmentItem.PlayerStatus = PlayerStatus;
             if (EquipmentItem != null)
@@ -264,7 +251,6 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
         else if (Item.Type == Item.ItemType.SourceCode) // 스킬북 아이템시 실행
         {   
-            Debug.Log("log121: 4444");
             SourceCodeItem SourceCodeItem = Item.ItemPrefab.GetComponent<SourceCodeItem>();
             if (SourceCodeItem != null)
             {   

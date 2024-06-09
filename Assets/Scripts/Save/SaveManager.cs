@@ -225,7 +225,8 @@ public class SaveManager : MonoBehaviour
         {
             if (equipmentSlots[i].Item != null)
             {
-                equipmentNames[i] = equipmentSlots[i].Item.ItemPrefab.name;
+                equipmentNames[i] = equipmentSlots[i].Item.name;
+                Debug.Log("equipment saved " +equipmentSlots[i].Item.name);
             }
 
         };
@@ -276,7 +277,6 @@ public class SaveManager : MonoBehaviour
                 itemNames[i] = slots[i].Item.name;
                 itemCounts[i] = slots[i].ItemCount;
                 itemCosts[i] = slots[i].Item.ItemCost;
-                Debug.Log("item saving " + itemNames[i]);
             }
         };
         // 정리된 배열들을 data에 저장
@@ -320,18 +320,14 @@ public class SaveManager : MonoBehaviour
 
         Console.WriteLine("Save Data:");
         for (int i = 0; i < data.equipmentNames.Length; i++){
-            Debug.Log($"ID: {data.equipmentNames[i]}");
         }
         for (int i = 0; i < data.itemNames.Length; i++){
-            Debug.Log($"ID: {data.itemNames[i]}");
         }
         for (int i = 0; i < data.quickItemNames.Length; i++){
-            Debug.Log($"ID: {data.quickItemNames[i]}");
         }
     }
     public void InstantiateOnSavePoint(PlayerData data)
     {
-        Debug.Log("e1");
         questManagerObject = Instantiate(questManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         questManager = FindObjectOfType<QuestManager>();
         questManagerObject.name = questManagerPrefab.name; // "(Clone)" 접미사 제거
@@ -341,11 +337,9 @@ public class SaveManager : MonoBehaviour
         questManager.activeQuests = data.activeQuests;
         questManager.completedQuests = data.completedQuests;
         
-        Debug.Log("e2");
         DisplaySaveDatas(data);
         if (playerObject == null)
         {
-        Debug.Log("e3");
             playerObject = Instantiate(playerPrefab, new Vector3(data.x, data.y, data.z), Quaternion.identity);
             playerObject.name = playerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
@@ -357,14 +351,12 @@ public class SaveManager : MonoBehaviour
             playerStatus.PlayerMaxHP = data.PlayerMaxHP;
             playerStatus.PlayerMaxMP = data.PlayerMaxMP;
             playerStatus.PlayerMaxEXP = data.PlayerMaxEXP;
-        Debug.Log("e4");
             // set current values.
             playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
             playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
             playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
 
             playerStatus.PlayerClass = data.PlayerClass;
-        Debug.Log("e5");
             playerStatus.PlayerName = data.PlayerName;
             playerStatus.PlayerATK = data.PlayerATK;
             playerStatus.PlayerDEF = data.PlayerDEF;
@@ -397,7 +389,6 @@ public class SaveManager : MonoBehaviour
 
         if (uiManagerObject == null)
         {
-        Debug.Log("e6");
             // LevelUpPoint
             uiManagerObject = Instantiate(uiManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             // 이 지점에서 초기화 시켜줘야 오류가 없음.
@@ -413,13 +404,9 @@ public class SaveManager : MonoBehaviour
             DontDestroyOnLoad(uiManagerObject); // 씬 전환 시 파괴되지 않도록 설정
 
 
-            Debug.Log("e7");
             InitialEquipmentItems();
-            Debug.Log("e8");
             LoadEquipments(data);
-            Debug.Log("e9");
             LoadItems(data);
-            Debug.Log("e10");
             LoadQuickItems(data);
 
             // LoadSkills(data);
@@ -511,58 +498,40 @@ public class SaveManager : MonoBehaviour
 
     private void LoadEquipments(PlayerData data)
     {
-        Debug.Log("eq1");
         for (int i = 0; i < data.equipmentNames.Length; i++)
         {
-        Debug.Log("eq2");
             var equipmentSlots = uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true);
             if (i >= equipmentSlots.Length)
             {
-        Debug.Log("eq3");
                 break;
             }
 
-        Debug.Log("eq4");
             equipmentSlots[i].Item = null;
 
-        Debug.Log("eq5");
             if (data.equipmentNames[i] != null)
             {
-        Debug.Log("eq6");
                 Item newEquipmentItem = ScriptableObject.CreateInstance<Item>();
                 EquipmentItem equipmentItem = new EquipmentItem();
-                newEquipmentItem.ItemCount = data.itemCounts[i];
-        Debug.Log("eq7");
 
-                newEquipmentItem.ItemName = data.equipmentNames[i];
-                string itemAssetPath = "Items/" + newEquipmentItem.ItemName;
+                newEquipmentItem.name = data.equipmentNames[i];
+                newEquipmentItem.ItemCount = data.itemCounts[i];
+                string itemAssetPath = "Items/" + newEquipmentItem.name;
                 Item newItemClass = (Item)Resources.Load(itemAssetPath, typeof(Item));
-        Debug.Log("eq8");
                 if (newItemClass == null)
                 {
                     continue;
                 }
-        Debug.Log("eq9");
-
+                newEquipmentItem.ItemName = newItemClass.ItemName;
                 newEquipmentItem.ItemCost = newItemClass.ItemCost;
-                Debug.Log("neq1");
                 newEquipmentItem.ItemDetailType = newItemClass.ItemDetailType;
-                Debug.Log("neq2");
                 newEquipmentItem.ItemImage = newItemClass.ItemImage;
-                Debug.Log("neq3");
                 newEquipmentItem.ItemPrefab = newItemClass.ItemPrefab;
-                Debug.Log("neq4 " + newEquipmentItem.ItemPrefab);
                 newEquipmentItem.IsAlreadyGet = true;
-                Debug.Log("neq5");
                 newEquipmentItem.ItemInfo = newItemClass.ItemInfo;
-                Debug.Log("neq6");
                 newEquipmentItem.Type = newItemClass.Type;
                 
 
-                Debug.Log("neq7");
                 equipmentSlots[i].AddItem(newEquipmentItem);
-                Debug.Log("neq8");
-        Debug.Log("eq10");
             }
         }
     }
@@ -579,16 +548,16 @@ public class SaveManager : MonoBehaviour
                 // Item 객체 생성
                 Item newItem = ScriptableObject.CreateInstance<Item>();
 
-                newItem.ItemName = data.itemNames[i];
-                Debug.Log("Loading items " + newItem.ItemName);
+                newItem.name = data.itemNames[i];
                 newItem.ItemCount = data.itemCounts[i];
-                string itemAssetPath = "Items/" + newItem.ItemName;
+                string itemAssetPath = "Items/" + newItem.name;
                 Item newItemClass = (Item)Resources.Load(itemAssetPath);
                 if (newItemClass == null)
                 {
                     continue;
                 }
                 // load the asset to set other properties easily
+                newItem.ItemName = newItemClass.ItemName;
                 newItem.ItemCost = newItemClass.ItemCost; // set
                 newItem.ItemDetailType = newItemClass.ItemDetailType;
                 newItem.ItemImage = newItemClass.ItemImage;
@@ -606,52 +575,37 @@ public class SaveManager : MonoBehaviour
     {
         for (int i = 0; i < data.quickItemNames.Length; i++)
         {
-            Debug.Log("q1");
             Slot refer_slot = uiManagerObject.GetComponentsInChildren<Slot>(true)[data.itemSlotReferencesIdx[i]];
-            Debug.Log("q2");
             refer_slot.ItemToolTip = uiManagerObject.GetComponentInChildren<ItemToolTip>(true);
-            Debug.Log("q3");
             var quickItemSlots = uiManagerObject.GetComponentsInChildren<ItemQuickSlot>(true);
-            Debug.Log("q4");
             if (data.quickItemNames[i] != null)
             {
-            Debug.Log("q5");
                 // Item 객체 생성
                 Item newItem = ScriptableObject.CreateInstance<Item>();
-            Debug.Log("q6");
-
-                // 속성 설정: serials
-                newItem.ItemName = data.quickItemNames[i];
+                newItem.name = data.quickItemNames[i];
                 newItem.ItemCount = data.quickItemCounts[i];
-            Debug.Log("q7");
-            Debug.Log("q7");
 
-                string itemAssetPath = "Items/" + newItem.ItemName;
-            Debug.Log("q8");
+                string itemAssetPath = "Items/" + newItem.name;
                 Item newItemClass = (Item)Resources.Load(itemAssetPath);
                 if (newItemClass == null)
                 {
-            Debug.Log("q9");
                     continue;
                 }
                 if (newItemClass != null)
                 {
-                    // load the asset to set other properties easily
-            Debug.Log("q10");
-                    newItem.ItemCost = newItemClass.ItemCost; // set
+                    newItem.ItemName = newItemClass.ItemName;
+                    newItem.ItemCost = newItemClass.ItemCost; 
                     newItem.ItemDetailType = newItemClass.ItemDetailType;
                     newItem.ItemImage = newItemClass.ItemImage;
                     newItem.ItemPrefab = newItemClass.ItemPrefab;
                     newItem.IsAlreadyGet = true;
                     newItem.ItemInfo = newItemClass.ItemInfo;
                     newItem.Type = newItemClass.Type;
-            Debug.Log("q11");
-
+                    
                     quickItemSlots[i].AddItem(newItem, data.quickItemCounts[i], refer_slot);
                 }
             }
 
-            Debug.Log("q12");
         }
     }
 
