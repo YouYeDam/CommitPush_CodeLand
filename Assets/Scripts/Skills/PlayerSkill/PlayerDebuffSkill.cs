@@ -46,6 +46,9 @@ public class PlayerDebuffSkill : MonoBehaviour
         {
             transform.position = TargetPosition;
         }
+        if (TargetMonster != null && !TargetMonster.GetComponent<BasicMonsterMovement>().IsAlive) {
+            DestroySelf();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

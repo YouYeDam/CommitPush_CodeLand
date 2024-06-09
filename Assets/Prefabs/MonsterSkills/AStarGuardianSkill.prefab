@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillSpeed: 6
   DestroyDelay: 1.5
-  Damage: 180
+  Damage: 200
   IsHoming: 1
   IsRotationing: 0
   IsDropSkill: 0

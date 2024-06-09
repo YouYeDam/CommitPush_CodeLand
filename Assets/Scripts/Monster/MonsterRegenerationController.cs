@@ -13,6 +13,7 @@ public class MonsterRegenerationController : MonoBehaviour
         BasicMonsterMovement = MonsterInstance.GetComponent<BasicMonsterMovement>();
         BasicMonsterMovement.IsTakeDamge = false;
         BasicMonsterMovement.CanWalk = true;
+        BasicMonsterMovement.IsSkilling = false;
         MonsterInstance.SetActive(false);
         StartCoroutine(RegenerateMonsterWithDelay(MonsterInstance));
     }
