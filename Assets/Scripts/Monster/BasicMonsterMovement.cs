@@ -222,6 +222,9 @@ public class BasicMonsterMovement : MonoBehaviour
                 Damage = Mathf.RoundToInt(Damage * (1 + MonsterStatus.LevelDiff / 100f)); // 받는 데미지 증가
             }
             MonsterStatus.MonsterCurrentHealth -= Damage;
+            if (MonsterStatus.MonsterCurrentHealth < 0) {
+                MonsterStatus.MonsterCurrentHealth = 0;
+            }
             MonsterStatus.DisplayHPMeter();
             MonsterStatus.DisplayMonsterInfo();
             MonsterTakeDamageDisplay.DisplayDamageBar(Damage, IsCrit);
