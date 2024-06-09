@@ -195,11 +195,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillSpeed: 2.8
   DestroyDelay: 1.5
-  Damage: 70
+  Damage: 75
   IsHoming: 1
+  IsRotationing: 0
+  IsDropSkill: 0
+  DropPos: 10
   BasicMonsterMovement: {fileID: 0}
   MonsterStatus: {fileID: 0}
   IsSlowingSkill: 0
   SlowTime: 3
   SlowFactor: 0.5
+  RotationSpeed: 360
+  DestroyTime: 0.15
   IsLeft: 0

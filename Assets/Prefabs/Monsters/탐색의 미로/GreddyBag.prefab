@@ -266,7 +266,7 @@ MonoBehaviour:
   MonsterLevel: 8
   MonsterMaxHealth: 150
   MonsterCurrentHealth: 0
-  MonsterDamage: 70
+  MonsterDamage: 80
   MonsterEXP: 19
   HPBarPos: 0.7
   MonsterInfoPos: 0.7

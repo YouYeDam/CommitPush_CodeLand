@@ -250,6 +250,7 @@ MonoBehaviour:
   IsTakeDamge: 0
   CanWalk: 1
   CanTriggerDamage: 1
+  IsSkilling: 0
   AttackDelayTime: 4.5
 --- !u!114 &3157593347497917494
 MonoBehaviour:
@@ -267,7 +268,7 @@ MonoBehaviour:
   MonsterLevel: 8
   MonsterMaxHealth: 90
   MonsterCurrentHealth: 0
-  MonsterDamage: 45
+  MonsterDamage: 50
   MonsterEXP: 19
   HPBarPos: 0.7
   MonsterInfoPos: 0.8
@@ -306,7 +307,7 @@ MonoBehaviour:
   - ItemPrefab: {fileID: 4338472210403635751, guid: a20cea60472899840ade3f6a44eed7f1, type: 3}
     SpawnProbability: 0.1
   - ItemPrefab: {fileID: 4338472210403635751, guid: 996a3a61bbb315a40a44bc36b212b294, type: 3}
-    SpawnProbability: 0.015
+    SpawnProbability: 0.01
   MonsterBit: 19
   MonsterSnippet: 0
 --- !u!114 &-8855345390103764750
@@ -340,9 +341,9 @@ MonoBehaviour:
   Projectile: {fileID: 8885825609034438207, guid: d0fe189282089ff47bdfed7f35088166, type: 3}
   SkillSpot: {fileID: 8763508143990234850}
   BackToIdleAnimTime: 0.7
-  Delay: 1
+  PreSkillDelay: 1
+  SkillDelayForAnim: 0
   UseSkillDistance: 10
-  IsSkilling: 0
 --- !u!1 &9048284205231676761
 GameObject:
   m_ObjectHideFlags: 0

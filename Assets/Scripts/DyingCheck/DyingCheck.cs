@@ -22,7 +22,10 @@ public class DyingCheck : MonoBehaviour
     public void RevivePlayer() {
         PlayerStatus.PlayerCurrentHP = PlayerStatus.PlayerMaxHP / 2;
         PlayerStatus.PlayerCurrentMP = PlayerStatus.PlayerMaxMP / 2;
-        PlayerStatus.PlayerCurrentEXP = Mathf.RoundToInt(PlayerStatus.PlayerCurrentEXP * 0.8f);
+        PlayerStatus.PlayerCurrentEXP = PlayerStatus.PlayerCurrentEXP - Mathf.RoundToInt(PlayerStatus.PlayerMaxEXP * 0.2f);
+        if (PlayerStatus.PlayerCurrentEXP < 0) {
+            PlayerStatus.PlayerCurrentEXP = 0;
+        }
         UIManager.DestroyAllTempInfo();
         
         ReviveSceneNameObject = GameObject.Find("ReviveSceneName");

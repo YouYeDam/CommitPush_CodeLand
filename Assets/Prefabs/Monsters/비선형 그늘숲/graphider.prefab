@@ -250,6 +250,7 @@ MonoBehaviour:
   IsTakeDamge: 0
   CanWalk: 1
   CanTriggerDamage: 1
+  IsSkilling: 0
   AttackDelayTime: 2
 --- !u!114 &3157593347497917494
 MonoBehaviour:
@@ -267,7 +268,7 @@ MonoBehaviour:
   MonsterLevel: 9
   MonsterMaxHealth: 100
   MonsterCurrentHealth: 0
-  MonsterDamage: 65
+  MonsterDamage: 75
   MonsterEXP: 23
   HPBarPos: 0.8
   MonsterInfoPos: 0.8
@@ -339,7 +340,6 @@ MonoBehaviour:
   PreSkillDelay: 1
   SkillDelayForAnim: 0
   UseSkillDistance: 10
-  IsSkilling: 0
 --- !u!1 &8171183535710225854
 GameObject:
   m_ObjectHideFlags: 0
