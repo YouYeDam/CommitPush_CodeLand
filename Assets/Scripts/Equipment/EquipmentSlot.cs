@@ -108,6 +108,17 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         ItemImage.sprite = this.Item.ItemImage;
         SetColor(1);
     }
+    public void AddItemOnLoad(Item Item) {
+        this.Item = Item;
+        GameObject ToolTipObject = GameObject.Find("EquipmentToolTip");
+        if (ToolTipObject != null) {
+        ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
+        }
+        EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
+        EquipmentItem.PlayerStatus = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
+        ItemImage.sprite = this.Item.ItemImage;
+        SetColor(1);
+    }
 
     public void CheckNull(Item NewItem) {
         if (Item == null) {

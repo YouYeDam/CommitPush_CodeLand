@@ -531,7 +531,7 @@ public class SaveManager : MonoBehaviour
                 newEquipmentItem.Type = newItemClass.Type;
                 
 
-                equipmentSlots[i].AddItem(newEquipmentItem);
+                equipmentSlots[i].AddItemOnLoad(newEquipmentItem);
             }
         }
     }
