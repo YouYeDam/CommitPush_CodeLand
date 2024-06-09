@@ -37,14 +37,16 @@ public class PlayerData
     public Animator playerAnimator; // 이거 필요 없었던 거 같은데
     public RuntimeAnimatorController runtimeAnimatorController;
     // 아이템 저장을 위해선 item 과 item count로 구성된 2차원 배열을 저장해야함.
-    public Item[] items = new Item[40];
+    public string[] itemNames = new string[40];
     public GameObject[] skillPrefabs = new GameObject[10];
     public GameObject[] quickSkillPrefabs = new GameObject[6];
     public int[] skillSlotReferencesIdx = new int[6];
     public int[] itemSlotReferencesIdx = new int[4];
-    public Item[] quickItems = new Item[4];
+    public string[] quickItemNames = new string[4];
     public int[] quickItemCounts = new int[4];
+    public int[] quickItemCosts = new int[4];
     public int[] itemCounts = new int[40];
+    public int[] itemCosts = new int[40];
     public bool[] isEquipment = new bool[40];
     public GameObject QSkill, WSkill, ESkill, RSkill, SSkill, DSkill;
     public float QSkillCoolDown, WSkillCoolDown, ESkillCoolDown, RSkillCoolDown, SSkillCoolDown, DSkillCoolDown;
@@ -100,21 +102,22 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    void DoSave(){
+    void DoSave()
+    {
         playerObject = GameObject.FindWithTag("Player");
         questManagerObject = GameObject.FindWithTag("QuestManager");
         uiManager = GameObject.FindWithTag("UIManager").GetComponent<UIManager>();
-            if (playerObject != null)
-            {
-                SavePlayerProgress(SceneManager.GetActiveScene().name, uiManager, playerObject, questManagerObject); 
-            }
+        if (playerObject != null)
+        {
+            SavePlayerProgress(SceneManager.GetActiveScene().name, uiManager, playerObject, questManagerObject);
+        }
         InactivatePauseMenu();
     }
 
     public void SavePlayerProgress(string currentSceneName, UIManager uIManager, GameObject playerObject, GameObject questManagerObject)
     {
         Slot[] slots = uiManager.GetComponentsInChildren<Slot>(true); // 슬롯은 기본적으로 비활성화 돼있기 때문에 (true) 값을 설정. 모든 슬롯을 가져옴.
-        EquipmentSlot[] equipmentSlots = uiManager.GetComponentsInChildren<EquipmentSlot>(true); 
+        EquipmentSlot[] equipmentSlots = uiManager.GetComponentsInChildren<EquipmentSlot>(true);
         SkillSlot[] skillSlots = uiManager.GetComponentsInChildren<SkillSlot>(true);
         PlayerStatus playerStatus = playerObject.GetComponent<PlayerStatus>();
         PlayerMoney playerMoney = playerObject.GetComponent<PlayerMoney>();
@@ -165,14 +168,14 @@ public class SaveManager : MonoBehaviour
             RSkillCoolDown = playerSkills.RSkillCoolDown,
             SSkillCoolDown = playerSkills.SSkillCoolDown,
             DSkillCoolDown = playerSkills.DSkillCoolDown,
-            runtimeAnimatorControllerPath = "AnimatorControllers/"+animatorControllerName,
+            runtimeAnimatorControllerPath = "AnimatorControllers/" + animatorControllerName,
             //8888
             QuestDatas = questManager.QuestDatas,
             allQuests = questManager.allQuests,
             activeQuests = questManager.activeQuests,
             completedQuests = questManager.completedQuests,
         };
-        
+
         SaveItems(slots, data);
         SaveSkills(skillSlots, data);
         SaveQuickSkills(skillQuickSlots, data);
@@ -187,10 +190,11 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private static void SaveQuestSlot(QuestSlot[] questSlots, PlayerData data, QuestManager questManager){
+    private static void SaveQuestSlot(QuestSlot[] questSlots, PlayerData data, QuestManager questManager)
+    {
         NPC[] npcs = FindObjectsOfType<NPC>();
         data.currentQuestIndex = new int[npcs.Length];
-        foreach(Quest quest in questManager.allQuests)
+        foreach (Quest quest in questManager.allQuests)
         {
             string questTitle = quest.Title;
             foreach (NPC npc in npcs)
@@ -209,7 +213,8 @@ public class SaveManager : MonoBehaviour
 
         data.quests = new Quest[30];
         Quest[] quests = new Quest[questSlots.Length];
-        for(int i = 0; i < questSlots.Length; i++){
+        for (int i = 0; i < questSlots.Length; i++)
+        {
             quests[i] = questSlots[i].Quest;
         }
         data.quests = quests;
@@ -229,14 +234,17 @@ public class SaveManager : MonoBehaviour
         // 정리된 배열들을 data에 저장
         data.equipments = equipments;
     }
-    private static void SaveQuickSkills(SkillQuickSlot[] skillQuickSlots, PlayerData data){
+    private static void SaveQuickSkills(SkillQuickSlot[] skillQuickSlots, PlayerData data)
+    {
         GameObject[] skillPrefabs = new GameObject[skillQuickSlots.Length];
         int[] skillSlotReferencesIdx = new int[skillQuickSlots.Length];
         for (int i = 0; i < skillQuickSlots.Length; i++)
         {
             skillPrefabs[i] = skillQuickSlots[i].SkillPrefab;
-            if(skillQuickSlots[i].SlotReference != null){
-            skillSlotReferencesIdx[i] = skillQuickSlots[i].SlotReference.transform.GetSiblingIndex();}
+            if (skillQuickSlots[i].SlotReference != null)
+            {
+                skillSlotReferencesIdx[i] = skillQuickSlots[i].SlotReference.transform.GetSiblingIndex();
+            }
         };
         // 정리된 배열들을 data에 저장
         data.quickSkillPrefabs = skillPrefabs;
@@ -258,48 +266,63 @@ public class SaveManager : MonoBehaviour
 
     private static void SaveItems(Slot[] slots, PlayerData data)
     {
-        Item[] items = new Item[slots.Length];
+        string[] itemNames = new string[slots.Length];
         int[] itemCounts = new int[slots.Length];
+        int[] itemCosts = new int[slots.Length];
 
         // 각 슬롯의 Item과 ItemCount를 배열에 저장합니다. 함수를 통해 넘겨받은 슬롯의 아이템들을 배열로 정리
         for (int i = 0; i < slots.Length; i++)
         {
-            items[i] = slots[i].Item;
-            itemCounts[i] = slots[i].ItemCount;
+            if (slots[i].Item != null)
+            {
+                itemNames[i] = slots[i].Item.name;
+                itemCounts[i] = slots[i].ItemCount;
+                itemCosts[i] = slots[i].Item.ItemCost;
+            }
         };
         // 정리된 배열들을 data에 저장
-        data.items = items;
+        data.itemNames = itemNames;
         data.itemCounts = itemCounts;
     }
-    private static void SaveQuickItems(ItemQuickSlot[] itemQuickSlots, PlayerData data){
-        Item[] items = new Item[itemQuickSlots.Length];
+    private static void SaveQuickItems(ItemQuickSlot[] itemQuickSlots, PlayerData data)
+    {
+        string[] itemNames = new string[itemQuickSlots.Length];
         int[] itemCounts = new int[itemQuickSlots.Length];
+        int[] itemCosts = new int[itemQuickSlots.Length];
         int[] referSlotsIdx = new int[itemQuickSlots.Length];
+        Debug.Log("log8282: "+itemQuickSlots[0].Item.name);
         for (int i = 0; i < itemQuickSlots.Length; i++)
         {
-            items[i] = itemQuickSlots[i].Item;
-            itemCounts[i] = itemQuickSlots[i].ItemCount;
-            if(itemQuickSlots[i].SlotReference != null){
-            referSlotsIdx[i] = itemQuickSlots[i].SlotReference.transform.GetSiblingIndex();}
+            if (itemQuickSlots[i].Item != null)
+            {
+                itemNames[i] = itemQuickSlots[i].Item.name;
+                itemCounts[i] = itemQuickSlots[i].ItemCount;
+                itemCosts[i] = itemQuickSlots[i].Item.ItemCost;
+                if (itemQuickSlots[i].SlotReference != null)
+                {
+                    referSlotsIdx[i] = itemQuickSlots[i].SlotReference.transform.GetSiblingIndex();
+                }
+            }
         };
         // 정리된 배열들을 data에 저장
-        data.quickItems = items;
+        data.quickItemNames = itemNames;
         data.quickItemCounts = itemCounts;
+        data.quickItemCosts = itemCosts;
         data.itemSlotReferencesIdx = referSlotsIdx;
     }
 
     public void InstantiateOnSavePoint(PlayerData data)
-    {   
-        if(data.items[0] != null){ Debug.Log("log: 4885" + data.items[0].name);}
+    {
+        if (data.itemNames[0] != null) { Debug.Log("log: 4885" + data.itemNames[0]); }
         else Debug.Log("log4885: items null");
-        if(data.equipments[0] != null) Debug.Log("log: 4885" + data.equipments[0].name);
+        if (data.equipments[0] != null) Debug.Log("log: 4885" + data.equipments[0].name);
         else Debug.Log("log4885: equipments null");
         if (playerObject == null)
         {
             playerObject = Instantiate(playerPrefab, new Vector3(data.x, data.y, data.z), Quaternion.identity);
             playerObject.name = playerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(playerObject); // 씬 전환 시 파괴되지 않도록 설정
-            
+
             playerStatus = playerObject.GetComponent<PlayerStatus>();
             // set level
             playerStatus.PlayerLevel = data.PlayerLevel;
@@ -311,7 +334,7 @@ public class SaveManager : MonoBehaviour
             playerStatus.PlayerCurrentMP = data.PlayerCurrentMP;
             playerStatus.PlayerCurrentHP = data.PlayerCurrentHP;
             playerStatus.PlayerCurrentEXP = data.PlayerCurrentEXP;
-            
+
             playerStatus.PlayerClass = data.PlayerClass;
             playerStatus.PlayerName = data.PlayerName;
             playerStatus.PlayerATK = data.PlayerATK;
@@ -341,7 +364,7 @@ public class SaveManager : MonoBehaviour
             string animatorControllerPath = data.runtimeAnimatorControllerPath;
             playerObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(animatorControllerPath);
         }
-        
+
 
         if (uiManagerObject == null)
         {
@@ -358,24 +381,25 @@ public class SaveManager : MonoBehaviour
             uiManager = uiManagerObject.GetComponent<UIManager>();
             uiManagerObject.name = uiManagerPrefab.name; // "(Clone)" 접미사 제거
             DontDestroyOnLoad(uiManagerObject); // 씬 전환 시 파괴되지 않도록 설정
-            
-            InitialEquipmentItems();
-            LoadEquipments(data);
 
-            LoadItems(data);    
+            // InitialEquipmentItems();
+            // LoadEquipments(data);
+
+            LoadItems(data);
             LoadQuickItems(data);
-            LoadSkills(data);
-            LoadQuickSkills(data);
-            ShopSlotInit();
-            LoadQuests(data);
-            
-            
-            
+            // LoadSkills(data);
+            // LoadQuickSkills(data);
+            // ShopSlotInit();
+            // LoadQuests(data);
+
+
+
 
         }
 
         // questmanager initialize
-        if (questManagerObject == null){
+        if (questManagerObject == null)
+        {
             questManagerObject = Instantiate(questManagerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
             questManager = FindObjectOfType<QuestManager>();
             questManagerObject.name = questManagerPrefab.name; // "(Clone)" 접미사 제거
@@ -388,8 +412,8 @@ public class SaveManager : MonoBehaviour
 
         // set sibling indices...
 
-        
-        
+
+
         // {
         //     StatusBar statusBar = uiManager.GetComponent<StatusBar>();
         //     statusBar.PlayerStatus = playerStatus;
@@ -407,7 +431,7 @@ public class SaveManager : MonoBehaviour
         //         statusBar.EXPMeter.fillAmount = (float)playerStatus.PlayerCurrentEXP / playerStatus.PlayerMaxEXP;
         //     else
         //         statusBar.EXPMeter.fillAmount = 0;
-                
+
         //     statusBar.HPDisplay.text = playerStatus.PlayerCurrentHP + " / " + playerStatus.PlayerMaxHP;
         //     statusBar.MPDisplay.text = playerStatus.PlayerCurrentMP + " / " + playerStatus.PlayerMaxMP;
         //     statusBar.EXPDisplay.text = playerStatus.PlayerCurrentEXP + " / " + playerStatus.PlayerMaxEXP;
@@ -416,31 +440,39 @@ public class SaveManager : MonoBehaviour
         // }
     }
 
-    private void InitialEquipmentItems(){
+    private void InitialEquipmentItems()
+    {
         EquipmentItem[] equipmentItems = uiManager.GetComponentsInChildren<EquipmentItem>();
-        for(int i = 0; i < equipmentItems.Length; i++){
+        for (int i = 0; i < equipmentItems.Length; i++)
+        {
             equipmentItems[i].PlayerStatus = playerStatus;
         }
     }
 
-    private void ShopSlotInit(){
+    private void ShopSlotInit()
+    {
         ShopSlot[] shopSlot = uiManager.GetComponentsInChildren<ShopSlot>(true);
-        for (int i = 0; i < shopSlot.Length; i++){
+        for (int i = 0; i < shopSlot.Length; i++)
+        {
             shopSlot[i].QuestManager = questManager;
         }
     }
 
-    private void LoadSkills(PlayerData data){
-        for (int i = 0; i < data.skillPrefabs.Length; i++){
-            if(data.skillPrefabs[i] != null){
+    private void LoadSkills(PlayerData data)
+    {
+        for (int i = 0; i < data.skillPrefabs.Length; i++)
+        {
+            if (data.skillPrefabs[i] != null)
+            {
                 uiManagerObject.GetComponentsInChildren<SkillSlot>(true)[i].AddSkill(data.skillPrefabs[i]);
             }
         }
     }
-    
-    private void LoadQuests(PlayerData data){
+
+    private void LoadQuests(PlayerData data)
+    {
         NPC[] npcs = FindObjectsOfType<NPC>();
-        foreach(Quest quest in data.allQuests)
+        foreach (Quest quest in data.allQuests)
         {
             string questTitle = quest.Title;
             foreach (NPC npc in npcs)
@@ -458,22 +490,27 @@ public class SaveManager : MonoBehaviour
         }
 
 
-        for (int i = 0; i < data.quests.Length; i++){
+        for (int i = 0; i < data.quests.Length; i++)
+        {
             uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].Quest = null;
-            if(data.quests[i] != null){
+            if (data.quests[i] != null)
+            {
                 Debug.Log("log1132: quest loaded" + data.quests[i]);
                 uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].AddQuest(data.quests[i]);
             }
         }
-        
-    }   
-    
-    private void LoadQuickSkills(PlayerData data){
-        for (int i = 0; i < data.quickSkillPrefabs.Length; i++){
+
+    }
+
+    private void LoadQuickSkills(PlayerData data)
+    {
+        for (int i = 0; i < data.quickSkillPrefabs.Length; i++)
+        {
             SkillQuickSlot skillQuickSlot = uiManagerObject.GetComponentsInChildren<SkillQuickSlot>(true)[i];
             skillQuickSlot.PlayerSkills = playerObject.GetComponent<PlayerSkills>();
             SkillSlot refer_slot = null;
-            if(data.quickSkillPrefabs[i] != null){
+            if (data.quickSkillPrefabs[i] != null)
+            {
                 refer_slot = uiManagerObject.GetComponentsInChildren<SkillSlot>(true)[data.skillSlotReferencesIdx[i]];
                 skillQuickSlot.AddSkill(data.quickSkillPrefabs[i], refer_slot); //여기서 그냥 null 값으로 넘어갔구나. slot도 같이 넘겨줘야하네 그럼.
             }
@@ -482,7 +519,7 @@ public class SaveManager : MonoBehaviour
 
     private void LoadEquipments(PlayerData data)
     {
-        
+
         for (int i = 0; i < data.equipments.Length; i++)
         {
             uiManagerObject.GetComponentsInChildren<EquipmentSlot>(true)[i].Item = null;
@@ -495,25 +532,86 @@ public class SaveManager : MonoBehaviour
 
     private void LoadItems(PlayerData data) // data의 아이템이 아이템인지 장비인지 구별해야함. isEquipment 함수를 자료형에 추가하고. 또 장비의 슬롯 인덱스도 저장해야함.
     {
-        for (int i = 0; i < data.items.Length; i++)
+        for (int i = 0; i < data.itemNames.Length; i++)
         {
-            if (data.items[i] != null)
+            if (data.itemNames[i] != null)
             {
-                uiManagerObject.GetComponentsInChildren<Slot>(true)[i].AddItem(data.items[i], data.itemCounts[i]);
+                Debug.Log("log666: " + data.itemNames[i]);
+                // Item 객체 생성
+                Item newItem = new Item();
+
+                // 속성 설정: serials
+                newItem.ItemName = data.itemNames[i];
+                newItem.ItemDetailType = "세부타입";
+                newItem.ItemCount = data.itemCounts[i];
+                newItem.ItemCost = data.itemCosts[i]; // set
+
+                string itemPrefabPath = "Items/" + newItem.ItemName;
+                // load prefab to set other properties easily
+                GameObject newItemPrefab = Resources.Load<GameObject>(itemPrefabPath);
+
+                UsedItem usedItem = newItemPrefab.GetComponent<UsedItem>();
+                EquipmentItem equipment = newItemPrefab.GetComponent<EquipmentItem>();
+                SourceCodeItem sourceCodeItem = newItemPrefab.GetComponent<SourceCodeItem>();
+                Quest quest = newItemPrefab.GetComponent<Quest>();
+                Item.ItemType itemType = Item.ItemType.Used;
+                if (usedItem != null) itemType = Item.ItemType.Used;
+                else if (equipment != null) itemType = Item.ItemType.Equipment;
+                else if (sourceCodeItem != null) itemType = Item.ItemType.SourceCode;
+                else if (quest != null) itemType = Item.ItemType.Quest;
+                else itemType = Item.ItemType.ETC;
+
+                newItem.Type = itemType; // Item.ItemType.Equipment; // ItemType enum에서 원하는 타입 선택
+                newItem.ItemImage = newItemPrefab.GetComponent<SpriteRenderer>().sprite; // someSprite는 Sprite 객체입니다.
+                newItem.ItemPrefab = newItemPrefab; // somePrefab는 GameObject입니다.
+                newItem.IsAlreadyGet = true;
+                newItem.ItemInfo = "아이템 정보"; // 이건 보류;
+                uiManagerObject.GetComponentsInChildren<Slot>(true)[i].AddItem(newItem, data.itemCounts[i]);
             }
         }
     }
+
     private void LoadQuickItems(PlayerData data) // data의 아이템이 아이템인지 장비인지 구별해야함. isEquipment 함수를 자료형에 추가하고. 또 장비의 슬롯 인덱스도 저장해야함.
     {
-        for (int i = 0; i < data.quickItems.Length; i++)
+        for (int i = 0; i < data.quickItemNames.Length; i++)
         {
             Slot refer_slot = uiManagerObject.GetComponentsInChildren<Slot>(true)[data.itemSlotReferencesIdx[i]];
             refer_slot.ItemToolTip = uiManagerObject.GetComponentInChildren<ItemToolTip>(true);
 
-            if (data.quickItems[i] != null)
+            if (data.quickItemNames[i] != null)
             {
-                uiManagerObject.GetComponentsInChildren<ItemQuickSlot>(true)[i].AddItem(data.quickItems[i], data.quickItemCounts[i], refer_slot);
+                /////////////////////********프리펩이 아니라 에셋을 참조하는 방식으로 바꿔야 할 거 같음.
+                // Item 객체 생성
+                Item newItem = new Item();
+                Debug.Log("LOG: 5959"+data.quickItemNames[i]);
+                // 속성 설정: serials
+                newItem.ItemName = data.quickItemNames[i];
+                newItem.ItemDetailType = "세부타입";
+                newItem.ItemCount = data.quickItemCounts[i];
+                newItem.ItemCost = data.quickItemCosts[i]; // set
+
+                string itemPrefabPath = "Items/" + newItem.ItemName;
+                // load prefab to set other properties easily
+                GameObject newItemPrefab = Resources.Load<GameObject>(itemPrefabPath);
+
+                UsedItem usedItem = newItemPrefab.GetComponent<UsedItem>();
+                EquipmentItem equipment = newItemPrefab.GetComponent<EquipmentItem>();
+                SourceCodeItem sourceCodeItem = newItemPrefab.GetComponent<SourceCodeItem>();
+                Quest quest = newItemPrefab.GetComponent<Quest>();
                 
+                Item.ItemType itemType = Item.ItemType.ETC;
+
+                if (usedItem != null) itemType = Item.ItemType.Used;
+                else if (equipment != null) itemType = Item.ItemType.Equipment;
+                else if (sourceCodeItem != null) itemType = Item.ItemType.SourceCode;
+                else if (quest != null) itemType = Item.ItemType.Quest;
+
+                newItem.Type = itemType; // Item.ItemType.Equipment; // ItemType enum에서 원하는 타입 선택
+                newItem.ItemImage = newItemPrefab.GetComponent<SpriteRenderer>().sprite; // someSprite는 Sprite 객체입니다.
+                newItem.ItemPrefab = newItemPrefab; // somePrefab는 GameObject입니다.
+                newItem.IsAlreadyGet = true;
+                newItem.ItemInfo = "아이템 정보"; // 이건 보류;
+                uiManagerObject.GetComponentsInChildren<ItemQuickSlot>(true)[i].AddItem(newItem, data.quickItemCounts[i], refer_slot);
             }
         }
     }
