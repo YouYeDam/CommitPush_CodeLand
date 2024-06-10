@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Chocolate
+  m_EditorClassIdentifier: 
+  ItemName: "\uCD08\uCF5C\uB9BF"
+  ItemDetailType: "\uC18C\uBE44(\uC74C\uC2DD)"
+  ItemCount: 1
+  ItemCost: 100
+  Type: 1
+  ItemImage: {fileID: 21300000, guid: 33f4183cf2dcca1458e384aea2a3c20d, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: 065ae3afea397e842ae68d3b2cb64dd5, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uB2EC\uCF64\uC501\uC4F8\uD55C \uCD08\uCF5C\uB9BF\uC774\uB2E4. \uCD08\uCF5C\uB9BF\uC758
+    \uB2F9\uBD84\uC774 \uC5D0\uB108\uC9C0\uB97C \uBE60\uB974\uAC8C \uACF5\uAE09\uD558\uC5EC
+    \uD53C\uB85C\uB97C \uC904\uC774\uACE0 \uC9D1\uC911\uB825\uC744 \uB192\uC774\uB294
+    \uB370 \uB3C4\uC6C0\uC744 \uC900\uB2E4. \uD55C \uC785 \uBCA0\uC5B4\uBB3C\uBA74
+    \uAE30\uBD84\uC774 \uC88B\uC544\uC9C0\uACE0 \uD65C\uB825\uC774 \uC0DD\uAE34\uB2E4.\r\n\r\n\uC0AC\uC6A9
+    \uC2DC HP\uB97C 100\uB9CC\uD07C \uD68C\uBCF5\uD55C\uB2E4."

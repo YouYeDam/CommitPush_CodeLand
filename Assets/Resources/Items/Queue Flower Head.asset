@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: Queue Flower Head
+  m_EditorClassIdentifier: 
+  ItemName: "\uD050\uD50C\uB77C\uC6CC\uC758 \uBA38\uB9AC"
+  ItemDetailType: "\uAE30\uD0C0"
+  ItemCount: 1
+  ItemCost: 13
+  Type: 3
+  ItemImage: {fileID: 21300000, guid: b383065f1dd061e4cb51f8abfa05a6a9, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: ebe8707b7bc0acb4d9e60cacd399e9a0, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uC544\uC9C1\uB3C4 \uAFC8\uD2C0\uB300\uACE0 \uC788\uB294 \uB4EF\uD55C
+    \uD050\uD50C\uB77C\uC6CC\uC758 \uBA38\uB9AC\uC774\uB2E4. \uC774\uBE68\uB3C4 \uB9E4\uC6B0
+    \uB0A0\uCE74\uB85C\uC6CC \uC190\uC774 \uBCA0\uC77C \uB4EF\uD558\uB2E4.\n\n\uD050\uB294
+    \uB370\uC774\uD130\uB97C \uC21C\uC11C\uB300\uB85C \uC800\uC7A5\uD558\uB294 \uC120\uD615
+    \uC790\uB8CC\uAD6C\uC870\uB85C, \uBA3C\uC800 \uB4E4\uC5B4\uAC04 \uB370\uC774\uD130\uAC00
+    \uBA3C\uC800 \uC0AC\uC6A9\uB41C\uB2E4(\uC120\uC785\uC120\uCD9C, FIFO). \uB300\uD45C\uC801\uC73C\uB85C
+    \uB300\uAE30\uC5F4 \uAD00\uB9AC\uB098 \uC791\uC5C5 \uC608\uC57D \uB4F1\uC5D0
+    \uD65C\uC6A9\uB41C\uB2E4."

@@ -18,7 +18,7 @@ public class MainButtonManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        saveManager = FindObjectOfType<SaveManager>();
+        this.saveManager = FindObjectOfType<SaveManager>();
     }
     void Start()
     {

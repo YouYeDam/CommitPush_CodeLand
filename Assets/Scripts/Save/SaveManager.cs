@@ -529,8 +529,7 @@ public class SaveManager : MonoBehaviour
                 newEquipmentItem.IsAlreadyGet = true;
                 newEquipmentItem.ItemInfo = newItemClass.ItemInfo;
                 newEquipmentItem.Type = newItemClass.Type;
-                
-
+            
                 equipmentSlots[i].AddItemOnLoad(newEquipmentItem);
             }
         }
@@ -566,7 +565,7 @@ public class SaveManager : MonoBehaviour
                 newItem.ItemInfo = newItemClass.ItemInfo;
                 newItem.Type = newItemClass.Type;
                 newItem.name = data.itemNames[i];
-                itemSlots[i].AddItem(newItem, newItem.ItemCount);
+                itemSlots[i].AddItemOnLoad(newItem, newItem.ItemCount);
             }
         }
     }
@@ -602,7 +601,7 @@ public class SaveManager : MonoBehaviour
                     newItem.ItemInfo = newItemClass.ItemInfo;
                     newItem.Type = newItemClass.Type;
                     
-                    quickItemSlots[i].AddItem(newItem, data.quickItemCounts[i], refer_slot);
+                    quickItemSlots[i].AddItemOnLoad(newItem, data.quickItemCounts[i], refer_slot);
                 }
             }
 

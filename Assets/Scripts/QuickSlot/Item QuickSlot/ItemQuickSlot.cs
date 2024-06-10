@@ -42,6 +42,25 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             SlotReference.QuickSlotReference = this;
         }
     }
+    public void AddItemOnLoad(Item Item, int Count = 1, Slot Slot = null) { // 퀵슬롯에 새로운 아이템 슬롯 추가
+        Debug.Log("Add item quick slot on load 1");
+        this.Item = Item;
+        ItemCount = Count;
+        ItemImage.sprite = this.Item.ItemImage;
+        SlotReference = Slot; // SlotReference 설정
+        Debug.Log("Add item quick slot on load 2");
+
+        CountImage.SetActive(true);
+        TextCount.text = ItemCount.ToString();
+        SetColor(1);
+        Debug.Log("Add item quick slot on load 3");
+
+        if (SlotReference != null) // Slot과 동기화
+        {
+        Debug.Log("Add item quick slot on load 4");
+            SlotReference.QuickSlotReference = this;
+        }
+    }
     
     public void SetSlotCount(int Count) {
         ItemCount += Count;

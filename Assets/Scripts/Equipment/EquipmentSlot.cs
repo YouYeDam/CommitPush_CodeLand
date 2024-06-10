@@ -97,12 +97,7 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     public void AddItem(Item Item) {
         this.Item = Item;
-        GameObject ToolTipObject = GameObject.Find("EquipmentToolTip");
-        EquipmentItem.PlayerStatus = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
         EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
-        if (ToolTipObject != null) {
-        ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
-        }
         if (EquipmentItem.IsSpecialEquipment) {
             SpecialEquipment SpecialEquipment = GetComponent<SpecialEquipment>();
             SpecialEquipment.SpecialEquipmentEffect(EquipmentItem.EquipmentType, Item.ItemName);
@@ -112,14 +107,21 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         SetColor(1);
     }
     public void AddItemOnLoad(Item Item) {
+        Debug.Log("add equipment on load 1");
         this.Item = Item;
+        Debug.Log("add equipment on load 2");
         GameObject ToolTipObject = GameObject.Find("EquipmentToolTip");
+        Debug.Log("add equipment on load 3");
         if (ToolTipObject != null) {
-        ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
+            ItemToolTip = ToolTipObject.GetComponent<ItemToolTip>();
         }
+        Debug.Log("add equipment on load 4");
         EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
+
+        Debug.Log("add equipment on load 5");
         EquipmentItem.PlayerStatus = GameObject.FindWithTag("Player").GetComponent<PlayerStatus>();
         ItemImage.sprite = this.Item.ItemImage;
+        Debug.Log("add equipment on load 6");
         SetColor(1);
     }
 
