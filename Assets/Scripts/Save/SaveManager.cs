@@ -55,7 +55,7 @@ public class PlayerData
     public List<Quest> activeQuests = new List<Quest>(); // 활성화된 퀘스트 리스트
     public List<Quest> completedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
     public Quest[] quests;
-    public int[] currentQuestIndex;
+    public Dictionary<string, int> currentQuestIndex = new Dictionary<string, int>();
     public string runtimeAnimatorControllerPath;
     // 장비 저장 데이터
     public string[] equipmentNames;
@@ -191,7 +191,6 @@ public class SaveManager : MonoBehaviour
     private static void SaveQuestSlot(QuestSlot[] questSlots, PlayerData data, QuestManager questManager)
     {
         NPC[] npcs = FindObjectsOfType<NPC>();
-        data.currentQuestIndex = new int[npcs.Length];
         foreach (Quest quest in questManager.allQuests)
         {
             string questTitle = quest.Title;
@@ -201,7 +200,8 @@ public class SaveManager : MonoBehaviour
                 {
                     if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
                     {
-                        // data.currentQuestIndex[i] = npc.currentQuestIndex;
+                        data.currentQuestIndex[questTitle] = questManager.NpcQuestState.GetQuestIndex(npc.NPCName);
+                        Debug.Log("npc.NPCName: " +npc.NPCName + "|| data.currentQuestIndex[i]: " + data.currentQuestIndex[questTitle]);
                     }
                 }
             }
@@ -422,8 +422,8 @@ public class SaveManager : MonoBehaviour
 
             LoadSkills(data);
             LoadQuickSkills(data);
-            // ShopSlotInit();
-            // LoadQuests(data);
+            ShopSlotInit();
+            LoadQuests(data, questManager);
 
 
 
@@ -470,8 +470,16 @@ public class SaveManager : MonoBehaviour
         }
     }
 
-    private void LoadQuests(PlayerData data)
+    private void LoadQuests(PlayerData data, QuestManager questManager)
     {
+        // questManager.NpcQuestState = gameObject.AddComponent<NPCQuestState>(); // NPCQuestState 추가
+        // questManager.InitializeQuests();
+        // questManager.ResetAllQuestObjectives();
+        // questManager.QuestContent = GameObject.Find("UIManager").transform.Find("Quest/Scroll View/Viewport/QuestContent").gameObject;
+        // questManager.QuestSlots = questManager.QuestContent.GetComponentsInChildren<QuestSlot>();
+        // questManager.PlayerGetItem = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGetItem>();
+        // questManager.PlayerMoney = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
+        // questManager.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
         NPC[] npcs = FindObjectsOfType<NPC>();
         foreach (Quest quest in data.allQuests)
         {
@@ -482,7 +490,7 @@ public class SaveManager : MonoBehaviour
                 {
                     if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
                     {
-                        // npc.currentQuestIndex = data.currentQuestIndex[i];
+                        questManager.NpcQuestState.SetQuestIndex(npc.NPCName, data.currentQuestIndex[questTitle]);
                     }
                 }
             }

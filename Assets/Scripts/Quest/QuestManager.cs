@@ -8,11 +8,11 @@ public class QuestManager : MonoBehaviour
     public List<Quest> allQuests = new List<Quest>(); // 모든 퀘스트 리스트
     public List<Quest> activeQuests = new List<Quest>(); // 활성화된 퀘스트 리스트
     public List<Quest> completedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
-    private GameObject QuestContent;  // 퀘스트 슬롯의 부모인 Content
+    public GameObject QuestContent;  // 퀘스트 슬롯의 부모인 Content
     public QuestSlot[] QuestSlots;
     public PlayerStatus PlayerStatus;
-    PlayerGetItem PlayerGetItem;
-    PlayerMoney PlayerMoney;
+    public PlayerGetItem PlayerGetItem;
+    public PlayerMoney PlayerMoney;
     public NPCQuestState NpcQuestState;
 
     public void Awake()
@@ -34,7 +34,7 @@ public class QuestManager : MonoBehaviour
     }
 
     // 퀘스트 초기화
-    private void InitializeQuests()
+    public void InitializeQuests()
     {
         foreach (var questData in QuestDatas)
         {
@@ -54,7 +54,7 @@ public class QuestManager : MonoBehaviour
     }
 
     // 모든 퀘스트 목표의 CurrentAmount를 초기화하는 메서드
-    private void ResetAllQuestObjectives()
+    public void ResetAllQuestObjectives()
     {
         foreach (var quest in allQuests)
         {
@@ -94,7 +94,14 @@ public class QuestManager : MonoBehaviour
         
         for (int i = 0; i < QuestSlots.Length; i++)
         {
-            if (QuestSlots[i].QuestNameText.text == "")
+            // 동일한 퀘스트가 이미 슬롯에 있는지 확인
+            if (QuestSlots[i].QuestNameText.text == quest.Title)
+            {
+                Debug.Log("The quest is already in the slot.");
+                return; // 동일한 퀘스트가 이미 있으므로 메소드를 종료
+            }
+
+            if (QuestSlots[i].QuestNameText.text == "" )
             {
                 QuestSlots[i].AddQuest(quest);
                 slotFound = true;
@@ -146,7 +153,7 @@ public class QuestManager : MonoBehaviour
     {
         int currentQuestIndex = NpcQuestState.GetQuestIndex(npcName);
         NpcQuestState.SetQuestIndex(npcName, currentQuestIndex + 1);
-        Debug.Log("log112: questindex updated: "+ NpcQuestState.GetQuestIndex(npcName));
+        Debug.Log("log112: quest index updated: "+ NpcQuestState.GetQuestIndex(npcName));
     }
     //퀘스트 슬롯 갱신
     private void UpdateQuestSlot(Quest quest)
