@@ -38,8 +38,8 @@ public class PlayerData
     public RuntimeAnimatorController runtimeAnimatorController;
     // 아이템 저장을 위해선 item 과 item count로 구성된 2차원 배열을 저장해야함.
     public string[] itemNames;
-    public GameObject[] skillPrefabs = new GameObject[10];
-    public GameObject[] quickSkillPrefabs = new GameObject[6];
+    public string[] skillNames = new string[10];
+    public string[] quickSkillNames = new string[6];
     public int[] skillSlotReferencesIdx;
     public int[] itemSlotReferencesIdx;
     public string[] quickItemNames;
@@ -226,7 +226,7 @@ public class SaveManager : MonoBehaviour
             if (equipmentSlots[i].Item != null)
             {
                 equipmentNames[i] = equipmentSlots[i].Item.name;
-                Debug.Log("equipment saved " +equipmentSlots[i].Item.name);
+                Debug.Log("equipment saved " + equipmentSlots[i].Item.name);
             }
 
         };
@@ -246,23 +246,27 @@ public class SaveManager : MonoBehaviour
             }
         };
         // 정리된 배열들을 data에 저장
-        data.quickSkillPrefabs = skillPrefabs;
+        // data.quickSkillPrefabs = skillPrefabs;
         data.skillSlotReferencesIdx = skillSlotReferencesIdx;
     }
 
     private static void SaveSkills(SkillSlot[] skillSlots, PlayerData data)
     {
-        GameObject[] skillPrefabs = new GameObject[skillSlots.Length];
+        string[] skillNames = new string[skillSlots.Length];
 
         // 각 슬롯의 skillprefab을 저장
         for (int i = 0; i < skillSlots.Length; i++)
         {
-            skillPrefabs[i] = skillSlots[i].SkillPrefab;
+                if (skillSlots[i].SkillPrefab != null)
+                {
+                    skillNames[i] = skillSlots[i].SkillPrefab.name;
+                    Debug.Log("skill saved: " + skillNames[i]);
+                }
         };
         // 정리된 배열들을 data에 저장
-        data.skillPrefabs = skillPrefabs;
-    }
+        data.skillNames = skillNames;
 
+    }
     private static void SaveItems(Slot[] slots, PlayerData data)
     {
         string[] itemNames = new string[slots.Length];
@@ -319,11 +323,14 @@ public class SaveManager : MonoBehaviour
         }
 
         Console.WriteLine("Save Data:");
-        for (int i = 0; i < data.equipmentNames.Length; i++){
+        for (int i = 0; i < data.equipmentNames.Length; i++)
+        {
         }
-        for (int i = 0; i < data.itemNames.Length; i++){
+        for (int i = 0; i < data.itemNames.Length; i++)
+        {
         }
-        for (int i = 0; i < data.quickItemNames.Length; i++){
+        for (int i = 0; i < data.quickItemNames.Length; i++)
+        {
         }
     }
     public void InstantiateOnSavePoint(PlayerData data)
@@ -336,7 +343,7 @@ public class SaveManager : MonoBehaviour
         questManager.allQuests = data.allQuests;
         questManager.activeQuests = data.activeQuests;
         questManager.completedQuests = data.completedQuests;
-        
+
         DisplaySaveDatas(data);
         if (playerObject == null)
         {
@@ -409,7 +416,7 @@ public class SaveManager : MonoBehaviour
             LoadItems(data);
             LoadQuickItems(data);
 
-            // LoadSkills(data);
+            LoadSkills(data);
             // LoadQuickSkills(data);
             // ShopSlotInit();
             // LoadQuests(data);
@@ -418,7 +425,7 @@ public class SaveManager : MonoBehaviour
 
 
         }
-        
+
 
     }
 
@@ -442,11 +449,19 @@ public class SaveManager : MonoBehaviour
 
     private void LoadSkills(PlayerData data)
     {
-        for (int i = 0; i < data.skillPrefabs.Length; i++)
+        var skillSlots = uiManagerObject.GetComponentsInChildren<SkillSlot>(true);
+        for (int i = 0; i < skillSlots.Length; i++)
         {
-            if (data.skillPrefabs[i] != null)
+            if (data.skillNames[i] != null)
             {
-                uiManagerObject.GetComponentsInChildren<SkillSlot>(true)[i].AddSkill(data.skillPrefabs[i]);
+                string skillAssetPath = "SkillPrefabs/" + data.skillNames[i];
+                Debug.Log("Loaded skill name: " + skillAssetPath);
+                GameObject newSkillPrefab = (GameObject)Resources.Load(skillAssetPath);
+                if (newSkillPrefab == null)
+                {
+                    continue;
+                }
+                skillSlots[i].AddSkill(newSkillPrefab);
             }
         }
     }
@@ -483,17 +498,17 @@ public class SaveManager : MonoBehaviour
 
     private void LoadQuickSkills(PlayerData data)
     {
-        for (int i = 0; i < data.quickSkillPrefabs.Length; i++)
-        {
-            SkillQuickSlot skillQuickSlot = uiManagerObject.GetComponentsInChildren<SkillQuickSlot>(true)[i];
-            skillQuickSlot.PlayerSkills = playerObject.GetComponent<PlayerSkills>();
-            SkillSlot refer_slot = null;
-            if (data.quickSkillPrefabs[i] != null)
-            {
-                refer_slot = uiManagerObject.GetComponentsInChildren<SkillSlot>(true)[data.skillSlotReferencesIdx[i]];
-                skillQuickSlot.AddSkill(data.quickSkillPrefabs[i], refer_slot); //여기서 그냥 null 값으로 넘어갔구나. slot도 같이 넘겨줘야하네 그럼.
-            }
-        }
+        // for (int i = 0; i < data.quickSkillPrefabs.Length; i++)
+        // {
+        // SkillQuickSlot skillQuickSlot = uiManagerObject.GetComponentsInChildren<SkillQuickSlot>(true)[i];
+        // skillQuickSlot.PlayerSkills = playerObject.GetComponent<PlayerSkills>();
+        // SkillSlot refer_slot = null;
+        // if (data.quickSkillPrefabs[i] != null)
+        // {
+        // refer_slot = uiManagerObject.GetComponentsInChildren<SkillSlot>(true)[data.skillSlotReferencesIdx[i]];
+        // skillQuickSlot.AddSkill(data.quickSkillPrefabs[i], refer_slot); //여기서 그냥 null 값으로 넘어갔구나. slot도 같이 넘겨줘야하네 그럼.
+        // }
+        // }
     }
 
     private void LoadEquipments(PlayerData data)
@@ -529,7 +544,7 @@ public class SaveManager : MonoBehaviour
                 newEquipmentItem.IsAlreadyGet = true;
                 newEquipmentItem.ItemInfo = newItemClass.ItemInfo;
                 newEquipmentItem.Type = newItemClass.Type;
-            
+
                 equipmentSlots[i].AddItemOnLoad(newEquipmentItem);
             }
         }
@@ -542,7 +557,7 @@ public class SaveManager : MonoBehaviour
         for (int i = 0; i < itemSlots.Length; i++)
         {
             if (data.itemNames[i] != null)
-            {   
+            {
 
                 // Item 객체 생성
                 Item newItem = ScriptableObject.CreateInstance<Item>();
@@ -593,14 +608,14 @@ public class SaveManager : MonoBehaviour
                 if (newItemClass != null)
                 {
                     newItem.ItemName = newItemClass.ItemName;
-                    newItem.ItemCost = newItemClass.ItemCost; 
+                    newItem.ItemCost = newItemClass.ItemCost;
                     newItem.ItemDetailType = newItemClass.ItemDetailType;
                     newItem.ItemImage = newItemClass.ItemImage;
                     newItem.ItemPrefab = newItemClass.ItemPrefab;
                     newItem.IsAlreadyGet = true;
                     newItem.ItemInfo = newItemClass.ItemInfo;
                     newItem.Type = newItemClass.Type;
-                    
+
                     quickItemSlots[i].AddItemOnLoad(newItem, data.quickItemCounts[i], refer_slot);
                 }
             }
