@@ -235,18 +235,22 @@ public class SaveManager : MonoBehaviour
     }
     private static void SaveQuickSkills(SkillQuickSlot[] skillQuickSlots, PlayerData data)
     {
-        GameObject[] skillPrefabs = new GameObject[skillQuickSlots.Length];
+        string[] quickSkillNames = new string[skillQuickSlots.Length];
         int[] skillSlotReferencesIdx = new int[skillQuickSlots.Length];
         for (int i = 0; i < skillQuickSlots.Length; i++)
         {
-            skillPrefabs[i] = skillQuickSlots[i].SkillPrefab;
+            if (skillQuickSlots[i].SkillPrefab != null)
+            {
+                quickSkillNames[i] = skillQuickSlots[i].SkillPrefab.name;
+                Debug.Log("quick skill saved: " + quickSkillNames[i]);
+            }
             if (skillQuickSlots[i].SlotReference != null)
             {
                 skillSlotReferencesIdx[i] = skillQuickSlots[i].SlotReference.transform.GetSiblingIndex();
             }
         };
         // 정리된 배열들을 data에 저장
-        // data.quickSkillPrefabs = skillPrefabs;
+        data.quickSkillNames = quickSkillNames;
         data.skillSlotReferencesIdx = skillSlotReferencesIdx;
     }
 
@@ -257,11 +261,11 @@ public class SaveManager : MonoBehaviour
         // 각 슬롯의 skillprefab을 저장
         for (int i = 0; i < skillSlots.Length; i++)
         {
-                if (skillSlots[i].SkillPrefab != null)
-                {
-                    skillNames[i] = skillSlots[i].SkillPrefab.name;
-                    Debug.Log("skill saved: " + skillNames[i]);
-                }
+            if (skillSlots[i].SkillPrefab != null)
+            {
+                skillNames[i] = skillSlots[i].SkillPrefab.name;
+                Debug.Log("skill saved: " + skillNames[i]);
+            }
         };
         // 정리된 배열들을 data에 저장
         data.skillNames = skillNames;
@@ -417,7 +421,7 @@ public class SaveManager : MonoBehaviour
             LoadQuickItems(data);
 
             LoadSkills(data);
-            // LoadQuickSkills(data);
+            LoadQuickSkills(data);
             // ShopSlotInit();
             // LoadQuests(data);
 
@@ -498,17 +502,24 @@ public class SaveManager : MonoBehaviour
 
     private void LoadQuickSkills(PlayerData data)
     {
-        // for (int i = 0; i < data.quickSkillPrefabs.Length; i++)
-        // {
-        // SkillQuickSlot skillQuickSlot = uiManagerObject.GetComponentsInChildren<SkillQuickSlot>(true)[i];
-        // skillQuickSlot.PlayerSkills = playerObject.GetComponent<PlayerSkills>();
-        // SkillSlot refer_slot = null;
-        // if (data.quickSkillPrefabs[i] != null)
-        // {
-        // refer_slot = uiManagerObject.GetComponentsInChildren<SkillSlot>(true)[data.skillSlotReferencesIdx[i]];
-        // skillQuickSlot.AddSkill(data.quickSkillPrefabs[i], refer_slot); //여기서 그냥 null 값으로 넘어갔구나. slot도 같이 넘겨줘야하네 그럼.
-        // }
-        // }
+        var quickSkillSlots = uiManagerObject.GetComponentsInChildren<SkillQuickSlot>(true);
+        for (int i = 0; i < quickSkillSlots.Length; i++)
+        {
+            SkillSlot refer_slot = null;
+            if (data.quickSkillNames[i] != null)
+            {
+                string skillAssetPath = "SkillPrefabs/" + data.quickSkillNames[i];
+                Debug.Log("Loaded quick skill name: " + skillAssetPath);
+                GameObject newSkillPrefab = (GameObject)Resources.Load(skillAssetPath);
+                if (newSkillPrefab == null)
+                {
+                    continue;
+                }
+                refer_slot = uiManagerObject.GetComponentsInChildren<SkillSlot>(true)[data.skillSlotReferencesIdx[i]];
+                quickSkillSlots[i].AddSkill(newSkillPrefab, refer_slot);
+                Debug.Log("quick skill loaded: " + newSkillPrefab.name);
+            }
+        }
     }
 
     private void LoadEquipments(PlayerData data)
