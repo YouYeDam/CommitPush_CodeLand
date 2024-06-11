@@ -546,7 +546,6 @@ public class SaveManager : MonoBehaviour
         playerObject.GetComponent<PlayerSkills>().RSkillCoolDown = data.RSkillCoolDown;
         playerObject.GetComponent<PlayerSkills>().SSkillCoolDown = data.SSkillCoolDown;
         playerObject.GetComponent<PlayerSkills>().DSkillCoolDown = data.DSkillCoolDown;
-        Debug.Log("cool down loaded: " + playerObject.GetComponent<PlayerSkills>().QSkillCoolDown + " = "+ data.QSkillCoolDown );
 
     }
 
