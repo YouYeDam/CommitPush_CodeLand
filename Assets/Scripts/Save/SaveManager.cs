@@ -54,7 +54,8 @@ public class PlayerData
     public List<Quest> allQuests = new List<Quest>(); // 모든 퀘스트 리스트
     public List<Quest> activeQuests = new List<Quest>(); // 활성화된 퀘스트 리스트
     public List<Quest> completedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
-    public Quest[] quests;
+    public Dictionary<string, int> NPCQuestIndices = new Dictionary<string, int>(); // 완료된 퀘스트 리스트
+    public Quest[] quests = new Quest[30];
     public Dictionary<string, int> currentQuestIndex = new Dictionary<string, int>();
     public string runtimeAnimatorControllerPath;
     // 장비 저장 데이터
@@ -161,6 +162,7 @@ public class SaveManager : MonoBehaviour
             SSkill = playerSkills.SSkill,
             DSkill = playerSkills.DSkill,
             QSkillCoolDown = playerSkills.QSkillCoolDown,
+            
             WSkillCoolDown = playerSkills.WSkillCoolDown,
             ESkillCoolDown = playerSkills.ESkillCoolDown,
             RSkillCoolDown = playerSkills.RSkillCoolDown,
@@ -173,6 +175,7 @@ public class SaveManager : MonoBehaviour
             activeQuests = questManager.activeQuests,
             completedQuests = questManager.completedQuests,
         };
+        Debug.Log("cool down saved: " + data.QSkillCoolDown );
 
         SaveItems(slots, data);
         SaveSkills(skillSlots, data);
@@ -191,6 +194,7 @@ public class SaveManager : MonoBehaviour
     private static void SaveQuestSlot(QuestSlot[] questSlots, PlayerData data, QuestManager questManager)
     {
         NPC[] npcs = FindObjectsOfType<NPC>();
+        data.NPCQuestIndices = questManager.NpcQuestState.NpcQuestIndices;
         foreach (Quest quest in questManager.allQuests)
         {
             string questTitle = quest.Title;
@@ -201,17 +205,23 @@ public class SaveManager : MonoBehaviour
                     if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
                     {
                         data.currentQuestIndex[questTitle] = questManager.NpcQuestState.GetQuestIndex(npc.NPCName);
-                        Debug.Log("npc.NPCName: " +npc.NPCName + "|| data.currentQuestIndex[i]: " + data.currentQuestIndex[questTitle]);
                     }
                 }
             }
         }
-
-        data.quests = new Quest[30];
+        
+        // quests in slots
         Quest[] quests = new Quest[questSlots.Length];
         for (int i = 0; i < questSlots.Length; i++)
         {
-            quests[i] = questSlots[i].Quest;
+            if(questSlots[i].Quest.Title != "")
+            {
+                Quest quest2Save = questSlots[i].Quest;
+                quests[i] = quest2Save;
+                Debug.Log("Save: quest name " + quest2Save.Title);
+                Debug.Log("Save: quest bools IsReadyToComplete " + quest2Save.IsReadyToComplete);
+                Debug.Log("Save: quest bools  IsCompleted " + quest2Save.IsCompleted);
+            }
         }
         data.quests = quests;
     }
@@ -236,6 +246,7 @@ public class SaveManager : MonoBehaviour
     private static void SaveQuickSkills(SkillQuickSlot[] skillQuickSlots, PlayerData data)
     {
         string[] quickSkillNames = new string[skillQuickSlots.Length];
+        int[] quickSkillCoolTime = new int[skillQuickSlots.Length];
         int[] skillSlotReferencesIdx = new int[skillQuickSlots.Length];
         for (int i = 0; i < skillQuickSlots.Length; i++)
         {
@@ -386,12 +397,7 @@ public class SaveManager : MonoBehaviour
             playerObject.GetComponent<PlayerSkills>().SSkill = data.SSkill;
             playerObject.GetComponent<PlayerSkills>().DSkill = data.DSkill;
 
-            playerObject.GetComponent<PlayerSkills>().QSkillCoolDown = data.QSkillCoolDown;
-            playerObject.GetComponent<PlayerSkills>().WSkillCoolDown = data.WSkillCoolDown;
-            playerObject.GetComponent<PlayerSkills>().ESkillCoolDown = data.ESkillCoolDown;
-            playerObject.GetComponent<PlayerSkills>().RSkillCoolDown = data.RSkillCoolDown;
-            playerObject.GetComponent<PlayerSkills>().SSkillCoolDown = data.SSkillCoolDown;
-            playerObject.GetComponent<PlayerSkills>().DSkillCoolDown = data.DSkillCoolDown;
+
             // Load animator controller
             string animatorControllerPath = data.runtimeAnimatorControllerPath;
             playerObject.GetComponent<Animator>().runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(animatorControllerPath);
@@ -421,7 +427,7 @@ public class SaveManager : MonoBehaviour
             LoadQuickItems(data);
 
             LoadSkills(data);
-            LoadQuickSkills(data);
+            LoadQuickSkills(data, playerObject);
             ShopSlotInit();
             LoadQuests(data, questManager);
 
@@ -466,6 +472,7 @@ public class SaveManager : MonoBehaviour
                     continue;
                 }
                 skillSlots[i].AddSkill(newSkillPrefab);
+
             }
         }
     }
@@ -481,6 +488,7 @@ public class SaveManager : MonoBehaviour
         // questManager.PlayerMoney = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
         // questManager.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
         NPC[] npcs = FindObjectsOfType<NPC>();
+        questManager.NpcQuestState.NpcQuestIndices = data.NPCQuestIndices;
         foreach (Quest quest in data.allQuests)
         {
             string questTitle = quest.Title;
@@ -500,19 +508,23 @@ public class SaveManager : MonoBehaviour
         for (int i = 0; i < data.quests.Length; i++)
         {
             uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].Quest = null;
-            if (data.quests[i] != null)
+            if (data.quests[i].Title != "")
             {
                 uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].AddQuest(data.quests[i]);
+                Debug.Log("Load: quest bools name " + data.quests[i].Title);
+                Debug.Log("Load: quest bools IsReadyToComplete " + data.quests[i].IsReadyToComplete);
+                Debug.Log("Load: quest bools  IsCompleted" + data.quests[i].IsCompleted);
             }
         }
 
     }
 
-    private void LoadQuickSkills(PlayerData data)
+    private void LoadQuickSkills(PlayerData data, GameObject playerObject)
     {
         var quickSkillSlots = uiManagerObject.GetComponentsInChildren<SkillQuickSlot>(true);
         for (int i = 0; i < quickSkillSlots.Length; i++)
         {
+            quickSkillSlots[i].PlayerSkills = playerObject.GetComponent<PlayerSkills>();
             SkillSlot refer_slot = null;
             if (data.quickSkillNames[i] != null)
             {
@@ -528,6 +540,14 @@ public class SaveManager : MonoBehaviour
                 Debug.Log("quick skill loaded: " + newSkillPrefab.name);
             }
         }
+        playerObject.GetComponent<PlayerSkills>().QSkillCoolDown = data.QSkillCoolDown;
+        playerObject.GetComponent<PlayerSkills>().WSkillCoolDown = data.WSkillCoolDown;
+        playerObject.GetComponent<PlayerSkills>().ESkillCoolDown = data.ESkillCoolDown;
+        playerObject.GetComponent<PlayerSkills>().RSkillCoolDown = data.RSkillCoolDown;
+        playerObject.GetComponent<PlayerSkills>().SSkillCoolDown = data.SSkillCoolDown;
+        playerObject.GetComponent<PlayerSkills>().DSkillCoolDown = data.DSkillCoolDown;
+        Debug.Log("cool down loaded: " + playerObject.GetComponent<PlayerSkills>().QSkillCoolDown + " = "+ data.QSkillCoolDown );
+
     }
 
     private void LoadEquipments(PlayerData data)
