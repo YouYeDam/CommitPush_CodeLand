@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ddaca5152367f4bae442bc0201f04a, type: 3}
+  m_Name: String Bolt Source Code
+  m_EditorClassIdentifier: 
+  ItemName: "\uC2A4\uD2B8\uB9C1 \uBCFC\uD2B8 \uC18C\uC2A4\uCF54\uB4DC"
+  ItemDetailType: "\uC18C\uC2A4\uCF54\uB4DC"
+  ItemCount: 1
+  ItemCost: 0
+  Type: 2
+  ItemImage: {fileID: 21300000, guid: 9c5b54d4da0b1a446a6bd26c55be06ec, type: 3}
+  ItemPrefab: {fileID: 4338472210403635751, guid: f4100182c93d7304987a4e06bf5a47c1, type: 3}
+  IsAlreadyGet: 0
+  ItemInfo: "\uC2A4\uD2B8\uB9C1 \uBCFC\uD2B8 \uC2A4\uD0AC\uC758 \uC18C\uC2A4\uCF54\uB4DC\uC774\uB2E4."

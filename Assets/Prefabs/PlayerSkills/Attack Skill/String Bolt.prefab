@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -1100430982042493478}
   - component: {fileID: 4696956795978963348}
   m_Layer: 8
-  m_Name: Loop Strike
+  m_Name: String Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 794951137
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2de8699035d498848b76d1d813526da2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 005dcff824c3be3449435f76f76eb443, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -148,7 +148,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0050988197, y: 0.005150676}
+  m_Offset: {x: 0.03790915, y: -0.0063181818}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -159,7 +159,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6617107, y: 1.6605928}
+  m_Size: {x: 2.0379918, y: 1.0126026}
   m_EdgeRadius: 0
 --- !u!114 &-2769534496952994686
 MonoBehaviour:
@@ -173,13 +173,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f621a849657f940822f0eeb0600276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillSpeed: 4
+  SkillSpeed: 10
   DestroyDelay: 1
-  Damage: 12
-  SkillCoefficient: 0.06
+  Damage: 20
+  SkillCoefficient: 0.08
   CanHitMany: 1
-  CoolDown: 4
-  MPUse: 35
+  CoolDown: 9
+  MPUse: 55
   DestroyTime: 0.4
 --- !u!114 &-1100430982042493478
 MonoBehaviour:
@@ -193,24 +193,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f90e74095945254288b32782f8612cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillName: "\uB8E8\uD504 \uC2A4\uD2B8\uB77C\uC774\uD06C"
+  SkillName: "\uC2A4\uD2B8\uB9C1 \uBCFC\uD2B8"
   SkillType: "\uACF5\uACA9\uD615"
-  SkillCoolDown: 5.5
-  SkillMPUse: 35
-  SkillExplain: "\uC801\uC744 \uD5A5\uD574 \uBC18\uBCF5\uC801\uC73C\uB85C \uD68C\uC804\uD558\uB294
-    \uCE7C\uB0A0\uC744 \uC18C\uD658\uD558\uC5EC \uB370\uBBF8\uC9C0\uB97C \uAC00\uD558\uB294
-    \uAE30\uC220\uC778 \uB8E8\uD504 \uC2A4\uD2B8\uB77C\uC774\uD06C\uC774\uB2E4. \uC6D0\uD615\uC758
-    \uAC70\uB300\uD55C \uBD89\uC740 \uCE7C\uB0A0\uC744 \uC801\uC5D0\uAC8C \uBC1C\uC0AC\uD55C\uB2E4.\r\n\r\n\uC5EC\uB7EC
-    \uAC1C\uCCB4 \uACF5\uACA9\uC774 \uAC00\uB2A5\uD558\uB2E4.\r\n\r\n\uB8E8\uD504\uB294
-    \uD2B9\uC815 \uC791\uC5C5\uC744 \uBC18\uBCF5\uC801\uC73C\uB85C \uC218\uD589\uD558\uAE30
-    \uC704\uD55C \uD504\uB85C\uADF8\uB798\uBC0D \uAD6C\uC870\uB85C \uB300\uD45C\uC801\uC778
-    \uAC83\uC774 for\uBB38\uACFC while\uBB38\uC774\uB2E4. for\uBB38\uC740 \uC815\uD574\uC9C4
-    \uD69F\uC218\uB9CC\uD07C \uBC18\uBCF5 \uC2E4\uD589\uD558\uB294 \uB8E8\uD504\uC774\uB2E4.
-    \uC8FC\uB85C \uBC18\uBCF5 \uD69F\uC218\uAC00 \uBA85\uD655\uD560 \uB54C \uC0AC\uC6A9\uB41C\uB2E4.
-    while\uBB38\uC740 \uC8FC\uC5B4\uC9C4 \uC870\uAC74\uC774 \uCC38\uC778 \uB3D9\uC548
-    \uACC4\uC18D\uD574\uC11C \uBC18\uBCF5 \uC2E4\uD589\uD558\uB294 \uB8E8\uD504\uC774\uB2E4.
-    \uC8FC\uB85C \uBC18\uBCF5 \uD69F\uC218\uAC00 \uBA85\uD655\uD558\uC9C0 \uC54A\uC744
-    \uB54C \uC0AC\uC6A9\uB41C\uB2E4. "
+  SkillCoolDown: 9
+  SkillMPUse: 50
+  SkillExplain: "\uC190\uC5D0\uC11C \uC804\uAE30\uB97C \uBC1C\uC0DD\uC2DC\uCF1C \uB9CC\uB4E0
+    \uBCFC\uD2B8\uB97C \uC801\uC5D0\uAC8C \uB358\uC838 \uB370\uBBF8\uC9C0\uB97C \uAC00\uD558\uB294
+    \uAE30\uC220\uC778 \uC2A4\uD2B8\uB9C1 \uBCFC\uD2B8\uC774\uB2E4. \uBCFC\uD2B8\uB294
+    \uBA3C \uACF3\uC758 \uC801\uAE4C\uC9C0 \uC21C\uC2DD\uAC04\uC5D0 \uAFF0\uB6AB\uB294\uB2E4.\n\n\uC5EC\uB7EC
+    \uAC1C\uCCB4 \uACF5\uACA9\uC774 \uAC00\uB2A5\uD558\uB2E4.\n\n\uC2A4\uD2B8\uB9C1(String)\uC740
+    \uD504\uB85C\uADF8\uB798\uBC0D\uC5D0\uC11C \uBB38\uC790\uB4E4\uC758 \uC5F0\uC18D,
+    \uC989 \uBB38\uC790\uC5F4\uC744 \uC758\uBBF8\uD55C\uB2E4. \uBB38\uC790\uC5F4\uC740
+    \uD14D\uC2A4\uD2B8 \uB370\uC774\uD130\uB97C \uC800\uC7A5\uD558\uACE0 \uCC98\uB9AC\uD558\uB294
+    \uB370 \uC0AC\uC6A9\uB418\uBA70, \uB2E4\uC591\uD55C \uD504\uB85C\uADF8\uB798\uBC0D
+    \uC5B8\uC5B4\uC5D0\uC11C \uC911\uC694\uD55C \uB370\uC774\uD130 \uD0C0\uC785\uC73C\uB85C
+    \uCDE8\uAE09\uB41C\uB2E4."
 --- !u!95 &4696956795978963348
 Animator:
   serializedVersion: 5
@@ -221,7 +218,7 @@ Animator:
   m_GameObject: {fileID: 8885825609034438207}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c3ffcf6d7507494439000ba2ce2501ac, type: 2}
+  m_Controller: {fileID: 9100000, guid: dbdf89f3a32b47948ae010710168e124, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

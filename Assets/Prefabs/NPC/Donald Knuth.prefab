@@ -59,8 +59,8 @@ MonoBehaviour:
     ReadyToCompleteDialogue: {fileID: 11400000, guid: 9891baf33431ee5408f8e78c163a1fd4, type: 2}
     PostQuestDialogue: {fileID: 11400000, guid: d61409a7bd4e90c47a278d338b259bf6, type: 2}
   - PreQuestDialogue: {fileID: 11400000, guid: bee9ebfa5a369b14d9420537b3d95e63, type: 2}
-    InProgressDialogue: {fileID: 11400000, guid: c5a52615cc8846345ae35855b6862139, type: 2}
-    ReadyToCompleteDialogue: {fileID: 11400000, guid: dd2768215559c384eb9580a2da90d90e, type: 2}
+    InProgressDialogue: {fileID: 11400000, guid: 4850927dcfff16c4b97be4e82ae0df63, type: 2}
+    ReadyToCompleteDialogue: {fileID: 11400000, guid: c5a52615cc8846345ae35855b6862139, type: 2}
     PostQuestDialogue: {fileID: 11400000, guid: 1f15c32fa88323d4d80136df1ffcd7c5, type: 2}
   - PreQuestDialogue: {fileID: 11400000, guid: 3f51915d64809ca4bb7bcd4108ffa670, type: 2}
     InProgressDialogue: {fileID: 11400000, guid: 4e30fbce2bbc39f4584051449438a1b7, type: 2}

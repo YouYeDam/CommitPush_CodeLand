@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &349573210681341999
+--- !u!1 &4338472210403635751
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,77 +8,68 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2836790508595056}
-  - component: {fileID: 5410975148291012644}
-  - component: {fileID: 717382888131969278}
-  - component: {fileID: 5149360776717742433}
-  - component: {fileID: 2373437424921086739}
-  m_Layer: 14
-  m_Name: Scratch Cat
-  m_TagString: NPC
+  - component: {fileID: 8957263903386475938}
+  - component: {fileID: -2162186586693608117}
+  - component: {fileID: -8944953272842421498}
+  - component: {fileID: 1634756597062129806}
+  - component: {fileID: 4511437244796332217}
+  - component: {fileID: 7663199105641667089}
+  m_Layer: 11
+  m_Name: String Bolt Source Code
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2836790508595056
+--- !u!4 &8957263903386475938
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349573210681341999}
+  m_GameObject: {fileID: 4338472210403635751}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.51, y: 3.58, z: 8.921235}
+  m_LocalPosition: {x: 1.8975732, y: 2.948134, z: 291.00772}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5410975148291012644
+--- !u!114 &-2162186586693608117
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349573210681341999}
+  m_GameObject: {fileID: 4338472210403635751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dce98ef6376c6e4a90bf811322f4e32, type: 3}
+  m_Script: {fileID: 11500000, guid: 734e8f7c622f2dd4e92959b0c1e9480e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QuestsToGive:
-  - {fileID: 11400000, guid: 1722bd38bce56314685be9eac2bdcb7d, type: 2}
-  QuestDialogues:
-  - PreQuestDialogue: {fileID: 11400000, guid: 5a6505341ff5bbb4993065ce3ee27a35, type: 2}
-    InProgressDialogue: {fileID: 11400000, guid: 54bee985f1c54234bbc664179ff0ec7a, type: 2}
-    ReadyToCompleteDialogue: {fileID: 11400000, guid: 54bee985f1c54234bbc664179ff0ec7a, type: 2}
-    PostQuestDialogue: {fileID: 11400000, guid: 6323cd256a61104428e15a2f190bce5b, type: 2}
-  DefaultDialogue: {fileID: 11400000, guid: 6323cd256a61104428e15a2f190bce5b, type: 2}
-  UIManager: {fileID: 0}
-  NPCName: "\uC2A4\uD06C\uB798\uCE58"
-  NPCJob: 
-  NPCNameInfo: {fileID: 7337256740539332341, guid: b57da644c15344546acebcacfc6f353f, type: 3}
-  NPCNameInfoText: {fileID: 0}
-  NPCNameInfoInstance: {fileID: 0}
-  NPCNameInfoPos: 0.8
-  NPCJobInfo: {fileID: 0}
-  NPCJobInfoText: {fileID: 0}
-  NPCJobInfoInstance: {fileID: 0}
-  NPCQuestStatus: {fileID: 7337256740539332341, guid: e8b5189164f1eb348a3c39754a8a2040, type: 3}
-  NPCQuestStatusText: {fileID: 0}
-  NPCQuestStatusInstance: {fileID: 0}
-  NPCQuestStatusPos: 1.2
-  IsShop: 0
-  HavingJob: 0
-  CurrentQuestIndex: 0
---- !u!212 &717382888131969278
+  item: {fileID: 11400000, guid: e9dec63798049e44fbdf730efb739096, type: 2}
+--- !u!114 &-8944953272842421498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338472210403635751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ba1d6b13aa01e2458cc3e16e545215e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillPrefab: {fileID: 8885825609034438207, guid: 24b87a5ad5d47234096bcaa54a03d774, type: 3}
+  SkillName: "\uC2A4\uD2B8\uB9C1 \uBCFC\uD2B8"
+--- !u!212 &1634756597062129806
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349573210681341999}
+  m_GameObject: {fileID: 4338472210403635751}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -110,29 +101,29 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 847609113
-  m_SortingLayer: 6
+  m_SortingLayerID: 518454301
+  m_SortingLayer: 9
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 24c2a462c9eaf0b44a3b79c943dbced8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9c5b54d4da0b1a446a6bd26c55be06ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.875, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &5149360776717742433
+--- !u!50 &4511437244796332217
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349573210681341999}
-  m_BodyType: 2
+  m_GameObject: {fileID: 4338472210403635751}
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -151,13 +142,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &2373437424921086739
+--- !u!61 &7663199105641667089
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 349573210681341999}
+  m_GameObject: {fileID: 4338472210403635751}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -183,16 +174,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0073560476, y: 0.054319978}
+  m_Offset: {x: -0.00984478, y: -0.0007572174}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3333334, y: 1.3333334}
-    newSize: {x: 0.875, y: 1}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.033912, y: 1.2191033}
+  m_Size: {x: 0.45910597, y: 0.63177013}
   m_EdgeRadius: 0

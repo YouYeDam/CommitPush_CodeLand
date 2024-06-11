@@ -28,5 +28,6 @@ MonoBehaviour:
       \uC5B4\uC11C \uC870\uC0AC\uB97C \uB9C8\uCE58\uACA0\uB124."
     SpeakerImage: {fileID: 21300000, guid: 6719acf27f070f741b4de76e171af64b, type: 3}
   - SpeakerName: "\uD50C\uB808\uC774\uC5B4"
-    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 280\uACBD\uD5D8\uCE58, 550\uBE44\uD2B8"
+    DialogueText: "\uBCF4\uC0C1 \uD68D\uB4DD: 280\uACBD\uD5D8\uCE58, 550\uBE44\uD2B8,
+      \uC2A4\uD2B8\uB9C1 \uBCFC\uD2B8 \uC18C\uC2A4\uCF54\uB4DC"
     SpeakerImage: {fileID: 0}
