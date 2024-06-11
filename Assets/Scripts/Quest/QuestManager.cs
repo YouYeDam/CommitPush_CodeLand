@@ -120,13 +120,14 @@ public class QuestManager : MonoBehaviour
     private void SetQuestReadyToComplete(Quest quest)
     {
         quest.IsReadyToComplete = true;
-        UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
+        UpdateQuestSlot(quest, quest.IsCompleted, quest.IsReadyToComplete); // 퀘스트 슬롯 상태 업데이트
     }
 
     // 퀘스트 완료
     public void CompleteQuest(string questTitle)
     {
         Quest quest = activeQuests.Find(q => q.Title == questTitle);
+        Debug.Log("quest found: "+quest.Title);
         if (quest != null && quest.IsReadyToComplete)
         {
             // 목표의 CurrentAmount 초기화 및 아이템 차감
@@ -138,14 +139,14 @@ public class QuestManager : MonoBehaviour
                 }
                 objective.ResetCurrentAmount();
             }
-
             quest.IsCompleted = true;
+            Debug.Log("quest.iscompleted in questmanager: "+quest.IsCompleted );
             activeQuests.Remove(quest);
             completedQuests.Add(quest);
 
             // 보상 지급
             RewardPlayer(quest);
-            UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
+            UpdateQuestSlot(quest, quest.IsCompleted, quest.IsReadyToComplete); // 퀘스트 슬롯 상태 업데이트
             IncrementNPCQuestIndex(quest.NPCName);
         }
     }
@@ -156,13 +157,14 @@ public class QuestManager : MonoBehaviour
         Debug.Log("log112: quest index updated: "+ NpcQuestState.GetQuestIndex(npcName));
     }
     //퀘스트 슬롯 갱신
-    private void UpdateQuestSlot(Quest quest)
+    private void UpdateQuestSlot(Quest quest, bool iscompleted, bool IsReadyToComplete)
     {
         foreach (QuestSlot questSlot in QuestSlots)
         {
             if (questSlot.QuestName == quest.Title)
             {
-                questSlot.UpdateQuestStatus();
+                Debug.Log("update quest slot : quest slot: "+questSlot.QuestName); 
+                questSlot.UpdateQuestStatus(iscompleted, IsReadyToComplete);
                 break;
             }
         }
@@ -240,7 +242,7 @@ public class QuestManager : MonoBehaviour
                     else
                     {
                         quest.IsReadyToComplete = false;
-                        UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
+                        UpdateQuestSlot(quest, quest.IsCompleted, quest.IsReadyToComplete); // 퀘스트 슬롯 상태 업데이트
                     }
 
                     break;

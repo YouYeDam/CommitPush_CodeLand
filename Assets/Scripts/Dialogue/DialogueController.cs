@@ -77,7 +77,9 @@ public class DialogueController : MonoBehaviour
                             // 퀘스트 중 조건을 만족했다면 퀘스트 완료
                             if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
                             {
+                                Debug.Log(quest.Title + " is completed ? " + quest.IsCompleted);
                                 QuestManager.CompleteQuest(questTitle);
+                                Debug.Log(quest.Title + " is completed ? " + quest.IsCompleted);
                             }
                         }
                         else

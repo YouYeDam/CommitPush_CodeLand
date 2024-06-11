@@ -56,10 +56,26 @@ public class PlayerData
     public List<Quest> completedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
     public Dictionary<string, int> NPCQuestIndices = new Dictionary<string, int>(); // 완료된 퀘스트 리스트
     public Quest[] quests = new Quest[30];
+    public bool[] isreadytocomplete = new bool[30];
+    public bool[] iscomplete = new bool[30];
     public Dictionary<string, int> currentQuestIndex = new Dictionary<string, int>();
     public string runtimeAnimatorControllerPath;
     // 장비 저장 데이터
     public string[] equipmentNames;
+
+
+    public string[] Title = new string[30];
+    public string[] QuestDescription = new string[30];
+    public int[] ExperienceReward = new int[30];
+    public int[] BitReward = new int[30];
+    public List<Item>[] ItemRewards = new List<Item>[30];
+    public List<QuestObjective>[] Objectives = new List<QuestObjective>[30];
+    public bool[] IsCompleted = new bool[30];
+    public bool[] IsReadyToComplete = new bool[30];
+    public int[] RequiredLevel = new int[30];
+    public string[] Place = new string[30];
+    public string[] NPCName = new string[30];
+
 }
 
 public class SaveManager : MonoBehaviour
@@ -193,8 +209,14 @@ public class SaveManager : MonoBehaviour
 
     private static void SaveQuestSlot(QuestSlot[] questSlots, PlayerData data, QuestManager questManager)
     {
-        NPC[] npcs = FindObjectsOfType<NPC>();
+
+        data.QuestDatas = questManager.QuestDatas;
+        data.allQuests = questManager.allQuests;
+        data.activeQuests = questManager.activeQuests;
+        data.completedQuests = questManager.completedQuests;
         data.NPCQuestIndices = questManager.NpcQuestState.NpcQuestIndices;
+
+        NPC[] npcs = FindObjectsOfType<NPC>();
         foreach (Quest quest in questManager.allQuests)
         {
             string questTitle = quest.Title;
@@ -204,26 +226,29 @@ public class SaveManager : MonoBehaviour
                 {
                     if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
                     {
-                        data.currentQuestIndex[questTitle] = questManager.NpcQuestState.GetQuestIndex(npc.NPCName);
+                        data.currentQuestIndex[npc.NPCName] = questManager.NpcQuestState.GetQuestIndex(npc.NPCName);
                     }
                 }
             }
         }
-        
-        // quests in slots
-        Quest[] quests = new Quest[questSlots.Length];
+
         for (int i = 0; i < questSlots.Length; i++)
         {
             if(questSlots[i].Quest.Title != "")
             {
-                Quest quest2Save = questSlots[i].Quest;
-                quests[i] = quest2Save;
-                Debug.Log("Save: quest name " + quest2Save.Title);
-                Debug.Log("Save: quest bools IsReadyToComplete " + quest2Save.IsReadyToComplete);
-                Debug.Log("Save: quest bools  IsCompleted " + quest2Save.IsCompleted);
+                data.Title[i] = questSlots[i].Quest.Title;
+                data.QuestDescription[i] = questSlots[i].Quest.QuestDescription;
+                data.ExperienceReward[i] = questSlots[i].Quest.ExperienceReward;
+                data.BitReward[i] = questSlots[i].Quest.BitReward;
+                data.ItemRewards[i] = questSlots[i].Quest.ItemRewards;
+                data.Objectives[i] = questSlots[i].Quest.Objectives;
+                data.IsCompleted[i] = questSlots[i].Quest.IsCompleted;
+                data.IsReadyToComplete[i] = questSlots[i].Quest.IsReadyToComplete;
+                data.RequiredLevel[i] = questSlots[i].Quest.RequiredLevel;
+                data.Place[i] = questSlots[i].Quest.Place;
+                data.NPCName[i] = questSlots[i].Quest.NPCName;
             }
         }
-        data.quests = quests;
     }
 
     private static void SaveEquipments(EquipmentSlot[] equipmentSlots, PlayerData data)
@@ -479,14 +504,19 @@ public class SaveManager : MonoBehaviour
 
     private void LoadQuests(PlayerData data, QuestManager questManager)
     {
-        // questManager.NpcQuestState = gameObject.AddComponent<NPCQuestState>(); // NPCQuestState 추가
-        // questManager.InitializeQuests();
-        // questManager.ResetAllQuestObjectives();
-        // questManager.QuestContent = GameObject.Find("UIManager").transform.Find("Quest/Scroll View/Viewport/QuestContent").gameObject;
-        // questManager.QuestSlots = questManager.QuestContent.GetComponentsInChildren<QuestSlot>();
-        // questManager.PlayerGetItem = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGetItem>();
-        // questManager.PlayerMoney = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
-        // questManager.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+        questManager.NpcQuestState = gameObject.AddComponent<NPCQuestState>(); // NPCQuestState 추가
+        questManager.InitializeQuests();
+        questManager.ResetAllQuestObjectives();
+        questManager.QuestContent = GameObject.Find("UIManager").transform.Find("Quest/Scroll View/Viewport/QuestContent").gameObject;
+        questManager.PlayerGetItem = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGetItem>();
+        questManager.PlayerMoney = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
+        questManager.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+        questManager.QuestDatas = data.QuestDatas ;
+        questManager.allQuests = data.allQuests ;
+        questManager.activeQuests = data.activeQuests ;
+        questManager.completedQuests = data.completedQuests ;
+        questManager.NpcQuestState.NpcQuestIndices = data.NPCQuestIndices;
+
         NPC[] npcs = FindObjectsOfType<NPC>();
         questManager.NpcQuestState.NpcQuestIndices = data.NPCQuestIndices;
         foreach (Quest quest in data.allQuests)
@@ -498,22 +528,20 @@ public class SaveManager : MonoBehaviour
                 {
                     if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
                     {
-                        questManager.NpcQuestState.SetQuestIndex(npc.NPCName, data.currentQuestIndex[questTitle]);
+                        questManager.NpcQuestState.SetQuestIndex(npc.NPCName, data.currentQuestIndex[npc.NPCName]);
                     }
                 }
             }
         }
 
-
+        questManager.QuestSlots = questManager.QuestContent.GetComponentsInChildren<QuestSlot>();
         for (int i = 0; i < data.quests.Length; i++)
         {
             uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].Quest = null;
-            if (data.quests[i].Title != "")
+            if (data.Title[i] != "")
             {
-                uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].AddQuest(data.quests[i]);
-                Debug.Log("Load: quest bools name " + data.quests[i].Title);
-                Debug.Log("Load: quest bools IsReadyToComplete " + data.quests[i].IsReadyToComplete);
-                Debug.Log("Load: quest bools  IsCompleted" + data.quests[i].IsCompleted);
+                Quest quest = new Quest(data.Title[i], data.QuestDescription[i], data.ExperienceReward[i], data.BitReward[i], data.ItemRewards[i], data.Objectives[i], data.RequiredLevel[i], data.Place[i], data.NPCName[i]);
+                uiManagerObject.GetComponentsInChildren<QuestSlot>(true)[i].AddQuest(quest);
             }
         }
 

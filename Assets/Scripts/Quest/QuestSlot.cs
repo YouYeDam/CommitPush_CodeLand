@@ -23,13 +23,26 @@ public class QuestSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         this.Quest = quest;
         QuestName = quest.Title;
         QuestNameText.text = QuestName;
-        UpdateQuestStatus();
+        UpdateQuestStatus(quest.IsCompleted, quest.IsReadyToComplete);
+    }
+    public void AddQuestOnLoad(Quest quest) {
+        GameObject ToolTipObject = GameObject.Find("QuestToolTip");
+        if (ToolTipObject != null) {
+            QuestToolTip = ToolTipObject.GetComponent<QuestToolTip>();
+        }
+        this.Quest = quest;
+        QuestName = quest.Title;
+        QuestNameText.text = QuestName;
+        UpdateQuestStatus(Quest.IsCompleted, Quest.IsReadyToComplete);
     }
 
-    public void UpdateQuestStatus() {
-        if (Quest.IsCompleted) {
+    public void UpdateQuestStatus(bool iscompleted, bool IsReadyToComplete) {
+        Debug.Log("quest in quest slot: "+Quest.Title);
+
+        Debug.Log("quest in quest slot: is completed: "+iscompleted);
+        if (Quest.IsCompleted || iscompleted) {
             QuestNameText.color = Color.gray; // 완료된 퀘스트는 회색
-        } else if (Quest.IsReadyToComplete) {
+        } else if (Quest.IsReadyToComplete || IsReadyToComplete) {
             QuestNameText.color = Color.yellow; // 완료 가능한 퀘스트는 노란색
         } else {
             QuestNameText.color = Color.white; // 기본 상태의 퀘스트는 흰색
