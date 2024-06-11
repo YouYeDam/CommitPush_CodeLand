@@ -36,6 +36,6 @@ MonoBehaviour:
     TargetName: "\uB371\uD50C\uB77C\uC6CC\uC758 \uC2EC\uC7A5"
     RequiredAmount: 3
     CurrentAmount: 0
-  RequiredLevel: 5
+  RequiredLevel: 4
   NPCName: "\uB3C4\uB110\uB4DC \uCEE4\uB204\uC2A4"
   Place: "\uC790\uB8CC\uAD6C\uC870 \uC815\uC6D01"

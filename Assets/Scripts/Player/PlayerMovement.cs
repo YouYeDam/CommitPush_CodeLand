@@ -297,7 +297,7 @@ public class PlayerMovement : MonoBehaviour
         { // 무적상태면 실행안함
             return;
         }
-        Damage -= Mathf.CeilToInt(PlayerStatus.PlayerDEF * 1.8f); // 방어력 공식: DEF * 1.8
+        Damage -= Mathf.CeilToInt(PlayerStatus.PlayerDEF * 1.65f); // 방어력 공식: DEF * 1.65
         Damage = Mathf.FloorToInt(Damage * Random.Range(0.8f, 1.21f)); // 데미지 랜덤값: 계산된 데미지의 0.8 ~ 1.2배로 조정
         if (Damage < 1)
         {

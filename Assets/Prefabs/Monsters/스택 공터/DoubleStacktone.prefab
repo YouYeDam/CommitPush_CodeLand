@@ -248,6 +248,7 @@ MonoBehaviour:
   IsTakeDamge: 0
   CanWalk: 1
   CanTriggerDamage: 1
+  IsSkilling: 0
   AttackDelayTime: 3
 --- !u!114 &3157593347497917494
 MonoBehaviour:
@@ -265,7 +266,7 @@ MonoBehaviour:
   MonsterLevel: 5
   MonsterMaxHealth: 70
   MonsterCurrentHealth: 0
-  MonsterDamage: 30
+  MonsterDamage: 35
   MonsterEXP: 11
   HPBarPos: 1.2
   MonsterInfoPos: 1.3

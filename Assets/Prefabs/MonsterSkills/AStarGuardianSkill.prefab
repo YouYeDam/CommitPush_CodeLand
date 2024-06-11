@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c32476e9073461e4fb08ba896d17197c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillSpeed: 6
-  DestroyDelay: 1.5
+  SkillSpeed: 6.5
+  DestroyDelay: 1.1
   Damage: 200
   IsHoming: 1
   IsRotationing: 0

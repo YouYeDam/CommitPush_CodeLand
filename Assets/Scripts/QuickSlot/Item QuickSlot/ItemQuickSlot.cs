@@ -15,6 +15,9 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     PlayerMovement PlayerMovement;
     [SerializeField] TMP_Text TextCount;
     [SerializeField] GameObject CountImage;
+    [SerializeField] GameObject DropInputField;
+    [SerializeField] GameObject BuyInputField;
+    [SerializeField] GameObject SellInputField;
 
     public bool IsSyncing = false; // 동기화 플래그
 
@@ -149,6 +152,9 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void UseItem() // 아이템 사용
     {
         if (Item == null || !PlayerMovement.IsAlive) {
+            return;
+        }
+        if (DropInputField.activeSelf || BuyInputField.activeSelf || SellInputField.activeSelf) {
             return;
         }
         UsedItem UsedItem = Item.ItemPrefab.GetComponent<UsedItem>();

@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SkillSpeed: 4
   DestroyDelay: 1
-  Damage: 10
+  Damage: 12
   SkillCoefficient: 0.06
   CanHitMany: 1
   CoolDown: 4

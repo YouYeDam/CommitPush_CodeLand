@@ -16,7 +16,8 @@ MonoBehaviour:
   Description: 
   ExperienceReward: 280
   BitReward: 550
-  ItemRewards: []
+  ItemRewards:
+  - {fileID: 11400000, guid: e9dec63798049e44fbdf730efb739096, type: 2}
   Objectives:
   - Type: 2
     TargetName: "\uB9AC\uD504 \uB178\uB4DC"

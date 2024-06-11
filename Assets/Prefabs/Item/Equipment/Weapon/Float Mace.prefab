@@ -68,10 +68,11 @@ MonoBehaviour:
   MPValue: 0
   ATKValue: 10
   DEFValue: 0
-  APValue: 0.048
+  APValue: 0.024
   CritValue: 0
   PlayerStatus: {fileID: 0}
   Equipment: {fileID: 0}
+  IsSpecialEquipment: 0
 --- !u!212 &1634756597062129806
 SpriteRenderer:
   m_ObjectHideFlags: 0

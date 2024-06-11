@@ -251,6 +251,7 @@ MonoBehaviour:
   IsTakeDamge: 0
   CanWalk: 1
   CanTriggerDamage: 1
+  IsSkilling: 0
   AttackDelayTime: 2
 --- !u!114 &3157593347497917494
 MonoBehaviour:
@@ -264,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8f6e2da49528449a1c776f7367a421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MonsterName: "\uBD80\uD328\uD55C \uB9AC\uD504"
+  MonsterName: "\uBD80\uD328\uD55C \uB8E8\uD2B8"
   MonsterLevel: 11
   MonsterMaxHealth: 260
   MonsterCurrentHealth: 0
@@ -304,6 +305,8 @@ MonoBehaviour:
     SpawnProbability: 0.4
   - ItemPrefab: {fileID: 4338472210403635751, guid: 62b51e14377bb1d4c8bad4dfd47de7eb, type: 3}
     SpawnProbability: 0.1
+  - ItemPrefab: {fileID: 4338472210403635751, guid: ef5f4f7f72b56344c8acb13fff21dec9, type: 3}
+    SpawnProbability: 0.01
   MonsterBit: 31
   MonsterSnippet: 0
 --- !u!114 &-8855345390103764750
@@ -337,9 +340,9 @@ MonoBehaviour:
   Projectile: {fileID: 8885825609034438207, guid: 51b1309ac25f9914f979ee429aad04b9, type: 3}
   SkillSpot: {fileID: 8763508143990234850}
   BackToIdleAnimTime: 0.4
-  Delay: 0.35
+  PreSkillDelay: 1
+  SkillDelayForAnim: 0
   UseSkillDistance: 20
-  IsSkilling: 0
 --- !u!114 &4474165348767794096
 MonoBehaviour:
   m_ObjectHideFlags: 0
