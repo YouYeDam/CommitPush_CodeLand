@@ -35,6 +35,9 @@ public class PlayerStatus : MonoBehaviour
     }
     void LateUpdate() {
         UpdatePlayerNameInfo();
+        if (PlayerNameInfoInstance != null){
+            PlayerNameInfoInstance.transform.SetSiblingIndex(0);
+        }
     }
     public void SetPlayerName(string NewName){
             PlayerName = NewName;

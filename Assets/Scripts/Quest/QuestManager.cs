@@ -14,23 +14,26 @@ public class QuestManager : MonoBehaviour
     public PlayerGetItem PlayerGetItem;
     public PlayerMoney PlayerMoney;
     public NPCQuestState NpcQuestState;
+    public bool IsLoaded = false;
 
     public void Awake()
     {
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        NpcQuestState = gameObject.AddComponent<NPCQuestState>(); // NPCQuestState 추가
+        // NpcQuestState = gameObject.AddComponent<NPCQuestState>(); // NPCQuestState 추가
     }
 
     void Start()
     {
-        InitializeQuests();
+        if (!IsLoaded){
+        InitializeQuests();}
         ResetAllQuestObjectives();
         QuestContent = GameObject.Find("UIManager").transform.Find("Quest/Scroll View/Viewport/QuestContent").gameObject;
         QuestSlots = QuestContent.GetComponentsInChildren<QuestSlot>();
         PlayerGetItem = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGetItem>();
         PlayerMoney = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
         PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+        NpcQuestState = GetComponent<NPCQuestState>();
     }
 
     // 퀘스트 초기화

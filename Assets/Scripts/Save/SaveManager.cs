@@ -6,8 +6,10 @@ using System.IO;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using System.Runtime.Serialization.Formatters.Binary;
 using Unity.VisualScripting;
 using UnityEditor;
+
 
 [System.Serializable]
 public class PlayerData
@@ -231,6 +233,9 @@ public class SaveManager : MonoBehaviour
                 }
             }
         }
+        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "SavedDictionaries", "currentQuestIndex.dat");
+        Directory.CreateDirectory(Path.GetDirectoryName(filePath)); // 필요한 경우 디렉토리 생성
+        SaveDictionary(data.currentQuestIndex, filePath);
 
         for (int i = 0; i < questSlots.Length; i++)
         {
@@ -383,6 +388,7 @@ public class SaveManager : MonoBehaviour
         questManager.allQuests = data.allQuests;
         questManager.activeQuests = data.activeQuests;
         questManager.completedQuests = data.completedQuests;
+        questManager.IsLoaded = true;
 
         DisplaySaveDatas(data);
         if (playerObject == null)
@@ -455,13 +461,7 @@ public class SaveManager : MonoBehaviour
             LoadQuickSkills(data, playerObject);
             ShopSlotInit();
             LoadQuests(data, questManager);
-
-
-
-
         }
-
-
     }
 
     private void InitialEquipmentItems()
@@ -504,31 +504,33 @@ public class SaveManager : MonoBehaviour
 
     private void LoadQuests(PlayerData data, QuestManager questManager)
     {
-        questManager.NpcQuestState = gameObject.AddComponent<NPCQuestState>(); // NPCQuestState 추가
-        questManager.InitializeQuests();
+        questManager.NpcQuestState = questManager.GetComponent<NPCQuestState>(); // NPCQuestState 추가
         questManager.ResetAllQuestObjectives();
         questManager.QuestContent = GameObject.Find("UIManager").transform.Find("Quest/Scroll View/Viewport/QuestContent").gameObject;
         questManager.PlayerGetItem = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerGetItem>();
         questManager.PlayerMoney = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoney>();
         questManager.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
-        questManager.QuestDatas = data.QuestDatas ;
-        questManager.allQuests = data.allQuests ;
-        questManager.activeQuests = data.activeQuests ;
-        questManager.completedQuests = data.completedQuests ;
+        questManager.QuestDatas = data.QuestDatas;
+        questManager.allQuests = data.allQuests;
+        questManager.activeQuests = data.activeQuests;
+
+        questManager.completedQuests = data.completedQuests;
+
         questManager.NpcQuestState.NpcQuestIndices = data.NPCQuestIndices;
 
         NPC[] npcs = FindObjectsOfType<NPC>();
-        questManager.NpcQuestState.NpcQuestIndices = data.NPCQuestIndices;
         foreach (Quest quest in data.allQuests)
         {
             string questTitle = quest.Title;
+            Debug.Log("quest title here: "+questTitle);
             foreach (NPC npc in npcs)
             {
                 for (int i = 0; i < npc.QuestsToGive.Count; i++)
                 {
                     if (npc.QuestsToGive[i].Title == questTitle) // 모든 퀘스트 타이틀에 대해 이터레이션. 
                     {
-                        questManager.NpcQuestState.SetQuestIndex(npc.NPCName, data.currentQuestIndex[npc.NPCName]);
+                        questManager.NpcQuestState.SetQuestIndex(npc.NPCName, data.currentQuestIndex[npc.NPCName]);  
+                        Debug.Log("npc.NPCName: "+ npc.NPCName + "  " +questManager.NpcQuestState.GetQuestIndex(npc.NPCName));
                     }
                 }
             }
@@ -545,6 +547,35 @@ public class SaveManager : MonoBehaviour
             }
         }
 
+    }
+    
+
+    public void SaveDictionary(Dictionary<string, int> dictionary, string filePath)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        using (FileStream stream = new FileStream(filePath, FileMode.Create))
+        {
+            formatter.Serialize(stream, dictionary);
+        }
+    }
+
+
+
+
+    public Dictionary<string, string> LoadDictionary(string filePath)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        Dictionary<string, string> dictionary = null;
+
+        if (File.Exists(filePath))
+        {
+            using (FileStream stream = new FileStream(filePath, FileMode.Open))
+            {
+                dictionary = (Dictionary<string, string>)formatter.Deserialize(stream);
+            }
+        }
+
+        return dictionary;
     }
 
     private void LoadQuickSkills(PlayerData data, GameObject playerObject)
