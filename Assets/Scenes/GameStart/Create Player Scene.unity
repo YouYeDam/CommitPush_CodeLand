@@ -528,13 +528,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d783682f94c66b4c8e68af18959f4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewSprite: {fileID: 21300000, guid: f35003b896e2db94e82435e56c62bb5d, type: 3}
-  RenderersToActivate:
+  PlayerSprite: {fileID: 21300000, guid: f35003b896e2db94e82435e56c62bb5d, type: 3}
+  ActiveRenderers:
   - {fileID: 1085004304}
-  RenderersToDeactivate:
+  InactiveRenderers:
   - {fileID: 334044239}
   - {fileID: 1121113606}
-  NewAnimatorController: {fileID: 9100000, guid: c91e81117c65cd345be903d6f03137ad, type: 2}
+  PlayerAnimatorController: {fileID: 9100000, guid: c91e81117c65cd345be903d6f03137ad, type: 2}
   UICanvas: {fileID: 2076669156}
 --- !u!4 &213701093
 Transform:
@@ -1419,7 +1419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputField: {fileID: 338018199}
-  Sprites:
+  PlayerSelectSignSprites:
   - {fileID: 334044239}
   - {fileID: 1085004304}
   - {fileID: 1121113606}
@@ -2465,13 +2465,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d783682f94c66b4c8e68af18959f4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewSprite: {fileID: 21300000, guid: df8da0b5bdbea6844865f9a1b4f9a498, type: 3}
-  RenderersToActivate:
+  PlayerSprite: {fileID: 21300000, guid: df8da0b5bdbea6844865f9a1b4f9a498, type: 3}
+  ActiveRenderers:
   - {fileID: 334044239}
-  RenderersToDeactivate:
+  InactiveRenderers:
   - {fileID: 1085004304}
   - {fileID: 1121113606}
-  NewAnimatorController: {fileID: 9100000, guid: b06ac2c0bc439dc49a1931ce2d717897, type: 2}
+  PlayerAnimatorController: {fileID: 9100000, guid: b06ac2c0bc439dc49a1931ce2d717897, type: 2}
   UICanvas: {fileID: 2076669156}
 --- !u!4 &1633613817
 Transform:
@@ -2517,13 +2517,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d783682f94c66b4c8e68af18959f4ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewSprite: {fileID: 21300000, guid: c63a564701bef0c4e86f1f62c2e84163, type: 3}
-  RenderersToActivate:
+  PlayerSprite: {fileID: 21300000, guid: c63a564701bef0c4e86f1f62c2e84163, type: 3}
+  ActiveRenderers:
   - {fileID: 1121113606}
-  RenderersToDeactivate:
+  InactiveRenderers:
   - {fileID: 334044239}
   - {fileID: 1085004304}
-  NewAnimatorController: {fileID: 9100000, guid: 90c63af98d26b844cb3200ffe4a02bb1, type: 2}
+  PlayerAnimatorController: {fileID: 9100000, guid: 90c63af98d26b844cb3200ffe4a02bb1, type: 2}
   UICanvas: {fileID: 2076669156}
 --- !u!4 &1752566329
 Transform:

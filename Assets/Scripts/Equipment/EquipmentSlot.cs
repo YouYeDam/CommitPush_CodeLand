@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public Item Item; // 장비 아이템
-    public Image ItemImage;  // 아이템의 이미지
+    public Image ItemImage;
     ItemToolTip ItemToolTip;
     EquipmentItem EquipmentItem;
     [SerializeField] GameObject UICanvas;
@@ -25,19 +25,21 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
-    public void ConnectUIManager() {
+    public void ConnectUIManager() { // UI 매니저 연결
         UICanvas = GameObject.Find("UIManager");
         if (UICanvas != null) {
             InventoryScript = UICanvas.GetComponent<Inventory>();
         }
     }
-    public void InitialEquip() {
-            if (Item != null) { // 초기 아이템 설정
+
+    public void InitialEquip() { // 초기 아이템 설정
+            if (Item != null) {
             EquipmentItem EquipmentItem = Item.ItemPrefab.GetComponent<EquipmentItem>();
             EquipmentItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
             AddItem(Item);
         }
     }
+
     public void SetColor(float Alpha){ // 아이템 이미지의 투명도 조절
         Color Color = ItemImage.color;
         Color.a = Alpha;
@@ -51,7 +53,7 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         SetColor(0);
     }
 
-    public void OnPointerClick(PointerEventData eventData) {
+    public void OnPointerClick(PointerEventData eventData) { // 더블클릭 기능
         ClickCount++;
         if (ClickCount == 1)
         {
@@ -69,21 +71,20 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         }
     }
 
-    void OnDoubleClick() // 슬롯 더블클릭
-    {
+    void OnDoubleClick() { // 슬롯 더블클릭시 아이템 탈착 및 인벤토리로 이동
         if (Item != null) {
         InventoryScript.AcquireItem(Item);
         ClearSlot();
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData) {
+    public void OnPointerEnter(PointerEventData eventData) { // 마우스가 장비 아이템 위에 있을 시 툴팁 전시
         if (Item != null) {
             ItemToolTip.ShowToolTip(Item);
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData) {
+    public void OnPointerExit(PointerEventData eventData) { // 마우스가 장비 아이템 위에서 벗어날 시 툴팁 숨김
         ItemToolTip.HideToolTip();
     }
 
@@ -99,11 +100,11 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         EquipmentItem.IncreaseStat();
     }
 
-    public void CheckNull(Item NewItem) {
-        if (Item == null) {
+    public void CheckNull(Item NewItem) { // 장비 슬롯이 비었는지 확인
+        if (Item == null) { // 비었으면 곧바로 슬롯에 장착
             AddItem(NewItem);
         }
-        else {
+        else { // 안비었다면 아이템을 장착중인 아이템을 인벤토리로 이동시킨 후 슬롯에 장착
             InventoryScript.AcquireItem(Item);
             ClearSlot();
             AddItem(NewItem);

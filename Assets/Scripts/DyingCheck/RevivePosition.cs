@@ -15,10 +15,9 @@ public class RevivePosition : MonoBehaviour
         }
     }
 
-    void SetPlayerPosition() {
+    void SetPlayerPosition() { // 부활 장소의 특정 리스폰 스폿에서 부활
         PlayerMovement.IsAlive = true;
         PlayerMovement.MyAnimator.SetBool("IsDying", false);
-        //PlayerMovement.MyAnimator.SetBool();
         Player.transform.position = transform.position;
     }
 }

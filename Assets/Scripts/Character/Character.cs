@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 public class Character : MonoBehaviour
 {
+    
     [SerializeField] Sprite BluePlayerPortrait;
     [SerializeField] Sprite PinkPlayerPortrait;
     [SerializeField] Sprite WhitePlayerPortrait;
@@ -39,15 +40,14 @@ public class Character : MonoBehaviour
         CritInfo.text = "치명타: " + (PlayerStatus.PlayerCrit * 100).ToString("F2") + "%"; 
         LevelUpPointInfo.text = "스탯포인트: " + PlayerStatus.LevelUpPoint;
     }
-
-    public void SetPortrait() {
+    
+    public void SetPortrait() { // 선택한 캐릭터에 따라서 초상화를 바꾸기
         if (PlayerAnimator != null && PlayerAnimator.runtimeAnimatorController != null) {
             if (PlayerAnimator.runtimeAnimatorController.name == "Blue Player") {
                 CharacterImage.sprite = BluePlayerPortrait;
             }
             else if (PlayerAnimator.runtimeAnimatorController.name == "Pink Player") {
                 CharacterImage.sprite = PinkPlayerPortrait;
-
             }
             else if (PlayerAnimator.runtimeAnimatorController.name == "White Player") {
                 CharacterImage.sprite = WhitePlayerPortrait;

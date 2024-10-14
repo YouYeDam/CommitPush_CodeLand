@@ -13,7 +13,7 @@ public class Equipment : MonoBehaviour
     public EquipmentSlot PetSlot;
     public EquipmentSlot TrinketSlot;
 
-    void Start() {
+    void Start() { // 게임 시작 시 기본 장비 착용
         HelmetSlot.InitialEquip();
         HelmetSlot.ConnectUIManager();
 

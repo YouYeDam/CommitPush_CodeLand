@@ -10,16 +10,17 @@ public class DyingCheck : MonoBehaviour
     ReviveSceneName ReviveSceneName;
     UIManager UIManager;
     public TextMeshProUGUI ButtonText;
+
     void Start() {
         PlayerStatus = FindObjectOfType<PlayerStatus>();
         UIManager = FindObjectOfType<UIManager>();
     }
 
-    public void ActivateDyingCheck() {
+    public void ActivateDyingCheck() { // 죽음 확인 창 활성화
         DyingCheckBase.SetActive(true);
     }
 
-    public void RevivePlayer() {
+    public void RevivePlayer() { // 확인 버튼 클릭 시 마을에서 부활
         PlayerStatus.PlayerCurrentHP = PlayerStatus.PlayerMaxHP / 2;
         PlayerStatus.PlayerCurrentMP = PlayerStatus.PlayerMaxMP / 2;
         PlayerStatus.PlayerCurrentEXP = PlayerStatus.PlayerCurrentEXP - Mathf.RoundToInt(PlayerStatus.PlayerMaxEXP * 0.2f);
@@ -28,8 +29,9 @@ public class DyingCheck : MonoBehaviour
         }
         UIManager.DestroyAllTempInfo();
         
-        ReviveSceneNameObject = GameObject.Find("ReviveSceneName");
-        if (ReviveSceneNameObject != null) {
+        ReviveSceneNameObject = GameObject.Find("ReviveSceneName"); 
+
+        if (ReviveSceneNameObject != null) { // 지정된 부활 장소(마을)에서 부활
             ReviveSceneName = ReviveSceneNameObject.GetComponent<ReviveSceneName>();
             string ReviveSceneNameInfo = ReviveSceneName.ReviveSceneNameInfo;
             ButtonText.color = Color.white;

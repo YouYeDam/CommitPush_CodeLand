@@ -4,18 +4,19 @@ using TMPro;
 
 public class DialogueController : MonoBehaviour
 {
-    public TMP_Text SpeakerNameText;  // 말하는 캐릭터 이름을 표시할 UI 요소
-    public TMP_Text DialogueText;  // 대화 내용을 표시할 UI 요소
+    public TMP_Text SpeakerNameText;
+    public TMP_Text DialogueText;
     public GameObject DialogueBase;
     public TextMeshProUGUI ButtonText;
-    public Image SpeakerImage; // 말하는 캐릭터 이미지
+    public Image SpeakerImage;
     public Image PlayerImage;
-    private Dialogue Dialogue;  // 현재 대화
-    private int CurrentNodeIndex = 0;  // 현재 노드 인덱스
+
+    Dialogue Dialogue;
+    int CurrentNodeIndex = 0;
     PlayerStatus PlayerStatus;
     Character Character;
     QuestManager QuestManager;
-    NPC CurrentNPC; // 현재 대화 중인 NPC
+    NPC CurrentNPC;
 
     void Start() {
         PlayerStatus = FindObjectOfType<PlayerStatus>();
@@ -23,8 +24,7 @@ public class DialogueController : MonoBehaviour
         QuestManager = FindObjectOfType<QuestManager>();
     }
 
-    public void StartDialogue(Dialogue dialogue, NPC npc)
-    {
+    public void StartDialogue(Dialogue dialogue, NPC npc) { // 대화 시작
         this.Dialogue = dialogue;
         this.CurrentNPC = npc; // 대화 중인 NPC 설정
         DialogueBase.SetActive(true);
@@ -32,19 +32,19 @@ public class DialogueController : MonoBehaviour
         DisplayNode();
     }
 
-    private void DisplayNode()
-    {
-        if (CurrentNodeIndex < Dialogue.nodes.Length)
-        {
-            DialogueNode node = Dialogue.nodes[CurrentNodeIndex];
+    void DisplayNode() { // 대화 진행
+        if (CurrentNodeIndex < Dialogue.nodes.Length) { // 대화가 안끝난 경우
+            DialogueNode node = Dialogue.nodes[CurrentNodeIndex]; // 현재 대화 노드
             SpeakerNameText.text = node.SpeakerName;
             DialogueText.text = node.DialogueText;
             SpeakerImage.sprite = node.SpeakerImage;
-            if (SpeakerNameText.text == "플레이어") {
+
+            if (SpeakerNameText.text == "플레이어") { // 플레이어가 말할 차례라면 플레이어로 변경
                 SpeakerNameText.text = PlayerStatus.PlayerName;
                 PlayerImage = Character.CharacterImage;
                 SpeakerImage.sprite = PlayerImage.sprite;
             }
+
             CurrentNodeIndex++;  // 다음 노드로 인덱스 증가
         }
         else
@@ -53,48 +53,37 @@ public class DialogueController : MonoBehaviour
         }
     }
     
-    public void OnNextButtonClicked()
-    {
-        DisplayNode();  // 사용자가 다음 버튼을 클릭할 때 다음 노드 표시
+    public void OnNextButtonClicked() { // 사용자가 다음 버튼을 클릭할 때 다음 노드 표시
+        DisplayNode();
     }
 
-    private void CheckQuestStatus()
-    {
-        if (CurrentNPC != null && QuestManager != null)
-        {
-            // 현재 퀘스트 인덱스 사용
-            int currentQuestIndex = QuestManager.NpcQuestState.GetQuestIndex(CurrentNPC.NPCName);
-            if (currentQuestIndex < CurrentNPC.QuestsToGive.Count)
-            {
-                string questTitle = CurrentNPC.QuestsToGive[currentQuestIndex].Title;
-                if (!string.IsNullOrEmpty(questTitle))
-                {
-                    Quest quest = QuestManager.GetQuestByTitle(questTitle);
-                    if (quest != null)
-                    {
-                        if (QuestManager.IsQuestActive(questTitle))
-                        {
-                            // 퀘스트 중 조건을 만족했다면 퀘스트 완료
-                            if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
-                            {
-                                QuestManager.CompleteQuest(questTitle);
+    void CheckQuestStatus() { // 해당 NPC의 퀘스트 진행 여부 확인 후 진행 상황에 맞게 처리
+        if (CurrentNPC != null && QuestManager != null) {
+            int CurrentQuestIndex = QuestManager.NpcQuestState.GetQuestIndex(CurrentNPC.NPCName); // 현재 퀘스트 인덱스
+
+            if (CurrentQuestIndex < CurrentNPC.QuestsToGive.Count) { // NPC에게 받을 수 있거나 수행하고 있는 퀘스트가 존재한다면
+                string QuestTitle = CurrentNPC.QuestsToGive[CurrentQuestIndex].Title;
+
+                if (!string.IsNullOrEmpty(QuestTitle)) {
+                    Quest quest = QuestManager.GetQuestByTitle(QuestTitle);
+
+                    if (quest != null) {
+                        if (QuestManager.IsQuestActive(QuestTitle)) { // 퀘스트 중 조건을 만족했다면 퀘스트 완료
+                            if (quest.Objectives.TrueForAll(obj => obj.IsComplete())) {
+                                QuestManager.CompleteQuest(QuestTitle);
                             }
                         }
-                        else
-                        {
-                            // 퀘스트를 시작하지 않은 경우 퀘스트 시작
-                            QuestManager.StartQuest(questTitle);
+                        else { // 퀘스트를 시작하지 않은 경우 퀘스트 시작
+                            QuestManager.StartQuest(QuestTitle);
                         }
                     }
                 }
             }
         }
-
         EndDialogue(); // 대화 종료
     }
 
-    public void EndDialogue()
-    {
+    public void EndDialogue() { // 다이얼로그 창 초기화
         SpeakerNameText.text = "";
         DialogueText.text = "";
         ButtonText.color = Color.white;

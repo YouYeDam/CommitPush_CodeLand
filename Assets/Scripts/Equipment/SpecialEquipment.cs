@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpecialEquipment : MonoBehaviour
 {
     PlayerStatus PlayerStatus;
-    private Coroutine PythonEffectCoroutine;
+    Coroutine PythonEffectCoroutine;
 
     void Start() {
         PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
@@ -43,12 +43,13 @@ public class SpecialEquipment : MonoBehaviour
         }
     }
 
-    void PythonEffect(bool ActivateEffect) {
+    void PythonEffect(bool ActivateEffect) { // 파이썬 아이템의 이펙트 활성화
         if (ActivateEffect) {
             if (PythonEffectCoroutine == null) {
                 PythonEffectCoroutine = StartCoroutine(PythonAutoHeal());
             }
-        } else {
+        } 
+        else {
             if (PythonEffectCoroutine != null) {
                 StopCoroutine(PythonEffectCoroutine);
                 PythonEffectCoroutine = null;
@@ -56,14 +57,14 @@ public class SpecialEquipment : MonoBehaviour
         }
     }
 
-    private IEnumerator PythonAutoHeal() {
+    IEnumerator PythonAutoHeal() { // 파이썬 아이템은 자동회복 기능
         while (true) {
             yield return new WaitForSeconds(10f);
             AutoHeal();
         }
     }
 
-    private void AutoHeal() {
+    void AutoHeal() { // HP와 MP 자동회복 (10초마다 5%씩)
         if (PlayerStatus.PlayerCurrentHP < PlayerStatus.PlayerMaxHP) {
             PlayerStatus.PlayerCurrentHP += Mathf.RoundToInt(PlayerStatus.PlayerMaxHP * 0.05f);
             if (PlayerStatus.PlayerCurrentHP > PlayerStatus.PlayerMaxHP) {

@@ -6,29 +6,29 @@ using System.Collections.Generic;
 [System.Serializable]
 public class QuestDialogue
 {
-    public Dialogue PreQuestDialogue;
-    public Dialogue InProgressDialogue;
-    public Dialogue ReadyToCompleteDialogue;
-    public Dialogue PostQuestDialogue;
+    public Dialogue PreQuestDialogue; // 퀘스트 받기 이전 대화
+    public Dialogue InProgressDialogue; // 퀘스트 진행중 대화
+    public Dialogue ReadyToCompleteDialogue; // 퀘스트 완료 대기 대화
+    public Dialogue PostQuestDialogue; // 퀘스트 완료 후 대화
 }
 
 public class NPC : MonoBehaviour
 {
-    public List<QuestData> QuestsToGive; // NPC가 줄 퀘스트 데이터 리스트
-    public List<QuestDialogue> QuestDialogues; // 퀘스트 별 대화 데이터 리스트
+    public List<QuestData> QuestsToGive; // NPC가 줄 퀘스트 리스트
+    public List<QuestDialogue> QuestDialogues; // 퀘스트 별 대화 리스트
 
     public Dialogue DefaultDialogue; // 퀘스트가 없는 경우 기본 대화
     public GameObject UIManager;
     [SerializeField] public string NPCName;
     [SerializeField] public string NPCJob;
-    public GameObject NPCNameInfo; // NPC 정보 텍스트 프리팹
+    public GameObject NPCNameInfo;
     public TMP_Text NPCNameInfoText;
     public GameObject NPCNameInfoInstance;
     public float NPCNameInfoPos = 0.7f;
-    public GameObject NPCJobInfo; // NPC 직업 텍스트 프리팹
+    public GameObject NPCJobInfo;
     public TMP_Text NPCJobInfoText;
     public GameObject NPCJobInfoInstance;
-    public GameObject NPCQuestStatus; // NPC 퀘스트 상태 텍스트 프리팹
+    public GameObject NPCQuestStatus;
     public TMP_Text NPCQuestStatusText;
     public GameObject NPCQuestStatusInstance;
     public float NPCQuestStatusPos = 1f;
@@ -65,7 +65,7 @@ public class NPC : MonoBehaviour
         }
     }
 
-    void SetNPCNameInfoPosition() {
+    void SetNPCNameInfoPosition() { // NPC 이름 위치 갱신
         if (NPCNameInfoInstance != null) {
             Vector3 newPosition = transform.position + Vector3.down * NPCNameInfoPos;
             NPCNameInfoInstance.transform.position = newPosition;
@@ -81,7 +81,7 @@ public class NPC : MonoBehaviour
         }
     }
 
-    void SetNPCJobInfoPosition() {
+    void SetNPCJobInfoPosition() { // NPC 직업 위치 갱신
         if (NPCJobInfoInstance != null) {
             Vector3 newPosition = transform.position + Vector3.down * (NPCNameInfoPos + 0.4f);
             NPCJobInfoInstance.transform.position = newPosition;
@@ -89,47 +89,40 @@ public class NPC : MonoBehaviour
         }
     }
 
-    public Dialogue GetCurrentDialogue()
-    {
-        if (questManager != null && CurrentQuestIndex < QuestsToGive.Count && CurrentQuestIndex < QuestDialogues.Count)
-        {
+    public Dialogue GetCurrentDialogue() { // 현재 대화 가져오기
+        if (questManager != null && CurrentQuestIndex < QuestsToGive.Count && CurrentQuestIndex < QuestDialogues.Count) {
             Quest quest = questManager.GetQuestByTitle(QuestsToGive[CurrentQuestIndex].Title);
             QuestDialogue questDialogue = QuestDialogues[CurrentQuestIndex];
 
-            if (CurrentQuestIndex > 0)
-            {
-                Quest previousQuest = questManager.GetQuestByTitle(QuestsToGive[CurrentQuestIndex - 1].Title);
-                QuestDialogue previousQuestDialogue = QuestDialogues[CurrentQuestIndex - 1];
+            if (CurrentQuestIndex > 0) { // 퀘스트를 하나 이상 완료한 상태라면
+                Quest PreviousQuest = questManager.GetQuestByTitle(QuestsToGive[CurrentQuestIndex - 1].Title);
+                QuestDialogue PreviousQuestDialogue = QuestDialogues[CurrentQuestIndex - 1];
 
-                if (previousQuest != null && previousQuest.IsCompleted)
-                {
-                    // 다음 퀘스트의 요구 레벨을 만족하지 못하는 경우
-                    if (questManager.PlayerStatus.PlayerLevel < quest.RequiredLevel)
-                    {
-                        return previousQuestDialogue.PostQuestDialogue;
+                if (PreviousQuest != null && PreviousQuest.IsCompleted) {
+                    if (questManager.PlayerStatus.PlayerLevel < quest.RequiredLevel) { // 다음 퀘스트의 요구 레벨을 만족하지 못하는 경우
+                        return PreviousQuestDialogue.PostQuestDialogue; // 이전 퀘스트 완료 후 나타나는 대화 출력
                     }
                 }
             }
 
-            if (quest != null)
-            {
-                if (quest.IsCompleted)
+            if (quest != null) { // 퀘스트 진행 상태별로 알맞은 대화 출력
+                if (quest.IsCompleted) 
                 {
                     return questDialogue.PostQuestDialogue;
                 }
-                else if (quest.IsReadyToComplete)
+                else if (quest.IsReadyToComplete) 
                 {
-                    return questDialogue.ReadyToCompleteDialogue; // 퀘스트 완료 가능 상태일 때의 대화 반환
+                    return questDialogue.ReadyToCompleteDialogue;
                 }
-                else if (questManager.IsQuestActive(QuestsToGive[CurrentQuestIndex].Title))
+                else if (questManager.IsQuestActive(QuestsToGive[CurrentQuestIndex].Title)) 
                 {
                     return questDialogue.InProgressDialogue;
                 }
-                else if (questManager.PlayerStatus.PlayerLevel < quest.RequiredLevel)
+                else if (questManager.PlayerStatus.PlayerLevel < quest.RequiredLevel) // 현재 퀘스트의 요구 레벨을 만족하지 못할 경우 DefaultDialogue 반환
                 {
-                    return DefaultDialogue; // 현재 퀘스트의 요구 레벨을 만족하지 못할 경우 DefaultDialogue 반환
+                    return DefaultDialogue; 
                 }
-                else
+                else 
                 {
                     return questDialogue.PreQuestDialogue;
                 }
@@ -138,11 +131,10 @@ public class NPC : MonoBehaviour
         return DefaultDialogue;
     }
 
-    public void UpdateQuestStatus()
-    {
-        if (questManager != null && CurrentQuestIndex < QuestsToGive.Count)
-        {
+    public void UpdateQuestStatus() { // 퀘스트 상태에 맞게 진행 상황 업데이트 (문자부호를 통해)
+        if (questManager != null && CurrentQuestIndex < QuestsToGive.Count) {
             Quest quest = questManager.GetQuestByTitle(QuestsToGive[CurrentQuestIndex].Title);
+
             if (quest != null)
             {
                 if (quest.IsCompleted)
@@ -165,22 +157,20 @@ public class NPC : MonoBehaviour
         }
     }
 
-    private void DisplayQuestStatus(string status, Color color)
-    {
-        if (UIManager != null && NPCQuestStatus != null)
-        {
-            if (NPCQuestStatusInstance == null)
-            {
+    void DisplayQuestStatus(string status, Color color) { // 퀘스트 상태 시각적으로 전시
+        if (UIManager != null && NPCQuestStatus != null) {
+            if (NPCQuestStatusInstance == null) {
                 NPCQuestStatusInstance = Instantiate(NPCQuestStatus, UIManager.transform);
                 NPCQuestStatusText = NPCQuestStatusInstance.GetComponent<TMP_Text>();
             }
+
             NPCQuestStatusText.text = status;
             NPCQuestStatusText.color = color;
             SetNPCQuestStatusPosition();
         }
     }
 
-    void SetNPCQuestStatusPosition() {
+    void SetNPCQuestStatusPosition() { // 퀘스트 상태 위치 조정
         if (NPCQuestStatusInstance != null) {
             Vector3 newPosition = transform.position + Vector3.up * NPCQuestStatusPos;
             NPCQuestStatusInstance.transform.position = newPosition;
@@ -188,10 +178,8 @@ public class NPC : MonoBehaviour
         }
     }
 
-    private void DestroyQuestStatus()
-    {
-        if (NPCQuestStatusInstance != null)
-        {
+    private void DestroyQuestStatus() { // 퀘스트 진행이 막혔거나 모두 완료한 생태라면 문자 부호 삭제
+        if (NPCQuestStatusInstance != null) {
             Destroy(NPCQuestStatusInstance);
             NPCQuestStatusInstance = null;
         }

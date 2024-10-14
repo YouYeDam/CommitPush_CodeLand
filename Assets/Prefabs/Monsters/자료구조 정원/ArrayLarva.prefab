@@ -248,6 +248,7 @@ MonoBehaviour:
   IsTakeDamge: 0
   CanWalk: 1
   CanTriggerDamage: 1
+  IsSkilling: 0
   AttackDelayTime: 3
 --- !u!114 &3157593347497917494
 MonoBehaviour:
@@ -262,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MonsterName: "\uC5B4\uB808\uC774 \uB77C\uBC14"
-  MonsterLevel: 3
+  MonsterLevel: 2
   MonsterMaxHealth: 40
   MonsterCurrentHealth: 0
   MonsterDamage: 15

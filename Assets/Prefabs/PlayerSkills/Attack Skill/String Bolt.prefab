@@ -173,9 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6f621a849657f940822f0eeb0600276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillSpeed: 10
+  SkillSpeed: 8
   DestroyDelay: 1
-  Damage: 20
+  Damage: 15
   SkillCoefficient: 0.08
   CanHitMany: 1
   CoolDown: 9
