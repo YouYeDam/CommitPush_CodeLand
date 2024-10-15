@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public Item Item; // 판매하는 아이템
-    public Image ItemImage;  // 아이템의 이미지
+    public Image ItemImage;
     public BuyItemInputField BuyItemInputField;
     CantBuyAlarm CantBuyAlarm;
     ItemToolTip ShopItemToolTip;
@@ -54,17 +54,17 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         ItemImage.sprite = null;
         SetColor(0);
     }
-    public void OnPointerEnter(PointerEventData eventData) {
+    public void OnPointerEnter(PointerEventData eventData) { // 마우스가 아이템 위에 있으면 툴팁 전시
         if (Item != null) {
             ShopItemToolTip.ShowToolTip(Item);
         }
     }
 
-    public void OnPointerExit(PointerEventData eventData) {
+    public void OnPointerExit(PointerEventData eventData) { // 마우스가 아이템을 벗어나면 툴팁 숨김
         ShopItemToolTip.HideToolTip();
     }
 
-    public void OnPointerClick(PointerEventData eventData) {
+    public void OnPointerClick(PointerEventData eventData) { // 더블클릭 기능
         ClickCount++;
         if (ClickCount == 1)
         {
@@ -82,30 +82,27 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
     }
 
-    void OnDoubleClick() // 슬롯 더블클릭
-    {
+    void OnDoubleClick() { // 슬롯 더블클릭
         if (Item == null || !PlayerMovement.IsAlive) {
             return;
         }
 
-        if (Item.Type == Item.ItemType.Used || Item.Type == Item.ItemType.ETC) // 소비 혹은 기타 아이템 시 실행
-        {
+        if (Item.Type == Item.ItemType.Used || Item.Type == Item.ItemType.ETC) { // 소비 혹은 기타 아이템 시 실행
             BuyItemInputField.OpenInputField(this);
         }
-        else if (Item.Type == Item.ItemType.Equipment || Item.Type == Item.ItemType.SourceCode) // 장비 혹은 스킬북 아이템시 실행
-        {
+        else if (Item.Type == Item.ItemType.Equipment || Item.Type == Item.ItemType.SourceCode) { // 장비 혹은 스킬북 아이템시 실행
             if (PlayerMoney.Bit >= Item.ItemCost) {
                 PlayerMoney.Bit -= Item.ItemCost;
                 PlayerGetItem.InventoryScript.AcquireItem(Item);
                 QuestManager.UpdateObjective(Item.ItemName, 1, true);
             }
-            else {
+            else { // 가지고 있는 돈이 모자라면 경고 알람
                 CantBuyAlarm.OpenCantBuyAlarm();
             }
         }
     }
 
-    public void BuyManyItem(int BuyItemCount) {
+    public void BuyManyItem(int BuyItemCount) { // 다수의 수량을 구매할 경우
         int TotalItemCost = Item.ItemCost * BuyItemCount;
         if (PlayerMoney.Bit >= TotalItemCost) {
             PlayerMoney.Bit -= TotalItemCost;

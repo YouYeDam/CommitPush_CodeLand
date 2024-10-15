@@ -149,6 +149,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         {
             ItemDrag.Instance.DragSlot = this;
             ItemDrag.Instance.DragSetImage(ItemImage);
+
             // 현재 슬롯의 월드 좌표를 드래그 객체의 위치로 설정
             ItemDrag.Instance.transform.position = this.transform.position;
             SetColor(0.5f); // 반투명하게 설정
@@ -175,8 +176,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             || ItemDrag.Instance.transform.localPosition.y > InventoryRect.yMax;
 
         if (IsOutsideInventory) { // 인벤토리를 벗어나서 드래그 종료 시 드랍 입력 필드 팝업
-            if (ItemDrag.Instance.DragSlot != null)
-            {
+            if (ItemDrag.Instance.DragSlot != null) {
                 DropItemInputNumber.OpenInputField();
                 ItemDrag.Instance.SetColor(0);
             }

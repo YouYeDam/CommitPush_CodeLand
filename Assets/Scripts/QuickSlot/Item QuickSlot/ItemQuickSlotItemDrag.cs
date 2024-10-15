@@ -18,14 +18,12 @@ public class ItemQuickSlotItemDrag : MonoBehaviour
         Instance = this;
     }
 
-    public void DragSetImage(Image ItemImage)
-    {
+    public void DragSetImage(Image ItemImage) { // 아이템 드래그 시 이미지 띄우기
         this.ItemImage.sprite = ItemImage.sprite;
         SetColor(1);
     }
 
-    public void SetColor(float Alpha)
-    {
+    public void SetColor(float Alpha) { // 알파값 1로 조정
         Color Color = ItemImage.color;
         Color.a = Alpha;
         ItemImage.color = Color;

@@ -18,14 +18,12 @@ public class SkillDrag : MonoBehaviour
         Instance = this;
     }
 
-    public void DragSetImage(Image SkillImage)
-    {
+    public void DragSetImage(Image SkillImage) { // 스킬 드래그 시 이미지 띄우기
         this.SkillImage.sprite = SkillImage.sprite;
         SetColor(1);
     }
 
-    public void SetColor(float Alpha)
-    {
+    public void SetColor(float Alpha) { // 알파값 1로 조정
         Color Color = SkillImage.color;
         Color.a = Alpha;
         SkillImage.color = Color;

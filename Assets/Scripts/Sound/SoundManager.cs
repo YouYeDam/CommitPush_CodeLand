@@ -27,10 +27,12 @@ public class SoundManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         GameObject BackgroundAudio = GameObject.FindWithTag("BackgroundMusic");
-        if (BackgroundAudio == null) {
+        if (BackgroundAudio == null) {  // 배경음악이 있는지 확인
             return;
-        } // 배경음악이 있는지 확인
+        }
+
         AudioSource CurrentBackgroundMusic = BackgroundAudio.GetComponent<AudioSource>();
+
         if (CurrentBackgroundMusic == null || (PreviousBackgroundMusic != null && CurrentBackgroundMusic.clip == PreviousBackgroundMusic.clip)) {
             return; // 오디오 소스가 없거나 클립이 같은 경우 리턴
         }
@@ -42,15 +44,15 @@ public class SoundManager : MonoBehaviour
         PreviousBackgroundMusic.clip = CurrentBackgroundMusic.clip; // 현재 음악을 이전 음악으로 설정
     }
 
-    private IEnumerator FadeIn(AudioSource AudioSource, float FadeTime)
-    {
+    IEnumerator FadeIn(AudioSource AudioSource, float FadeTime) { // 배경음악 변경 시 볼륨이 서서히 커지도록 설정
         float StartVolume = 0f;
         AudioSource.volume = 0f; // 초기 볼륨을 0으로 설정
-        while (AudioSource.volume < OriginalVolue) // 기존 볼륨까지 점진적으로 증가
-        {
+
+        while (AudioSource.volume < OriginalVolue) { // 기존 볼륨까지 점진적으로 증가
             AudioSource.volume += StartVolume + Time.deltaTime / FadeTime;
             yield return null;
         }
+
         AudioSource.volume = OriginalVolue;
     }
 }

@@ -17,27 +17,33 @@ public class StatusBar : MonoBehaviour
         PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
     }
 
-void Update() {
-    if (PlayerStatus.PlayerCurrentHP > 0)
-        HPMeter.fillAmount = (float)PlayerStatus.PlayerCurrentHP / PlayerStatus.PlayerMaxHP;
-    else
-        HPMeter.fillAmount = 0;
+    void Update() { // 플레이어 스테이터스 바 갱신
+        if (PlayerStatus.PlayerCurrentHP > 0) {
+            HPMeter.fillAmount = (float)PlayerStatus.PlayerCurrentHP / PlayerStatus.PlayerMaxHP;
+        }
+        else {
+            HPMeter.fillAmount = 0;
+        }
 
-    if (PlayerStatus.PlayerCurrentMP > 0)
-        MPMeter.fillAmount = (float)PlayerStatus.PlayerCurrentMP / PlayerStatus.PlayerMaxMP;
-    else
-        MPMeter.fillAmount = 0;
+        if (PlayerStatus.PlayerCurrentMP > 0) {
+            MPMeter.fillAmount = (float)PlayerStatus.PlayerCurrentMP / PlayerStatus.PlayerMaxMP;
+        }
+        else {
+            MPMeter.fillAmount = 0;
+        }
 
-    if (PlayerStatus.PlayerCurrentEXP > 0)
-        EXPMeter.fillAmount = (float)PlayerStatus.PlayerCurrentEXP / PlayerStatus.PlayerMaxEXP;
-    else
-        EXPMeter.fillAmount = 0;
-
-    HPDisplay.text = PlayerStatus.PlayerCurrentHP + " / " + PlayerStatus.PlayerMaxHP;
-    MPDisplay.text = PlayerStatus.PlayerCurrentMP + " / " + PlayerStatus.PlayerMaxMP;
-    EXPDisplay.text = PlayerStatus.PlayerCurrentEXP + " / " + PlayerStatus.PlayerMaxEXP;
-    PlayerLV.text = "LV." + PlayerStatus.PlayerLevel + " " + PlayerStatus.PlayerClass;
-    PlayerName.text = PlayerStatus.PlayerName;
-}
+        if (PlayerStatus.PlayerCurrentEXP > 0) {
+            EXPMeter.fillAmount = (float)PlayerStatus.PlayerCurrentEXP / PlayerStatus.PlayerMaxEXP;
+        }
+        else {
+            EXPMeter.fillAmount = 0;
+        }
+        
+        HPDisplay.text = PlayerStatus.PlayerCurrentHP + " / " + PlayerStatus.PlayerMaxHP;
+        MPDisplay.text = PlayerStatus.PlayerCurrentMP + " / " + PlayerStatus.PlayerMaxMP;
+        EXPDisplay.text = PlayerStatus.PlayerCurrentEXP + " / " + PlayerStatus.PlayerMaxEXP;
+        PlayerLV.text = "LV." + PlayerStatus.PlayerLevel + " " + PlayerStatus.PlayerClass;
+        PlayerName.text = PlayerStatus.PlayerName;
+    }
 
 }

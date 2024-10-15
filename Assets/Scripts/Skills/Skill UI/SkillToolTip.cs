@@ -18,11 +18,14 @@ public class SkillToolTip : MonoBehaviour
     void Start() {
         PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
     }
-    public void ShowToolTip(GameObject SkillPrefab) {
+
+    public void ShowToolTip(GameObject SkillPrefab) { // 아이템 툴팁 전시 기능
         SkillToolTipBase.SetActive(true);
+
         if (SkillPrefab == null) {
             return;
         }
+
         SkillNameText.text = SkillPrefab.GetComponent<SkillInfo>().SkillName;
         SkillInfoText.text = SkillPrefab.GetComponent<SkillInfo>().SkillExplain;
         SkillMPUseText.text = "소모 정신력: " + SkillPrefab.GetComponent<SkillInfo>().SkillMPUse + " MP";
@@ -32,7 +35,7 @@ public class SkillToolTip : MonoBehaviour
         SkillImage.sprite = SkillSpriteRenderer.sprite;
     }
 
-    public void HideToolTip() {
+    public void HideToolTip() { // 스킬 툴팁 숨김 기능
         SkillToolTipBase.SetActive(false);
     }
 }

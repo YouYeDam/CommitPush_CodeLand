@@ -46,7 +46,7 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
     }
     
-    public void SetSlotCount(int Count) {
+    public void SetSlotCount(int Count) { // 해당 퀵슬롯에 등록된 아이템 개수 카운트
         ItemCount += Count;
         TextCount.text = ItemCount.ToString();
 
@@ -75,23 +75,20 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
     }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        if(Item != null)
-        {
+    public void OnBeginDrag(PointerEventData eventData) { // 퀵슬롯에 등록된 아이템 드래그 시작시
+        if(Item != null) {
             ItemQuickSlotItemDrag.Instance.DragItemQuickSlot = this;
             ItemQuickSlotItemDrag.Instance.DragSetImage(ItemImage);
-            // 현재 슬롯의 월드 좌표를 드래그 객체의 위치로 설정
-            ItemQuickSlotItemDrag.Instance.transform.position = this.transform.position;
+            
+            ItemQuickSlotItemDrag.Instance.transform.position = this.transform.position; // 현재 슬롯의 월드 좌표를 드래그 객체의 위치로 설정
             SetColor(0.5f);
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (Item != null) 
-        {
+    public void OnDrag(PointerEventData eventData) { // 드래그 중일 때 드래그 된 아이템이 마우스를 따라가도록
+        if (Item != null) {
             Vector3 GlobalMousePos;
+
             if (RectTransformUtility.ScreenPointToWorldPointInRectangle(ItemQuickSlotItemDrag.Instance.MyRectTransform, eventData.position, eventData.pressEventCamera, out GlobalMousePos))
             {
                 ItemQuickSlotItemDrag.Instance.MyRectTransform.position = GlobalMousePos;
@@ -99,8 +96,7 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
     }
 
-    public void OnEndDrag(PointerEventData eventData)
-    {
+    public void OnEndDrag(PointerEventData eventData) { // 아이템 드래그 종료 시
         if (Item != null)
         {
             ClearSlot();
@@ -109,16 +105,15 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         ItemQuickSlotItemDrag.Instance.SetColor(0);
         ItemQuickSlotItemDrag.Instance.DragItemQuickSlot = null;
     }
-    public void OnDrop(PointerEventData eventData)
-    {
-        if (ItemDrag.Instance.DragSlot != null) 
-        {
-            if (ItemDrag.Instance.DragSlot.Item.Type != Item.ItemType.Used) {
-                return; // 소모품 타입이 아니라면 리턴
+
+    public void OnDrop(PointerEventData eventData) {
+        if (ItemDrag.Instance.DragSlot != null) {
+            if (ItemDrag.Instance.DragSlot.Item.Type != Item.ItemType.Used) { // 소모품 타입이 아니라면 리턴
+                return;
             }
+
             // 현재 퀵슬롯에 아이템이 있으면 해당 아이템과의 연동을 해제
-            if (this.Item != null)
-            {
+            if (this.Item != null) {
                 ClearSlot();
             }
             if (ItemDrag.Instance.DragSlot.QuickSlotReference != null) {
@@ -130,18 +125,18 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
     }
 
-    public void UseItem() // 아이템 사용
-    {
+    public void UseItem() { // 아이템 사용
         if (Item == null || !PlayerMovement.IsAlive) {
             return;
         }
         if (DropInputField.activeSelf || BuyInputField.activeSelf || SellInputField.activeSelf) {
             return;
         }
+        
         UsedItem UsedItem = Item.ItemPrefab.GetComponent<UsedItem>();
         UsedItem.PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
-        if (UsedItem != null)
-        {
+
+        if (UsedItem != null) {
             UsedItem.EffectItem();
             SetSlotCount(-1);
         }

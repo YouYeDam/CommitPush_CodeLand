@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerAttackSkill : MonoBehaviour
 {
     [SerializeField] float SkillSpeed = 1f;
-    [SerializeField] float DestroyDelay = 0.5f;
+    [SerializeField] float DestroyDelay = 0.5f; // 스킬 자동 파괴까지 시간
     [SerializeField] int Damage = 10;
     [SerializeField] float SkillCoefficient = 0.05f; // 스킬계수
     Rigidbody2D MyRigidbody;
@@ -38,14 +38,15 @@ public class PlayerAttackSkill : MonoBehaviour
         
     }
 
-    void OnTriggerEnter2D(Collider2D other) {
-        if (IsAttackDone) {
+    void OnTriggerEnter2D(Collider2D other) { // 스킬이 몬스터와 닿을 시 발생
+        if (IsAttackDone) { // 단일 개체만 타격 가능한 스킬일 경우 중복 타격 방지
             return;
         }
         if (other is BoxCollider2D && other.gameObject.tag == "Monster") {
             BasicMonsterMovement BaiscMonsterMovement = other.gameObject.GetComponent<BasicMonsterMovement>();
             BaiscMonsterMovement.TakeDamage(Damage, IsCrit);
-            if (!CanHitMany) {
+
+            if (!CanHitMany) { // 단일 개체만 타격 가능한 스킬일 경우 스킬 파괴
                 Invoke("DestroySelf", DestroyTime);
                 IsAttackDone = true;
             }
@@ -58,8 +59,7 @@ public class PlayerAttackSkill : MonoBehaviour
         }
     }
 
-    void DestroySelf()
-    {
+    void DestroySelf() { // 스킬 파괴
         Destroy(gameObject);
     }
 }

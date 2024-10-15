@@ -42,7 +42,7 @@ public class PlayerBuffSkill : MonoBehaviour
         transform.position = new Vector3(PlayerX, PlayerY, transform.position.z);
     }
 
-    void CheckBuffType() {
+    void CheckBuffType() { // 버프 타입 체크
         if (IsStatusUpBuff) {
             PlayerBuffController.PlayerStatusUp(BuffDuration, HPBuff, MPBuff, ATKBuff, DEFBuff, APBuff, CritBuff);
         }
@@ -50,7 +50,7 @@ public class PlayerBuffSkill : MonoBehaviour
             PlayerBuffController.PlayerSpeedUp(BuffDuration, MoveSpeedBuff, JumpSpeedBuff, ClimbSpeedBuff);
         }
     }
-    void DestroySelf() {
+    void DestroySelf() { // 스킬 파괴
             Destroy(gameObject);
     }
 }

@@ -22,42 +22,38 @@ public class UIManager : MonoBehaviour
         ItemQuickSlot = gameObject.transform.GetChild(0).gameObject;
         SkillQuickSlot = gameObject.transform.GetChild(1).gameObject;
     }
-    private void OnDestroy()
-    {
+
+    void OnDestroy() {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         int UINum = FindObjectsOfType<UIManager>().Length;
         string currentSceneName = scene.name;
 
-        if (UINum > 1 || currentSceneName == "Main Menu Scene")
-        {
+        if (UINum > 1 || currentSceneName == "Main Menu Scene") { // UI Manager가 2개 이상 되지 않도록 설정
             Destroy(gameObject);
         }
-        else
-        {
-            // 씬이 로드될 때마다 Main Camera를 찾아서 Canvas의 Render Camera로 설정.
-            
+        else {  // 씬이 로드될 때마다 Main Camera를 찾아서 Canvas의 Render Camera로 설정
             Camera MainCamera = Camera.main;
-            if (MainCamera != null)
-            {
+            if (MainCamera != null) {
                 Canvas Canvas = GetComponent<Canvas>();
-                if (Canvas != null)
-                {
+
+                if (Canvas != null) {
                     Canvas.renderMode = RenderMode.ScreenSpaceCamera;
                     Canvas.worldCamera = MainCamera;
                 }
             }
             
         }
+
         if (DialogueController != null && DialogueController.DialogueBase.activeSelf) {
             DialogueController.EndDialogue();
         }
 
         // 씬이 로드될 때 플레이어 인풋이 막힌 상황이면 스테이터스바, 퀵슬롯들도 비활성화
         GameObject StopPlayerInput = GameObject.FindWithTag("StopPlayerInput");
+
         if (StopPlayerInput != null) {
             StatusBar.SetActive(false);
             ItemQuickSlot.SetActive(false);
@@ -70,11 +66,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void DestroyAllTempInfo()
-    {
+    public void DestroyAllTempInfo() { // 임시 생성된 정보(몬스터 체력바, NPC 이름 등) 삭제
         GameObject[] tempInfos = GameObject.FindGameObjectsWithTag("TempInfo");
-        foreach (GameObject tempInfo in tempInfos)
-        {
+
+        foreach (GameObject tempInfo in tempInfos) {
             Destroy(tempInfo);
         }
     }

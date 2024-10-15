@@ -11,11 +11,9 @@ public class CameraFollowPlayer : MonoBehaviour
         FindAndFollowPlayer();
     }
 
-    void FindAndFollowPlayer()
-    {
+    void FindAndFollowPlayer() { // 카메라가 플레이어를 따라다닐 수 있도록
         GameObject PlayerObject = GameObject.FindGameObjectWithTag("Player");
-        if (PlayerObject != null && VirtualCamera != null)
-        {
+        if (PlayerObject != null && VirtualCamera != null) {
             VirtualCamera.Follow = PlayerObject.transform;
         }
     }

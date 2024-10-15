@@ -11,8 +11,7 @@ public class ItemQuickSlotController : MonoBehaviour
         TryInputNumber();
     }
 
-    void TryInputNumber()
-    {
+    void TryInputNumber() { // 숫자 키(1, 2, 3, 4)를 눌러 해당하는 퀵슬롯 실행
         if (Input.GetKeyDown(KeyCode.Alpha1)) { // 0번 슬롯 실행
             Execute(0);
         }
@@ -27,7 +26,7 @@ public class ItemQuickSlotController : MonoBehaviour
         }
     }
 
-    void Execute(int SlotIndex) {
+    void Execute(int SlotIndex) { // 퀵슬롯에 등록된 아이템 사용
         QuickSlots[SlotIndex].UseItem();
     }
 }

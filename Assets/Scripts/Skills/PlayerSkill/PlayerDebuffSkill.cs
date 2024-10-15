@@ -6,7 +6,7 @@ public class PlayerDebuffSkill : MonoBehaviour
 {
     [SerializeField] float SkillSpeed = 1f;
     [SerializeField] float DestroyDelay = 0.5f;
-    [SerializeField] float AttackDistance = 5f; // 캐스트 거리
+    [SerializeField] float AttackDistance = 5f; // 스킬 사거리
     [SerializeField] float BoxHeight = 0.5f; // 박스의 높이
     [SerializeField] float BoxWidth = 1f; // 박스의 너비
     Rigidbody2D MyRigidbody;
@@ -38,12 +38,10 @@ public class PlayerDebuffSkill : MonoBehaviour
         MyRigidbody.velocity = new Vector2(XSpeed, 0f);
 
         // Update에서 타겟 몬스터 위치로 지속적으로 갱신
-        if (TargetMonster != null)
-        {
+        if (TargetMonster != null) {
             transform.position = TargetMonster.transform.position;
         }
-        else
-        {
+        else {
             transform.position = TargetPosition;
         }
         if (TargetMonster != null && !TargetMonster.GetComponent<BasicMonsterMovement>().IsAlive) {
@@ -51,52 +49,46 @@ public class PlayerDebuffSkill : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (IsAttackDone)
-        {
+    void OnTriggerEnter2D(Collider2D other) { // 스킬이 몬스터와 닿을 시 발생
+        if (IsAttackDone) {
             return;
         }
-        if (other is BoxCollider2D && other.gameObject.tag == "Monster")
-        {
+
+        if (other is BoxCollider2D && other.gameObject.tag == "Monster") {
             BasicMonsterMovement MonsterMovement = other.gameObject.GetComponent<BasicMonsterMovement>();
             MonsterMovement.MonsterSlowDebuff(DebuffDuration, SlowDebuffFactor);
-            if (!CanHitMany)
-            {
+
+            if (!CanHitMany) { // 단일 개체만 타격 가능한 스킬일 경우 중복 타격 방지
                 IsAttackDone = true;
             }
         }
     }
 
-    void FlipSprite()
-    {
+    void FlipSprite() { //스킬 이펙트 좌우반전
         if (XSpeed < 0)
         {
             transform.localScale = new Vector2(-1, 1);
         }
     }
 
-    void CheckMonster()
-    {
+    void CheckMonster() { // 타켓할 몬스터 체크
         Vector2 Origin = Player.transform.position;
         Vector2 Direction = PlayerMovement.transform.localScale.x > 0 ? Vector2.right : Vector2.left;
         Vector2 Size = new Vector2(BoxWidth, BoxHeight);
         float Angle = 0f;
 
-        RaycastHit2D[] Hits = Physics2D.BoxCastAll(Origin, Size, Angle, Direction, AttackDistance, LayerMask.GetMask("Monster"));
+        RaycastHit2D[] Hits = Physics2D.BoxCastAll(Origin, Size, Angle, Direction, AttackDistance, LayerMask.GetMask("Monster")); // 박스 내 몬스터 감지
         float MinDistance = float.MaxValue;
         GameObject ClosestMonster = null;
 
-        foreach (RaycastHit2D Hit in Hits)
-        {
-            if (Hit.collider != null && Hit.collider.CompareTag("Monster"))
-            {
+        foreach (RaycastHit2D Hit in Hits) { // 범위 내 모든 몬스터를 순회
+            if (Hit.collider != null && Hit.collider.CompareTag("Monster")) {
                 BasicMonsterMovement MonsterMovement = Hit.collider.GetComponent<BasicMonsterMovement>();
-                if (MonsterMovement != null && MonsterMovement.IsAlive)
-                {
+
+                if (MonsterMovement != null && MonsterMovement.IsAlive) { // 살아있는 몬스터만 감지
                     float Distance = Vector2.Distance(Origin, Hit.point);
-                    if (Distance < MinDistance)
-                    {
+
+                    if (Distance < MinDistance) { // 가장 가까운 몬스터 탐지
                         MinDistance = Distance;
                         ClosestMonster = Hit.collider.gameObject;
                     }
@@ -104,18 +96,15 @@ public class PlayerDebuffSkill : MonoBehaviour
             }
         }
 
-        if (ClosestMonster != null)
-        {
+        if (ClosestMonster != null) {
             TargetMonster = ClosestMonster;
         }
-        else
-        {
+        else {
             DestroySelf();
         }
     }
 
-    void DestroySelf()
-    {
+    void DestroySelf() { // 스킬 파괴
         Destroy(gameObject);
     }
 }
