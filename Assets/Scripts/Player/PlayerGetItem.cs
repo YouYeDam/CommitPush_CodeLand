@@ -11,8 +11,7 @@ public class PlayerGetItem : MonoBehaviour
     DropMoney DropMoney;
     QuestManager QuestManager;
 
-    // 이미 획득한 아이템을 추적하기 위한 Set
-    HashSet<GameObject> acquiredItems = new HashSet<GameObject>();
+    HashSet<GameObject> AcquiredItems = new HashSet<GameObject>(); // 이미 획득한 아이템을 추적하기 위한 Set (중복 습득 버그 방지)
     
     void Start() {
         UICanvas = GameObject.Find("UIManager");
@@ -31,35 +30,36 @@ public class PlayerGetItem : MonoBehaviour
         AcquireItem(collision.gameObject);
     }
 
-    void AcquireItem(GameObject itemObject) {
-        if (acquiredItems.Contains(itemObject)) {
-            return; // 이미 획득한 아이템이면 반환
+    void AcquireItem(GameObject ItemObject) { // 아이템 획득 기능 함수
+        if (AcquiredItems.Contains(ItemObject)) {
+            return; // 이미 획득한 아이템이면 반환 (중복 습득 버그 방지)
         }
 
-        if (itemObject.tag == "Item" && InventoryScript != null) {
-            Item item = itemObject.GetComponent<ItemPickup>().item;
+        if (ItemObject.tag == "Item" && InventoryScript != null) {
+            Item item = ItemObject.GetComponent<ItemPickup>().item;
             InventoryScript.AcquireItem(item); // 아이템과 갯수를 전달하여 호출
+
             QuestManager.UpdateObjective(item.ItemName, 1, true);
-            acquiredItems.Add(itemObject);
-            StartCoroutine(DestroyAfterDelay(itemObject));
+            AcquiredItems.Add(ItemObject); // 해시 셋에 아이템 삽입
+            StartCoroutine(DestroyAfterDelay(ItemObject));
         }
 
-        if (itemObject.tag == "Money") {
-            DropMoney = itemObject.GetComponent<DropMoney>();
+        if (ItemObject.tag == "Money") {
+            DropMoney = ItemObject.GetComponent<DropMoney>();
             if (DropMoney.Bit != 0) {
                 PlayerMoney.Bit += DropMoney.Bit;
             }
             if (DropMoney.Snippet != 0) {
                 PlayerMoney.Snippet += DropMoney.Snippet;
             }
-            acquiredItems.Add(itemObject);
-            StartCoroutine(DestroyAfterDelay(itemObject));
+            AcquiredItems.Add(ItemObject); // 해시 셋에 아이템 삽입
+            StartCoroutine(DestroyAfterDelay(ItemObject));
         }
     }
 
-    IEnumerator DestroyAfterDelay(GameObject itemObject) {
+    IEnumerator DestroyAfterDelay(GameObject itemObject) { // 대기시간 후 아이템 삭제 (버그 방지)
         yield return new WaitForEndOfFrame(); // 한 프레임 기다린 후
         Destroy(itemObject);
-        acquiredItems.Remove(itemObject); // Destroy한 후 Set에서 제거
+        AcquiredItems.Remove(itemObject); // 삭제 후 해시셋에서 제거
     }
 }

@@ -5,8 +5,8 @@ public class MonsterSummoningSkill : MonoBehaviour
 {
     [SerializeField] float SummonBackToIdleAnimTime = 0.35f;
     [SerializeField] float SummonDelayTime = 1f;
-    [SerializeField] public int SummonCount = 0;
-    [SerializeField] public int MaxSummonCount = 30;
+    [SerializeField] public int SummonCount = 0; // 현재 소환한 횟수
+    [SerializeField] public int MaxSummonCount = 30; // 최대 소환 가능 개체수
     public Transform SummonSpot;
     Animator MyAnimator;
     BasicMonsterMovement BasicMonsterMovement;
@@ -19,10 +19,8 @@ public class MonsterSummoningSkill : MonoBehaviour
         GenerateMonster = GetComponent<GenerateMonster>();
     }
 
-    public void SummonMonsters()
-    {
-        if (SummonCount >= MaxSummonCount)
-        {
+    public void SummonMonsters() { // 몬스터 소환
+        if (SummonCount >= MaxSummonCount) { // 몬스터를 최대 소환 가능 개체수 이상만큼 소환하면 더이상 소환 X
             return;
         }
 
@@ -33,8 +31,7 @@ public class MonsterSummoningSkill : MonoBehaviour
         StartCoroutine(SummonRoutine());
     }
 
-    IEnumerator SummonRoutine()
-    {
+    IEnumerator SummonRoutine() { // 대기시간 후 몬스터 소환
         yield return new WaitForSeconds(SummonBackToIdleAnimTime);
         MyAnimator.SetBool("IsSummoning", false);
         BasicMonsterMovement.CanWalk = true;

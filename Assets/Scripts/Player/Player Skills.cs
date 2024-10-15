@@ -21,7 +21,7 @@ public class PlayerSkills : MonoBehaviour
 
     [SerializeField] Transform SkillSpot;
     [SerializeField] Transform BuffSpot;
-    [SerializeField] float GlobalCoolDown = 0.3f;
+    [SerializeField] float GlobalCoolDown = 0.3f; // 글로벌 쿨타임
     [SerializeField] public float QSkillCoolDown;
     [SerializeField] public float WSkillCoolDown;
     [SerializeField] public float ESkillCoolDown;
@@ -79,7 +79,7 @@ public class PlayerSkills : MonoBehaviour
         SkillCoolDownReduce();
     }
 
-    void UpdateSkillCoolDown(ref float SkillCoolDown) {
+    void UpdateSkillCoolDown(ref float SkillCoolDown) {  // 스킬 쿨타임 추적
         if (SkillCoolDown > 0) {
             SkillCoolDown -= Time.deltaTime;
             if (SkillCoolDown < 0) {
@@ -88,7 +88,7 @@ public class PlayerSkills : MonoBehaviour
         }
     }
 
-    void OnNormalAttack() {
+    void OnNormalAttack() { // 기본 공격 (A키)
         if (PlayerMovement.IsAlive == false || !PlayerManager.CanInput) {
             return;
         }
@@ -102,8 +102,8 @@ public class PlayerSkills : MonoBehaviour
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 PlayerMovement.IsWalkingAllowed = false; // 스킬을 사용한 후 이동 멈춤 설정
                 
-                Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
+                Invoke("ResetCanAttack", GlobalCoolDown);
+                Invoke("BackToIdleAnim", BackToIdleAnimTime);
             }
         }
     }
@@ -112,11 +112,13 @@ public class PlayerSkills : MonoBehaviour
         if (PlayerMovement.IsAlive == false || !PlayerManager.CanInput || QSkill == null || PlayerStatus.PlayerCurrentMP < QSkillMPUse) {
             return;
         }
+        
         bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
         bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
+
         if (CanAttack && CanQSkill) {
-            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
+            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) { // 플레이어가 지면에 있을 경우에만 실행
                 CheckSkillType(QSkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanQSkill = false;
@@ -126,10 +128,11 @@ public class PlayerSkills : MonoBehaviour
                 if (PlayerStatus.PlayerCurrentMP < 0) {
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
+
                 QSkillRemainingCoolDown = QSkillCoolDown;
-                Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("ResetQSkill", QSkillCoolDown); // 쿨다운 이후 RestQSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
+                Invoke("ResetCanAttack", GlobalCoolDown);
+                Invoke("ResetQSkill", QSkillCoolDown); 
+                Invoke("BackToIdleAnim", BackToIdleAnimTime);
             }
         }
     }
@@ -142,7 +145,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanWSkill) {
-            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
+            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) { // 플레이어가 지면에 있을 경우에만 실행
                 CheckSkillType(WSkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanWSkill = false;
@@ -153,9 +156,9 @@ public class PlayerSkills : MonoBehaviour
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
                 WSkillRemainingCoolDown = WSkillCoolDown;
-                Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("ResetWSkill", WSkillCoolDown); // 쿨다운 이후 RestQSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
+                Invoke("ResetCanAttack", GlobalCoolDown);
+                Invoke("ResetWSkill", WSkillCoolDown);
+                Invoke("BackToIdleAnim", BackToIdleAnimTime);
             }
         }
     }
@@ -167,7 +170,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanESkill) {
-            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
+            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) { // 플레이어가 지면에 있을 경우에만 실행
                 CheckSkillType(ESkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanESkill = false;
@@ -178,9 +181,9 @@ public class PlayerSkills : MonoBehaviour
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
                 ESkillRemainingCoolDown = ESkillCoolDown;
-                Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("ResetESkill", ESkillCoolDown); // 쿨다운 이후 RestQSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
+                Invoke("ResetCanAttack", GlobalCoolDown);
+                Invoke("ResetESkill", ESkillCoolDown);
+                Invoke("BackToIdleAnim", BackToIdleAnimTime);
             }
         }
     }
@@ -192,7 +195,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanRSkill) {
-            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
+            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) { // 플레이어가 지면에 있을 경우에만 실행
                 CheckSkillType(RSkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanRSkill = false;
@@ -203,9 +206,9 @@ public class PlayerSkills : MonoBehaviour
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
                 RSkillRemainingCoolDown = RSkillCoolDown;
-                Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("ResetRSkill", RSkillCoolDown); // 쿨다운 이후 ResetRSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
+                Invoke("ResetCanAttack", GlobalCoolDown);
+                Invoke("ResetRSkill", RSkillCoolDown);
+                Invoke("BackToIdleAnim", BackToIdleAnimTime);
             }
         }
     }
@@ -218,7 +221,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanSSkill) {
-            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
+            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) { // 플레이어가 지면에 있을 경우에만 실행
                 CheckSkillType(SSkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanSSkill = false;
@@ -229,9 +232,9 @@ public class PlayerSkills : MonoBehaviour
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
                 SSkillRemainingCoolDown = SSkillCoolDown;
-                Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("ResetSSkill", SSkillCoolDown); // 쿨다운 이후 ResetSSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
+                Invoke("ResetCanAttack", GlobalCoolDown);
+                Invoke("ResetSSkill", SSkillCoolDown);
+                Invoke("BackToIdleAnim", BackToIdleAnimTime);
             }
         }
     }
@@ -243,7 +246,7 @@ public class PlayerSkills : MonoBehaviour
         bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
         if (CanAttack && CanDSkill) {
-            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
+            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) { // 플레이어가 지면에 있을 경우에만 실행
                 CheckSkillType(DSkill);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정
                 CanDSkill = false;
@@ -254,14 +257,14 @@ public class PlayerSkills : MonoBehaviour
                     PlayerStatus.PlayerCurrentMP = 0;
                 }
                 DSkillRemainingCoolDown = DSkillCoolDown;
-                Invoke("ResetCanAttack", GlobalCoolDown); // 쿨다운 이후 ResetCanAttack 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("ResetDSkill", DSkillCoolDown); // 쿨다운 이후 ResetDSkill 함수를 호출하여 스킬 사용 가능 상태로 변경
-                Invoke("BackToIdleAnim", BackToIdleAnimTime); // 일정 시간 이후 BackToIdleAnim 함수를 호출하여 Idle 애니메이션으로 변경
+                Invoke("ResetCanAttack", GlobalCoolDown);
+                Invoke("ResetDSkill", DSkillCoolDown);
+                Invoke("BackToIdleAnim", BackToIdleAnimTime);
             }
         }
     }
 
-    void CheckSkillType(GameObject Skill) {
+    void CheckSkillType(GameObject Skill) { // 스킬의 유형 파악 후 스킬 생성 및 알맞은 플레이어 애니메이션 실행
         switch(Skill.GetComponent<SkillInfo>().SkillType) {
             case "공격형":
                 Instantiate(Skill, SkillSpot.position, transform.rotation);
@@ -311,18 +314,17 @@ public class PlayerSkills : MonoBehaviour
         MyAnimator.SetBool("IsBuffing", false);
     }
 
-    public void SetSkillsCoolTime(string ButtonKey)
-    {
+    public void SetSkillsCoolTime(string ButtonKey) { // 스킬 쿨타임 설정
         GameObject Skill = GetSkillByButtonKey(ButtonKey);
 
-        if (Skill != null)
-        {
+        if (Skill != null) {
             PlayerAttackSkill AttackSkill = Skill.GetComponent<PlayerAttackSkill>();
             PlayerBuffSkill BuffSkill = Skill.GetComponent<PlayerBuffSkill>();
             PlayerTargetSkill TargetSkill = Skill.GetComponent<PlayerTargetSkill>();
             PlayerDebuffSkill DebuffSkill = Skill.GetComponent<PlayerDebuffSkill>();
             PlayerHealingSkill HealingSkill = Skill.GetComponent<PlayerHealingSkill>();
 
+            // 스킬 속성 할당
             if (AttackSkill != null)
             {
                 SetSkillProperties(ButtonKey, AttackSkill.CoolDown, AttackSkill.MPUse);
@@ -346,8 +348,7 @@ public class PlayerSkills : MonoBehaviour
         }
     }
 
-    private GameObject GetSkillByButtonKey(string ButtonKey)
-    {
+    GameObject GetSkillByButtonKey(string ButtonKey) { // 알맞은 키에 대한 스킬 반환
         switch (ButtonKey)
         {
             case "Q": return QSkill;
@@ -360,8 +361,7 @@ public class PlayerSkills : MonoBehaviour
         }
     }
 
-    private void SetSkillProperties(string ButtonKey, float CoolDown, int MPUse)
-    {
+    void SetSkillProperties(string ButtonKey, float CoolDown, int MPUse) { // 키에 맞는 스킬 속성 설정(쿨타임, MP사용량)
         switch (ButtonKey)
         {
             case "Q":
@@ -391,7 +391,7 @@ public class PlayerSkills : MonoBehaviour
         }
     }
 
-    void SkillCoolDownReduce() {
+    void SkillCoolDownReduce() { // 플레이어의 AP스탯에 따라 쿨타임이 줄어들도록(0.3초 미만으로는 줄어들지 못하게)
         QSkillCoolDown = InitialQSkillCoolDown * (1 - PlayerStatus.PlayerAP);
         if (QSkillCoolDown < 0.3f) {
             QSkillCoolDown = 0.3f;

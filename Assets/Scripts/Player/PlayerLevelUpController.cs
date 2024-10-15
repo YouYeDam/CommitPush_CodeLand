@@ -31,7 +31,7 @@ public class PlayerLevelUpController : MonoBehaviour
             CheckLevelUpPoint();
         }
     }
-    public void ConnectButton() {
+    public void ConnectButton() { // 캐릭터 상태창의 스탯업 버튼과 연결
         HPUPButtonObject = GameObject.Find("HP UP Button");
         HPUPButton = HPUPButtonObject.GetComponent<Button>();
         HPUPButton.onClick.AddListener(PlayerStatus.HPUp);
@@ -57,7 +57,7 @@ public class PlayerLevelUpController : MonoBehaviour
         CritUPButton.onClick.AddListener(PlayerStatus.CritUp);
     }
 
-    public void CheckLevelUpPoint() {
+    public void CheckLevelUpPoint() { // 스탯업 포인트가 남아있을 경우에만 버튼 활성화
         if (PlayerStatus.LevelUpPoint >= 1) {
             HPUPButton.interactable = true;
             MPUPButton.interactable = true;

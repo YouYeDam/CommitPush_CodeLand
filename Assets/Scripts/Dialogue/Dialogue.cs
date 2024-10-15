@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Dialogue", menuName = "New Dialogue/Dialogue")] // 다이얼로그 어트리뷰트 생성
+[CreateAssetMenu(fileName = "New Dialogue", menuName = "New Dialogue/Dialogue")] // 다이얼로그 메뉴 생성
 public class Dialogue : ScriptableObject
 {
     public DialogueNode[] nodes; // 대화 노드 배열

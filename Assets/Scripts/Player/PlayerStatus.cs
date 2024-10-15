@@ -31,29 +31,31 @@ public class PlayerStatus : MonoBehaviour
         PlayerCurrentMP = PlayerMaxMP;
         UIManager = GameObject.Find("UIManager");
     }
-    void LateUpdate() {
+
+    void LateUpdate() { // 플레이어 이름의 위치가 튀는 것을 방지하기 위해서
         UpdatePlayerNameInfo();
     }
-    public void SetPlayerName(string NewName){
+    public void SetPlayerName(string NewName){ // 플레이어 이름 설정
             PlayerName = NewName;
     }
 
-    public void GainEXP(int EXP) {
+    public void GainEXP(int EXP) { // 경험치 획득
         PlayerCurrentEXP += EXP;
         if (PlayerCurrentEXP >= PlayerMaxEXP) {
             LevelUp();
         }
     }
 
-    void LevelUp() {
+    void LevelUp() { // 레벨업 기능
         PlayerLevel += 1;
-        PlayerCurrentEXP -= PlayerMaxEXP;
+        PlayerCurrentEXP -= PlayerMaxEXP; // 초과한 경험치 이전되도록
         PlayerMaxHP += 10;
         PlayerMaxMP += 10;
         PlayerCurrentHP = PlayerMaxHP;
         PlayerCurrentMP = PlayerMaxMP;
         LevelUpPoint += 3;
 
+        // 레벨에 따라 요구 경험치 증가량 조정
         if (PlayerLevel <= 5) {
             PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.8f);
         }
@@ -63,12 +65,14 @@ public class PlayerStatus : MonoBehaviour
         else {
             PlayerMaxEXP = PlayerMaxEXP + (int)Mathf.Floor(PlayerMaxEXP * 0.55f);
         }
-        if (PlayerCurrentEXP >= PlayerMaxEXP) {
+
+        if (PlayerCurrentEXP >= PlayerMaxEXP) { // 2단 레벨업 방지
             PlayerCurrentEXP = PlayerMaxEXP - 1;
         }
-        Instantiate(LevelUpEffect, LevelUpSpot.position, transform.rotation);
 
-        GameObject[] Monsters = GameObject.FindGameObjectsWithTag("Monster");
+        Instantiate(LevelUpEffect, LevelUpSpot.position, transform.rotation); // 레벨업 이펙트
+
+        GameObject[] Monsters = GameObject.FindGameObjectsWithTag("Monster"); // 몬스터와 플레이어 레벨차 재조정
         foreach (GameObject Monster in Monsters) {
             MonsterStatus MonsterStatus = Monster.GetComponent<MonsterStatus>();
             if (MonsterStatus != null) {
@@ -77,7 +81,7 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    public void DisplayPlayerNameInfo() { // 캐릭터 이름 보이기
+    public void DisplayPlayerNameInfo() { // 플레이어 이름 보이기
         if (UIManager != null && PlayerNameInfo != null && PlayerNameInfoInstance == null) {
             PlayerNameInfoInstance = Instantiate(PlayerNameInfo, UIManager.transform); // 캔버스의 자식으로 할당
             PlayerNameInfoText = PlayerNameInfoInstance.GetComponent<TMP_Text>();
@@ -86,7 +90,7 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
-    void UpdatePlayerNameInfo() {
+    void UpdatePlayerNameInfo() { // 플레이어 이름 위치 갱신
         if (PlayerNameInfoInstance != null) {
             Vector3 newPosition = transform.position + Vector3.down * PlayerNameInfoPos;
             PlayerNameInfoInstance.transform.position = newPosition;
@@ -125,7 +129,7 @@ public class PlayerStatus : MonoBehaviour
         LevelUpPoint -= 1;
     }
 
-    public void AutoHeal(float Bonus) {
+    public void AutoHeal(float Bonus) { // 체력 자동회복
         if (PlayerCurrentHP != PlayerMaxHP) {
             PlayerCurrentHP += Mathf.RoundToInt(PlayerMaxHP * 0.03f);
             if (PlayerCurrentHP > PlayerMaxHP) {

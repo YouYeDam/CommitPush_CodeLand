@@ -18,7 +18,7 @@ public class PlayerInteraction : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
 
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+    void OnTriggerEnter2D(Collider2D other) { // 플레이어가 포탈 혹은 터널과 닿을 시 포탈 정보 저장
         if (other.gameObject.tag == "Portal") {
             CanUsePortal = true;
             PortalInfo = other.gameObject.GetComponent<PortalInfo>();
@@ -31,17 +31,23 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.tag == "Portal") {
-            CanUsePortal = false;
-            PortalInfo = null;
-            LoadSceneName = null;
-        }
+void OnTriggerExit2D(Collider2D other) { 
+    if (other.gameObject.tag == "Portal") { // 플레이어가 포탈을 벗어날 시 초기화
+        CanUsePortal = false;
+        PortalInfo = null;
+        LoadSceneName = null;
     }
 
-    void OnPortal() {
+    if (other.gameObject.tag == "Tunnel") { // 플레이어가 터널을 벗어날 시 초기화
+        CanUseTunnel = false;
+        PortalInfo = null;
+    }
+}
+
+    void OnPortal() { // 포탈 이용
         if (CanUsePortal) {
-            UIManager.DestroyAllTempInfo();
+            UIManager.DestroyAllTempInfo(); // 화면에 남아있는 임시 정보(데미지바, NPC이름 등) 전부 삭제
+            
             if (LoadSceneName != null) {
                 ConnectPortalName = PortalInfo.ConnectPortalName;
                 PlayerManager.SetConnectPortalName(ConnectPortalName);
@@ -50,7 +56,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    void OnTunnel() {
+    void OnTunnel() { // 터널 이용
         if (CanUseTunnel) {
             ConnectPortalName = PortalInfo.ConnectPortalName;
             GameObject ConnectPortal = GameObject.Find(ConnectPortalName);

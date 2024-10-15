@@ -19,11 +19,11 @@ public class MonsterThrowingSkill : MonoBehaviour
         MyCapsuleCollider = GetComponent<CapsuleCollider2D>();
         BasicMonsterMovement = GetComponent<BasicMonsterMovement>();
     }
-    public void ShootSkill() {
+    public void ShootSkill() { // 던지기 스킬
         bool IsOnGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
         bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
 
-        if (IsOnLadderGround || IsOnGround) {
+        if (IsOnLadderGround || IsOnGround) { // 몬스터가 지면에 있을 경우에만
             Invoke("InstantiateSkill", SkillDelayForAnim);
             MyAnimator.SetBool("IsThrowing", true);
             BasicMonsterMovement.IsSkilling = true;
@@ -32,13 +32,13 @@ public class MonsterThrowingSkill : MonoBehaviour
         }
     }
 
-    void BackToIdleAnim() {
+    void BackToIdleAnim() { // 애니메이션 복구
         MyAnimator.SetBool("IsThrowing", false);
         BasicMonsterMovement.IsSkilling = false;
         BasicMonsterMovement.CanWalk = true;
     }
 
-    void InstantiateSkill() {
+    void InstantiateSkill() { // 발사체 생성
         ProjectileInstance = Instantiate(Projectile, ThrowingSpot.position, transform.rotation);
         // MonsterAttackSkill 컴포넌트를 가져와 필요한 값을 할당
         MonsterAttackSkill MonsterAttackSkill = ProjectileInstance.GetComponent<MonsterAttackSkill>();

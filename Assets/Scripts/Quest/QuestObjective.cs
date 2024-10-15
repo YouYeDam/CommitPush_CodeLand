@@ -15,23 +15,18 @@ public class QuestObjective
     public int RequiredAmount; // 목표 달성을 위한 수량
     public int CurrentAmount; // 현재 달성한 수량
 
-    public QuestObjective(ObjectiveType type, string targetName, int requiredAmount)
-    {
+    public QuestObjective(ObjectiveType type, string targetName, int requiredAmount) {
         Type = type;
         TargetName = targetName;
         RequiredAmount = requiredAmount;
         CurrentAmount = 0;
     }
     
-    // 목표 달성 여부를 확인하는 메서드
-    public bool IsComplete()
-    {
+    public bool IsComplete() { // 목표 달성 여부를 확인하는 메서드
         return Type == ObjectiveType.None || CurrentAmount >= RequiredAmount;
     }
 
-    // 목표를 초기화하는 메서드
-    public void ResetCurrentAmount()
-    {
+    public void ResetCurrentAmount() { // 목표를 초기화하는 메서드
         CurrentAmount = 0;
     }
 }

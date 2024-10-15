@@ -43,6 +43,8 @@ public class PlayerUI : MonoBehaviour
         PlayerLevelUpController = GetComponent<PlayerLevelUpController>();
         PlayerManager = GetComponent<PlayerManager>();
         UIManager = GameObject.Find("UIManager");
+
+        // UIManager에 연결된 UI 가져오기
         Character = UIManager.transform.GetChild(2).gameObject;
         Skill = UIManager.transform.GetChild(3).gameObject;
         Equipment = UIManager.transform.GetChild(4).gameObject;
@@ -51,7 +53,7 @@ public class PlayerUI : MonoBehaviour
         Dialogue = UIManager.transform.GetChild(9).gameObject.transform.GetChild(0).gameObject;
         Shop = UIManager.transform.GetChild(6).gameObject;
 
-        // 원래 위치 저장
+        // 원래 위치 저장 (다시 열었을 때 위치 고정하도록)
         CharacterOriginalPosition = Character.GetComponent<RectTransform>().anchoredPosition;
         SkillOriginalPosition = Skill.GetComponent<RectTransform>().anchoredPosition;
         EquipmentOriginalPosition = Equipment.GetComponent<RectTransform>().anchoredPosition;
@@ -60,7 +62,7 @@ public class PlayerUI : MonoBehaviour
         ShopOriginalPosition = Shop.GetComponent<RectTransform>().anchoredPosition;
     }
 
-    public void OnInventory() {
+    public void OnInventory() { // 인벤토리 창 열기 (I키)
         if (Inventory == null || !PlayerManager.CanInput) {
             return;
         }
@@ -69,18 +71,16 @@ public class PlayerUI : MonoBehaviour
         }
         else {
             Inventory.SetActive(true);
-            // 원래 위치로 복원
-            Inventory.GetComponent<RectTransform>().anchoredPosition = InventoryOriginalPosition;
-
-            // 닫기 버튼 연결
-            if (InventoryButtonObject == null) {
+            Inventory.GetComponent<RectTransform>().anchoredPosition = InventoryOriginalPosition; // 원래 위치로 복원
+            
+            if (InventoryButtonObject == null) { // 닫기 버튼 연결
                 InventoryButtonObject = GameObject.Find("Inventory Close Button");
                 InventoryButton = InventoryButtonObject.GetComponent<Button>();
                 InventoryButton.onClick.AddListener(OnInventory);
             }
         }
     }
-    public void OnCharacter() {
+    public void OnCharacter() { // 캐릭터 창 열기 (C키)
         if (Character == null || !PlayerManager.CanInput) {
             return;
         }
@@ -89,11 +89,9 @@ public class PlayerUI : MonoBehaviour
         }
         else {
             Character.SetActive(true);
-            // 원래 위치로 복원
-            Character.GetComponent<RectTransform>().anchoredPosition = CharacterOriginalPosition;
+            Character.GetComponent<RectTransform>().anchoredPosition = CharacterOriginalPosition; // 원래 위치로 복원
 
-            // 닫기 버튼 연결
-            if (CharacterButtonObject == null) {
+            if (CharacterButtonObject == null) { // 닫기 버튼 연결
                 CharacterButtonObject = GameObject.Find("Character Close Button");
                 CharacterButton = CharacterButtonObject.GetComponent<Button>();
                 CharacterButton.onClick.AddListener(OnCharacter);
@@ -102,7 +100,7 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    public void OnQuest() {
+    public void OnQuest() { // 퀘스트 창 열기 (J키)
         if (Quest == null || !PlayerManager.CanInput) {
             return;
         }
@@ -111,18 +109,17 @@ public class PlayerUI : MonoBehaviour
         }
         else {
             Quest.SetActive(true);
-            // 원래 위치로 복원
-            Quest.GetComponent<RectTransform>().anchoredPosition = QuestOriginalPosition;
+            Quest.GetComponent<RectTransform>().anchoredPosition = QuestOriginalPosition; // 원래 위치로 복원
 
-            // 닫기 버튼 연결
-            if (QuestButtonObject == null) {
+            if (QuestButtonObject == null) { // 닫기 버튼 연결
                 QuestButtonObject = GameObject.Find("Quest Close Button");
                 QuestButton = QuestButtonObject.GetComponent<Button>();
                 QuestButton.onClick.AddListener(OnQuest);
             }
         }
     }
-    public void OnSkill() {
+
+    public void OnSkill() { // 스킬 창 열기 (K키)
         if (Skill == null || !PlayerManager.CanInput) {
             return;
         }
@@ -131,11 +128,9 @@ public class PlayerUI : MonoBehaviour
         }
         else {
             Skill.SetActive(true);
-            // 원래 위치로 복원
-            Skill.GetComponent<RectTransform>().anchoredPosition = SkillOriginalPosition;
+            Skill.GetComponent<RectTransform>().anchoredPosition = SkillOriginalPosition; // 원래 위치로 복원
 
-            // 닫기 버튼 연결
-            if (SkillButtonObject == null) {
+            if (SkillButtonObject == null) { // 닫기 버튼 연결
                 SkillButtonObject = GameObject.Find("Skill Close Button");
                 SkillButton = SkillButtonObject.GetComponent<Button>();
                 SkillButton.onClick.AddListener(OnSkill);
@@ -143,7 +138,7 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    public void OnEquipment() {
+    public void OnEquipment() { // 장비 창 열기 (P키)
         if (Equipment == null || !PlayerManager.CanInput) {
             return;
         }
@@ -152,11 +147,9 @@ public class PlayerUI : MonoBehaviour
         }
         else {
             Equipment.SetActive(true);
-            // 원래 위치로 복원
-            Equipment.GetComponent<RectTransform>().anchoredPosition = EquipmentOriginalPosition;
-
-            // 닫기 버튼 연결
-            if (EquipmentButtonObject == null) {
+            Equipment.GetComponent<RectTransform>().anchoredPosition = EquipmentOriginalPosition; // 원래 위치로 복원
+            
+            if (EquipmentButtonObject == null) { // 닫기 버튼 연결
                 EquipmentButtonObject = GameObject.Find("Equipment Close Button");
                 EquipmentButton = EquipmentButtonObject.GetComponent<Button>();
                 EquipmentButton.onClick.AddListener(OnEquipment);
@@ -164,18 +157,18 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    public void SetDialogueButton() {
+    public void SetDialogueButton() { // 다이얼로그 창 버튼 설정
         DialogueButtonObject = GameObject.Find("Dialogue Close Button");
         DialogueButton = DialogueButtonObject.GetComponent<Button>();
         DialogueButton.onClick.AddListener(CloseDialogue);
     }
-    public void CloseDialogue() {
+    public void CloseDialogue() { // 다이얼로그 창 닫기
         if (Dialogue.activeSelf) {
             Dialogue.SetActive(false);
         }
     }
 
-    public void OpenShop() {
+    public void OpenShop() { // 상점 창 열기
         if (Shop == null || !PlayerManager.CanInput) {
             return;
         }
@@ -188,8 +181,8 @@ public class PlayerUI : MonoBehaviour
         if (Dialogue.activeSelf) { // 대화창이 열려있으면 대화창 닫기
             CloseDialogue();
         }
-        // 원래 위치로 복원
-        Shop.GetComponent<RectTransform>().anchoredPosition = ShopOriginalPosition;
+        
+        Shop.GetComponent<RectTransform>().anchoredPosition = ShopOriginalPosition; // 원래 위치로 복원
         if (ShopButtonObject == null) {
             ShopButtonObject = GameObject.Find("Shop Close Button");
             ShopButton = ShopButtonObject.GetComponent<Button>();
@@ -197,7 +190,7 @@ public class PlayerUI : MonoBehaviour
         }
     }
 
-    public void CloseShop() {
+    public void CloseShop() { // 상점 창 닫기
         if (Shop.activeSelf) {
             Shop.SetActive(false);
         }

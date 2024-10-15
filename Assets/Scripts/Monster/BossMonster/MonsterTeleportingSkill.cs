@@ -20,7 +20,7 @@ public class MonsterTeleportingSkill : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public void MonsterTeleportSkill() {
+    public void MonsterTeleportSkill() { // 몬스터 텔레포트 스킬
         MyAnimator.SetBool("IsTeleporting", true);
         BasicMonsterMovement.CanWalk = false;
         BasicMonsterMovement.IsSkilling = true;
@@ -28,8 +28,7 @@ public class MonsterTeleportingSkill : MonoBehaviour
         StartCoroutine(TeleportRoutine(TeleportPosition));
     }
 
-    IEnumerator TeleportRoutine(Vector3 TeleportPosition)
-    {
+    IEnumerator TeleportRoutine(Vector3 TeleportPosition) { // 대기시간 후 텔레포트 스킬 사용
         yield return new WaitForSeconds(TeleportDelayTime);
         MyAnimator.SetBool("IsTeleporting", false);
         BasicMonsterMovement.CanWalk = true;
@@ -38,12 +37,12 @@ public class MonsterTeleportingSkill : MonoBehaviour
         transform.position = TeleportPosition;
     }
 
-    void InstantiateEffect() {
+    void InstantiateEffect() { // 텔레포트 이펙트 연출
         TeleportEffectInstance = Instantiate(TeleportEffect, TeleportSpot.position, transform.rotation);
         Invoke("DestroyEffect", DestroyEffectTime);
     }
 
-    void DestroyEffect() {
+    void DestroyEffect() { // 대기시간 후 이펙트 삭제
         Destroy(TeleportEffectInstance);
     }
 }

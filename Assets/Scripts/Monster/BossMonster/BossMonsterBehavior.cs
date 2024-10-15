@@ -7,10 +7,10 @@ public class BossMonsterBehavior : MonoBehaviour
     [SerializeField] bool IsThrowingBoss = false; // 던지기 스킬을 가진 보스인지
     [SerializeField] bool IsDroppingBoss = false; // 낙하물 투하 스킬을 가진 보스인지
     [SerializeField] bool IsTeleportingBoss = false; // 텔레포트 스킬을 가진 보스인지
-    [SerializeField] float SummonWaitTime = 20f;
-    [SerializeField] float ThrowingWaitTime = 10f;
-    [SerializeField] float DroppingWaitTime = 20f;
-    [SerializeField] float TeleportingWaitTime = 30f;
+    [SerializeField] float SummonWaitTime = 20f; // 소환 스킬 쿨타임
+    [SerializeField] float ThrowingWaitTime = 10f; // 던지기 스킬 쿨타임
+    [SerializeField] float DroppingWaitTime = 20f; // 낙하물 투하 스킬 쿨타임
+    [SerializeField] float TeleportingWaitTime = 30f; // 텔레포트 스킬 쿨타임
     MonsterSummoningSkill MonsterSummoningSkill;
     MonsterThrowingSkill MonsterThrowingSkill;
     MonsterDroppingSkill MonsterDroppingSkill;
@@ -44,7 +44,7 @@ public class BossMonsterBehavior : MonoBehaviour
         }
     }
 
-    IEnumerator SummonSkill() {
+    IEnumerator SummonSkill() { // 소환 스킬
         while (PlayerMovement.IsAlive && MonsterSummoningSkill.SummonCount < MonsterSummoningSkill.MaxSummonCount) {
             yield return new WaitForSeconds(SummonWaitTime);
 
@@ -55,7 +55,7 @@ public class BossMonsterBehavior : MonoBehaviour
         }
     }
 
-    IEnumerator ThrowingSkill() {
+    IEnumerator ThrowingSkill() { // 던지기 스킬
         while (PlayerMovement.IsAlive) {
             yield return new WaitForSeconds(ThrowingWaitTime);
 
@@ -66,7 +66,7 @@ public class BossMonsterBehavior : MonoBehaviour
         }
     }
 
-    IEnumerator DroppingSkill() {
+    IEnumerator DroppingSkill() { // 낙하물 투하 스킬
         while (PlayerMovement.IsAlive) {
             yield return new WaitForSeconds(DroppingWaitTime);
 
@@ -77,7 +77,7 @@ public class BossMonsterBehavior : MonoBehaviour
         }
     }
 
-    IEnumerator TeleportingSkill() {
+    IEnumerator TeleportingSkill() { // 텔레포트 스킬
         while (PlayerMovement.IsAlive) {
             yield return new WaitForSeconds(TeleportingWaitTime);
 

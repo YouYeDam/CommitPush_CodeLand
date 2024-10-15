@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 public class QuestManager : MonoBehaviour
 {
     public List<QuestData> QuestDatas; // 모든 퀘스트 데이터 리스트
-    private List<Quest> allQuests = new List<Quest>(); // 모든 퀘스트 리스트
-    private List<Quest> activeQuests = new List<Quest>(); // 활성화된 퀘스트 리스트
-    private List<Quest> completedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
-    private GameObject QuestContent;  // 퀘스트 슬롯의 부모인 Content
-    private QuestSlot[] QuestSlots;
+    List<Quest> AllQuests = new List<Quest>(); // 모든 퀘스트 리스트
+    List<Quest> ActiveQuests = new List<Quest>(); // 활성화된 퀘스트 리스트
+    List<Quest> CompletedQuests = new List<Quest>(); // 완료된 퀘스트 리스트
+    GameObject QuestContent;  // 퀘스트 슬롯의 부모인 Content
+    QuestSlot[] QuestSlots;
     public PlayerStatus PlayerStatus;
     PlayerGetItem PlayerGetItem;
     PlayerMoney PlayerMoney;
@@ -33,9 +33,7 @@ public class QuestManager : MonoBehaviour
         PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
     }
 
-    // 퀘스트 초기화
-    private void InitializeQuests()
-    {
+    void InitializeQuests() { // 퀘스트 초기화
         foreach (var questData in QuestDatas)
         {
             Quest quest = new Quest(
@@ -46,17 +44,15 @@ public class QuestManager : MonoBehaviour
                 questData.ItemRewards,
                 questData.Objectives,
                 questData.RequiredLevel,
-                questData.Place, // 추가된 부분
-                questData.NPCName // 추가된 부분
+                questData.Place,
+                questData.NPCName
             );
-            allQuests.Add(quest);
+            AllQuests.Add(quest); // 모든 퀘스트 리스트에 추가
         }
     }
 
-    // 모든 퀘스트 목표의 CurrentAmount를 초기화하는 메서드
-    private void ResetAllQuestObjectives()
-    {
-        foreach (var quest in allQuests)
+    void ResetAllQuestObjectives() { // 모든 퀘스트 목표의 현재 수량을 초기화
+        foreach (var quest in AllQuests)
         {
             foreach (var objective in quest.Objectives)
             {
@@ -64,92 +60,70 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
+    public void StartQuest(string QuestTitle) { // 퀘스트 시작
+        Quest quest = AllQuests.Find(q => q.Title == QuestTitle); // 모든 퀘스트 리스트에서 해당하는 제목을 가진 퀘스트를 할당
 
-    // 퀘스트 시작
-    public void StartQuest(string questTitle)
-    {
-        Quest quest = allQuests.Find(q => q.Title == questTitle);
-        if (quest != null && !activeQuests.Contains(quest) && !quest.IsCompleted)
-        {
-            // 요구 레벨을 확인
-            if (PlayerStatus.PlayerLevel >= quest.RequiredLevel)
-            {
-                activeQuests.Add(quest);
+        if (quest != null && !ActiveQuests.Contains(quest) && !quest.IsCompleted) { // 퀘스트가 이미 활성화 상태거나 완료된 상태가 아닐 경우에만 실행
+            if (PlayerStatus.PlayerLevel >= quest.RequiredLevel) { // 요구 레벨을 확인
+                ActiveQuests.Add(quest); // 활성화된 퀘스트 리스트에 추가
                 AddQuestSlot(quest); // UI에 퀘스트 추가
+                
+                CheckInventoryForQuestItems(quest); // 현재 인벤토리를 체크하여 수집 목표 업데이트
 
-                // 현재 인벤토리를 체크하여 수집 목표 업데이트
-                CheckInventoryForQuestItems(quest);
-
-                // 퀘스트 목표 즉시 완료 여부 체크
-                if (quest.Objectives.TrueForAll(obj => obj.Type == QuestObjective.ObjectiveType.None || obj.IsComplete()))
-                {
+                if (quest.Objectives.TrueForAll(obj => obj.Type == QuestObjective.ObjectiveType.None || obj.IsComplete())) { // 퀘스트 목표 즉시 완료 여부 체크
                     SetQuestReadyToComplete(quest);
                 }
             }
         }
     }
-    private void AddQuestSlot(Quest quest)
-    {
-        bool slotFound = false;
+    
+    void AddQuestSlot(Quest quest) { // 퀘스트 UI창에 퀘스트 추가
+        bool RemainingSlot = false;
         
-        for (int i = 0; i < QuestSlots.Length; i++)
-        {
-            if (QuestSlots[i].QuestNameText.text == "")
-            {
+        for (int i = 0; i < QuestSlots.Length; i++) {
+            if (QuestSlots[i].QuestNameText.text == "") { // 퀘스트 슬롯이 비어있는 경우
                 QuestSlots[i].AddQuest(quest);
-                slotFound = true;
+                RemainingSlot = true;
                 break;
             }
         }
 
-        // 남는 퀘스트 슬롯이 없는 경우
-        if (!slotFound)
-        {
-            activeQuests.Remove(quest); // 활성화된 퀘스트 리스트에서 제거
+        if (!RemainingSlot) { // 남는 퀘스트 슬롯이 없는 경우
+            ActiveQuests.Remove(quest); // 활성화된 퀘스트 리스트에서 제거 (퀘스트를 못받게 함)
         }
     }
 
-    // 퀘스트 완료 준비 상태로 설정
-    private void SetQuestReadyToComplete(Quest quest)
-    {
+    void SetQuestReadyToComplete(Quest quest) { // 퀘스트 완료 준비 상태로 설정
         quest.IsReadyToComplete = true;
         UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
     }
 
-    // 퀘스트 완료
-    public void CompleteQuest(string questTitle)
-    {
-        Quest quest = activeQuests.Find(q => q.Title == questTitle);
-        if (quest != null && quest.IsReadyToComplete)
-        {
-            // 목표의 CurrentAmount 초기화 및 아이템 차감
-            foreach (var objective in quest.Objectives)
-            {
-                if (objective.Type == QuestObjective.ObjectiveType.Collect)
-                {
+    public void CompleteQuest(string questTitle) { // 퀘스트 완료
+        Quest quest = ActiveQuests.Find(q => q.Title == questTitle); // 활성화된 퀘스트 리스트에서 해당하는 제목을 가진 퀘스트를 할당
+        if (quest != null && quest.IsReadyToComplete) {
+            foreach (var objective in quest.Objectives) { // 목표의 CurrentAmount 초기화 및 아이템 차감
+                if (objective.Type == QuestObjective.ObjectiveType.Collect) {
                     PlayerGetItem.InventoryScript.RemoveItem(objective.TargetName, objective.RequiredAmount);
                 }
                 objective.ResetCurrentAmount();
             }
 
             quest.IsCompleted = true;
-            activeQuests.Remove(quest);
-            completedQuests.Add(quest);
+            ActiveQuests.Remove(quest);
+            CompletedQuests.Add(quest);
 
-            // 보상 지급
-            RewardPlayer(quest);
+            RewardPlayer(quest); // 보상 지급
             UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
             IncrementNPCQuestIndex(quest.NPCName);
         }
     }
-    private void IncrementNPCQuestIndex(string npcName) // 퀘스트 인덱스 증가
-    {
-        int currentQuestIndex = NpcQuestState.GetQuestIndex(npcName);
-        NpcQuestState.SetQuestIndex(npcName, currentQuestIndex + 1);
+
+    void IncrementNPCQuestIndex(string NpcName) { // 퀘스트 인덱스 증가
+        int CurrentQuestIndex = NpcQuestState.GetQuestIndex(NpcName);
+        NpcQuestState.SetQuestIndex(NpcName, CurrentQuestIndex + 1);
     }
-    //퀘스트 슬롯 갱신
-    private void UpdateQuestSlot(Quest quest)
-    {
+    
+    void UpdateQuestSlot(Quest quest) { //퀘스트 슬롯 갱신
         foreach (QuestSlot questSlot in QuestSlots)
         {
             if (questSlot.QuestName == quest.Title)
@@ -159,10 +133,8 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
-
-    // 플레이어에게 보상 지급
-    private void RewardPlayer(Quest quest)
-    {
+    
+    void RewardPlayer(Quest quest) { // 플레이어에게 보상 지급
         PlayerStatus.GainEXP(quest.ExperienceReward);
         PlayerMoney.Bit += quest.BitReward;
         foreach (Item item in quest.ItemRewards)
@@ -172,38 +144,28 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // 퀘스트 목표 업데이트
-    public void UpdateObjective(string targetName, int amount, bool isItem = false)
-    {
-        foreach (var quest in activeQuests)
+    public void UpdateObjective(string TargetName, int Amount, bool IsItem = false) { // 퀘스트 목표 업데이트
+        foreach (var Quest in ActiveQuests)
         {
-            foreach (var objective in quest.Objectives)
+            foreach (var Objective in Quest.Objectives)
             {
-                // 몬스터 처치 목표 업데이트
-                if (!isItem && objective.Type == QuestObjective.ObjectiveType.Kill && objective.TargetName == targetName)
-                {
-                    if (objective.CurrentAmount <= objective.RequiredAmount) {
-                        objective.CurrentAmount += amount;
+                if (!IsItem && Objective.Type == QuestObjective.ObjectiveType.Kill && Objective.TargetName == TargetName) { // 몬스터 처치 목표 업데이트
+                    if (Objective.CurrentAmount <= Objective.RequiredAmount) {
+                        Objective.CurrentAmount += Amount;
                     }
 
-                    // 퀘스트가 모두 완료되었는지 체크
-                    if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
-                    {
-                        SetQuestReadyToComplete(quest);
+                    if (Quest.Objectives.TrueForAll(obj => obj.IsComplete())) { // 퀘스트가 모두 완료되었는지 체크
+                        SetQuestReadyToComplete(Quest);
                     }
 
                     break;
                 }
 
-                // 아이템 수집 목표 업데이트
-                if (isItem && objective.Type == QuestObjective.ObjectiveType.Collect && objective.TargetName == targetName)
-                {
-                    objective.CurrentAmount += amount;
+                if (IsItem && Objective.Type == QuestObjective.ObjectiveType.Collect && Objective.TargetName == TargetName) { // 아이템 수집 목표 업데이트
+                    Objective.CurrentAmount += Amount;
 
-                    // 퀘스트가 모두 완료되었는지 체크
-                    if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
-                    {
-                        SetQuestReadyToComplete(quest);
+                    if (Quest.Objectives.TrueForAll(obj => obj.IsComplete())) { // 퀘스트가 모두 완료되었는지 체크
+                        SetQuestReadyToComplete(Quest);
                     }
 
                     break;
@@ -212,27 +174,22 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    // 아이템 제거 목표 업데이트
-    public void UpdateRemoveObjective(string itemName, int amount)
-    {
-        foreach (var quest in activeQuests)
-        {
-            foreach (var objective in quest.Objectives)
-            {
-                if (objective.Type == QuestObjective.ObjectiveType.Collect && objective.TargetName == itemName)
-                {
-                    objective.CurrentAmount -= amount;
-                    if (objective.CurrentAmount < 0) objective.CurrentAmount = 0;
+    public void UpdateRemoveObjective(string ItemName, int Amount) { // 아이템 제거 목표 업데이트
+        foreach (var Quest in ActiveQuests) {
+            foreach (var Objective in Quest.Objectives) {
+                if (Objective.Type == QuestObjective.ObjectiveType.Collect && Objective.TargetName == ItemName) {
+                    Objective.CurrentAmount -= Amount;
 
-                    // 퀘스트가 완료된 상태에서 다시 제거될 때의 처리
-                    if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
-                    {
-                        SetQuestReadyToComplete(quest);
+                    if (Objective.CurrentAmount < 0) {
+                        Objective.CurrentAmount = 0;
                     }
-                    else
-                    {
-                        quest.IsReadyToComplete = false;
-                        UpdateQuestSlot(quest); // 퀘스트 슬롯 상태 업데이트
+
+                    if (Quest.Objectives.TrueForAll(obj => obj.IsComplete())) { // 아이템 제거 후에도 완료가 가능한 상태인지 확인
+                        SetQuestReadyToComplete(Quest);
+                    }
+                    else { // 아이템 제거 후 완료가 불가능한 상태라면 해당 상태 반영
+                        Quest.IsReadyToComplete = false;
+                        UpdateQuestSlot(Quest);
                     }
 
                     break;
@@ -241,51 +198,40 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    private void CheckInventoryForQuestItems(Quest quest)
-    {
-        foreach (var objective in quest.Objectives)
-        {
-            if (objective.Type == QuestObjective.ObjectiveType.Collect)
-            {
-                int currentAmount = PlayerGetItem.InventoryScript.GetItemAmount(objective.TargetName);
-                if (currentAmount > 0)
-                {
-                    objective.CurrentAmount += currentAmount;
+    void CheckInventoryForQuestItems(Quest quest) {
+        foreach (var objective in quest.Objectives) {
+            if (objective.Type == QuestObjective.ObjectiveType.Collect) {
+                int CurrentAmount = PlayerGetItem.InventoryScript.GetItemAmount(objective.TargetName); // 퀘스트 아이템을 플레이어가 이미 얼마나 가지고 있는지 확인
 
-                    // 퀘스트가 모두 완료되었는지 체크
-                    if (quest.Objectives.TrueForAll(obj => obj.IsComplete()))
-                    {
+                if (CurrentAmount > 0) { // 가지고 있는 게 있다면 현재 수량에 그만큼 반영
+                    objective.CurrentAmount += CurrentAmount;
+                    
+                    if (quest.Objectives.TrueForAll(obj => obj.IsComplete())) { // 퀘스트가 모두 완료되었는지 체크
                         SetQuestReadyToComplete(quest);
                     }
                 }
             }
         }
     }
-    // 특정 퀘스트를 제목으로 검색
-    public Quest GetQuestByTitle(string questTitle)
-    {
-        return allQuests.Find(q => q.Title == questTitle);
+
+    public Quest GetQuestByTitle(string questTitle) { // 특정 퀘스트를 제목으로 검색
+        return AllQuests.Find(q => q.Title == questTitle);
     }
 
-    // 특정 퀘스트가 활성화 상태인지 확인
-    public bool IsQuestActive(string questTitle)
-    {
-        return activeQuests.Exists(q => q.Title == questTitle);
+    
+    public bool IsQuestActive(string questTitle) { // 특정 퀘스트가 활성화 상태인지 확인
+        return ActiveQuests.Exists(q => q.Title == questTitle);
     }
 
-    // 현재 활성화된 퀘스트 리스트 반환
-    public List<Quest> GetActiveQuests()
-    {
-        return activeQuests;
+    public List<Quest> GetActiveQuests() { // 현재 활성화된 퀘스트 리스트 반환
+        return ActiveQuests;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
+    void OnSceneLoaded(Scene scene, LoadSceneMode Mode) {
         int UINum = FindObjectsOfType<QuestManager>().Length;
-        string currentSceneName = scene.name;
+        string CurrentSceneName = scene.name;
 
-        if (UINum > 1 || currentSceneName == "Main Menu Scene")
-        {
+        if (UINum > 1 || CurrentSceneName == "Main Menu Scene") { // 퀘스트 매니저가 1개만 존재하도록
             Destroy(gameObject);
         }
     }

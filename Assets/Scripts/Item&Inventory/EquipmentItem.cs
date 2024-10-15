@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 public class EquipmentItem : MonoBehaviour
 {
-    [SerializeField] public string EquipmentType; // 소비 유형(머리, 상의, 하의, 무기, 장갑, 신발, 펫, 장신구 등)
+    [SerializeField] public string EquipmentType; // 장비 유형(머리, 상의, 하의, 무기, 장갑, 신발, 펫, 장신구)
     [SerializeField] public int RequireLevel = 1; //필요 착용 레벨
-    [SerializeField] public string EquipmentItemGrade = "일반";
-    [SerializeField] int HPValue; // HP 영향값
-    [SerializeField] int MPValue; // MP 영향값
-    [SerializeField] int ATKValue; // ATK 영향값
-    [SerializeField] int DEFValue; // DEF 영향값
-    [SerializeField] float APValue; // AP 영향값
-    [SerializeField] float CritValue; // Crit 영향값
+    [SerializeField] public string EquipmentItemGrade = "일반"; // 기본 장비 등급
+    [SerializeField] int HPValue;
+    [SerializeField] int MPValue;
+    [SerializeField] int ATKValue;
+    [SerializeField] int DEFValue;
+    [SerializeField] float APValue;
+    [SerializeField] float CritValue;
     public PlayerStatus PlayerStatus;
     public Equipment Equipment;
     public bool IsSpecialEquipment = false;
     
-    public void EquipItem(Item NewItem) {
+    public void EquipItem(Item NewItem) { // 아이템 착용 기능
         Equipment = FindObjectOfType<Equipment>();
-        switch (EquipmentType) {
+        switch (EquipmentType) { // 각 타입별로 알맞은 부위에 수행
             case "머리":
                 Equipment.HelmetSlot.CheckNull(NewItem);
                 break;
@@ -48,7 +48,7 @@ public class EquipmentItem : MonoBehaviour
         }
     }
 
-    public void IncreaseStat() {
+    public void IncreaseStat() { // 장비 착용 시 장비 스탯만큼 캐릭터 스탯 상승
         if (HPValue != 0) {
             IncreaseHP();
         }
@@ -93,7 +93,7 @@ public class EquipmentItem : MonoBehaviour
         PlayerStatus.PlayerCrit += CritValue;
     }
 
-    public void DecreaseStat() {
+    public void DecreaseStat() { // 장비 탈착 시 스탯 원상태 복구
         if (HPValue != 0) {
             DecreaseHP();
         }

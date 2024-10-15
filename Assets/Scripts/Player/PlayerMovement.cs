@@ -19,14 +19,14 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask TargetLayerMask;
 
     public bool IsAlive = true;
-    bool IsInvincible = false;
+    bool IsInvincible = false; // 무적 상태
     float StartGravity;
     bool LadderSwitch = false;
-    float TimeInState = 0f;
-    float RequiredTime = 0.3f;
+    float TimeInState = 0f; // 플레이어 바닥 갇힘 지속시간
+    float RequiredTime = 0.3f; // 해당 시간 후 플레이어 살짝 들어올려 버그 방지
     Color Color;
-    [SerializeField] float WalkDelayTime = 0.2f; // Walk 함수 호출을 지연할 시간
-    [SerializeField] public float InvincibleTime = 1f;
+    [SerializeField] float WalkDelayTime = 0.2f;
+    [SerializeField] public float InvincibleTime = 1f; // 무적 지속시간
     [SerializeField] float RunSpeed = 10f;
     [SerializeField] float JumpSpeed = 5f;
     [SerializeField] float ClimbSpeed = 5f;
@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     float OriginalRunSpeed;
     float OriginalJumpSpeed;
     float OriginalClimbSpeed;
+
     void Start()
     {
         MyRigidbody = GetComponent<Rigidbody2D>();
@@ -73,36 +74,31 @@ public class PlayerMovement : MonoBehaviour
         CheckWalk();
         ClimbLadder();
         FlipSprite();
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
-        {
+
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded()) { // 플레이어 점프 동작 구현
             MyRigidbody.AddForce(new Vector2(0, JumpSpeed * 1.2f), ForceMode2D.Impulse);
         }
     }
 
-    bool IsGrounded()
-    {
+    bool IsGrounded() { // 지면에 닿아있는 상태인지 확인
         RaycastHit2D Hit = Physics2D.Raycast(MyCapsuleCollider.bounds.center, Vector2.down, MyCapsuleCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("Ground") | LayerMask.GetMask("LadderToGround"));
         return Hit.collider != null;
     }
 
-    void OnMove(InputValue Value)
-    { //키보드로 좌우상하 입력받기
-        if (!PlayerManager.CanInput)
-        {
+    void OnMove(InputValue Value) { //키보드로 좌우상하 입력받기
+        if (!PlayerManager.CanInput) {
             return;
         }
         MoveInput = Value.Get<Vector2>();
     }
 
-    void Walk()
-    { //플레이어 좌우이동
-        if (IsAlive == false)
-        {
+    void Walk() { //플레이어 좌우이동
+        if (IsAlive == false) {
             return;
         }
 
         bool PlayerHasHorizontalSpeed = Mathf.Abs(MyRigidbody.velocity.x) > Mathf.Epsilon;
-                // MoveInput이 OnMove에서 1이거나(위아래 키 안 눌렸을 때) 0.75로(위아래 키 눌렸을 떄) 설정됨. 두 값이 바뀌는 이유로 걷는 속도가 느려짐. -> 조건에 따라 무조건 1로 설정해야함.
+        // MoveInput이 OnMove에서 1이거나(위아래 키 안 눌렸을 때) 0.75로(위아래 키 눌렸을 떄) 설정됨. 두 값이 바뀌는 이유로 걷는 속도가 느려짐. -> 조건에 따라 무조건 1로 설정해야함.
         // float modifiedX = 0;
         // if (MoveInput.x > 0){
             // modifiedX = 1f;
@@ -125,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
             RaycastHit2D HitRight = Physics2D.Raycast(transform.position, transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground") | LayerMask.GetMask("LadderToGround"));
             RaycastHit2D HitLeft = Physics2D.Raycast(transform.position, -transform.right * transform.localScale.x, 0.3f, LayerMask.GetMask("Ground") | LayerMask.GetMask("LadderToGround"));
 
-            // 만약 양쪽 모두가 Ground 레이어와 충돌하지 않고 있다면 Walk 애니메이션 실행
+            // 만약 양쪽 모두가 Ground 레이어와 충돌하지 않고 있다면 Walk 애니메이션 실행 아니면 Idle 애니메이션 실행
             if (HitRight.collider == null && HitLeft.collider == null)
             {
                 MyAnimator.SetBool("IsWalking", PlayerHasHorizontalSpeed);
@@ -350,7 +346,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void UpPosition()
-    {
+    { // 플레이어 바닥에 끼임 버그 방지
         bool IsCapsuleOnGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
         bool IsBoxOnGround = MyBoxColliders[0].IsTouchingLayers(LayerMask.GetMask("Ground"));
 
@@ -376,7 +372,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void SpeedChange(float Duration, float MoveSpeedFactor, float JumpSpeedFactor, float ClimbSpeedFactor)
-    {
+    { // 플레이어 임시적으로 속도 변화
         if (CurrentSpeedChangeCoroutine != null)
         {
             StopCoroutine(CurrentSpeedChangeCoroutine);
@@ -385,8 +381,8 @@ public class PlayerMovement : MonoBehaviour
         CurrentSpeedChangeCoroutine = StartCoroutine(SpeedChangeCoroutine(Duration, MoveSpeedFactor, JumpSpeedFactor, ClimbSpeedFactor));
     }
 
-    private IEnumerator SpeedChangeCoroutine(float Duration, float MoveSpeedFactor, float JumpSpeedFactor, float ClimbSpeedFactor)
-    {
+    IEnumerator SpeedChangeCoroutine(float Duration, float MoveSpeedFactor, float JumpSpeedFactor, float ClimbSpeedFactor)
+    { // 속도 변화 코루틴
         RunSpeed *= MoveSpeedFactor;
         JumpSpeed *= JumpSpeedFactor;
         ClimbSpeed *= ClimbSpeedFactor;

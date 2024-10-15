@@ -21,9 +21,9 @@ public class MonsterTakeDamageDisplay : MonoBehaviour
         UpdateDamageBarPosition();
     }
 
-    public void DisplayDamageBar(int Damage, bool IsCrit) {
+    public void DisplayDamageBar(int Damage, bool IsCrit) { // 데미지바 보이기
         if (UIManager != null && DamageBar != null) {
-            // 이전 인스턴스가 있으면 삭제
+            // 이전 인스턴스가 있으면 삭제(데미지바가 겹쳐서 확인이 불가능한 경우가 없도록)
             if (DamageBarInstance != null) {
                 Destroy(DamageBarInstance);
             }
@@ -37,22 +37,22 @@ public class MonsterTakeDamageDisplay : MonoBehaviour
                 DamageText.color = Color.red;
             }
 
-            StartCoroutine(FadeOutAndDestroy(DamageText, DamageBarInstance, Delay));
+            StartCoroutine(FadeOutAndDestroy(DamageText, DamageBarInstance, Delay)); // 일정 시간 후 데미지바 삭제 호출
         }
     }
 
-    void UpdateDamageBarPosition() {
+    void UpdateDamageBarPosition() { // 데미지바가 몬스터를 따라다니도록 위치 갱신
         if (DamageBarInstance != null) {
             Vector3 newPosition = transform.position + Vector3.up * DamageBarPos;
             DamageBarInstance.transform.position = newPosition;
         }
     }
 
-    IEnumerator FadeOutAndDestroy(TMP_Text DamageText, GameObject DamageBarInstance, float Delay) {
+    IEnumerator FadeOutAndDestroy(TMP_Text DamageText, GameObject DamageBarInstance, float Delay) { // 데미지바 점점 소멸하다 삭제
         float ElapsedTime = 0;
         Color OriginalColor = DamageText.color;
 
-        while (ElapsedTime < Delay) {
+        while (ElapsedTime < Delay) { // 데미지바가 점점 소멸하다 삭제될 수 있도록 알파값 조정
             float Alpha = Mathf.Lerp(1f, 0f, ElapsedTime / Delay);
             DamageText.color = new Color(OriginalColor.r, OriginalColor.g, OriginalColor.b, Alpha);
             ElapsedTime += Time.deltaTime;

@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "CommitPush_CapstoneDesign.sln"
+    "dotnet.defaultSolution": "CommitPush_CodeLand.sln"
 }

@@ -18,7 +18,7 @@ public class ItemToolTip : MonoBehaviour
     void Start() {
         PlayerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
     }
-    public void ShowToolTip(Item Item) {
+    public void ShowToolTip(Item Item) { // 아이템 툴팁 전시 기능
         ItemToolTipBase.SetActive(true);
 
         ItemNameText.text = Item.ItemName;
@@ -37,17 +37,17 @@ public class ItemToolTip : MonoBehaviour
         }
     }
 
-    public void HideToolTip() {
+    public void HideToolTip() { // 아이템 툴팁 숨김 기능
         ItemToolTipBase.SetActive(false);
     }
 
-    void DisplayRequireLevel(Item Item) {
+    void DisplayRequireLevel(Item Item) { // 필요 아이템 레벨 전시 기능
         ItemRequireLVText.gameObject.SetActive(true);
         int RequireLevel = Item.ItemPrefab.GetComponent<EquipmentItem>().RequireLevel;
         ItemRequireLVText.text = "필요 코딩력: " + RequireLevel + " LV";
 
         Color color;
-        if (RequireLevel > PlayerStatus.PlayerLevel) {
+        if (RequireLevel > PlayerStatus.PlayerLevel) { // 레벨 미달이면 필요 착용 레벨을 붉은색으로 표시
             ColorUtility.TryParseHtmlString("#FF0000", out color); // Red
             ItemRequireLVText.color = color;
         } else {
@@ -55,13 +55,13 @@ public class ItemToolTip : MonoBehaviour
             ItemRequireLVText.color = color;
         }
     }
-    void DisplayEquipmentGrade(Item Item) {
+    void DisplayEquipmentGrade(Item Item) { // 아이템 등급 전시 기능
         ItemGradeText.gameObject.SetActive(true);
         string EquipmentItemGrade = Item.ItemPrefab.GetComponent<EquipmentItem>().EquipmentItemGrade;
         ItemGradeText.text = "아이템 등급: " + EquipmentItemGrade;
 
         Color color;
-        switch (EquipmentItemGrade) {
+        switch (EquipmentItemGrade) { // 등급에 따라 색상 부여
             case "일반":
                 ColorUtility.TryParseHtmlString("#FFFFFF", out color); // White
                 ItemGradeText.color = color;
@@ -92,7 +92,7 @@ public class ItemToolTip : MonoBehaviour
         }
     }
 
-    void HideEquipmentInfoText() {
+    void HideEquipmentInfoText() { // 장비아이템 전용 텍스트 숨김 
         ItemRequireLVText.gameObject.SetActive(false);
         ItemGradeText.gameObject.SetActive(false);
     }

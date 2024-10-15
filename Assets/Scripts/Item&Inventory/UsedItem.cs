@@ -10,7 +10,7 @@ public class UsedItem : MonoBehaviour
     [SerializeField] int EffectDuration; // 기간
 
     public PlayerStatus PlayerStatus;
-    public void EffectItem() {
+    public void EffectItem() { // 소비 아이템 사용시 효과
         switch (UsedType) {
             case "음식":
                 IncreaseHP();
@@ -19,7 +19,7 @@ public class UsedItem : MonoBehaviour
                 IncreaseMP();
                 break;
             case "강장제":
-                IncreaseStatus();
+                //IncreaseStatus();
                 break;
             default:
                 break;
@@ -40,7 +40,8 @@ public class UsedItem : MonoBehaviour
         }
     }
 
-    public void IncreaseStatus() {
+    /* 강장제 미구현
+    public void IncreaseStatus() { // 강장제에만 해당
         switch (TonicType) {
             case "ATK":
                 PlayerStatus.PlayerATK += EffectValue;
@@ -54,7 +55,7 @@ public class UsedItem : MonoBehaviour
         Invoke("EndIncreaseStatus", EffectDuration);
     }
 
-    public void EndIncreaseStatus() {
+    public void EndIncreaseStatus() { // 강장제 지속시간 끝나면 스탯 복구
         switch (TonicType) {
             case "ATK":
                 PlayerStatus.PlayerATK -= EffectValue;
@@ -66,6 +67,6 @@ public class UsedItem : MonoBehaviour
                 break;
         }
     }
-
+    */
 }
 
