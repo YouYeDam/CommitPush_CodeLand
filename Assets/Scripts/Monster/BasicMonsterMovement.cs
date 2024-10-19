@@ -101,7 +101,7 @@ public class BasicMonsterMovement : MonoBehaviour
         }
     }
     
-    public void Move() { // 몬스터 이동
+    void Move() { // 몬스터 이동
         if (!IsAlive) {
             return;
         }
@@ -119,12 +119,14 @@ public class BasicMonsterMovement : MonoBehaviour
         if (!IsAlive) {
             return;
         }
+
         if (Player != null) {
             RestartWalking(); // 멈춰있었다면 다시 이동가능하도록
             Vector2 PlayerPosition = Player.transform.position;
             Vector2 DirectionToPlayer = (PlayerPosition - (Vector2)transform.position).normalized;
 
-            if (DirectionToPlayer.x <= PlayerOverlapRange && DirectionToPlayer.x >= -PlayerOverlapRange) {  // 플레이어가 몬스터 겹침 확인 범위 내에 있다면 몬스터 이동 멈춤
+            // 플레이어가 몬스터 겹침 확인 범위 내에 있다면 몬스터 이동 멈춤 (계속 뒤집는 행동 방지)
+            if (DirectionToPlayer.x <= PlayerOverlapRange && DirectionToPlayer.x >= -PlayerOverlapRange) {
                 MonsterRigidbody.velocity = new Vector2 (0f, 0f);
                 MonsterAnimator.SetBool("IsIdling", true);
             }
@@ -155,7 +157,7 @@ public class BasicMonsterMovement : MonoBehaviour
         if (!PlayerMovement.IsAlive) { // 플레이어 사망 시 어그로 풀림
             IsTakeDamge = false;
             MonsterAnimator.SetBool("IsIdling", false);
-            SetRandomBehavior();
+            SetRandomBehavior(); // 다시 랜덤 행동 시작
         }
     }
 
@@ -167,10 +169,10 @@ public class BasicMonsterMovement : MonoBehaviour
             float WaitTime = Random.Range(FlipTimeHead, FlipTimeRear);
             yield return new WaitForSeconds(WaitTime);
 
-            if (IsTakeDamge) {
+            if (IsTakeDamge) { // 피격 시 코루틴 중단
                 yield break;
             }
-            FlipEnemyFacing();
+            FlipEnemyFacing(); // 플레이어 방향으로 스프라이트 뒤집기
         }
     }
 
@@ -182,10 +184,10 @@ public class BasicMonsterMovement : MonoBehaviour
             float WaitTime = Random.Range(StopTimeHead, StopTimeRear);
             yield return new WaitForSeconds(WaitTime);
 
-            if (IsTakeDamge) {
+            if (IsTakeDamge) { // 피격 시 코루틴 중단
                 yield break;
             }
-            StopWalking();
+            StopWalking(); // 랜덤 이동을 멈추고 플레이어에게만 다가가기 위해
         }
     }
 
@@ -193,6 +195,7 @@ public class BasicMonsterMovement : MonoBehaviour
         StartCoroutine(RandomFlip());
         StartCoroutine(RandomStop());
     }
+
     public void FlipEnemyFacing() { // 스프라이트 반전
         bool IsOnGround = MonsterCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
         if (!IsOnGround) {

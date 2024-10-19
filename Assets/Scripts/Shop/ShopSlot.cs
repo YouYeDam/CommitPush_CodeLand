@@ -92,8 +92,8 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         }
         else if (Item.Type == Item.ItemType.Equipment || Item.Type == Item.ItemType.SourceCode) { // 장비 혹은 스킬북 아이템시 실행
             if (PlayerMoney.Bit >= Item.ItemCost) {
-                PlayerMoney.Bit -= Item.ItemCost;
-                PlayerGetItem.InventoryScript.AcquireItem(Item);
+                PlayerMoney.Bit -= Item.ItemCost; // 플레이어의 소지금 차감
+                PlayerGetItem.InventoryScript.InventoryAcquireItem(Item); // 플레이어에게 아이템 등록
                 QuestManager.UpdateObjective(Item.ItemName, 1, true);
             }
             else { // 가지고 있는 돈이 모자라면 경고 알람
@@ -106,7 +106,7 @@ public class ShopSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         int TotalItemCost = Item.ItemCost * BuyItemCount;
         if (PlayerMoney.Bit >= TotalItemCost) {
             PlayerMoney.Bit -= TotalItemCost;
-            PlayerGetItem.InventoryScript.AcquireItem(Item, BuyItemCount);
+            PlayerGetItem.InventoryScript.InventoryAcquireItem(Item, BuyItemCount);
             QuestManager.UpdateObjective(Item.ItemName, BuyItemCount, true);
         }
         else {

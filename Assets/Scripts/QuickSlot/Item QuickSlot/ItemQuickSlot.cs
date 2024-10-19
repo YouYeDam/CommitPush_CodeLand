@@ -30,7 +30,7 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         ItemImage.color = Color;
     }
 
-    public void AddItem(Item Item, int Count = 1, Slot Slot = null) { // 퀵슬롯에 새로운 아이템 슬롯 추가
+    public void AddQuickSlotItem(Item Item, int Count = 1, Slot Slot = null) { // 퀵슬롯에 새로운 아이템 슬롯 추가
         this.Item = Item;
         ItemCount = Count;
         ItemImage.sprite = this.Item.ItemImage;
@@ -119,7 +119,7 @@ public class ItemQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             if (ItemDrag.Instance.DragSlot.QuickSlotReference != null) {
                 ItemDrag.Instance.DragSlot.QuickSlotReference.ClearSlot();
             }
-            AddItem(ItemDrag.Instance.DragSlot.Item, ItemDrag.Instance.DragSlot.ItemCount, ItemDrag.Instance.DragSlot);
+            AddQuickSlotItem(ItemDrag.Instance.DragSlot.Item, ItemDrag.Instance.DragSlot.ItemCount, ItemDrag.Instance.DragSlot);
             DropItemInputNumber DropItemInputNumber = FindObjectOfType<DropItemInputNumber>();
             DropItemInputNumber.Cancel();
         }

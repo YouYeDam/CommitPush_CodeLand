@@ -37,7 +37,7 @@ public class PlayerGetItem : MonoBehaviour
 
         if (ItemObject.tag == "Item" && InventoryScript != null) {
             Item item = ItemObject.GetComponent<ItemPickup>().item;
-            InventoryScript.AcquireItem(item); // 아이템과 갯수를 전달하여 호출
+            InventoryScript.InventoryAcquireItem(item); // 아이템과 갯수를 전달하여 호출
 
             QuestManager.UpdateObjective(item.ItemName, 1, true);
             AcquiredItems.Add(ItemObject); // 해시 셋에 아이템 삽입

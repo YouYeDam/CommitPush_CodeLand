@@ -60,6 +60,7 @@ public class QuestManager : MonoBehaviour
             }
         }
     }
+    
     public void StartQuest(string QuestTitle) { // 퀘스트 시작
         Quest quest = AllQuests.Find(q => q.Title == QuestTitle); // 모든 퀘스트 리스트에서 해당하는 제목을 가진 퀘스트를 할당
 
@@ -139,7 +140,7 @@ public class QuestManager : MonoBehaviour
         PlayerMoney.Bit += quest.BitReward;
         foreach (Item item in quest.ItemRewards)
         {
-            PlayerGetItem.InventoryScript.AcquireItem(item);
+            PlayerGetItem.InventoryScript.InventoryAcquireItem(item);
             UpdateObjective(item.ItemName, 1, true);
         }
     }

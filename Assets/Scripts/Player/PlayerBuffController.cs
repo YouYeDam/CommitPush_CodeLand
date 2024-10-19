@@ -22,7 +22,7 @@ public class PlayerBuffController : MonoBehaviour
         PlayerStatus.PlayerAP += AP;
         PlayerStatus.PlayerCrit += Crit;
 
-        StartCoroutine(RemoveBuffAfterDuration(BuffDuration, HP, MP, ATK, DEF, AP, Crit));
+        StartCoroutine(RemoveBuffAfterDuration(BuffDuration, HP, MP, ATK, DEF, AP, Crit)); // 버프 지속시간 종료 후 스탯 원상복구
     }
 
     public void PlayerStatusDown(int HP, int MP, int ATK, int DEF, float AP, float Crit) { // 버프된 스탯 감소

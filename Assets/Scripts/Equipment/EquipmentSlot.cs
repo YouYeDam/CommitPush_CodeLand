@@ -73,7 +73,7 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     void OnDoubleClick() { // 슬롯 더블클릭시 아이템 탈착 및 인벤토리로 이동
         if (Item != null) {
-        InventoryScript.AcquireItem(Item);
+        InventoryScript.InventoryAcquireItem(Item);
         ClearSlot();
         }
     }
@@ -105,7 +105,7 @@ public class EquipmentSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             AddItem(NewItem);
         }
         else { // 안비었다면 아이템을 장착중인 아이템을 인벤토리로 이동시킨 후 슬롯에 장착
-            InventoryScript.AcquireItem(Item);
+            InventoryScript.InventoryAcquireItem(Item);
             ClearSlot();
             AddItem(NewItem);
         }

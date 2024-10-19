@@ -34,22 +34,21 @@ public class PlayerBuffSkill : MonoBehaviour
     }
 
     void Update() {
-        // 플레이어의 x 좌표를 가져오기
         float PlayerX = Player.transform.position.x;
         float PlayerY = Player.transform.position.y + 1.5f;
 
-        // 현재 오브젝트의 x 좌표를 플레이어의 x 좌표로, y 좌표를 플레이어의 x 좌표로 설정
         transform.position = new Vector3(PlayerX, PlayerY, transform.position.z);
     }
 
     void CheckBuffType() { // 버프 타입 체크
         if (IsStatusUpBuff) {
-            PlayerBuffController.PlayerStatusUp(BuffDuration, HPBuff, MPBuff, ATKBuff, DEFBuff, APBuff, CritBuff);
+            PlayerBuffController.PlayerStatusUp(BuffDuration, HPBuff, MPBuff, ATKBuff, DEFBuff, APBuff, CritBuff); // 할당된 수치에 맞게 스탯 상승
         }
         if (IsSpeedUpBuff) {
             PlayerBuffController.PlayerSpeedUp(BuffDuration, MoveSpeedBuff, JumpSpeedBuff, ClimbSpeedBuff);
         }
     }
+    
     void DestroySelf() { // 스킬 파괴
             Destroy(gameObject);
     }

@@ -188,7 +188,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     }
 
     public void OnDrop(PointerEventData eventData) { // 아이템 슬롯에 드랍 시
-        if (ItemDrag.Instance.DragSlot != null) { // 이미 아이템이 있는 슬롯에 드랍 시 슬롯 간 아이템 교환
+        if (ItemDrag.Instance.DragSlot != null) { // 드랍 시 슬롯 간 아이템 교환
             ChangeSlot(); 
         }
     }
@@ -212,8 +212,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             QuickSlotReference.SlotReference = this;
         }
 
-        if (ItemDrag.Instance.DragSlot.QuickSlotReference != null)
-        {
+        if (ItemDrag.Instance.DragSlot.QuickSlotReference != null) {
             ItemDrag.Instance.DragSlot.QuickSlotReference.SlotReference = ItemDrag.Instance.DragSlot;
         }
     }
@@ -283,6 +282,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         }
         else { // 그 외 아이템 시 실행
             PlayerMoney.Bit += Mathf.RoundToInt(Item.ItemCost * 0.7f); // 판매할 때 아이템 가격 70%로 조정
+            QuestManager.UpdateRemoveObjective(Item.ItemName, 1); // QuestManager에서 아이템 제거 목표 업데이트
             ClearSlot();
         }
     }
@@ -290,9 +290,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public void SellManyItem(int SellItemCount) { // 다수의 수량을 판매할 경우 실행
         int TotalItemCost = Item.ItemCost * SellItemCount;
         PlayerMoney.Bit += Mathf.RoundToInt(TotalItemCost * 0.7f); // 판매할 때 아이템 가격 70%로 조정
-
-        // QuestManager에서 아이템 제거 목표 업데이트
-        QuestManager.UpdateRemoveObjective(Item.ItemName, SellItemCount);
+        QuestManager.UpdateRemoveObjective(Item.ItemName, SellItemCount); // QuestManager에서 아이템 제거 목표 업데이트
         
         SetSlotCount(-SellItemCount);
     }

@@ -82,7 +82,7 @@ public class SkillQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        CheckCoolDown();
+        CheckCoolDown(); // 쿨타임이 남아있는지 확인
         if (!CanDelete) {
             return;
         }
@@ -91,16 +91,15 @@ public class SkillQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         SkillQuickSlotSkillDrag.Instance.DragSkillQuickSlot = null;
     }
 
-    public void OnDrop(PointerEventData eventData) {
-        if (SlotReference != null) {
+    public void OnDrop(PointerEventData eventData) { // 스킬이 퀵슬롯에 드롭되었을 때 퀵슬롯에 스킬 등록
+        if (SlotReference != null) { // 쿨타임이 남아있는지 확인
             CheckCoolDown();
         }
-        if (SkillDrag.Instance == null || !CanDelete) {
+        if (SkillDrag.Instance == null || !CanDelete) { // 쿨타임이 남아있다면 삭제 불가
             return;
         }
-        if (SkillDrag.Instance.SkillDragSlot != null) {
-            if (this.SkillPrefab != null)
-            {
+        if (SkillDrag.Instance.SkillDragSlot != null) { // 이미 퀵슬롯에 스킬이 있다면 비우기
+            if (this.SkillPrefab != null) {
                 ClearSlot();
             }
 
@@ -169,7 +168,7 @@ public class SkillQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         }
     }
 
-    public void CheckCoolDown() {
+    public void CheckCoolDown() { // 쿨타임 체크
         CanDelete = false;
         SlotReference.CanDelete = false;
         switch (ButtonKey) {
@@ -214,47 +213,47 @@ public class SkillQuickSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         }
     }
 
-    private IEnumerator CoolDownCoroutine() {
+    IEnumerator CoolDownCoroutine() {
         while (true) {
             yield return null;
             UpdateCoolDownUI();
         }
     }
 
-    private void UpdateCoolDownUI() {
+    void UpdateCoolDownUI() { // 쿨타임 UI 최신화
         float remainingCoolDown = 0;
-        bool canUse = false;
+        bool CanUse = false;
 
         switch (ButtonKey) {
             case "Q":
                 remainingCoolDown = PlayerSkills.QSkillRemainingCoolDown;
-                canUse = PlayerSkills.CanQSkill;
+                CanUse = PlayerSkills.CanQSkill;
                 break;
             case "W":
                 remainingCoolDown = PlayerSkills.WSkillRemainingCoolDown;
-                canUse = PlayerSkills.CanWSkill;
+                CanUse = PlayerSkills.CanWSkill;
                 break;
             case "E":
                 remainingCoolDown = PlayerSkills.ESkillRemainingCoolDown;
-                canUse = PlayerSkills.CanESkill;
+                CanUse = PlayerSkills.CanESkill;
                 break;
             case "R":
                 remainingCoolDown = PlayerSkills.RSkillRemainingCoolDown;
-                canUse = PlayerSkills.CanRSkill;
+                CanUse = PlayerSkills.CanRSkill;
                 break;
             case "S":
                 remainingCoolDown = PlayerSkills.SSkillRemainingCoolDown;
-                canUse = PlayerSkills.CanSSkill;
+                CanUse = PlayerSkills.CanSSkill;
                 break;
             case "D":
                 remainingCoolDown = PlayerSkills.DSkillRemainingCoolDown;
-                canUse = PlayerSkills.CanDSkill;
+                CanUse = PlayerSkills.CanDSkill;
                 break;
             default:
                 break;
         }
 
-        if (canUse) {
+        if (CanUse) {
             SetCoolDownPanel(0);
             CoolDownText.text = "";
         } else {

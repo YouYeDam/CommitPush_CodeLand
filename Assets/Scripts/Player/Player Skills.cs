@@ -92,11 +92,13 @@ public class PlayerSkills : MonoBehaviour
         if (PlayerMovement.IsAlive == false || !PlayerManager.CanInput) {
             return;
         }
+
         bool IsOnLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
         bool IsOnLadderGround = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("LadderGround"));
         bool IsSteppingLadder = MyCapsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && !MyBoxColliders[1].IsTouchingLayers(LayerMask.GetMask("Ladder"));
+
         if (CanAttack) {
-            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) {
+            if (!IsOnLadder || IsOnLadderGround || IsSteppingLadder) { // 플레이어가 지면에 있을 경우에만 실행
                 Instantiate(NormalAttack, SkillSpot.position, transform.rotation);
                 MyAnimator.SetBool("IsAttacking", true);
                 CanAttack = false; // 스킬을 사용한 후 플래그를 false로 설정

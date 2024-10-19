@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
         Slots = Content.GetComponentsInChildren<Slot>();
     }
     
-    public void AcquireItem(Item Item, int Count = 1) { // 아이템 획득
+    public void InventoryAcquireItem(Item Item, int Count = 1) { // 아이템 획득
         if(Item.ItemType.Used == Item.Type || Item.ItemType.ETC == Item.Type) { // 소비 혹은 기타 아이템일 경우에만 개수 스택
             for (int i = 0; i < Slots.Length; i++) {
                 if (Slots[i].Item != null) {

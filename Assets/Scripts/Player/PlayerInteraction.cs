@@ -2,7 +2,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
-    {
+{
     PortalInfo PortalInfo;
     UIManager UIManager;
     PlayerManager PlayerManager;
